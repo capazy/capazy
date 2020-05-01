@@ -1,0 +1,30 @@
+import React from "react";
+import { Link } from "react-router-dom";
+function Footer() {
+  return (
+    <footer class='w-full text-center border-t border-grey p-4 mt-10'>
+      <nav className=''>
+        <Link to='/'>
+          <span className='inline-block text-gray-800 hover:text-gray-600 mr-4'>
+            Home
+          </span>
+        </Link>
+        <Link to='/terms'>
+          <span className='inline-block text-gray-800 hover:text-gray-600 mr-4'>
+            Terms
+          </span>
+        </Link>
+        <Link to='/support'>
+          <span className='inline-block text-gray-800 hover:text-gray-600 mr-4'>
+            Support
+          </span>
+        </Link>
+      </nav>
+      <div>
+        <span>© {new Date().getFullYear()} Capazy</span>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;
