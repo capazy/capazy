@@ -2,4 +2,20 @@
 
 @tailwind components;
 
+.btn {
+  @apply mb-4 inline-block px-5 py-3 rounded-lg uppercase tracking-wider font-semibold  text-sm;
+}
+
+.btn:focus {
+  @apply outline-none shadow-outline;
+}
+
+.btn-rounded {
+  @apply mx-auto mx-0  font-bold rounded-full mt-4 mt-0 py-4 px-8 shadow-lg;
+}
+
+.btn-rounded:focus {
+  @apply outline-none shadow-outline underline;
+}
+
 @tailwind utilities;

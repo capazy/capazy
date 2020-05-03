@@ -5,14 +5,20 @@ import { Switch, Redirect } from "react-router-dom";
 import RouteWithLayout from "./router/RouteWithLayout";
 
 // Views
-import { Landing, Test } from "./views";
-import Main from "./layout/Main";
+import { Landing, Test, Home } from "./views";
+import Layout from "./layout";
 
 const Routes = () => {
   return (
     <Switch>
-      <RouteWithLayout exact path='/' layout={Main} component={Landing} />
-      <RouteWithLayout exact path='/test' layout={Main} component={Test} />
+      <RouteWithLayout
+        exact
+        path='/landing'
+        layout={Layout}
+        component={Landing}
+      />
+      <RouteWithLayout exact path='/' layout={Layout} component={Home} />
+      <RouteWithLayout exact path='/test' layout={Layout} component={Test} />
 
       <Redirect
         to={{
