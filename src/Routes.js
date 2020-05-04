@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { Switch, Redirect } from "react-router-dom";
+import { Switch, Redirect } from 'react-router-dom';
 
-import RouteWithLayout from "./router/RouteWithLayout";
+import RouteWithLayout from './router/RouteWithLayout';
 
 // Views
-import { Landing, Test, Home, Signup } from "./views";
-import Layout from "./layout";
+import { Landing, Test, Home, Signup, Login } from './views';
+import Layout from './layout';
 
 const Routes = () => {
   return (
@@ -17,6 +17,7 @@ const Routes = () => {
         layout={Layout}
         component={Signup}
       />
+      <RouteWithLayout exact path="/login" layout={Layout} component={Login} />
       <RouteWithLayout
         exact
         path="/landing"
@@ -28,7 +29,7 @@ const Routes = () => {
 
       <Redirect
         to={{
-          pathname: "/",
+          pathname: '/',
         }}
       />
     </Switch>

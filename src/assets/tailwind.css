@@ -3,7 +3,7 @@
 @tailwind components;
 
 .btn {
-  @apply mb-4 inline-block px-5 py-3 rounded-lg uppercase tracking-wider font-semibold  text-sm;
+  @apply inline-block px-5 py-3 rounded-lg uppercase tracking-wider font-semibold  text-sm;
 }
 
 .btn:focus {
@@ -16,6 +16,10 @@
 
 .btn-rounded:focus {
   @apply outline-none shadow-outline underline;
+}
+
+.btn-square {
+  @apply inline-block px-3 py-2 rounded-sm  font-semibold  text-sm;
 }
 
 @tailwind utilities;
