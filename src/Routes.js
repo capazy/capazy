@@ -5,7 +5,7 @@ import { Switch, Redirect } from "react-router-dom";
 import RouteWithLayout from "./router/RouteWithLayout";
 
 // Views
-import { Landing, Test, Home } from "./views";
+import { Landing, Test, Home, Signup } from "./views";
 import Layout from "./layout";
 
 const Routes = () => {
@@ -13,12 +13,18 @@ const Routes = () => {
     <Switch>
       <RouteWithLayout
         exact
-        path='/landing'
+        path="/signup"
+        layout={Layout}
+        component={Signup}
+      />
+      <RouteWithLayout
+        exact
+        path="/landing"
         layout={Layout}
         component={Landing}
       />
-      <RouteWithLayout exact path='/' layout={Layout} component={Home} />
-      <RouteWithLayout exact path='/test' layout={Layout} component={Test} />
+      <RouteWithLayout exact path="/" layout={Layout} component={Home} />
+      <RouteWithLayout exact path="/test" layout={Layout} component={Test} />
 
       <Redirect
         to={{

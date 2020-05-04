@@ -6,7 +6,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000/",
+  uri: process.env.REACT_APP_APOLLO_API_URI,
 });
 
 const client = new ApolloClient({
