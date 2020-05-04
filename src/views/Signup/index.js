@@ -1,9 +1,22 @@
 import React from 'react';
-
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
+const CREATE_USER = gql`
+  mutation createUser($email: String!, $password: String!) {
+    createUser(userInput: { email: $email, password: $password }) {
+      userId
+      token
+      tokenExp
+    }
+  }
+`;
 
 const SignUp = () => {
+  const [createUser, { data }] = useMutation(CREATE_USER);
+
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
       email: '',
@@ -15,10 +28,12 @@ const SignUp = () => {
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: ({ email, password }) => {
+      createUser({ variables: { email, password } });
     },
   });
+
+  console.log('DATA', data);
 
   return (
     <div className="w-full max-w-xs mx-auto">
