@@ -1,5 +1,7 @@
 {
   "build": {
-    "env": {}
+    "env": {
+      "REACT_APP_APOLLO_API_URI": "@apollo-api-uri"
+    }
   }
 }
