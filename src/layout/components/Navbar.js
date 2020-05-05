@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const links = () => (
+  <div className="hidden flex md:block px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
+    <Link
+      to="/signup"
+      className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+    >
+      Sign Up
+    </Link>
+    <Link
+      to="/login"
+      className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+    >
+      Login
+    </Link>
+    <button className="btn-square bg-brand-blue  text-white mx-2">
+      Post a Project
+    </button>
+  </div>
+);
+
 function ExamplesNavbar() {
   const [isOpen, setOpen] = useState(false);
   return (
@@ -42,7 +62,7 @@ function ExamplesNavbar() {
           {/* FINISH SEARCH */}
           <div className="sm:hidden">
             <button
-              onClick={() => setOpen(isOpen === false ? true : false)}
+              onClick={() => setOpen(!isOpen)}
               type="button"
               className="block text-gray-900 hover:text-white focus:text-black pb-1"
             >
@@ -62,37 +82,23 @@ function ExamplesNavbar() {
             <div className="px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
               <Link
                 to="/signup"
-                className="block sm:inline-block px-2 py-1 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
               >
                 Sign Up
               </Link>
               <Link
-                to="/"
-                className="block sm:inline-block px-2 py-1 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                to="/login"
+                className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
               >
                 Login
               </Link>
-              <button className="btn-rounded">Action</button>
+              <button className="btn-square bg-brand-blue  text-white mx-2">
+                Post a Project
+              </button>
             </div>
           )}
         </div>
-        <div className="hidden flex md:block px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
-          <Link
-            to="/signup"
-            className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
-          >
-            Sign Up
-          </Link>
-          <Link
-            to="/login"
-            className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
-          >
-            Login
-          </Link>
-          <button className="btn-square bg-brand-blue  text-white mx-2">
-            Post a Project
-          </button>
-        </div>
+        {links()}
       </div>
     </nav>
   );

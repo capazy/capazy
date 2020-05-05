@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN } from '../../graphql/mutation/user';
 
 const SignUp = () => {
-  const [erros, setError] = useState({});
   const [login, { data }] = useMutation(LOGIN);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({

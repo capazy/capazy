@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_USER } from '../../graphql/mutation/user';
 
 const SignUp = () => {
-  const [createUser, { data }] = useMutation(CREATE_USER);
+  const [userInput, { data }] = useMutation(CREATE_USER);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -14,23 +14,61 @@ const SignUp = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Required'),
+      name: Yup.string().required('Required'),
+      lastName: Yup.string().required('Required'),
       password: Yup.string()
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
     }),
-    onSubmit: ({ email, password }) => {
-      createUser({ variables: { email, password } });
+    onSubmit: ({ email, password, name, lastName }) => {
+      userInput({ variables: { name, lastName, email, password } });
     },
   });
 
-  console.log('DATA', data);
-
   return (
-    <div className="pt-5 w-full max-w-xs mx-auto my-auto">
+    <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
+        <div className="flex flex-wrap -mx-3 mb-4">
+          <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="Email"
+            >
+              Name
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="name"
+              placeholder="Jane"
+              onChange={handleChange}
+              value={values.name}
+              invalid={touched.name && errors.name ? true : undefined}
+            />
+            <p className="text-red-500 text-xs italic">{errors.name}</p>
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="Email"
+            >
+              Last Name
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="lastName"
+              type="lastName"
+              placeholder="Doe"
+              onChange={handleChange}
+              value={values.lastName}
+              invalid={touched.lastName && errors.lastName ? true : undefined}
+            />
+            <p className="text-red-500 text-xs italic">{errors.lastName}</p>
+          </div>
+        </div>
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -42,14 +80,14 @@ const SignUp = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
-            placeholder="Email"
+            placeholder="jane-doe@mycompany.com"
             onChange={handleChange}
             value={values.email}
             invalid={touched.email && errors.email ? true : undefined}
           />
           <p className="text-red-500 text-xs italic">{errors.email}</p>
         </div>
-        <div className="mb-6">
+        <div className="mb-3">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="password"
@@ -67,6 +105,7 @@ const SignUp = () => {
           />
           <p className="text-red-500 text-xs italic">{errors.password}</p>
         </div>
+
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign Up
