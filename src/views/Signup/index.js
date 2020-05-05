@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_USER } from '../../graphql/mutation/createUser';
+import { CREATE_USER } from '../../graphql/mutation/user';
 
 const SignUp = () => {
-  const [erros, setError] = useState({});
   const [createUser, { data }] = useMutation(CREATE_USER);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({

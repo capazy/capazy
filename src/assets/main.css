@@ -614,6 +614,7 @@ video {
   padding-bottom: 0.75rem;
   border-radius: 0.5rem;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   font-weight: 600;
   font-size: 0.875rem;
 }

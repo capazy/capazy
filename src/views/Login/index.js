@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_USER } from '../../graphql/mutation/createUser';
+import { LOGIN } from '../../graphql/mutation/user';
 
 const SignUp = () => {
   const [erros, setError] = useState({});
-  const [createUser, { data }] = useMutation(CREATE_USER);
+  const [login, { data }] = useMutation(LOGIN);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -20,7 +20,7 @@ const SignUp = () => {
         .required('Required'),
     }),
     onSubmit: ({ email, password }) => {
-      createUser({ variables: { email, password } });
+      login({ variables: { email, password } });
     },
   });
 
