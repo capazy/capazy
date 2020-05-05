@@ -7,7 +7,7 @@ const Home = () => {
         {/* <!--Left Col--> */}
         <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
           <p className="uppercase tracking-loose w-full">
-            What business are you?
+            New generation of companies
           </p>
           <h1 className="my-4 text-5xl font-bold leading-tight">
             Main Hero Message to sell yourself!
