@@ -1,28 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation } from '@apollo/react-hooks';
-import { CREATE_USER } from '../../graphql/mutation/user';
+import { AuthContext } from '../../context/AuthContext';
 
 const SignUp = () => {
-  const [userInput, { data }] = useMutation(CREATE_USER);
-  console.log('CREATE_USER', data);
+  const { login } = useContext(AuthContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
     },
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Required'),
-      name: Yup.string().required('Required'),
+      firstName: Yup.string().required('Required'),
       lastName: Yup.string().required('Required'),
       password: Yup.string()
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
     }),
-    onSubmit: ({ email, password, name, lastName }) => {
-      userInput({ variables: { name, lastName, email, password } });
+    onSubmit: (values) => {
+      login(values);
     },
   });
 
@@ -34,35 +34,30 @@ const SignUp = () => {
       >
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
-              Name
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              First Name
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="name"
-              placeholder="Jane"
+              id="firstName"
+              type="text"
+              placeholder="First Name"
               onChange={handleChange}
-              value={values.name}
-              invalid={touched.name && errors.name ? true : undefined}
+              value={values.firstName}
+              invalid={touched.firstName && errors.firstName ? true : undefined}
             />
-            <p className="text-red-500 text-xs italic">{errors.name}</p>
+            <p className="text-red-500 text-xs italic">{errors.firstName}</p>
           </div>
+
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Last Name
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="lastName"
-              type="lastName"
-              placeholder="Doe"
+              type="text"
+              placeholder="Last Name"
               onChange={handleChange}
               value={values.lastName}
               invalid={touched.lastName && errors.lastName ? true : undefined}
@@ -70,29 +65,25 @@ const SignUp = () => {
             <p className="text-red-500 text-xs italic">{errors.lastName}</p>
           </div>
         </div>
+
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="Email"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Email
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
-            placeholder="jane-doe@mycompany.com"
+            placeholder="Email"
             onChange={handleChange}
             value={values.email}
             invalid={touched.email && errors.email ? true : undefined}
           />
           <p className="text-red-500 text-xs italic">{errors.email}</p>
         </div>
+
         <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Password
           </label>
           <input
