@@ -5,7 +5,7 @@ import { Switch, Redirect } from 'react-router-dom';
 import RouteWithLayout from './router/RouteWithLayout';
 
 // Views
-import { UserForm, Test, Home, Signup, Login, UserFormn } from './views';
+import { UserForm, Test, Home, Signup, Login } from './views';
 import Layout from './layout';
 
 const Routes = () => {

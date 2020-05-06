@@ -1,15 +1,22 @@
 import React from 'react';
 import Select from 'react-select';
 
-const MySelect = ({ options, value, onBlur, onChange, label, isMulti }) => {
+const SelectComponent = ({
+  options,
+  value,
+  onBlur,
+  onChange,
+  label,
+  field,
+  isMulti,
+}) => {
   const handleChange = (value) => {
-    onChange('topics', value);
+    onChange(field, value);
   };
 
   const handleBlur = () => {
-    onBlur('topics', true);
+    onBlur(field, true);
   };
-  console.log('value', value, 'option', options);
 
   return (
     <div style={{ margin: '1rem 0' }}>
@@ -26,4 +33,4 @@ const MySelect = ({ options, value, onBlur, onChange, label, isMulti }) => {
   );
 };
 
-export default MySelect;
+export default SelectComponent;

@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation } from '@apollo/react-hooks';
-import { CREATE_USER } from '../../graphql/mutation/user';
+// import { useMutation } from '@apollo/react-hooks';
+// import { CREATE_USER } from '../../graphql/mutation/user';
 import { Select } from '../../components';
-
-// const options = [
-//   {category: { value: "Websites, IT & Software", label: "Websites, IT & Software"},
-//     skills: {}}
 
 const options = [
   {
@@ -17,7 +13,7 @@ const options = [
       { value: 'react1', label: 'react1' },
       { value: 'react2', label: 'react2' },
       { value: 'react3', label: 'react3' },
-      { value: 'react', label: 'react' },
+      { value: 'react4', label: 'react4' },
     ],
   },
   {
@@ -27,20 +23,14 @@ const options = [
       { value: 'angular1', label: 'angular1' },
       { value: 'angular2', label: 'angular2' },
       { value: 'angular3', label: 'angular3' },
-      { value: 'angular', label: 'angular' },
+      { value: 'angular4', label: 'angular4' },
     ],
   },
 ];
 
 const SignUp = () => {
-  const [userInput, { data }] = useMutation(CREATE_USER);
-  const [skill, setSkill] = useState();
-
-  const handleSkills = (category) => {
-    const { skills } = options.find((item) => item.category.value === category);
-
-    setSkill(skills);
-  };
+  // const [userInput, { data }] = useMutation(CREATE_USER);
+  const [skillData, setSkillData] = useState();
 
   const {
     handleSubmit,
@@ -72,7 +62,12 @@ const SignUp = () => {
     },
   });
 
-  const { category } = values;
+  const { category, skills } = values;
+
+  const handleSkills = ({ value }) => {
+    const { skills } = options.find((item) => item.category.value === value);
+    setSkillData(skills);
+  };
 
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
@@ -102,7 +97,8 @@ const SignUp = () => {
 
           <p className="text-red-500 text-xs italic">{errors.description}</p>
         </div>
-        <div className="w-full ">
+
+        {/* <div className="w-full ">
           <select
             id="category"
             onChange={(e) => {
@@ -118,16 +114,34 @@ const SignUp = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
+
         <div className="w-full ">
           <Select
-            options={skill}
+            options={options.map((item) => item.category)}
             value={category}
-            isMulti={true}
-            onChange={setFieldValue}
+            field={'category'}
+            isMulti={false}
+            onChange={(e, category) => {
+              handleSkills(category);
+              setFieldValue(e);
+            }}
             onBlur={setFieldTouched}
             error={errors.category}
             touched={touched.category}
+          />
+        </div>
+
+        <div className="w-full ">
+          <Select
+            options={skillData}
+            value={skills}
+            field={'skills'}
+            isMulti={true}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+            error={errors.skills}
+            touched={touched.skills}
           />
         </div>
 

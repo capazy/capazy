@@ -6,6 +6,7 @@ import { CREATE_USER } from '../../graphql/mutation/user';
 
 const SignUp = () => {
   const [userInput, { data }] = useMutation(CREATE_USER);
+  console.log('CREATE_USER', data);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
