@@ -6,7 +6,6 @@ const SelectComponent = ({
   value,
   onBlur,
   onChange,
-  label,
   field,
   isMulti,
 }) => {
@@ -19,8 +18,7 @@ const SelectComponent = ({
   };
 
   return (
-    <div style={{ margin: '1rem 0' }}>
-      <label htmlFor="color">{label}</label>
+    <div className="my-2">
       <Select
         id="color"
         options={options}
