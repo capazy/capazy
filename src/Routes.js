@@ -5,7 +5,15 @@ import { Switch, Redirect } from 'react-router-dom';
 import RouteWithLayout from './router/RouteWithLayout';
 
 // Views
-import { UserForm, Test, Home, Signup, Login, Feed } from './views';
+import {
+  UserForm,
+  Test,
+  Home,
+  Signup,
+  Login,
+  Feed,
+  ProjectForm,
+} from './views';
 import Layout from './layout';
 
 const Routes = () => {
@@ -18,6 +26,12 @@ const Routes = () => {
         component={Signup}
       />
       <RouteWithLayout exact path="/feed" layout={Layout} component={Feed} />
+      <RouteWithLayout
+        exact
+        path="/project-form"
+        layout={Layout}
+        component={ProjectForm}
+      />
       <RouteWithLayout exact path="/login" layout={Layout} component={Login} />
       <RouteWithLayout
         exact

@@ -28,7 +28,7 @@ const options = [
   },
 ];
 
-const SignUp = () => {
+const UserForm = () => {
   const [userInput, { data }] = useMutation(UPDATE_USER);
   console.log('RES', data);
 
@@ -48,17 +48,7 @@ const SignUp = () => {
       skills: [],
       description: '',
     },
-    // validationSchema: Yup.object({
-    //   skills: Yup.array()
-    //     .min(3, 'Pick at least 3 tags')
-    //     .of(
-    //       Yup.object().shape({
-    //         label: Yup.string().required(),
-    //         value: Yup.string().required(),
-    //       })
-    //     ),
-    //   category: Yup.string().required(),
-    // }),
+    // validationSchema: userFormSchema
     onSubmit: (values, { resetForm }) => {
       let modifySkills = [];
       values.skills.map((skill) => {
@@ -152,4 +142,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default UserForm;
