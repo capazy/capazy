@@ -5,11 +5,12 @@ import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_USER } from '../../graphql/mutation/user';
 import { Select } from '../../components';
+import { transformArray } from '../../utils/transformArray';
 
 const options = [
   {
     id: 0,
-    category: { value: 'Web Ti', label: 'Web TI' },
+    expertise: { value: 'Web Ti', label: 'Web TI' },
     skills: [
       { value: 'react1', label: 'react1' },
       { value: 'react2', label: 'react2' },
@@ -19,7 +20,7 @@ const options = [
   },
   {
     id: 1,
-    category: { value: 'Financial', label: 'Financial' },
+    expertise: { value: 'Financial', label: 'Financial' },
     skills: [
       { value: 'angular1', label: 'angular1' },
       { value: 'angular2', label: 'angular2' },
@@ -30,10 +31,10 @@ const options = [
 ];
 
 const dataTest = [
-  { value: 'test1', label: 'test1' },
-  { value: 'test2', label: 'test2' },
-  { value: 'test3', label: 'test3' },
-  { value: 'test4', label: 'test4' },
+  { value: 'angular1', label: 'angular1' },
+  { value: 'angular2', label: 'angular2' },
+  { value: 'angular3', label: 'angular3' },
+  { value: 'angular4', label: 'angular4' },
 ];
 
 const UserForm = () => {
@@ -52,7 +53,7 @@ const UserForm = () => {
     handleChange,
   } = useFormik({
     initialValues: {
-      category: '',
+      expertise: '',
       companyName: '',
       companyDepartment: '',
       skills: [],
@@ -61,55 +62,50 @@ const UserForm = () => {
       country: '',
     },
     validationSchema: Yup.object({
-      skills: Yup.array()
-        .min(1, 'Pick at least 1 skill')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      languages: Yup.array()
-        .min(1, 'Pick at least 1 language')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      category: Yup.string(),
-      description: Yup.string().required(),
-      companyName: Yup.string().required(),
-      companyDepartment: Yup.string().required(),
-      country: Yup.string().required(),
+      // skills: Yup.array()
+      //   .min(1, 'Pick at least 1 skill')
+      //   .of(
+      //     Yup.object().shape({
+      //       label: Yup.string().required(),
+      //       value: Yup.string().required(),
+      //     })
+      //   ),
+      // languages: Yup.array()
+      //   .min(1, 'Pick at least 1 language')
+      //   .of(
+      //     Yup.object().shape({
+      //       label: Yup.string().required(),
+      //       value: Yup.string().required(),
+      //     })
+      //   ),
+      // category: Yup.string(),
+      // description: Yup.string().required(),
+      // companyName: Yup.string().required(),
+      // companyDepartment: Yup.string().required(),
+      // country: Yup.string().required(),
     }),
-    onSubmit: (values, { resetForm }) => {
-      let modifySkills = [];
-      values.skills.map((skill) => {
-        return modifySkills.push(skill.value);
+    onSubmit: async (values, { resetForm }) => {
+      values.skills = await transformArray(values, 'skills');
+      values.languages = await transformArray(values, 'languages');
+      userInput({
+        variables: values,
       });
-      values.skills = modifySkills;
-      const formData = { skills: modifySkills };
-      console.log(values);
-
-      // userInput({ variables: formData });
-      // resetForm();
+      resetForm();
+      console.log('after', values);
     },
   });
 
   const {
-    category,
     skills,
     description,
     languages,
     companyName,
     companyDepartment,
-    country,
   } = values;
 
   const handleSkills = (e) => {
     const { skills } = options.find(
-      (item) => item.category.value === e.target.value
+      (item) => item.expertise.value === e.target.value
     );
     setSkillData(skills);
   };
@@ -226,17 +222,29 @@ const UserForm = () => {
             >
               Country
             </label>
-            <div className="w-full ">
-              <Select
-                options={dataTest}
-                value={country}
-                field={'country'}
-                isMulti={false}
-                onChange={setFieldValue}
-                onBlur={setFieldTouched}
-                error={errors.country}
-                touched={touched.country}
-              />
+
+            <div className="w-full">
+              <select
+                id="country"
+                name="country"
+                onChange={(e) => {
+                  handleChange(e);
+                  handleSkills(e);
+                }}
+                defaultValue="Country"
+              >
+                <option value="Country" disabled>
+                  Country
+                </option>
+                {options.map((item) => (
+                  <option
+                    key={item.expertise.label}
+                    value={item.expertise.value}
+                  >
+                    {item.expertise.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <p className="text-red-500 text-xs italic">{errors.country}</p>
           </div>
@@ -250,29 +258,32 @@ const UserForm = () => {
               className="block text-gray-500 text-sm font-bold mb-2"
               htmlFor="Email"
             >
-              Category
+              Expertise
             </label>
             <div className="w-full">
               <select
-                id="category"
-                name="category"
+                id="expertise"
+                name="expertise"
                 onChange={(e) => {
                   handleChange(e);
                   handleSkills(e);
                 }}
-                defaultValue="Category"
+                defaultValue="Expertise"
               >
-                <option value="Category" disabled>
+                <option value="Expertise" disabled>
                   Category
                 </option>
                 {options.map((item) => (
-                  <option key={item.category.label} value={item.category.value}>
-                    {item.category.label}
+                  <option
+                    key={item.expertise.label}
+                    value={item.expertise.value}
+                  >
+                    {item.expertise.label}
                   </option>
                 ))}
               </select>
             </div>
-            <p className="text-red-500 text-xs italic">{errors.category}</p>
+            <p className="text-red-500 text-xs italic">{errors.expertise}</p>
             <label
               className="block text-gray-500 text-sm font-bold mb-2"
               htmlFor="Email"

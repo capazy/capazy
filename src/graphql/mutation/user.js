@@ -33,10 +33,39 @@ export const LOGIN = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($skills: [String!]) {
-    updateUser(userInput: { skills: $skills }) {
+  mutation updateUser(
+    $firstName: String
+    $lastName: String
+    $description: String
+    $skills: [String!]
+    $languages: [String!]
+    $expertise: String
+    $companyName: String
+    $companyDepartment: String
+    $country: String
+  ) {
+    updateUser(
+      userInput: {
+        firstName: $firstName
+        lastName: $lastName
+        description: $description
+        skills: $skills
+        languages: $languages
+        expertise: $expertise
+        companyName: $companyName
+        companyDepartment: $companyDepartment
+        country: $country
+      }
+    ) {
       _id
+      firstName
+      languages
+      description
+      companyName
+      companyDepartment
+      country
       skills
+      expertise
     }
   }
 `;

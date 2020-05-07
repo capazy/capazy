@@ -3,9 +3,10 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/queries/project';
 
 const Feed = () => {
-  const { loading, data } = useQuery(GET_PROJECTS);
+  const { loading, data, refetch } = useQuery(GET_PROJECTS);
   if (loading) return <p>Loading...</p>;
   const projects = data.projects;
+  refetch();
 
   return (
     <Fragment>
