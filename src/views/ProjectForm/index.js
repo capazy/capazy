@@ -31,14 +31,12 @@ import { CREATE_PROJECT } from '../../graphql/mutation/user';
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
-// title: "Test",
-// description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-// type: "One-time",
-// deadline: "2020-05-07T03:32:53.989Z"
-// published: "globally"
-
 const ProjectForm = () => {
-  const [createProject] = useMutation(CREATE_PROJECT);
+  const [createProject] = useMutation(CREATE_PROJECT, {
+    update(_, { data }) {
+      console.log('project', data);
+    },
+  });
 
   // const [skillData, setSkillData] = useState();
 
@@ -57,6 +55,7 @@ const ProjectForm = () => {
       type: '',
       published: '',
       deadline: '',
+
       // skills: [],
     },
     // validationSchema: prijecrFormSchema
@@ -69,7 +68,7 @@ const ProjectForm = () => {
       // const formData = { skills: modifySkills };
       // userInput({ variables: formData });
       // resetForm();
-      values.deadline = new Date(values.deadline).toISOString();
+
       createProject({ variables: values });
       resetForm();
     },

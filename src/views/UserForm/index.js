@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 // import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_USER } from '../../graphql/mutation/user';
@@ -60,29 +59,29 @@ const UserForm = () => {
       languages: [],
       country: '',
     },
-    validationSchema: Yup.object({
-      skills: Yup.array()
-        .min(1, 'Pick at least 1 skill')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      languages: Yup.array()
-        .min(1, 'Pick at least 1 language')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      category: Yup.string(),
-      description: Yup.string().required(),
-      companyName: Yup.string().required(),
-      companyDepartment: Yup.string().required(),
-      country: Yup.string().required(),
-    }),
+    // validationSchema: Yup.object({
+    //   skills: Yup.array()
+    //     .min(1, 'Pick at least 1 skill')
+    //     .of(
+    //       Yup.object().shape({
+    //         label: Yup.string().required(),
+    //         value: Yup.string().required(),
+    //       })
+    //     ),
+    //   languages: Yup.array()
+    //     .min(1, 'Pick at least 1 language')
+    //     .of(
+    //       Yup.object().shape({
+    //         label: Yup.string().required(),
+    //         value: Yup.string().required(),
+    //       })
+    //     ),
+    //   category: Yup.string(),
+    //   description: Yup.string().required(),
+    //   companyName: Yup.string().required(),
+    //   companyDepartment: Yup.string().required(),
+    //   country: Yup.string().required(),
+    // }),
     onSubmit: (values, { resetForm }) => {
       let modifySkills = [];
       values.skills.map((skill) => {
@@ -90,15 +89,12 @@ const UserForm = () => {
       });
       values.skills = modifySkills;
       const formData = { skills: modifySkills };
-      console.log(values);
-
-      // userInput({ variables: formData });
-      // resetForm();
+      userInput({ variables: formData });
+      resetForm();
     },
   });
 
   const {
-    category,
     skills,
     description,
     languages,
