@@ -15,12 +15,12 @@ const How = () => {
           <div className="flex flex-wrap">
             <div className="w-5/6 sm:w-1/2 p-6">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                Holistic View of the Entire Organization
+                Holistic view of the entire organization
               </h3>
               <p className="text-gray-600 mb-8">
-                Capacity Eliminates Hierarchy that Impairs Execution by
-                allowing all talent within the Organization to freely chose to colaborate 
-                on a compelling Project
+                Capacity eliminates hierarchy that impairs execution by
+                allowing all talent within the organization to freely chose to colaborate 
+                on a compelling project
                 <br />
                 <br />
                 Take a Look How:
@@ -468,13 +468,13 @@ const How = () => {
             <div className="w-full sm:w-1/2 p-6 mt-6">
               <div className="align-middle">
                 <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  Collabrate globally with you peers
+                  Collabrate globally with your peers
                 </h3>
                 <p className="text-gray-600 mb-8">
-                  Get Exposure within your Organization by Providing Meaningful
-                  Support when Capacity is a Major Constrain, 
-                  Develop relationships and strong ties within the company by mutual 
-                  colaboration by being exposed to different challenges 
+                  Get exposure within your organization by providing meaningful
+                  support when capacity is a major constrain; 
+                  develop relationships and strong ties within the company by mutual 
+                  colaboration 
                   <br />
                   <br />
                   Images from:

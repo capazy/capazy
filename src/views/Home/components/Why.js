@@ -54,8 +54,8 @@ const Why = () => {
                   Problem Solving
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                problem-solving is easier – since people with different skills and 
-                knowledge will work together to produce a creative solution.
+                Problem-solving is easier – since people with different skills and 
+                knowledge will work together to produce a creative solution
                 </p>
               </a>
             </div>
@@ -83,8 +83,7 @@ const Why = () => {
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
                   Reduce the cost allocated to temporary hires due to lack of
-                  resources within your team, reach out to your internal resources
-                  and allow them to participate
+                  resources within your team. There is Capacity available within!!
                 </p>
               </a>
             </div>

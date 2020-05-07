@@ -49,7 +49,7 @@ function ExamplesNavbar() {
               >
                 Sing up
               </Link>
-              <button className="btn-rounded">Action</button>
+              <button className="btn-rounded">Contact Us</button>
             </div>
           )}
         </div>
