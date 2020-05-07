@@ -1,5 +1,6 @@
 export const authReducer = (state, { type, payload }) => {
   switch (type) {
+    case 'CREATE_USER':
     case 'LOGIN':
       localStorage.setItem('token', payload.token);
       return {

@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { AuthContext } from '../../context/AuthContext';
 
 const SignUp = () => {
-  const { login } = useContext(AuthContext);
+  const { signup } = useContext(AuthContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -22,7 +22,7 @@ const SignUp = () => {
         .required('Required'),
     }),
     onSubmit: (values) => {
-      login(values);
+      signup(values);
     },
   });
 
