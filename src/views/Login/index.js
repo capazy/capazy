@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation } from '@apollo/react-hooks';
-import { LOGIN } from '../../graphql/mutation/user';
+import { AuthContext } from '../../context/AuthContext';
 
 const SignUp = () => {
-  const [login, { data }] = useMutation(LOGIN);
+  const { login } = useContext(AuthContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -18,12 +17,10 @@ const SignUp = () => {
         .max(20, 'Must be 20 characters or less')
         .required('Required'),
     }),
-    onSubmit: ({ email, password }) => {
-      login({ variables: { email, password } });
+    onSubmit: (values) => {
+      login(values);
     },
   });
-
-  console.log('DATA', data);
 
   return (
     <div className="pt-5 w-full max-w-xs mx-auto my-auto">

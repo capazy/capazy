@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_USER } from '../../graphql/mutation/user';
+import { CREATE_USER, LOGIN } from '../../graphql/mutation/user';
 import { authReducer } from '../../reducers/authReducer';
 
 const AuthContext = createContext({
@@ -16,12 +16,22 @@ const AuthProvider = (props) => {
     user: null,
   });
 
-  // login
-  const login = async (data) => {
+  // signup
+  const signup = async (data) => {
     userInput({ variables: data });
   };
-  const [userInput, { loading }] = useMutation(CREATE_USER, {
+  const [userInput] = useMutation(CREATE_USER, {
     update(_, { data: { createUser: loginData } }) {
+      dispatch({ type: 'CREATE_USER', payload: loginData });
+    },
+  });
+
+  // login
+  const login = async (data) => {
+    loginInput({ variables: data });
+  };
+  const [loginInput] = useMutation(LOGIN, {
+    update(_, { data: { login: loginData } }) {
       dispatch({ type: 'LOGIN', payload: loginData });
     },
   });
@@ -32,7 +42,7 @@ const AuthProvider = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user: state.user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user: state.user, signup, login, logout }}>
       {props.children}
     </AuthContext.Provider>
   );

@@ -20,7 +20,6 @@ const SelectComponent = ({
   return (
     <div className="my-2">
       <Select
-        id="color"
         options={options}
         isMulti={isMulti}
         onChange={handleChange}

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+// import * as Yup from 'yup';
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_USER } from '../../graphql/mutation/user';
 import { Select } from '../../components';
 
 const options = [
@@ -33,7 +36,10 @@ const dataTest = [
   { value: 'test4', label: 'test4' },
 ];
 
-const SignUp = () => {
+const UserForm = () => {
+  const [userInput, { data }] = useMutation(UPDATE_USER);
+  console.log('RES', data);
+
   const [skillData, setSkillData] = useState();
 
   const {
@@ -77,12 +83,20 @@ const SignUp = () => {
       companyDepartment: Yup.string().required(),
       country: Yup.string().required(),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
+      let modifySkills = [];
+      values.skills.map((skill) => {
+        return modifySkills.push(skill.value);
+      });
+      values.skills = modifySkills;
+      const formData = { skills: modifySkills };
       console.log(values);
+
+      // userInput({ variables: formData });
+      // resetForm();
     },
   });
 
-  console.log(values);
   const {
     category,
     skills,
@@ -93,8 +107,10 @@ const SignUp = () => {
     country,
   } = values;
 
-  const handleCategory = ({ value }) => {
-    const { skills } = options.find((item) => item.category.value === value);
+  const handleSkills = (e) => {
+    const { skills } = options.find(
+      (item) => item.category.value === e.target.value
+    );
     setSkillData(skills);
   };
 
@@ -236,20 +252,25 @@ const SignUp = () => {
             >
               Category
             </label>
-            <div className="w-full ">
-              <Select
-                options={options.map((item) => item.category)}
-                value={category}
-                field={'category'}
-                isMulti={false}
-                onChange={(e, category) => {
-                  handleCategory(category);
-                  setFieldValue(e);
+            <div className="w-full">
+              <select
+                id="category"
+                name="category"
+                onChange={(e) => {
+                  handleChange(e);
+                  handleSkills(e);
                 }}
-                onBlur={setFieldTouched}
-                error={errors.category}
-                touched={touched.category}
-              />
+                defaultValue="Category"
+              >
+                <option value="Category" disabled>
+                  Category
+                </option>
+                {options.map((item) => (
+                  <option key={item.category.label} value={item.category.value}>
+                    {item.category.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <p className="text-red-500 text-xs italic">{errors.category}</p>
             <label
@@ -284,4 +305,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default UserForm;

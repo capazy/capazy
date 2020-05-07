@@ -15,9 +15,17 @@ const links = () => (
     >
       Login
     </Link>
-    <button className="btn-square bg-brand-blue  text-white mx-2">
-      Post a Project
-    </button>
+    <Link
+      to="/feed"
+      className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+    >
+      Projects
+    </Link>
+    <Link to="/project-form">
+      <button className="btn-square bg-brand-blue text-white mx-2">
+        Post a Project
+      </button>
+    </Link>
   </div>
 );
 
@@ -92,9 +100,17 @@ function ExamplesNavbar() {
               >
                 Login
               </Link>
-              <button className="btn-square bg-brand-blue  text-white mx-2">
-                Post a Project
-              </button>
+              <Link
+                to="/feed"
+                className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+              >
+                Projects
+              </Link>
+              <Link to="/project-form">
+                <button className="btn-square bg-brand-blue text-white mx-2">
+                  Post a Project
+                </button>
+              </Link>
             </div>
           )}
         </div>
