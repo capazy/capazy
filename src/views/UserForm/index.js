@@ -65,7 +65,8 @@ const SignUp = () => {
         return modifySkills.push(skill.value);
       });
       values.skills = modifySkills;
-      userInput({ variables: { skills: values.skills } });
+      const formData = { skills: modifySkills };
+      userInput({ variables: formData });
       resetForm();
     },
   });
