@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-// import { useMutation } from '@apollo/react-hooks';
-// import { CREATE_USER } from '../../graphql/mutation/user';
+// import * as Yup from 'yup';
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_USER } from '../../graphql/mutation/user';
 import { Select } from '../../components';
 
 const options = [
@@ -29,7 +29,9 @@ const options = [
 ];
 
 const SignUp = () => {
-  // const [userInput, { data }] = useMutation(CREATE_USER);
+  const [userInput, { data }] = useMutation(UPDATE_USER);
+  console.log('RES', data);
+
   const [skillData, setSkillData] = useState();
 
   const {
@@ -46,26 +48,35 @@ const SignUp = () => {
       skills: [],
       description: '',
     },
-    validationSchema: Yup.object({
-      skills: Yup.array()
-        .min(3, 'Pick at least 3 tags')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      category: Yup.string().required(),
-    }),
-    onSubmit: ({ values }) => {
-      console.log(values);
+    // validationSchema: Yup.object({
+    //   skills: Yup.array()
+    //     .min(3, 'Pick at least 3 tags')
+    //     .of(
+    //       Yup.object().shape({
+    //         label: Yup.string().required(),
+    //         value: Yup.string().required(),
+    //       })
+    //     ),
+    //   category: Yup.string().required(),
+    // }),
+    onSubmit: (values, { resetForm }) => {
+      let modifySkills = [];
+      values.skills.map((skill) => {
+        return modifySkills.push(skill.value);
+      });
+      values.skills = modifySkills;
+      const formData = { skills: modifySkills };
+      userInput({ variables: formData });
+      resetForm();
     },
   });
 
-  const { category, skills } = values;
+  const { skills } = values;
 
-  const handleSkills = ({ value }) => {
-    const { skills } = options.find((item) => item.category.value === value);
+  const handleSkills = (e) => {
+    const { skills } = options.find(
+      (item) => item.category.value === e.target.value
+    );
     setSkillData(skills);
   };
 
@@ -94,42 +105,28 @@ const SignUp = () => {
               touched.description && errors.description ? true : undefined
             }
           ></textarea>
-
           <p className="text-red-500 text-xs italic">{errors.description}</p>
         </div>
 
-        {/* <div className="w-full ">
+        <div className="w-full ">
           <select
             id="category"
+            name="category"
             onChange={(e) => {
-              handleSkills(e.target.value);
               handleChange(e);
+              handleSkills(e);
             }}
             defaultValue="Category"
           >
-            <option disable>Category</option>
+            <option value="Category" disabled>
+              Category
+            </option>
             {options.map((item) => (
               <option key={item.category.label} value={item.category.value}>
                 {item.category.label}
               </option>
             ))}
           </select>
-        </div> */}
-
-        <div className="w-full ">
-          <Select
-            options={options.map((item) => item.category)}
-            value={category}
-            field={'category'}
-            isMulti={false}
-            onChange={(e, category) => {
-              handleSkills(category);
-              setFieldValue(e);
-            }}
-            onBlur={setFieldTouched}
-            error={errors.category}
-            touched={touched.category}
-          />
         </div>
 
         <div className="w-full ">

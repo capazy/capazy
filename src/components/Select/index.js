@@ -20,9 +20,8 @@ const SelectComponent = ({
 
   return (
     <div style={{ margin: '1rem 0' }}>
-      <label htmlFor="color">{label}</label>
+      <label>{label}</label>
       <Select
-        id="color"
         options={options}
         isMulti={isMulti}
         onChange={handleChange}
