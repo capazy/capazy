@@ -15,6 +15,9 @@ export const GET_PROJECTS = gql`
       }
       vacancies {
         _id
+        title
+        experience
+        skills
       }
     }
   }

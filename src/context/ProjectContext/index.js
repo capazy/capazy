@@ -10,8 +10,6 @@ const ProjectContext = createContext({
 const ProjectProvider = (props) => {
   const [projectId, setProjectId] = useState(null);
 
-  console.log('CTX', projectId);
-
   return (
     <ProjectContext.Provider value={{ projectId, setProjectId }}>
       {props.children}

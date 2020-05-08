@@ -97,3 +97,11 @@ export const CREATE_VACANCY = gql`
     }
   }
 `;
+
+export const JOIN_VACANCY = gql`
+  mutation joinVacancy($vacancyId: ID!) {
+    joinVacancy(vacancyId: $vacancyId) {
+      _id
+    }
+  }
+`;
