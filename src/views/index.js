@@ -6,3 +6,4 @@ export { default as UserForm } from './UserForm';
 export { default as ProjectForm } from './ProjectForm';
 export { default as VacancyForm } from './VacancyForm';
 export { default as Feed } from './Feed';
+export { default as Profile } from './Profile';

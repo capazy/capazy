@@ -14,6 +14,7 @@ import {
   Feed,
   ProjectForm,
   VacancyForm,
+  Profile,
 } from './views';
 import Layout from './layout';
 
@@ -45,6 +46,12 @@ const Routes = () => {
         path="/user-form"
         layout={Layout}
         component={UserForm}
+      />
+      <RouteWithLayout
+        exact
+        path="/profile"
+        layout={Layout}
+        component={Profile}
       />
       <RouteWithLayout exact path="/" layout={Layout} component={Home} />
       <RouteWithLayout exact path="/test" layout={Layout} component={Test} />

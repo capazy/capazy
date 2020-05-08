@@ -15,12 +15,7 @@ const links = () => (
     >
       Login
     </Link>
-    <Link
-      to="/feed"
-      className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
-    >
-      Projects
-    </Link>
+
     <Link to="/project-form">
       <button className="btn-square bg-brand-blue text-white mx-2">
         Post a Project
@@ -29,10 +24,10 @@ const links = () => (
   </div>
 );
 
-function ExamplesNavbar() {
+function Navbar() {
   const [isOpen, setOpen] = useState(false);
   return (
-    <nav className="fixed w-full z-10 top-0 bg-white border-b-2 ">
+    <nav className=" w-full z-10 top-0 bg-white border-b-2 ">
       <div className="container mx-auto sm:flex sm:justify-between sm:items-center ">
         <div className="flex  items-end justify-between px-4 py-3 sm:p-0">
           <div className="-ml-8">
@@ -47,7 +42,7 @@ function ExamplesNavbar() {
           {/* SEARCH */}
 
           <div className="hidden md:block flex-1 w-full mx-auto max-w-sm content-center py-4 ">
-            <div className="relative pull-right pl-4 pr-4 md:pr-0">
+            {/* <div className="relative pull-right pl-4 pr-4 md:pr-0">
               <input
                 type="search"
                 placeholder="Search"
@@ -65,7 +60,7 @@ function ExamplesNavbar() {
                   <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
                 </svg>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* FINISH SEARCH */}
           <div className="sm:hidden">
@@ -120,4 +115,4 @@ function ExamplesNavbar() {
   );
 }
 
-export default ExamplesNavbar;
+export default Navbar;
