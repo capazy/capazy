@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/queries/project';
-import { JOIN_VACANCY } from '../../graphql/mutation/user';
+import { JOIN_VACANCY } from '../../graphql/mutation/vacancy';
 
 const Feed = () => {
   const [joinVacancy] = useMutation(JOIN_VACANCY, {

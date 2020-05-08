@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_PROJECT } from '../../graphql/mutation/user';
+import { CREATE_PROJECT } from '../../graphql/mutation/project';
 import { ProjectContext } from '../../context/ProjectContext';
 
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
