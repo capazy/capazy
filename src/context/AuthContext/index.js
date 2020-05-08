@@ -36,6 +36,13 @@ const AuthProvider = (props) => {
     },
   });
 
+  // get a user
+  // const getUser = async (data) => {
+  //   const { data } = useQuery(GET_USER, {
+  //     variables: { userId: id },
+  //   });
+  // };
+
   // logout
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
