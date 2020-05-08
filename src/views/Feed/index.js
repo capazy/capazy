@@ -1,17 +1,27 @@
 import React, { Fragment } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/queries/project';
+import { JOIN_VACANCY } from '../../graphql/mutation/vacancy';
 
 const Feed = () => {
+  const [joinVacancy] = useMutation(JOIN_VACANCY, {
+    update(_, { data }) {
+      console.log('JOIN', data);
+    },
+  });
+
   const { loading, data, refetch } = useQuery(GET_PROJECTS);
   if (loading) return <p>Loading...</p>;
-  const projects = data.projects;
   refetch();
+
+  const handleJoin = (vacancyId) => {
+    joinVacancy({ variables: { vacancyId } });
+  };
 
   return (
     <Fragment>
       <div className="py-16">
-        {projects.map((project) => (
+        {data.projects.map((project) => (
           <div
             className="container w-full flex flex-wrap mx-auto px-2 lg:pt-2"
             key={project._id}
@@ -24,26 +34,64 @@ const Feed = () => {
                 <hr className="border-b border-gray-400" />
               </div>
               <p className="py-6">{project.description}</p>
-              <table className="w-full">
-                <thead>
-                  <tr className="text-left">
-                    <th>Type</th>
-                    <th>Deadline</th>
-                    <th>Published</th>
-                    <th>Vacancies</th>
-                    <th>Creator</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{project.type}</td>
-                    <td>{project.deadline}</td>
-                    <td>{project.published}</td>
-                    <td>{project.vacancies.length}</td>
-                    <td>{project.creator._id}</td>
-                  </tr>
-                </tbody>
-              </table>
+
+              <div>
+                <h2>Project Info</h2>
+                <table className="w-full">
+                  <thead>
+                    <tr className="text-left">
+                      <th>Type</th>
+                      <th>Deadline</th>
+                      <th>Published</th>
+                      <th>Vacancies</th>
+                      <th>Creator</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{project.type}</td>
+                      <td>{project.deadline}</td>
+                      <td>{project.published}</td>
+                      <td>{project.vacancies.length}</td>
+                      <td>{project.creator._id}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br />
+
+              <div>
+                <h2>Vacancies Info</h2>
+                <table className="w-full">
+                  <thead>
+                    <tr className="text-left">
+                      <th>ID</th>
+                      <th>Title</th>
+                      <th>Experience Req.</th>
+                      <th>Skills</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {project.vacancies.map((vacancy) => (
+                      <tr key={vacancy._id}>
+                        <td>{vacancy._id}</td>
+                        <td>{vacancy.title}</td>
+                        <td>{vacancy.experience}</td>
+                        <td>{vacancy.skills}</td>
+                        <td>
+                          <button
+                            className="btn bg-brand-blue text-white mb-0"
+                            onClick={() => handleJoin(vacancy._id)}
+                          >
+                            Join
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         ))}

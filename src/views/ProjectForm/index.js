@@ -1,91 +1,54 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-// import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_PROJECT } from '../../graphql/mutation/user';
-// import { Select } from '../../components';
-
-// const options = [
-//   {
-//     id: 0,
-//     category: { value: 'Web Ti', label: 'Web TI' },
-//     skills: [
-//       { value: 'react1', label: 'react1' },
-//       { value: 'react2', label: 'react2' },
-//       { value: 'react3', label: 'react3' },
-//       { value: 'react4', label: 'react4' },
-//     ],
-//   },
-//   {
-//     id: 1,
-//     category: { value: 'Financial', label: 'Financial' },
-//     skills: [
-//       { value: 'angular1', label: 'angular1' },
-//       { value: 'angular2', label: 'angular2' },
-//       { value: 'angular3', label: 'angular3' },
-//       { value: 'angular4', label: 'angular4' },
-//     ],
-//   },
-// ];
+import { CREATE_PROJECT } from '../../graphql/mutation/project';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
-// title: "Test",
-// description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-// type: "One-time",
-// deadline: "2020-05-07T03:32:53.989Z"
-// published: "globally"
-
 const ProjectForm = () => {
-  const [createProject] = useMutation(CREATE_PROJECT);
+  const { setProjectId } = useContext(ProjectContext);
 
-  // const [skillData, setSkillData] = useState();
+  const [createProject] = useMutation(CREATE_PROJECT, {
+    update(
+      _,
+      {
+        data: {
+          createProject: { _id: projectId },
+        },
+      }
+    ) {
+      setProjectId(projectId);
+    },
+  });
 
-  const {
-    handleSubmit,
-    values,
-    errors,
-    touched,
-    // setFieldTouched,
-    // setFieldValue,
-    handleChange,
-  } = useFormik({
+  const [state, setState] = useState(false);
+
+  const { handleSubmit, values, errors, touched, handleChange } = useFormik({
     initialValues: {
       title: '',
       description: '',
       type: '',
       published: '',
       deadline: '',
-      // skills: [],
     },
-    // validationSchema: prijecrFormSchema
-    onSubmit: (values, { resetForm }) => {
-      // let modifySkills = [];
-      // values.skills.map((skill) => {
-      //   return modifySkills.push(skill.value);
-      // });
-      // values.skills = modifySkills;
-      // const formData = { skills: modifySkills };
-      // userInput({ variables: formData });
-      // resetForm();
-      values.deadline = new Date(values.deadline).toISOString();
-      createProject({ variables: values });
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      await createProject({ variables: values });
+      await setState(true);
     },
   });
 
-  const { title, description, deadline } = values;
+  if (state) {
+    return <Redirect push to="/vacancy-form" />;
+  }
 
-  // const handleSkills = (e) => {
-  //   const { skills } = options.find(
-  //     (item) => item.category.value === e.target.value
-  //   );
-  //   setSkillData(skills);
-  // };
+  const { title, description, deadline } = values;
 
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
+      <h1>Paso 1 de 2</h1>
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
@@ -174,22 +137,9 @@ const ProjectForm = () => {
         </div>
         <p className="text-red-500 text-xs italic">{errors.deadline}</p>
 
-        {/* <div className="w-full ">
-          <Select
-            options={skillData}
-            value={skills}
-            field={'skills'}
-            isMulti={true}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-            error={errors.skills}
-            touched={touched.skills}
-          />
-        </div> */}
-
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
-            Post
+            Next
           </button>
         </div>
       </form>
