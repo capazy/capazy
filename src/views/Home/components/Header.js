@@ -7,18 +7,17 @@ const Home = () => {
         {/* <!--Left Col--> */}
         <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
           <p className="uppercase tracking-loose w-full">
-            What business are you?
+          Effective knowledge sharing
           </p>
           <h1 className="my-4 text-5xl font-bold leading-tight">
-            Main Hero Message to sell yourself!
+            Changing how companies source talent
           </h1>
           <p className="leading-normal text-2xl mb-8">
-            Sub-hero message, not too long and not too short. Make it just
-            right!
+            Bring visibility of all projects to the entire organization
           </p>
 
           <button className="btn-rounded bg-brand-blue text-white my-6 py-4 px-8 z-0 ">
-            Subscribe
+            Learn How
           </button>
         </div>
         {/* <!--Right Col--> */}

@@ -6,7 +6,7 @@ const Why = () => {
       <section className="bg-white border-b py-8">
         <div className="container mx-auto flex flex-wrap pt-4 pb-12">
           <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            Title
+            For the Organization
           </h1>
           <div className="w-full mb-4">
             <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -22,18 +22,20 @@ const Why = () => {
                   xGETTING STARTED
                 </p>
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Lorem ipsum dolor sit amet.
+                  Team Work
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                Good teamwork helps to build morale in the workplace, 
+                which makes workers more productive and ultimately improves profits
+                
+
                 </p>
               </a>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <div className="flex items-center justify-center">
                 <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                  Action
+                  Learn More
                 </button>
               </div>
             </div>
@@ -49,18 +51,18 @@ const Why = () => {
                   xGETTING STARTED
                 </p>
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Lorem ipsum dolor sit amet.
+                  Problem Solving
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                Problem-solving is easier – since people with different skills and 
+                knowledge will work together to produce a creative solution
                 </p>
               </a>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <div className="flex items-center justify-center">
                 <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                  Action
+                Learn More
                 </button>
               </div>
             </div>
@@ -75,19 +77,20 @@ const Why = () => {
                 <p className="w-full text-gray-600 text-xs md:text-sm px-6">
                   xGETTING STARTED
                 </p>
+
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Lorem ipsum dolor sit amet.
+                  Cost Reduction
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                  Reduce the cost allocated to temporary hires due to lack of
+                  resources within your team. There is Capacity available within!!
                 </p>
               </a>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <div className="flex items-center justify-center">
                 <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                  Action
+                Learn More
                 </button>
               </div>
             </div>
