@@ -318,6 +318,7 @@
   { "value": "GitLab", "label": "GitLab" },
   { "value": "Golang", "label": "Golang" },
   { "value": "Google Analytics", "label": "Google Analytics" },
+  { "value": "Google Display", "label": "Google Display" },
   { "value": "Google APIs", "label": "Google APIs" },
   { "value": "Google App Engine", "label": "Google App Engine" },
   { "value": "Google Cardboard", "label": "Google Cardboard" },
