@@ -16,9 +16,11 @@ export const CREATE_VACANCY = gql`
       }
     ) {
       _id
-      title
-      experience
-      skills
+      project {
+        vacancies {
+          _id
+        }
+      }
     }
   }
 `;

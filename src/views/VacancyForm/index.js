@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_VACANCY } from '../../graphql/mutation/vacancy';
 import { ProjectContext } from '../../context/ProjectContext';
 import { Select } from '../../components';
 import { transformArray } from '../../utils/transformArray';
+import allSkillsData from '../../data/allSkillsData.json';
 
 const experienceOptions = [
   { value: 'beginner', label: 'Beginner' },
@@ -12,19 +14,13 @@ const experienceOptions = [
   { value: 'advanced', label: 'Advanced' },
 ];
 
-const skillsOptions = [
-  { value: 'test1', label: 'test1' },
-  { value: 'test2', label: 'test2' },
-  { value: 'test3', label: 'test3' },
-  { value: 'test4', label: 'test4' },
-];
-
 const ProjectForm = () => {
   const { projectId } = useContext(ProjectContext);
+  const [state, setState] = useState(null);
 
   const [vacancyInput] = useMutation(CREATE_VACANCY, {
     update(_, { data }) {
-      console.log('vacancy', data);
+      setState(data);
     },
   });
 
@@ -59,6 +55,14 @@ const ProjectForm = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
+        {state ? (
+          <Fragment>
+            <h2>Vacancies</h2>
+            {state.createVacancy.project.vacancies.map((datum) => (
+              <p key={datum._id}>{datum._id}</p>
+            ))}
+          </Fragment>
+        ) : null}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Title
@@ -102,7 +106,7 @@ const ProjectForm = () => {
             Skills
           </label>
           <Select
-            options={skillsOptions}
+            options={allSkillsData}
             value={skills}
             field={'skills'}
             isMulti={true}
@@ -116,8 +120,13 @@ const ProjectForm = () => {
 
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
-            Post
+            Add vacancy
           </button>
+          <Link to="/feed">
+            <button className="btn bg-brand-blue text-white mb-0">
+              Finish
+            </button>
+          </Link>
         </div>
       </form>
     </div>
