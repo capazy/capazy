@@ -38,6 +38,7 @@ export const UPDATE_USER = gql`
     $lastName: String
     $description: String
     $skills: [String!]
+    $additionalSkills: [String!]
     $languages: [String!]
     $expertise: String
     $companyName: String
@@ -50,6 +51,7 @@ export const UPDATE_USER = gql`
         lastName: $lastName
         description: $description
         skills: $skills
+        additionalSkills: $additionalSkills
         languages: $languages
         expertise: $expertise
         companyName: $companyName
@@ -65,6 +67,7 @@ export const UPDATE_USER = gql`
       companyDepartment
       country
       skills
+      additionalSkills
       expertise
     }
   }

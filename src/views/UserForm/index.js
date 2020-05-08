@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
+import { Redirect } from 'react-router-dom';
+
 import * as Yup from 'yup';
 // import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
@@ -7,39 +9,13 @@ import { UPDATE_USER } from '../../graphql/mutation/user';
 import { Select } from '../../components';
 import { transformArray } from '../../utils/transformArray';
 
-const options = [
-  {
-    id: 0,
-    expertise: { value: 'Web Ti', label: 'Web TI' },
-    skills: [
-      { value: 'react1', label: 'react1' },
-      { value: 'react2', label: 'react2' },
-      { value: 'react3', label: 'react3' },
-      { value: 'react4', label: 'react4' },
-    ],
-  },
-  {
-    id: 1,
-    expertise: { value: 'Financial', label: 'Financial' },
-    skills: [
-      { value: 'angular1', label: 'angular1' },
-      { value: 'angular2', label: 'angular2' },
-      { value: 'angular3', label: 'angular3' },
-      { value: 'angular4', label: 'angular4' },
-    ],
-  },
-];
-
-const dataTest = [
-  { value: 'angular1', label: 'angular1' },
-  { value: 'angular2', label: 'angular2' },
-  { value: 'angular3', label: 'angular3' },
-  { value: 'angular4', label: 'angular4' },
-];
+import skillsData from '../../data/skillsData.json';
+import allSkillsData from '../../data/allSkillsData.json';
+import countriesData from '../../data/countriesData.json';
+import languagesData from '../../data/languagesData.json';
 
 const UserForm = () => {
   const [userInput, { data }] = useMutation(UPDATE_USER);
-  console.log('RES', data);
 
   const [skillData, setSkillData] = useState();
 
@@ -60,38 +36,49 @@ const UserForm = () => {
       description: '',
       languages: [],
       country: '',
+      additionalSkills: [],
     },
     validationSchema: Yup.object({
-      // skills: Yup.array()
-      //   .min(1, 'Pick at least 1 skill')
-      //   .of(
-      //     Yup.object().shape({
-      //       label: Yup.string().required(),
-      //       value: Yup.string().required(),
-      //     })
-      //   ),
-      // languages: Yup.array()
-      //   .min(1, 'Pick at least 1 language')
-      //   .of(
-      //     Yup.object().shape({
-      //       label: Yup.string().required(),
-      //       value: Yup.string().required(),
-      //     })
-      //   ),
-      // category: Yup.string(),
-      // description: Yup.string().required(),
-      // companyName: Yup.string().required(),
-      // companyDepartment: Yup.string().required(),
-      // country: Yup.string().required(),
+      skills: Yup.array()
+        .min(1, 'Pick at least 1 skill')
+        .of(
+          Yup.object().shape({
+            label: Yup.string().required(),
+            value: Yup.string().required(),
+          })
+        ),
+
+      additionalSkills: Yup.array().of(
+        Yup.object().shape({
+          label: Yup.string(),
+          value: Yup.string(),
+        })
+      ),
+      languages: Yup.array()
+        .min(1, 'Pick at least 1 language')
+        .of(
+          Yup.object().shape({
+            label: Yup.string().required(),
+            value: Yup.string().required(),
+          })
+        ),
+      description: Yup.string().required(),
+      companyName: Yup.string().required(),
+      companyDepartment: Yup.string().required(),
+      country: Yup.string().required(),
+      expertise: Yup.string().required(),
     }),
     onSubmit: async (values, { resetForm }) => {
       values.skills = await transformArray(values, 'skills');
       values.languages = await transformArray(values, 'languages');
+      values.additionalSkills = await transformArray(
+        values,
+        'additionalSkills'
+      );
       userInput({
         variables: values,
       });
       resetForm();
-      console.log('after', values);
     },
   });
 
@@ -101,15 +88,25 @@ const UserForm = () => {
     languages,
     companyName,
     companyDepartment,
+    additionalSkills,
   } = values;
 
   const handleSkills = (e) => {
-    const { skills } = options.find(
+    const { skills } = skillsData.find(
       (item) => item.expertise.value === e.target.value
     );
     setSkillData(skills);
   };
 
+  if (data) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/feed',
+        }}
+      />
+    );
+  }
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
@@ -202,7 +199,7 @@ const UserForm = () => {
             </label>
             <div className="w-full ">
               <Select
-                options={dataTest}
+                options={languagesData}
                 value={languages}
                 field={'languages'}
                 isMulti={true}
@@ -227,21 +224,15 @@ const UserForm = () => {
               <select
                 id="country"
                 name="country"
-                onChange={(e) => {
-                  handleChange(e);
-                  handleSkills(e);
-                }}
+                onChange={handleChange}
                 defaultValue="Country"
               >
                 <option value="Country" disabled>
                   Country
                 </option>
-                {options.map((item) => (
-                  <option
-                    key={item.expertise.label}
-                    value={item.expertise.value}
-                  >
-                    {item.expertise.label}
+                {countriesData.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
                   </option>
                 ))}
               </select>
@@ -271,9 +262,9 @@ const UserForm = () => {
                 defaultValue="Expertise"
               >
                 <option value="Expertise" disabled>
-                  Category
+                  Expertise
                 </option>
-                {options.map((item) => (
+                {skillsData.map((item) => (
                   <option
                     key={item.expertise.label}
                     value={item.expertise.value}
@@ -284,25 +275,50 @@ const UserForm = () => {
               </select>
             </div>
             <p className="text-red-500 text-xs italic">{errors.expertise}</p>
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
-              Skills
-            </label>
-            <div className="w-full ">
-              <Select
-                options={skillData}
-                value={skills}
-                field={'skills'}
-                isMulti={true}
-                onChange={setFieldValue}
-                onBlur={setFieldTouched}
-                error={errors.skills}
-                touched={touched.skills}
-              />
+            <div className="w-full">
+              <label
+                className="block text-gray-500 text-sm font-bold mb-2"
+                htmlFor="Email"
+              >
+                Skills
+              </label>
+              <div className="w-full ">
+                <Select
+                  options={skillData}
+                  value={skills}
+                  field={'skills'}
+                  isMulti={true}
+                  onChange={setFieldValue}
+                  onBlur={setFieldTouched}
+                  error={errors.skills}
+                  touched={touched.skills}
+                />
+              </div>
+              <p className="text-red-500 text-xs italic">{errors.skills}</p>
             </div>
-            <p className="text-red-500 text-xs italic">{errors.skills}</p>
+            <div className="w-full">
+              <label
+                className="block text-gray-500 text-sm font-bold mb-2"
+                htmlFor="Email"
+              >
+                Additional Expertise
+              </label>
+              <div className="w-full ">
+                <Select
+                  options={allSkillsData}
+                  value={additionalSkills}
+                  field={'additionalSkills'}
+                  isMulti={true}
+                  onChange={setFieldValue}
+                  onBlur={setFieldTouched}
+                  error={errors.additionalSkills}
+                  touched={touched.additionalSkills}
+                />
+              </div>
+              <p className="text-red-500 text-xs italic">
+                {errors.additionalSkills}
+              </p>
+            </div>
           </div>
         </div>
 
