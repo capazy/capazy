@@ -1,20 +1,28 @@
 import React, { useContext, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+
+// apollo
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_VACANCY } from '../../graphql/mutation/vacancy';
-import { ProjectContext } from '../../context/ProjectContext';
-import { Select } from '../../components';
-import { transformArray } from '../../utils/transformArray';
-import allSkillsData from '../../data/allSkillsData.json';
 
+// context
+import { ProjectContext } from '../../context/ProjectContext';
+
+// components
+import { Select } from '../../components';
+
+// utils
+import { transformArray } from '../../utils/transformArray';
+import { vacancyFormSchema } from '../../utils/formikSchemas';
+import allSkillsData from '../../data/allSkillsData.json';
 const experienceOptions = [
   { value: 'beginner', label: 'Beginner' },
   { value: 'intermediate', label: 'Intermediate' },
   { value: 'advanced', label: 'Advanced' },
 ];
 
-const ProjectForm = () => {
+const VacancyForm = () => {
   const { projectId } = useContext(ProjectContext);
   const [state, setState] = useState(null);
 
@@ -39,8 +47,9 @@ const ProjectForm = () => {
       experience: '',
       skills: '',
     },
+    validationSchema: vacancyFormSchema,
     onSubmit: async (values, { resetForm }) => {
-      values.skills = transformArray(values, 'skills');
+      values.skills = await transformArray(values, 'skills');
       await vacancyInput({ variables: values });
       resetForm();
     },
@@ -133,4 +142,4 @@ const ProjectForm = () => {
   );
 };
 
-export default ProjectForm;
+export default VacancyForm;

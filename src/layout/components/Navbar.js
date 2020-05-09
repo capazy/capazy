@@ -7,7 +7,7 @@ const links = () => (
       to="/signup"
       className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
     >
-      Sign Up
+      Signup
     </Link>
     <Link
       to="/login"
@@ -24,7 +24,7 @@ const links = () => (
   </div>
 );
 
-function Navbar() {
+const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   return (
     <nav className=" w-full z-10 top-0 bg-white border-b-2 ">
@@ -87,7 +87,7 @@ function Navbar() {
                 to="/signup"
                 className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
               >
-                Sign Up
+                Signup
               </Link>
               <Link
                 to="/login"
@@ -113,6 +113,6 @@ function Navbar() {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

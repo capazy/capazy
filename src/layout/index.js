@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
+// components
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import NewNavbar from './components/NewNavbar';
+
+// context
 import { AuthContext } from '../context/AuthContext';
 
 const Main = (props) => {

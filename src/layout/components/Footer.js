@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-function Footer() {
+
+const Footer = () => {
   return (
     <footer className="w-full text-center border-t border-grey p-4 mt-10">
       <nav className="">
@@ -25,6 +26,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+
+// context
 import { AuthContext } from '../../context/AuthContext';
+
+// utils
+import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
   const { signup } = useContext(AuthContext);
@@ -13,14 +17,7 @@ const SignUp = () => {
       email: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email address').required('Required'),
-      firstName: Yup.string().required('Required'),
-      lastName: Yup.string().required('Required'),
-      password: Yup.string()
-        .max(20, 'Must be 20 characters or less')
-        .required('Required'),
-    }),
+    validationSchema: signupFormSchema,
     onSubmit: (values) => {
       signup(values);
     },
