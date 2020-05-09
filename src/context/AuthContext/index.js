@@ -47,6 +47,7 @@ const AuthProvider = (props) => {
   // logout
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
+    window.location.href = process.env.REACT_URI;
   };
 
   return (

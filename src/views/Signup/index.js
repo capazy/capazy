@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { useFormik } from 'formik';
+import { Redirect } from 'react-router-dom';
 import * as Yup from 'yup';
 import { AuthContext } from '../../context/AuthContext';
 
 const SignUp = () => {
-  const { signup } = useContext(AuthContext);
+  const { signup, user } = useContext(AuthContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -25,6 +26,10 @@ const SignUp = () => {
       signup(values);
     },
   });
+
+  if (user) {
+    return <Redirect push to="/user-form" />;
+  }
 
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">

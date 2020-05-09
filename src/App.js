@@ -7,6 +7,8 @@ import GlobalProvider from './context';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { GET_USER } from './graphql/queries/user';
 import UserContext from './context/UserContext';
+import { Redirect } from 'react-router-dom';
+
 require('dotenv-flow').config();
 
 ///Google Analytics Events
@@ -29,7 +31,6 @@ const App = () => {
   // refetch();
 
   // console.log('LAZYDATA', data);
-
   return (
     <Router history={history}>
       <GlobalProvider>

@@ -81,7 +81,9 @@ const UserForm = () => {
       resetForm();
     },
   });
-
+  if (data) {
+    return <Redirect push to="/feed" />;
+  }
   const {
     skills,
     description,

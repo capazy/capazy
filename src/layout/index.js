@@ -1,19 +1,20 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import NewNavbar from './components/NewNavbar';
-import UserContext from '../context/UserContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Main = (props) => {
   const { children } = props;
-  const { data } = useContext(UserContext);
-  console.log('DATA', data);
+  const { user } = useContext(AuthContext);
   return (
     <div className="">
       <div className="mx-auto ">
         <main>
-          {data ? <NewNavbar /> : <Navbar />}
+          {user ? <NewNavbar /> : <Navbar />}
           <div className="container mx-auto mt-2 md:mt-2">{children}</div>
           <Footer />
         </main>
