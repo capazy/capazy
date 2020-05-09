@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 import Routes from './Routes';
 import GlobalProvider from './context';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { GET_USER } from './graphql/queries/user';
+import UserContext from './context/UserContext';
 require('dotenv-flow').config();
 
 ///Google Analytics Events
@@ -22,12 +23,19 @@ const history = createBrowserHistory();
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
-  const { data } = useQuery(GET_USER);
-  console.log(data);
+  // const [getUser, { data }] = useLazyQuery(GET_USER);
+  // const { data, refetch } = useQuery(GET_USER);
+
+  // refetch();
+
+  // console.log('LAZYDATA', data);
+
   return (
     <Router history={history}>
       <GlobalProvider>
+        {/* <UserContext.Provider value={{ data }}> */}
         <Routes />
+        {/* </UserContext.Provider> */}
       </GlobalProvider>
     </Router>
   );
