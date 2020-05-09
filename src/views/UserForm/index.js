@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
-import * as Yup from 'yup';
-// import * as Yup from 'yup';
+// apollo
 import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_USER } from '../../graphql/mutation/user';
-import { Select } from '../../components';
-import { transformArray } from '../../utils/transformArray';
 
+// components
+import { Select } from '../../components';
+
+// utils
 import skillsData from '../../data/skillsData.json';
 import allSkillsData from '../../data/allSkillsData.json';
 import countriesData from '../../data/countriesData.json';
 import languagesData from '../../data/languagesData.json';
+import { userFormSchema } from '../../utils/formikSchemas';
+import { transformArray } from '../../utils/transformArray';
 
 const UserForm = () => {
   const [userInput, { data }] = useMutation(UPDATE_USER);
@@ -38,36 +41,7 @@ const UserForm = () => {
       country: '',
       additionalSkills: [],
     },
-    validationSchema: Yup.object({
-      skills: Yup.array()
-        .min(1, 'Pick at least 1 skill')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-
-      additionalSkills: Yup.array().of(
-        Yup.object().shape({
-          label: Yup.string(),
-          value: Yup.string(),
-        })
-      ),
-      languages: Yup.array()
-        .min(1, 'Pick at least 1 language')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      description: Yup.string().required(),
-      companyName: Yup.string().required(),
-      companyDepartment: Yup.string().required(),
-      country: Yup.string().required(),
-      expertise: Yup.string().required(),
-    }),
+    validationSchema: userFormSchema,
     onSubmit: async (values, { resetForm }) => {
       values.skills = await transformArray(values, 'skills');
       values.languages = await transformArray(values, 'languages');
@@ -75,7 +49,7 @@ const UserForm = () => {
         values,
         'additionalSkills'
       );
-      userInput({
+      await userInput({
         variables: values,
       });
       resetForm();

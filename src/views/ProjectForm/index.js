@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
+
+// apollo
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_PROJECT } from '../../graphql/mutation/project';
 import { ProjectContext } from '../../context/ProjectContext';
 
+// utils
+import { projectFormSchema } from '../../utils/formikSchemas';
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
@@ -34,6 +38,7 @@ const ProjectForm = () => {
       published: '',
       deadline: '',
     },
+    validationSchema: projectFormSchema,
     onSubmit: async (values, { resetForm }) => {
       await createProject({ variables: values });
       await setState(true);

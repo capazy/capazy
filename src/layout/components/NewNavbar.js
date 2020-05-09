@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-
 import { Link } from 'react-router-dom';
+
+// context
+import { AuthContext } from '../../context/AuthContext';
 
 const links = () => (
   <div
@@ -50,7 +51,7 @@ const links = () => (
     </ul>
   </div>
 );
-const Navbar = () => {
+const NewNavbar = () => {
   const { logout } = useContext(AuthContext);
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
@@ -169,4 +170,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NewNavbar;
