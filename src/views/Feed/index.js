@@ -8,7 +8,7 @@ import { JOIN_VACANCY } from '../../graphql/mutation/vacancy';
 const Feed = () => {
   const [joinVacancy] = useMutation(JOIN_VACANCY, {
     update(_, { data }) {
-      console.log('VAcancy', data);
+      console.log('Vacancy', data);
     },
   });
 
