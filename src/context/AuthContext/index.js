@@ -4,48 +4,43 @@ import { CREATE_USER, LOGIN } from '../../graphql/mutation/user';
 import { authReducer } from '../../reducers/authReducer';
 
 const AuthContext = createContext({
-  tokenExp: null,
   user: null,
+  tokenExp: null,
   login: (data) => {},
   logout: () => {},
+  signup: (data) => {},
 });
 
 const AuthProvider = (props) => {
   const [state, dispatch] = useReducer(authReducer, {
-    tokenExp: null,
     user: null,
+    tokenExp: null,
   });
 
   // signup
-  const signup = async (data) => {
-    userInput({ variables: data });
-  };
   const [userInput] = useMutation(CREATE_USER, {
     update(_, { data: { createUser: loginData } }) {
       dispatch({ type: 'CREATE_USER', payload: loginData });
     },
   });
+  const signup = async (data) => {
+    userInput({ variables: data });
+  };
 
   // login
-  const login = async (data) => {
-    loginInput({ variables: data });
-  };
   const [loginInput] = useMutation(LOGIN, {
     update(_, { data: { login: loginData } }) {
       dispatch({ type: 'LOGIN', payload: loginData });
     },
   });
-
-  // get a user
-  // const getUser = async (data) => {
-  //   const { data } = useQuery(GET_USER, {
-  //     variables: { userId: id },
-  //   });
-  // };
+  const login = async (data) => {
+    loginInput({ variables: data });
+  };
 
   // logout
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
+    window.location.href = process.env.REACT_URI;
   };
 
   return (

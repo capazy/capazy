@@ -21,20 +21,20 @@ const links = () => (
       </li>
       <li className="mr-6 my-2 md:my-0">
         <Link
-          to="/myprojects"
+          to="/joined-projects"
           className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
         >
           <i className="fas fa-tasks fa-fw mr-3"></i>
-          <span className="pb-1 md:pb-0 text-sm">My projects</span>
+          <span className="pb-1 md:pb-0 text-sm">Joined projects</span>
         </Link>
       </li>
       <li className="mr-6 my-2 md:my-0">
         <Link
-          to="/#"
+          to="/created-projects"
           className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
         >
           <i className="fa fa-envelope fa-fw mr-3"></i>
-          <span className="pb-1 md:pb-0 text-sm">Skills</span>
+          <span className="pb-1 md:pb-0 text-sm">Created projects</span>
         </Link>
       </li>
 

@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER_JOINED_PROJECTS } from '../../graphql/queries/user';
 
-const Feed = () => {
+const JoinedProjects = () => {
   // const [joinVacancy] = useMutation(JOIN_VACANCY, {
   //   update(_, { data }) {},
   // });
@@ -84,4 +84,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default JoinedProjects;

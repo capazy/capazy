@@ -1,5 +1,14 @@
 import gql from 'graphql-tag';
 
+export const GET_USER = gql`
+  {
+    user {
+      _id
+      firstName
+    }
+  }
+`;
+
 export const GET_USER_CREATED_PROJECTS = gql`
   {
     user {
@@ -24,6 +33,7 @@ export const GET_USER_CREATED_PROJECTS = gql`
     }
   }
 `;
+
 export const GET_USER_JOINED_PROJECTS = gql`
   {
     user {

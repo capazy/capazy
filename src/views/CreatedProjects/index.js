@@ -4,13 +4,14 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER_CREATED_PROJECTS } from '../../graphql/queries/user';
 
-const Feed = () => {
+const CreatedProjects = () => {
   // const [joinVacancy] = useMutation(JOIN_VACANCY, {
   //   update(_, { data }) {},
   // });
 
   const { loading, data, refetch } = useQuery(GET_USER_CREATED_PROJECTS);
   if (loading) return <p>Loading...</p>;
+  if (!data) return <p>No data</p>;
   refetch();
 
   // const handleJoin = (vacancyId) => {
@@ -99,4 +100,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default CreatedProjects;

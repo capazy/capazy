@@ -8,16 +8,17 @@ import NewNavbar from './components/NewNavbar';
 
 // context
 import { AuthContext } from '../context/AuthContext';
+import { UserContext } from '../context/UserContext';
 
 const Main = (props) => {
   const { children } = props;
   const { user } = useContext(AuthContext);
-
+  const { data } = useContext(UserContext);
   return (
     <div className="">
       <div className="mx-auto ">
         <main>
-          {user ? <NewNavbar /> : <Navbar />}
+          {data || user ? <NewNavbar /> : <Navbar />}
           <div className="container mx-auto mt-2 md:mt-2">{children}</div>
           <Footer />
         </main>
