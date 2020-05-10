@@ -15,6 +15,8 @@ import {
   ProjectForm,
   VacancyForm,
   Profile,
+  JoinedProjects,
+  CreatedProjects,
 } from './views';
 import Layout from './layout';
 
@@ -28,6 +30,18 @@ const Routes = () => {
         component={Signup}
       />
       <RouteWithLayout exact path="/feed" layout={Layout} component={Feed} />
+      <RouteWithLayout
+        exact
+        path="/joined-projects"
+        layout={Layout}
+        component={JoinedProjects}
+      />
+      <RouteWithLayout
+        exact
+        path="/created-projects"
+        layout={Layout}
+        component={CreatedProjects}
+      />
       <RouteWithLayout
         exact
         path="/project-form"
