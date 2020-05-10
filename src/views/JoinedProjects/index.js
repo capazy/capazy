@@ -53,6 +53,7 @@ const Feed = () => {
               <br />
               <div>
                 <h2>Project Info</h2>
+                <p className="py-6">{vacancy.project.description}</p>
                 <table className="w-full">
                   <thead>
                     <tr className="text-left">
