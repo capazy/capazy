@@ -59,19 +59,19 @@ const SearchBar = () => {
 
       <div className="py-16">
         {data &&
-          data.projectsBySkill.map((vacancies) => (
+          data.projectsBySkill.map((project) => (
             <div
               className="container w-full flex flex-wrap mx-auto px-2 lg:pt-2"
-              key={vacancies._id}
+              key={project._id}
             >
               <div className="w-full p-8 mt-6 lg:mt-0 text-gray-900 leading-normal bg-white border border-gray-400 border-rounded">
                 <div className="font-sans">
                   <h1 className="font-sans break-normal text-gray-900 py-2 text-xl">
-                    {vacancies.project.title} | {vacancies.project._id}
+                    {project.title} | {project._id}
                   </h1>
                   <hr className="border-b border-gray-400" />
                 </div>
-                <p className="py-6">{vacancies.project.description}</p>
+                <p className="py-6">{project.description}</p>
 
                 <div>
                   <h2>Project Info</h2>
@@ -87,11 +87,11 @@ const SearchBar = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{vacancies.project.type}</td>
-                        <td>{vacancies.project.deadline}</td>
-                        <td>{vacancies.project.published}</td>
-                        <td>{vacancies.project.vacancies.length}</td>
-                        <td>{vacancies.project.creator._id}</td>
+                        <td>{project.type}</td>
+                        <td>{project.deadline}</td>
+                        <td>{project.published}</td>
+                        <td>{project.vacancies.length}</td>
+                        <td>{project.creator._id}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -111,7 +111,7 @@ const SearchBar = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {vacancies.project.vacancies.map((vacancy) => (
+                      {project.vacancies.map((vacancy) => (
                         <tr key={vacancy._id}>
                           <td>{vacancy._id}</td>
                           <td>{vacancy.title}</td>
