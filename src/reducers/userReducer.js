@@ -3,8 +3,7 @@ export const userReducer = (state, { type, payload }) => {
     case 'GET_USER':
       return {
         ...state,
-        firstName: payload.firstName,
-        lastName: payload.lastName,
+        userId: payload._id,
       };
     default:
       return state;

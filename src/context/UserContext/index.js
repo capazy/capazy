@@ -1,8 +1,7 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 
 const UserContext = createContext({
-  firstName: '',
-  lastName: '',
+  userId: null,
 });
 
-export default UserContext;
+export { UserContext };
