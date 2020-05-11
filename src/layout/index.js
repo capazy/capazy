@@ -13,7 +13,7 @@ import { UserContext } from '../context/UserContext';
 const Main = (props) => {
   const { children } = props;
   const { user } = useContext(AuthContext);
-  const { data, loading } = useContext(UserContext);
+  const { data } = useContext(UserContext);
 
   return (
     <div className="">

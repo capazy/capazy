@@ -25,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     getCurrentUser();
-  }, []);
+  }, [getCurrentUser]);
 
   return (
     <Router history={history}>

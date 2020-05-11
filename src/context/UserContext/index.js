@@ -8,8 +8,9 @@ const UserContext = createContext({
 
 const UserProvider = (props) => {
   //getCurrentUser
-  const [getCurrentUser, { data, loading }] = useLazyQuery(GET_USER);
+  const [getCurrentUser, { data, called }] = useLazyQuery(GET_USER);
 
+  const loading = !(data && called);
   return (
     <UserContext.Provider value={{ getCurrentUser, data, loading }}>
       {props.children}

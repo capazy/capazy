@@ -5,6 +5,14 @@ export const GET_USER = gql`
     user {
       _id
       firstName
+      lastName
+      description
+      skills
+      languages
+      # experience
+      companyName
+      companyDepartment
+      country
     }
   }
 `;
