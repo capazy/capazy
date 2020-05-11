@@ -36,11 +36,9 @@ const SignUp = () => {
       >
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              First Name
-            </label>
+            <label className="form-label">First Name</label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="form-input"
               id="firstName"
               type="text"
               placeholder="First Name"
@@ -48,15 +46,13 @@ const SignUp = () => {
               value={values.firstName}
               invalid={touched.firstName && errors.firstName ? true : undefined}
             />
-            <p className="text-red-500 text-xs italic">{errors.firstName}</p>
+            <p className="form-error">{errors.firstName}</p>
           </div>
 
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Last Name
-            </label>
+            <label className="form-label">Last Name</label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="form-input"
               id="lastName"
               type="text"
               placeholder="Last Name"
@@ -64,16 +60,14 @@ const SignUp = () => {
               value={values.lastName}
               invalid={touched.lastName && errors.lastName ? true : undefined}
             />
-            <p className="text-red-500 text-xs italic">{errors.lastName}</p>
+            <p className="form-error">{errors.lastName}</p>
           </div>
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Email
-          </label>
+          <label className="form-label">Email</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="form-input"
             id="email"
             type="email"
             placeholder="Email"
@@ -81,15 +75,13 @@ const SignUp = () => {
             value={values.email}
             invalid={touched.email && errors.email ? true : undefined}
           />
-          <p className="text-red-500 text-xs italic">{errors.email}</p>
+          <p className="form-error">{errors.email}</p>
         </div>
 
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Password
-          </label>
+          <label className="form-label">Password</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="form-input"
             id="password"
             type="password"
             placeholder="Password"
@@ -97,7 +89,7 @@ const SignUp = () => {
             value={values.password}
             invalid={touched.password && errors.password ? true : undefined}
           />
-          <p className="text-red-500 text-xs italic">{errors.password}</p>
+          <p className="form-error">{errors.password}</p>
         </div>
 
         <div className="flex items-center justify-between">

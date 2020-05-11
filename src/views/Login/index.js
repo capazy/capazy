@@ -33,14 +33,11 @@ const SignUp = () => {
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="Email"
-          >
+          <label className="form-label" htmlFor="Email">
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="form-input"
             id="email"
             type="email"
             placeholder="Email"
@@ -48,17 +45,14 @@ const SignUp = () => {
             value={values.email}
             invalid={touched.email && errors.email ? true : undefined}
           />
-          <p className="text-red-500 text-xs italic">{errors.email}</p>
+          <p className="form-error">{errors.email}</p>
         </div>
         <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className="form-label" htmlFor="password">
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="form-input"
             id="password"
             type="password"
             placeholder="Password"
@@ -66,7 +60,7 @@ const SignUp = () => {
             value={values.password}
             invalid={touched.password && errors.password ? true : undefined}
           />
-          <p className="text-red-500 text-xs italic">{errors.password}</p>
+          <p className="form-error">{errors.password}</p>
         </div>
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">

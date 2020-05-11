@@ -92,23 +92,35 @@ const VacancyForm = () => {
           <label className="block text-gray-500 text-sm font-bold mb-2">
             Experience
           </label>
-          <select
-            id="experience"
-            name="experience"
-            onChange={handleChange}
-            defaultValue="Experience"
-          >
-            <option value="Experience" disabled>
-              Experience
-            </option>
-            {experienceOptions.map((item) => (
-              <option key={item.label} value={item.value}>
-                {item.label}
+          <div className="mb-4 inline-block relative w-full">
+            <select
+              id="experience"
+              name="experience"
+              onChange={handleChange}
+              defaultValue="Experience"
+              className="form-input bg-white"
+            >
+              <option value="Experience" disabled>
+                Experience
               </option>
-            ))}
-          </select>
+              {experienceOptions.map((item) => (
+                <option key={item.label} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+              <svg
+                class="fill-current h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
+          </div>
+          <p className="text-red-500 text-xs italic">{errors.experience}</p>
         </div>
-        <p className="text-red-500 text-xs italic">{errors.experience}</p>
 
         <div className="mb-4">
           <label className="block text-gray-500 text-sm font-bold mb-2">

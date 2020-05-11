@@ -2,6 +2,7 @@
 
 @tailwind components;
 
+/* BUTTONS */
 .btn {
   @apply inline-block px-5 py-3 rounded-lg uppercase tracking-wider font-semibold  text-sm;
 }
@@ -9,7 +10,6 @@
 .btn:focus {
   @apply outline-none shadow-outline;
 }
-
 .btn-rounded {
   @apply mx-auto mx-0  font-bold rounded-full mt-4 mt-0 py-4 px-8 shadow-lg;
 }
@@ -20,6 +20,23 @@
 
 .btn-square {
   @apply inline-block px-3 py-2 rounded-sm  font-semibold  text-sm;
+}
+
+/* FORM */
+.form-input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+}
+
+.form-input:focus {
+  @apply shadow-outline outline-none;
+}
+
+.form-label {
+  @apply block text-gray-500 text-sm font-bold mb-2;
+}
+
+.form-error {
+  @apply text-red-500 text-xs italic mt-1;
 }
 
 @tailwind utilities;

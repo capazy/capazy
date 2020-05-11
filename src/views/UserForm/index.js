@@ -93,12 +93,7 @@ const UserForm = () => {
         <div className="border-b-2 mb-2">
           <h1 className="text-gray-900 text-xl mb-1">Company</h1>
           <div className="mb-4">
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
-              Name
-            </label>
+            <label className="form-label">Name</label>
             <input
               id="companyName"
               rows="4"
@@ -106,19 +101,16 @@ const UserForm = () => {
               placeholder="Company"
               onChange={handleChange}
               value={companyName}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
+              className="form-input"
               invalid={
                 touched.companyName && errors.companyName ? true : undefined
               }
             ></input>
 
-            <p className="text-red-500 text-xs italic">{errors.companyName}</p>
+            <p className="form-error">{errors.companyName}</p>
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
+            <label className="form-label" htmlFor="Email">
               Department
             </label>
             <input
@@ -136,7 +128,7 @@ const UserForm = () => {
               }
             ></input>
 
-            <p className="text-red-500 text-xs italic">{errors.companyName}</p>
+            <p className="form-error">{errors.companyName}</p>
           </div>
         </div>
 
@@ -144,10 +136,7 @@ const UserForm = () => {
         <div className="border-b-2 mb-2">
           <h1 className="text-gray-900 text-xl mb-1">Personal</h1>
           <div className="mb-4">
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
+            <label className="form-label" htmlFor="Email">
               Description
             </label>
             <textarea
@@ -157,20 +146,17 @@ const UserForm = () => {
               placeholder="Lorem ipsum dolor sit "
               onChange={handleChange}
               value={description}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
+              className="form-input"
               invalid={
                 touched.description && errors.description ? true : undefined
               }
             ></textarea>
 
-            <p className="text-red-500 text-xs italic">{errors.description}</p>
+            <p className="form-error">{errors.description}</p>
           </div>
 
           <div className="mb-4">
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
+            <label className="form-label" htmlFor="Email">
               Languages
             </label>
             <div className="w-full ">
@@ -185,25 +171,27 @@ const UserForm = () => {
                 touched={touched.languages}
               />
             </div>
-            <p className="text-red-500 text-xs italic">{errors.languages}</p>
+            <p className="form-error">{errors.languages}</p>
           </div>
 
           <div className="mb-4">
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
+            <label className="form-label" htmlFor="Email">
               Country
             </label>
 
-            <div className="w-full">
+            <div className="inline-block relative w-full">
               <select
                 id="country"
                 name="country"
                 onChange={handleChange}
                 defaultValue="Country"
+                className="form-input bg-white"
               >
-                <option value="Country" disabled>
+                <option
+                  value="Country"
+                  disabled
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
                   Country
                 </option>
                 {countriesData.map((item) => (
@@ -212,24 +200,31 @@ const UserForm = () => {
                   </option>
                 ))}
               </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                <svg
+                  class="fill-current h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
             </div>
-            <p className="text-red-500 text-xs italic">{errors.country}</p>
+            <p className="form-error">{errors.country}</p>
           </div>
         </div>
 
         {/* SKILLS */}
         <div className="mb-2">
           <h1 className="text-gray-900 text-xl mb-1">Skills</h1>
-          <div className="mb-4">
-            <label
-              className="block text-gray-500 text-sm font-bold mb-2"
-              htmlFor="Email"
-            >
+          <div className="mb-4 ">
+            <label className="form-label" htmlFor="Email">
               Expertise
             </label>
-            <div className="w-full">
+            <div className="inline-block relative w-full">
               <select
                 id="expertise"
+                className="form-input bg-white"
                 name="expertise"
                 onChange={(e) => {
                   handleChange(e);
@@ -237,7 +232,11 @@ const UserForm = () => {
                 }}
                 defaultValue="Expertise"
               >
-                <option value="Expertise" disabled>
+                <option
+                  value="Expertise"
+                  disabled
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
                   Expertise
                 </option>
                 {skillsData.map((item) => (
@@ -249,13 +248,19 @@ const UserForm = () => {
                   </option>
                 ))}
               </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                <svg
+                  class="fill-current h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
             </div>
-            <p className="text-red-500 text-xs italic">{errors.expertise}</p>
+            <p className="form-error">{errors.expertise}</p>
             <div className="w-full">
-              <label
-                className="block text-gray-500 text-sm font-bold mb-2"
-                htmlFor="Email"
-              >
+              <label className="form-label" htmlFor="Email">
                 Skills
               </label>
               <div className="w-full ">
@@ -270,13 +275,10 @@ const UserForm = () => {
                   touched={touched.skills}
                 />
               </div>
-              <p className="text-red-500 text-xs italic">{errors.skills}</p>
+              <p className="form-error">{errors.skills}</p>
             </div>
             <div className="w-full">
-              <label
-                className="block text-gray-500 text-sm font-bold mb-2"
-                htmlFor="Email"
-              >
+              <label className="form-label" htmlFor="Email">
                 Additional Expertise
               </label>
               <div className="w-full ">
@@ -291,9 +293,7 @@ const UserForm = () => {
                   touched={touched.additionalSkills}
                 />
               </div>
-              <p className="text-red-500 text-xs italic">
-                {errors.additionalSkills}
-              </p>
+              <p className="form-error">{errors.additionalSkills}</p>
             </div>
           </div>
         </div>
