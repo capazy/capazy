@@ -5,11 +5,23 @@ import App from './App';
 import ApolloClient from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
+import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_APOLLO_API_URI,
+});
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+
+  if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
 const authLink = setContext((_, { headers }) => {
