@@ -17,30 +17,34 @@ const AuthProvider = (props) => {
     tokenExp: null,
   });
 
-  // signup
-  const [userInput] = useMutation(CREATE_USER, {
+  // apollo-signup
+  const [createUser] = useMutation(CREATE_USER, {
     update(_, { data: { createUser: loginData } }) {
       dispatch({ type: 'CREATE_USER', payload: loginData });
     },
   });
-  const signup = async (data) => {
-    userInput({ variables: data });
-  };
 
-  // login
-  const [loginInput] = useMutation(LOGIN, {
+  // apollo-login
+  const [loginUser] = useMutation(LOGIN, {
     update(_, { data: { login: loginData } }) {
       dispatch({ type: 'LOGIN', payload: loginData });
     },
   });
+
+  // signup
+  const signup = async (data) => {
+    await createUser({ variables: data });
+  };
+
+  // login
   const login = async (data) => {
-    loginInput({ variables: data });
+    await loginUser({ variables: data });
   };
 
   // logout
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
-    window.location.href = process.env.REACT_URI;
+    window.location.href = '/';
   };
 
   return (

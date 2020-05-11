@@ -15,11 +15,19 @@ const httpLink = createHttpLink({
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) =>
+    graphQLErrors.map(({ message, locations, path }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
+      );
+      if (message.includes('Unauthenticated')) {
+        // redirect to /login
+        console.log('HEY');
+      } else {
+        console.log('dispatch');
+        // dispatch an alert
+      }
+      return null;
+    });
 
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
@@ -35,7 +43,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: errorLink.concat(authLink.concat(httpLink)),
   cache: new InMemoryCache(),
 });
 
