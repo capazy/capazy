@@ -13,7 +13,8 @@ import { UserContext } from '../context/UserContext';
 const Main = (props) => {
   const { children } = props;
   const { user } = useContext(AuthContext);
-  const { data } = useContext(UserContext);
+  const { data, loading } = useContext(UserContext);
+
   return (
     <div className="">
       <div className="mx-auto ">

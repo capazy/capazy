@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 import Routes from './Routes';
-import GlobalProvider from './context';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_USER } from './graphql/queries/user';
 import { UserContext } from './context/UserContext';
 
 require('dotenv-flow').config();
@@ -24,15 +21,15 @@ const history = createBrowserHistory();
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
-  const { data } = useQuery(GET_USER);
+  const { getCurrentUser } = useContext(UserContext);
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <Router history={history}>
-      <GlobalProvider>
-        <UserContext.Provider value={{ data }}>
-          <Routes />
-        </UserContext.Provider>
-      </GlobalProvider>
+      <Routes />
     </Router>
   );
 };

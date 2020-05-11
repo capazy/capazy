@@ -8,6 +8,9 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from '@apollo/react-hooks';
 
+//Global Context
+import GlobalProvider from './context';
+
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_APOLLO_API_URI,
 });
@@ -29,6 +32,8 @@ const client = new ApolloClient({
 
 export default (
   <ApolloProvider client={client}>
-    <App />
+    <GlobalProvider>
+      <App />
+    </GlobalProvider>
   </ApolloProvider>
 );
