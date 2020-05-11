@@ -606,6 +606,8 @@ video {
   }
 }
 
+/* BUTTONS */
+
 .btn {
   display: inline-block;
   padding-left: 1.25rem;
@@ -656,6 +658,8 @@ video {
   font-weight: 600;
   font-size: 0.875rem;
 }
+
+/* FORM */
 
 .form-input {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
