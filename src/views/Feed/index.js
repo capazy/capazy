@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom';
 
 // apollo
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_PROJECTS } from '../../graphql/queries/project';
-import { JOIN_VACANCY } from '../../graphql/mutation/vacancy';
+import { GET_PROJECTS } from '../../graphql/project';
+import { JOIN_VACANCY } from '../../graphql/vacancy';
 import { CardProject } from '../../components';
 
 const Feed = () => {

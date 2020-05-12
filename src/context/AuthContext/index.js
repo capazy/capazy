@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_USER, LOGIN } from '../../graphql/mutation/user';
+import { CREATE_USER, LOGIN } from '../../graphql/user';
 import { authReducer } from '../../reducers/authReducer';
 
 const AuthContext = createContext({

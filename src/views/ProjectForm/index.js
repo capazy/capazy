@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 // apollo
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_PROJECT } from '../../graphql/mutation/project';
+import { CREATE_PROJECT } from '../../graphql/project';
 import { ProjectContext } from '../../context/ProjectContext';
 
 // utils

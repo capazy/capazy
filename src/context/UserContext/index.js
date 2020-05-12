@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { GET_USER } from '../../graphql/queries/user';
+import { GET_USER } from '../../graphql/user';
 
 const UserContext = createContext({
   data: null,

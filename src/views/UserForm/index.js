@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // apollo
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_USER } from '../../graphql/mutation/user';
+import { UPDATE_USER } from '../../graphql/user';
 
 // components
 import { Select } from '../../components';

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 // apollo
 import { useQuery } from '@apollo/react-hooks';
-import { GET_USER_JOINED_PROJECTS } from '../../graphql/queries/user';
+import { GET_USER_JOINED_PROJECTS } from '../../graphql/user';
 
 const JoinedProjects = () => {
   // const [joinVacancy] = useMutation(JOIN_VACANCY, {

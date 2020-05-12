@@ -3,8 +3,8 @@ import { useFormik } from 'formik';
 
 // apollo
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { GET_PROJECTS_BY_SKILL } from '../../graphql/queries/project';
-import { JOIN_VACANCY } from '../../graphql/mutation/vacancy';
+import { GET_PROJECTS_BY_SKILL } from '../../graphql/project';
+import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // context
 // import { AuthContext } from '../../context/AuthContext';
