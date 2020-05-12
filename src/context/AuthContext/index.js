@@ -34,7 +34,7 @@ const AuthProvider = (props) => {
     },
   });
   const login = async (data) => {
-    loginInput({ variables: data });
+    await loginInput({ variables: data });
   };
 
   // logout

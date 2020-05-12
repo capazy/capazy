@@ -51,14 +51,19 @@ const CardProject = ({
             <table className="text-left w-full border-collapse">
               <tbody>
                 {vacancies.map((vacancy) => (
-                  <tr className="">
+                  <tr key={vacancy._id}>
                     <td className="py-1 px-2 border-b border-grey-light">
                       <span className="w-full py-3 ">
                         <p className="text-gray-800 text-sm">{vacancy.title}</p>
-                        {vacancy.skills.map((skill) => (
-                          <p className="table-cell text-xs text-gray-500 font-medium">
+                        {vacancy.skills.map((skill, i) => (
+                          // <span key={skill}>
+                          <p
+                            key={skill[i]}
+                            className="table-cell text-xs text-gray-500 font-medium"
+                          >
                             {skill}
                           </p>
+                          // </span>
                         ))}
                       </span>
                     </td>

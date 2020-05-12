@@ -7,9 +7,11 @@ import { AuthContext } from '../../context/AuthContext';
 
 // utils
 import { loginFormSchema } from '../../utils/formikSchemas';
+import { UserContext } from '../../context/UserContext';
 
 const SignUp = () => {
   const { login, user } = useContext(AuthContext);
+  const { getCurrentUser } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -21,6 +23,9 @@ const SignUp = () => {
       login(values);
     },
   });
+  if (user) {
+    getCurrentUser();
+  }
 
   if (user) {
     return <Redirect push to="/feed" />;
