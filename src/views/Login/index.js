@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useStoreState } from 'easy-peasy';
 
 // context
 import { AuthContext } from '../../context/AuthContext';
@@ -8,7 +9,10 @@ import { AuthContext } from '../../context/AuthContext';
 // utils
 import { loginFormSchema } from '../../utils/formikSchemas';
 
-const SignUp = () => {
+const Login = () => {
+  const message = useStoreState((state) => state.message);
+  console.log('STORE', message);
+
   const { login, user } = useContext(AuthContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
@@ -84,4 +88,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

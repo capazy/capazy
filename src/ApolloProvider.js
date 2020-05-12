@@ -1,5 +1,6 @@
 import React from 'react';
 import App from './App';
+import { StoreProvider } from 'easy-peasy';
 
 // apollo
 import ApolloClient from 'apollo-client';
@@ -9,8 +10,11 @@ import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-//Global Context
+// global Context
 import GlobalProvider from './context';
+
+// error store
+import store from './errorsStore';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_APOLLO_API_URI,
@@ -23,11 +27,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
       );
       if (message.includes('Unauthenticated')) {
-        // redirect to /login
-        console.log('HEY');
+        console.log('redirect to /login');
       } else {
         console.log('dispatch');
-        // dispatch an alert
+        store.dispatch.changeMassage(message);
       }
       return null;
     });
@@ -52,8 +55,10 @@ const client = new ApolloClient({
 
 export default (
   <ApolloProvider client={client}>
-    <GlobalProvider>
-      <App />
-    </GlobalProvider>
+    <StoreProvider store={store}>
+      <GlobalProvider>
+        <App />
+      </GlobalProvider>
+    </StoreProvider>
   </ApolloProvider>
 );
