@@ -59,11 +59,9 @@ const ProjectForm = () => {
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Title
-          </label>
+          <label className="form-label">Title</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="form-input"
             id="title"
             type="text"
             placeholder="Title"
@@ -71,13 +69,11 @@ const ProjectForm = () => {
             value={title}
             invalid={touched.title && errors.title ? true : undefined}
           />
-          <p className="text-red-500 text-xs italic">{errors.title}</p>
+          <p className="form-error">{errors.title}</p>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Description
-          </label>
+        <div className="mb-4 ">
+          <label className="form-label">Description</label>
           <textarea
             id="description"
             rows="4"
@@ -85,20 +81,21 @@ const ProjectForm = () => {
             placeholder="Project description..."
             onChange={handleChange}
             value={description}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="form-input"
             invalid={
               touched.description && errors.description ? true : undefined
             }
           ></textarea>
-          <p className="text-red-500 text-xs italic">{errors.description}</p>
+          <p className="form-error">{errors.description}</p>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 inline-block relative w-full">
           <select
             id="type"
             name="type"
             onChange={handleChange}
             defaultValue="Type"
+            className="form-input bg-white"
           >
             <option value="Type" disabled>
               Type
@@ -109,15 +106,25 @@ const ProjectForm = () => {
               </option>
             ))}
           </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+            <svg
+              class="fill-current h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
         </div>
-        <p className="text-red-500 text-xs italic">{errors.type}</p>
+        <p className="form-error">{errors.type}</p>
 
-        <div className="mb-4">
+        <div className="mb-4 inline-block relative w-full">
           <select
             id="published"
             name="published"
             onChange={handleChange}
             defaultValue="Published"
+            className="form-input bg-white"
           >
             <option value="Published" disabled>
               Published
@@ -128,8 +135,17 @@ const ProjectForm = () => {
               </option>
             ))}
           </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+            <svg
+              class="fill-current h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
         </div>
-        <p className="text-red-500 text-xs italic">{errors.published}</p>
+        <p className="form-error">{errors.published}</p>
 
         <div className="mb-4">
           <input
@@ -138,9 +154,10 @@ const ProjectForm = () => {
             name="deadline"
             onChange={handleChange}
             value={deadline}
+            className="form-input"
           />
         </div>
-        <p className="text-red-500 text-xs italic">{errors.deadline}</p>
+        <p className="form-error">{errors.deadline}</p>
 
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">

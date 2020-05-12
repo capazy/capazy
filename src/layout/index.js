@@ -15,6 +15,9 @@ const Main = (props) => {
   const { user } = useContext(AuthContext);
   const { data } = useContext(UserContext);
 
+  console.log('DATA', data);
+  console.log('USER', user);
+
   return (
     <div className="">
       <div className="mx-auto ">
