@@ -69,7 +69,7 @@ const CreatedProjects = () => {
                       <th>Title</th>
                       <th>Experience Req.</th>
                       <th>Skills</th>
-                      {/* <th>Action</th> */}
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -79,14 +79,14 @@ const CreatedProjects = () => {
                         <td>{vacancy.title}</td>
                         <td>{vacancy.experience}</td>
                         <td>{vacancy.skills}</td>
-                        {/* <td>
+                        <td>
                           <button
                             className="btn bg-brand-blue text-white mb-0"
-                            onClick={() => handleJoin(vacancy._id)}
+                            // onClick={() => handleJoin(vacancy._id)}
                           >
                             Join
                           </button>
-                        </td> */}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

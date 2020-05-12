@@ -23,7 +23,10 @@ import React from 'react';
 //   }
 // `;
 
-const CardProject = ({ project: { title, description, type, vacancies } }) => {
+const CardProject = ({
+  project: { title, description, type, vacancies },
+  handleJoin,
+}) => {
   return (
     <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden my-2">
       <img
@@ -65,7 +68,10 @@ const CardProject = ({ project: { title, description, type, vacancies } }) => {
                       </span>
                     </td>
                     <td className=" py-1 px-6 border-b border-grey-light">
-                      <button className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm">
+                      <button
+                        onClick={() => handleJoin(vacancy._id)}
+                        className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
+                      >
                         Apply
                       </button>
                     </td>

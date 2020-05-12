@@ -20,6 +20,7 @@ export const GET_USER = gql`
 export const GET_USER_CREATED_PROJECTS = gql`
   {
     user {
+      _id
       createdProjects {
         _id
         title
