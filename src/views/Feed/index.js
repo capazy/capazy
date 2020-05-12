@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
-import { CardProject } from '../../components';
+import { ProjectCard } from '../../components';
 
 const Feed = () => {
   const [joinSuccess, setJoinSuccess] = useState(false);
@@ -38,7 +38,7 @@ const Feed = () => {
               key={project._id}
               className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
             >
-              <CardProject project={project} handleJoin={handleJoin} />
+              <ProjectCard project={project} handleJoin={handleJoin} />
             </div>
           ))}
         </div>

@@ -6,15 +6,10 @@ import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { GET_PROJECTS_BY_SKILL } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
-// context
-// import { AuthContext } from '../../context/AuthContext';
-
 // utils
 // import { loginFormSchema } from '../../utils/formikSchemas';
 
 const SearchBar = () => {
-  // const { login, user } = useContext(AuthContext);
-
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
       skill: '',

@@ -23,7 +23,7 @@ import React from 'react';
 //   }
 // `;
 
-const CardProject = ({
+const ProjectCard = ({
   project: { title, description, type, vacancies },
   handleJoin,
 }) => {
@@ -91,4 +91,4 @@ const CardProject = ({
   );
 };
 
-export default CardProject;
+export default ProjectCard;

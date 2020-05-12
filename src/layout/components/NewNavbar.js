@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // context
-import { AuthContext } from '../../context/AuthContext';
+import { UserContext } from '../../context/UserContext';
 
 const links = () => (
   <div
@@ -61,7 +61,7 @@ const links = () => (
   </div>
 );
 const NewNavbar = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout } = useContext(UserContext);
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
 

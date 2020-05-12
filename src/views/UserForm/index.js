@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
-
-// apollo
-import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_USER } from '../../graphql/user';
 
 // components
 import { Select } from '../../components';
@@ -16,10 +12,11 @@ import countriesData from '../../data/countriesData.json';
 import languagesData from '../../data/languagesData.json';
 import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
+import { UserContext } from '../../context/UserContext';
 
 const UserForm = () => {
-  const [userInput, { data }] = useMutation(UPDATE_USER);
-
+  const { update } = useContext(UserContext);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
 
   const {
@@ -49,13 +46,12 @@ const UserForm = () => {
         values,
         'additionalSkills'
       );
-      await userInput({
-        variables: values,
-      });
+      await update(values);
+      setUpdateSuccess(true);
       resetForm();
     },
   });
-  if (data) {
+  if (updateSuccess) {
     return <Redirect push to="/feed" />;
   }
   const {
@@ -74,15 +70,6 @@ const UserForm = () => {
     setSkillData(skills);
   };
 
-  if (data) {
-    return (
-      <Redirect
-        to={{
-          pathname: '/feed',
-        }}
-      />
-    );
-  }
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
