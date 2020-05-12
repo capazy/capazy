@@ -107,6 +107,12 @@ export const GET_USER_CREATED_PROJECTS = gql`
           title
           experience
           skills
+          postulatedUsers {
+            _id
+            firstName
+            lastName
+            skills
+          }
         }
       }
     }

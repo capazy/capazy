@@ -703,6 +703,17 @@ video {
   margin-top: 0.25rem;
 }
 
+/* TAB CONTENT */
+
+.tab-content {
+  max-height: 0;
+  transition: max-height 0.35s;
+}
+
+.tab input:checked ~ .tab-content {
+  max-height: 100vh;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
