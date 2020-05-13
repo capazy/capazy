@@ -10,7 +10,7 @@ import { CREATE_VACANCY } from '../../graphql/vacancy';
 import { ProjectContext } from '../../context/ProjectContext';
 
 // components
-import { Select } from '../../components';
+import { SelectMulti } from '../../components';
 
 // utils
 import { transformArray } from '../../utils/transformArray';
@@ -126,7 +126,7 @@ const VacancyForm = () => {
           <label className="block text-gray-500 text-sm font-bold mb-2">
             Skills
           </label>
-          <Select
+          <SelectMulti
             options={allSkillsData}
             value={skills}
             field={'skills'}
@@ -143,7 +143,7 @@ const VacancyForm = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Add vacancy
           </button>
-          <Link to="/feed">
+          <Link to="/search">
             <button className="btn bg-brand-blue text-white mb-0">
               Finish
             </button>

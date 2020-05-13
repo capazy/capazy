@@ -32,7 +32,7 @@ const Login = () => {
   }
 
   if (user) {
-    return <Redirect push to="/feed" />;
+    return <Redirect push to="/search" />;
   }
 
   return (

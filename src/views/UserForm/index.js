@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_USER } from '../../graphql/user';
 
 // components
-import { Select } from '../../components';
+import { SelectMulti } from '../../components';
 
 // utils
 import skillsData from '../../data/skillsData.json';
@@ -56,7 +56,7 @@ const UserForm = () => {
     },
   });
   if (data) {
-    return <Redirect push to="/feed" />;
+    return <Redirect push to="/search" />;
   }
   const {
     skills,
@@ -160,7 +160,7 @@ const UserForm = () => {
               Languages
             </label>
             <div className="w-full ">
-              <Select
+              <SelectMulti
                 options={languagesData}
                 value={languages}
                 field={'languages'}
@@ -264,7 +264,7 @@ const UserForm = () => {
                 Skills
               </label>
               <div className="w-full ">
-                <Select
+                <SelectMulti
                   options={skillData}
                   value={skills}
                   field={'skills'}
@@ -282,7 +282,7 @@ const UserForm = () => {
                 Additional Expertise
               </label>
               <div className="w-full ">
-                <Select
+                <SelectMulti
                   options={allSkillsData}
                   value={additionalSkills}
                   field={'additionalSkills'}

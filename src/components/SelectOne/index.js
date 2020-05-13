@@ -1,14 +1,7 @@
 import React from 'react';
-import Select from 'react-select';
+import Select from 'react-select-virtualized';
 
-const SelectComponent = ({
-  options,
-  value,
-  onBlur,
-  onChange,
-  field,
-  isMulti,
-}) => {
+const SelectOneComponent = ({ options, value, onBlur, onChange, field }) => {
   const handleChange = (value) => {
     onChange(field, value);
   };
@@ -21,13 +14,13 @@ const SelectComponent = ({
     <div className="my-2">
       <Select
         options={options}
-        isMulti={isMulti}
         onChange={handleChange}
         onBlur={handleBlur}
         value={value}
+        placeholder="Search projects for skill..."
       />
     </div>
   );
 };
 
-export default SelectComponent;
+export default SelectOneComponent;

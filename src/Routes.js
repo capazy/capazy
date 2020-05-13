@@ -11,7 +11,6 @@ import {
   Home,
   Signup,
   Login,
-  Feed,
   ProjectForm,
   VacancyForm,
   Profile,
@@ -29,7 +28,6 @@ const Routes = () => {
         layout={Layout}
         component={Signup}
       />
-      <RouteWithLayout exact path="/feed" layout={Layout} component={Feed} />
       <RouteWithLayout
         exact
         path="/joined-projects"

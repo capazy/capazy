@@ -96,7 +96,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link
-                to="/feed"
+                to="/search"
                 className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
               >
                 Projects

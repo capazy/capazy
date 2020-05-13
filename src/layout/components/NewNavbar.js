@@ -10,15 +10,6 @@ const links = () => (
     id="nav-content"
   >
     <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
-      <li className="mr-6 my-2 mb-1 md:my-0">
-        <Link
-          to="/feed"
-          className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
-        >
-          <i className="fas fa-home fa-fw mr-3 text-orange-dark"></i>
-          <span className="pb-1 md:pb-0 text-sm">Browse</span>
-        </Link>
-      </li>
       <li className="mr-6 my-2 md:my-0">
         <Link
           to="/search"

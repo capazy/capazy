@@ -35,31 +35,8 @@ export const CREATE_PROJECT = gql`
 `;
 
 export const GET_PROJECTS = gql`
-  {
-    projects {
-      _id
-      title
-      description
-      type
-      deadline
-      published
-      isOpen
-      creator {
-        _id
-      }
-      vacancies {
-        _id
-        title
-        experience
-        skills
-      }
-    }
-  }
-`;
-
-export const GET_PROJECTS_BY_SKILL = gql`
-  query projectsBySkill($skill: String!) {
-    projectsBySkill(skill: $skill) {
+  query projects($skill: String!) {
+    projects(skill: $skill) {
       _id
       title
       description
