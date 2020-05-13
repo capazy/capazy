@@ -19,8 +19,6 @@ export const CREATE_VACANCY = gql`
       project {
         vacancies {
           _id
-          firtsName
-          lastName
         }
       }
     }
