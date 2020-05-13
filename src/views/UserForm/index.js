@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
-
-// apollo
-import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_USER } from '../../graphql/user';
 
 // components
 import { SelectMulti } from '../../components';
@@ -16,10 +12,11 @@ import countriesData from '../../data/countriesData.json';
 import languagesData from '../../data/languagesData.json';
 import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
+import { UserContext } from '../../context/UserContext';
 
 const UserForm = () => {
-  const [userInput, { data }] = useMutation(UPDATE_USER);
-
+  const { update } = useContext(UserContext);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
 
   const {
@@ -49,14 +46,13 @@ const UserForm = () => {
         values,
         'additionalSkills'
       );
-      await userInput({
-        variables: values,
-      });
+      await update(values);
+      setUpdateSuccess(true);
       resetForm();
     },
   });
-  if (data) {
-    return <Redirect push to="/search" />;
+  if (updateSuccess) {
+    return <Redirect push to="/feed" />;
   }
   const {
     skills,
@@ -74,15 +70,6 @@ const UserForm = () => {
     setSkillData(skills);
   };
 
-  if (data) {
-    return (
-      <Redirect
-        to={{
-          pathname: '/feed',
-        }}
-      />
-    );
-  }
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
@@ -200,9 +187,9 @@ const UserForm = () => {
                   </option>
                 ))}
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                 <svg
-                  class="fill-current h-6 w-6"
+                  className="fill-current h-6 w-6"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                 >
@@ -248,9 +235,9 @@ const UserForm = () => {
                   </option>
                 ))}
               </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                 <svg
-                  class="fill-current h-6 w-6"
+                  className="fill-current h-6 w-6"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                 >

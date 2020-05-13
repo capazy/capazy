@@ -3,13 +3,13 @@ import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 // context
-import { AuthContext } from '../../context/AuthContext';
+import { UserContext } from '../../context/UserContext';
 
 // utils
 import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
-  const { signup, user } = useContext(AuthContext);
+  const { signup, user } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {

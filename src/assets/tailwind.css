@@ -22,6 +22,13 @@
   @apply inline-block px-3 py-2 rounded-sm  font-semibold  text-sm;
 }
 
+.btn-small {
+  @apply bg-green-500 text-white text-xs py-1 px-4 rounded-full;
+}
+
+.btn-small:focus {
+  @apply outline-none shadow-outline;
+}
 /* FORM */
 .form-input {
   @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
@@ -37,6 +44,18 @@
 
 .form-error {
   @apply text-red-500 text-xs italic mt-1;
+}
+
+/* TAB CONTENT */
+.tab-content {
+  max-height: 0;
+  -webkit-transition: max-height 0.35s;
+  -o-transition: max-height 0.35s;
+  transition: max-height 0.35s;
+}
+
+.tab input:checked ~ .tab-content {
+  max-height: 100vh;
 }
 
 @tailwind utilities;

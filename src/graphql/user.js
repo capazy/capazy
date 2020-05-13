@@ -15,7 +15,6 @@ export const CREATE_USER = gql`
         lastName: $lastName
       }
     ) {
-      userId
       token
       tokenExp
     }
@@ -25,7 +24,6 @@ export const CREATE_USER = gql`
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(loginInput: { email: $email, password: $password }) {
-      userId
       token
       tokenExp
     }
@@ -61,14 +59,13 @@ export const UPDATE_USER = gql`
     ) {
       _id
       firstName
-      languages
+      lastName
       description
+      skills
+      languages
       companyName
       companyDepartment
       country
-      skills
-      additionalSkills
-      expertise
     }
   }
 `;
@@ -110,6 +107,12 @@ export const GET_USER_CREATED_PROJECTS = gql`
           title
           experience
           skills
+          postulatedUsers {
+            _id
+            firstName
+            lastName
+            skills
+          }
         }
       }
     }

@@ -8,7 +8,7 @@ import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import { CardProject, SelectOne } from '../../components';
+import { ProjectCard, SelectOne } from '../../components';
 
 // context
 // import { AuthContext } from '../../context/AuthContext';
@@ -107,7 +107,7 @@ const SearchBar = () => {
               key={project._id}
               className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
             >
-              <CardProject project={project} handleJoin={handleJoin} />
+              <ProjectCard project={project} handleJoin={handleJoin} />
             </div>
           ))}
         </div>

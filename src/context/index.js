@@ -1,7 +1,6 @@
 import React, { createContext } from 'react';
-import { AuthProvider } from './AuthContext';
-import { ProjectProvider } from './ProjectContext';
 import { UserProvider } from './UserContext';
+import { ProjectProvider } from './ProjectContext';
 
 const GlobalContext = createContext();
 
@@ -9,9 +8,7 @@ const GlobalProvider = (props) => {
   return (
     <GlobalContext.Provider>
       <ProjectProvider>
-        <UserProvider>
-          <AuthProvider>{props.children}</AuthProvider>
-        </UserProvider>
+        <UserProvider>{props.children}</UserProvider>
       </ProjectProvider>
     </GlobalContext.Provider>
   );

@@ -4,18 +4,16 @@ import { useFormik } from 'formik';
 import { useStoreState } from 'easy-peasy';
 
 // context
-import { AuthContext } from '../../context/AuthContext';
+import { UserContext } from '../../context/UserContext';
 
 // utils
 import { loginFormSchema } from '../../utils/formikSchemas';
-import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
   const message = useStoreState((state) => state.message);
   console.log('STORE', message);
 
-  const { login, user } = useContext(AuthContext);
-  const { getCurrentUser } = useContext(UserContext);
+  const { login, user } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -27,9 +25,6 @@ const Login = () => {
       await login(values);
     },
   });
-  if (user) {
-    getCurrentUser();
-  }
 
   if (user) {
     return <Redirect push to="/search" />;
