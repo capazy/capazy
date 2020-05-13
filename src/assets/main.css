@@ -674,6 +674,11 @@ video {
   border-radius: 9999px;
 }
 
+.btn-small:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
 /* FORM */
 
 .form-input {

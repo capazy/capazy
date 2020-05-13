@@ -29,9 +29,9 @@ const CreatedCard = ({
 }) => {
   return (
     <div className="my-10">
-      <div className="max-w-md w-full lg:max-w-full lg:flex border-r border-b border-l  ">
+      <div className="max-w-md w-full lg:max-w-full lg:flex border-r border-b border-l border-t  ">
         <div
-          className="md:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+          className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
           style={{
             backgroundImage:
               'url(https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
@@ -41,7 +41,7 @@ const CreatedCard = ({
         <div className="py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
           <div className="flex mb-8">
             <img
-              className="hidden md:block flex-initial mr-2 h-48"
+              className="hidden lg:block flex-initial mr-2 h-48"
               src="https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
               alt="project"
             />
@@ -98,9 +98,9 @@ const CreatedCard = ({
                             {/* <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
                               open
                             </span> */}
-                            <div class="inset-y-0 right-0 flex text-center px-2 mt-4 text-gray-600">
+                            <div className="inset-y-0 right-0 flex text-center px-2 mt-4 text-gray-600">
                               <svg
-                                class="fill-current h-6 w-6"
+                                className="fill-current h-6 w-6"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                               >
@@ -120,7 +120,8 @@ const CreatedCard = ({
                                   <td className="w-1/3 text-left py-0 px-2">
                                     <span className="w-full  ">
                                       <h1 className="block text-gray-800 text-sm">
-                                        {vacancy.title}
+                                        {postulated.firstName}{' '}
+                                        {postulated.lastName}
                                       </h1>
 
                                       {postulated.skills.map((skill, i) => (
@@ -131,7 +132,6 @@ const CreatedCard = ({
                                           >
                                             {skill}
                                           </p>
-                                          {console.log(i)}
                                         </span>
                                       ))}
                                     </span>

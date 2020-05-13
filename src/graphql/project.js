@@ -75,6 +75,8 @@ export const GET_PROJECTS_BY_SKILL = gql`
         title
         experience
         skills
+        firstName
+        lastName
       }
     }
   }

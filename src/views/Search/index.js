@@ -34,8 +34,8 @@ const SearchBar = () => {
   return (
     <Fragment>
       <div className="pt-5 w-full max-w-xs my-auto mx-auto">
-        <form class="w-full max-w-sm" onSubmit={handleSubmit}>
-          <div class="flex items-center py-2">
+        <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+          <div className="flex items-center py-2">
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="skill"
