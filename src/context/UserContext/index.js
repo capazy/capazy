@@ -67,8 +67,6 @@ const UserProvider = (props) => {
     window.location.href = '/';
   };
 
-  console.log('STATE', state);
-
   return (
     <UserContext.Provider
       value={{

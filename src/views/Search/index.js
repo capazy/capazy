@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 // apollo
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
@@ -20,21 +20,32 @@ const SearchBar = () => {
   const [projects, setProjects] = useState([]);
   const [joinSuccess, setJoinSuccess] = useState(false);
 
+  const [getProjects] = useLazyQuery(GET_PROJECTS, {
+    onCompleted: (data) => {
+      console.log('APOLLO');
+      setProjects(data.projects);
+    },
+  });
+
   const [joinVacancy] = useMutation(JOIN_VACANCY, {
     update(_, { data }) {
       console.log('Vacancy', data);
     },
   });
 
-  const [getProjects, { loading }] = useLazyQuery(GET_PROJECTS, {
-    onCompleted: (data) => {
-      setProjects(data.projects);
-    },
-  });
+  // const { loading, data, refetch } = useQuery(GET_PROJECTS, {
+  //   variables: { skill: '' },
+  // });
+  // refetch();
+  // if (loading || !projects || !data) return <p>Loading...</p>;
+
+  // setProjects(data.projects);
 
   useEffect(() => {
     getProjects({ variables: { skill: '' } });
   }, [getProjects]);
+
+  console.log('DATA', projects);
 
   const {
     handleSubmit,
@@ -66,7 +77,6 @@ const SearchBar = () => {
     return <Redirect push to="/joined-projects" />;
   }
 
-  if (loading || !projects) return <p>Loading...</p>;
   return (
     <Fragment>
       <div className="pt-5 w-full px-4 md:px-12">

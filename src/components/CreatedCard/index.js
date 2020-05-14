@@ -1,31 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// {
-//     user {
-//       _id
-//       createdProjects {
-//         _id
-//         title
-//         description
-//         type
-//         deadline
-//         published
-//         isOpen
-//         creator {
-//           _id
-//         }
-//         vacancies {
-//           _id
-//           title
-//           experience
-//           skills
-//         }
-//       }
-//     }
-//   }
 const CreatedCard = ({
   project: { title, description, type, deadline, published, isOpen, vacancies },
+  handleSelect,
 }) => {
   return (
     <div className="my-10">
@@ -138,7 +116,16 @@ const CreatedCard = ({
                                   </td>
 
                                   <td className="text-right py-3 px-4">
-                                    <button className="btn-small" to="#">
+                                    <button
+                                      className="btn-small"
+                                      to="#"
+                                      onClick={() =>
+                                        handleSelect(
+                                          postulated._id,
+                                          vacancy._id
+                                        )
+                                      }
+                                    >
                                       Select
                                     </button>
                                   </td>

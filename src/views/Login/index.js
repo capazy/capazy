@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { useStoreState } from 'easy-peasy';
+// import { useStoreState } from 'easy-peasy';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -10,8 +10,7 @@ import { UserContext } from '../../context/UserContext';
 import { loginFormSchema } from '../../utils/formikSchemas';
 
 const Login = () => {
-  const message = useStoreState((state) => state.message);
-  console.log('STORE', message);
+  // const message = useStoreState((state) => state.message);
 
   const { login, user } = useContext(UserContext);
 

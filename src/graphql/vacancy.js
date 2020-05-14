@@ -32,3 +32,11 @@ export const JOIN_VACANCY = gql`
     }
   }
 `;
+
+export const SELECT_USER = gql`
+  mutation selectUser($selectedUserId: ID!, $vacancyId: ID!) {
+    selectUser(selectedUserId: $selectedUserId, vacancyId: $vacancyId) {
+      _id
+    }
+  }
+`;
