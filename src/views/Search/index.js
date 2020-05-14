@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
@@ -10,42 +10,12 @@ import { JOIN_VACANCY } from '../../graphql/vacancy';
 // components
 import { ProjectCard, SelectOne } from '../../components';
 
-// context
-// import { AuthContext } from '../../context/AuthContext';
-
 // utils
 import allSkillsData from '../../data/allSkillsData.json';
 
 const SearchBar = () => {
-  const [projects, setProjects] = useState([]);
+  const [search, setSearch] = useState(null);
   const [joinSuccess, setJoinSuccess] = useState(false);
-
-  const [getProjects] = useLazyQuery(GET_PROJECTS, {
-    onCompleted: (data) => {
-      console.log('APOLLO');
-      setProjects(data.projects);
-    },
-  });
-
-  const [joinVacancy] = useMutation(JOIN_VACANCY, {
-    update(_, { data }) {
-      console.log('Vacancy', data);
-    },
-  });
-
-  // const { loading, data, refetch } = useQuery(GET_PROJECTS, {
-  //   variables: { skill: '' },
-  // });
-  // refetch();
-  // if (loading || !projects || !data) return <p>Loading...</p>;
-
-  // setProjects(data.projects);
-
-  useEffect(() => {
-    getProjects({ variables: { skill: '' } });
-  }, [getProjects]);
-
-  console.log('DATA', projects);
 
   const {
     handleSubmit,
@@ -68,6 +38,26 @@ const SearchBar = () => {
   });
   const { skill } = values;
 
+  // Mounting the component: all prejects
+  const { loading, data, refetch } = useQuery(GET_PROJECTS, {
+    variables: { skill: '' },
+  });
+  refetch();
+
+  // Search project by skill
+  const [getProjects] = useLazyQuery(GET_PROJECTS, {
+    onCompleted: (data) => {
+      setSearch(data);
+    },
+  });
+
+  // Join a project
+  const [joinVacancy] = useMutation(JOIN_VACANCY, {
+    update(_, { data }) {
+      console.log('Vacancy', data);
+    },
+  });
+
   const handleJoin = async (vacancyId) => {
     await joinVacancy({ variables: { vacancyId } });
     await setJoinSuccess(true);
@@ -77,11 +67,15 @@ const SearchBar = () => {
     return <Redirect push to="/joined-projects" />;
   }
 
+  if (loading || !data) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Fragment>
       <div className="pt-5 w-full px-4 md:px-12">
-        <form class="w-full" onSubmit={handleSubmit}>
-          <div class="flex items-center py-2">
+        <form className="w-full" onSubmit={handleSubmit}>
+          <div className="flex items-center py-2">
             <div className="w-full">
               <SelectOne
                 options={allSkillsData}
@@ -112,14 +106,23 @@ const SearchBar = () => {
 
       <div className="container my-2 mx-auto px-4 md:px-12">
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
-          {projects.map((project) => (
-            <div
-              key={project._id}
-              className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
-            >
-              <ProjectCard project={project} handleJoin={handleJoin} />
-            </div>
-          ))}
+          {search
+            ? search.projects.map((project) => (
+                <div
+                  key={project._id}
+                  className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                >
+                  <ProjectCard project={project} handleJoin={handleJoin} />
+                </div>
+              ))
+            : data.projects.map((project) => (
+                <div
+                  key={project._id}
+                  className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                >
+                  <ProjectCard project={project} handleJoin={handleJoin} />
+                </div>
+              ))}
         </div>
       </div>
     </Fragment>

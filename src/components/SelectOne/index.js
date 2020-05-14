@@ -17,7 +17,7 @@ const SelectOneComponent = ({ options, value, onBlur, onChange, field }) => {
         onChange={handleChange}
         onBlur={handleBlur}
         value={value}
-        placeholder="Search projects for skill..."
+        placeholder="Search projects by skill..."
       />
     </div>
   );
