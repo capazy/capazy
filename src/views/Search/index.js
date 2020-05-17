@@ -8,7 +8,7 @@ import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import { ProjectCard, SelectOne } from '../../components';
+import { ProjectCard, SelectOne, Alert } from '../../components';
 
 // context
 // import { AuthContext } from '../../context/AuthContext';
@@ -70,6 +70,7 @@ const SearchBar = () => {
   return (
     <Fragment>
       <div className="pt-5 w-full px-4 md:px-12">
+        <Alert />
         <form class="w-full" onSubmit={handleSubmit}>
           <div class="flex items-center py-2">
             <div className="w-full">

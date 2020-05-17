@@ -1,7 +1,9 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useContext } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
+
+import toggleAlert from '../../utils/toggleAlert';
 
 const UserContext = createContext({
   tokenExp: null,
@@ -17,6 +19,10 @@ const UserProvider = (props) => {
     user: null,
     tokenExp: null,
   });
+  //context
+
+  //Alert context
+
   // apollo-signup
   const [createUser] = useMutation(CREATE_USER, {
     update(_, { data: { createUser: loginData } }) {
@@ -58,7 +64,12 @@ const UserProvider = (props) => {
   };
 
   const update = async (data) => {
-    await updateUser({ variables: data });
+    try {
+      await updateUser({ variables: data });
+      toggleAlert('Hello');
+    } catch (error) {
+      toggleAlert('error');
+    }
   };
 
   // logout
@@ -66,8 +77,6 @@ const UserProvider = (props) => {
     dispatch({ type: 'LOGOUT' });
     window.location.href = '/';
   };
-
-  console.log('STATE', state);
 
   return (
     <UserContext.Provider
