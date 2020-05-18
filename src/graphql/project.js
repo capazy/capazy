@@ -5,7 +5,8 @@ export const CREATE_PROJECT = gql`
     $title: String!
     $description: String!
     $type: String!
-    $deadline: String!
+    $startDate: String!
+    $endDate: String!
     $published: String!
   ) {
     createProject(
@@ -13,7 +14,8 @@ export const CREATE_PROJECT = gql`
         title: $title
         description: $description
         type: $type
-        deadline: $deadline
+        startDate: $startDate
+        endDate: $endDate
         published: $published
       }
     ) {
@@ -21,7 +23,8 @@ export const CREATE_PROJECT = gql`
       title
       description
       type
-      deadline
+      startDate
+      endDate
       published
       isOpen
       creator {
@@ -41,7 +44,8 @@ export const GET_PROJECTS = gql`
       title
       description
       type
-      deadline
+      startDate
+      endDate
       published
       isOpen
       creator {

@@ -36,7 +36,8 @@ const ProjectForm = () => {
       description: '',
       type: '',
       published: '',
-      deadline: '',
+      startDate: '',
+      endDate: '',
     },
     validationSchema: projectFormSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -49,7 +50,7 @@ const ProjectForm = () => {
     return <Redirect push to="/vacancy-form" />;
   }
 
-  const { title, description, deadline } = values;
+  const { title, description, startDate, endDate } = values;
 
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
@@ -150,14 +151,26 @@ const ProjectForm = () => {
         <div className="mb-4">
           <input
             type="date"
-            id="deadline"
-            name="deadline"
+            id="startDate"
+            name="startDate"
             onChange={handleChange}
-            value={deadline}
+            value={startDate}
             className="form-input"
           />
         </div>
-        <p className="form-error">{errors.deadline}</p>
+        <p className="form-error">{errors.startDate}</p>
+
+        <div className="mb-4">
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            onChange={handleChange}
+            value={endDate}
+            className="form-input"
+          />
+        </div>
+        <p className="form-error">{errors.endDate}</p>
 
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">

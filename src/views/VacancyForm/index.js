@@ -44,8 +44,10 @@ const VacancyForm = () => {
     initialValues: {
       projectId: projectId,
       title: '',
-      experience: '',
+      experience: 'Experience',
       skills: '',
+      timeCommitment: '',
+      timeCommitmentUnits: '',
     },
     validationSchema: vacancyFormSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -55,7 +57,7 @@ const VacancyForm = () => {
     },
   });
 
-  const { title, skills } = values;
+  const { title, skills, timeCommitment } = values;
 
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
@@ -72,6 +74,7 @@ const VacancyForm = () => {
             ))}
           </Fragment>
         ) : null}
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Title
@@ -137,6 +140,62 @@ const VacancyForm = () => {
             touched={touched.skills}
           />
           <p className="text-red-500 text-xs italic">{errors.skills}</p>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Time Commitment
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="timeCommitment"
+            type="number"
+            // placeholder="timeCommitment"
+            onChange={handleChange}
+            value={timeCommitment}
+            invalid={
+              touched.timeCommitment && errors.timeCommitment ? true : undefined
+            }
+          />
+          <p className="text-red-500 text-xs italic">{errors.timeCommitment}</p>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-500 text-sm font-bold mb-2">
+            Time Commitment Units
+          </label>
+          <div className="mb-4 inline-block relative w-full">
+            <select
+              id="timeCommitmentUnits"
+              name="timeCommitmentUnits"
+              onChange={handleChange}
+              defaultValue="test"
+              className="form-input bg-white"
+            >
+              <option value="test" disabled>
+                Test
+              </option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+              {/* {experienceOptions.map((item) => (
+                <option key={item.label} value={item.value}>
+                  {item.label}
+                </option>
+              ))} */}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+              <svg
+                className="fill-current h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
+          </div>
+          <p className="text-red-500 text-xs italic">
+            {errors.timeCommitmentUnits}
+          </p>
         </div>
 
         <div className="flex items-center justify-between">
