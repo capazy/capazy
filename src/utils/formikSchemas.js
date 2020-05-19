@@ -51,7 +51,8 @@ export const projectFormSchema = Yup.object({
   description: Yup.string().required(),
   type: Yup.string().required(),
   published: Yup.string().required(),
-  deadline: Yup.string().required(),
+  startDate: Yup.string().required(),
+  endDate: Yup.string().required(),
 });
 
 export const vacancyFormSchema = Yup.object({
@@ -65,4 +66,6 @@ export const vacancyFormSchema = Yup.object({
         value: Yup.string().required(),
       })
     ),
+  timeCommitment: Yup.number().required(),
+  timeCommitmentUnits: Yup.string().required(),
 });

@@ -6,6 +6,8 @@ export const CREATE_VACANCY = gql`
     $title: String!
     $experience: String!
     $skills: [String!]
+    $timeCommitment: Float!
+    $timeCommitmentUnits: String!
   ) {
     createVacancy(
       vacancyInput: {
@@ -13,6 +15,8 @@ export const CREATE_VACANCY = gql`
         title: $title
         experience: $experience
         skills: $skills
+        timeCommitment: $timeCommitment
+        timeCommitmentUnits: $timeCommitmentUnits
       }
     ) {
       _id
