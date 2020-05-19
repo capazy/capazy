@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 // context
 import { UserContext } from '../../context/UserContext';
+import Alert from '../../components/Alert';
 
 const links = () => (
   <div
@@ -172,6 +173,7 @@ const NewNavbar = () => {
         </div>
         <div>{isOpen && links()}</div>
       </nav>
+      <Alert />
     </div>
   );
 };
