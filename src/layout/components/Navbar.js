@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Alert } from '../../components';
 
 const links = () => (
   <div className="hidden flex md:block px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
@@ -111,6 +112,7 @@ const Navbar = () => {
         </div>
         {links()}
       </div>
+      <Alert />
     </nav>
   );
 };

@@ -4,7 +4,6 @@ import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 import Routes from './Routes';
 import { UserContext } from './context/UserContext';
-import { Alert } from './components';
 
 require('dotenv-flow').config();
 
@@ -30,7 +29,6 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <Alert />
       <Routes />
     </Router>
   );

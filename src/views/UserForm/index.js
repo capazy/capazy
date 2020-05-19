@@ -38,7 +38,7 @@ const UserForm = () => {
       country: '',
       additionalSkills: [],
     },
-    // validationSchema: userFormSchema,
+    validationSchema: userFormSchema,
     onSubmit: async (values, { resetForm }) => {
       values.skills = await transformArray(values, 'skills');
       values.languages = await transformArray(values, 'languages');

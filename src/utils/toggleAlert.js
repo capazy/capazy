@@ -1,8 +1,11 @@
 import store from '../errorsStore';
 
-const toggleAlert = (msg) => {
-  store.dispatch.changeMassage(msg);
-  setTimeout(() => store.dispatch.changeMassage(null), 2000);
+const toggleAlert = (msg, alertType) => {
+  store.dispatch.changeMassage({ msg, alertType });
+  setTimeout(
+    () => store.dispatch.changeMassage({ msg: null, alertType: null }),
+    5000
+  );
 };
 
 export default toggleAlert;

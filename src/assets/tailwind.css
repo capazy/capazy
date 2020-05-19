@@ -58,4 +58,34 @@
   max-height: 100vh;
 }
 
+/* ALERT */
+
+.alert-banner {
+  @apply w-full;
+}
+
+.alert-banner input:checked ~ * {
+  @apply hidden;
+}
+
+.banner {
+  @apply cursor-pointer flex px-4 py-1 shadow-md rounded-b;
+}
+
+.success {
+  @apply bg-teal-100 border-t-4 border-teal-500 text-teal-900;
+}
+
+.info {
+  @apply bg-blue-100 border-t-4 border-blue-500 text-blue-700;
+}
+
+.warming {
+  @apply bg-orange-200 border-t-4 border-orange-500  text-orange-700;
+}
+
+.error {
+  @apply bg-red-200 border-t-4 border-red-500 text-red-700;
+}
+
 @tailwind utilities;

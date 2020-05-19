@@ -30,7 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       if (message.includes('Unauthenticated')) {
         console.log('redirect to /login');
       } else {
-        toggleAlert(message);
+        toggleAlert(message, 'error');
       }
       return null;
     });

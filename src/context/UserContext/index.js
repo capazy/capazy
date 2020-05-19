@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
@@ -66,9 +66,9 @@ const UserProvider = (props) => {
   const update = async (data) => {
     try {
       await updateUser({ variables: data });
-      toggleAlert('Hello');
+      toggleAlert('Hello', 'success');
     } catch (error) {
-      toggleAlert('error');
+      toggleAlert('error', 'error');
     }
   };
 
