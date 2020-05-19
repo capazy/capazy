@@ -1,4 +1,4 @@
-import store from '../errorsStore';
+import store from '../messageStore';
 
 const toggleAlert = (msg, alertType) => {
   store.dispatch.changeMassage({ msg, alertType });

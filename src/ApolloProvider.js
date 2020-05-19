@@ -14,7 +14,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import GlobalProvider from './context';
 
 // error store
-import store from './errorsStore';
+import store from './messageStore';
 import toggleAlert from './utils/toggleAlert';
 
 const httpLink = createHttpLink({
