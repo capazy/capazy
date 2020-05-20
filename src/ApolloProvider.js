@@ -14,7 +14,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import GlobalProvider from './context';
 
 // error store
-import store from './errorsStore';
+import store from './messageStore';
+import toggleAlert from './utils/toggleAlert';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_APOLLO_API_URI,
@@ -29,8 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       if (message.includes('Unauthenticated')) {
         console.log('redirect to /login');
       } else {
-        console.log('dispatch');
-        store.dispatch.changeMassage(message);
+        toggleAlert(message, 'error');
       }
       return null;
     });
