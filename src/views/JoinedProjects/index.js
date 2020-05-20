@@ -11,7 +11,7 @@ const JoinedProjects = () => {
   // });
 
   const { loading, data, refetch } = useQuery(GET_USER_JOINED_PROJECTS);
-  if (loading) return <p>Loading...</p>;
+  if (!data) return <p>Loading...</p>;
   refetch();
 
   // const handleJoin = (vacancyId) => {
