@@ -26,6 +26,8 @@
     "react-select": "^3.1.0",
     "react-select-virtualized": "^2.5.3",
     "react-virtualized": "^9.21.2",
+    "sendbird-uikit": "^1.0.2",
+    "talkjs": "^0.14.2",
     "yup": "^0.28.5"
   },
   "scripts": {
