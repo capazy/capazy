@@ -87,6 +87,23 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_USERS = gql`
+  query users($skill: String!) {
+    users(skill: $skill) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      # experience
+      companyName
+      companyDepartment
+      country
+    }
+  }
+`;
+
 export const GET_USER_CREATED_PROJECTS = gql`
   {
     user {

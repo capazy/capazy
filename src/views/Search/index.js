@@ -5,10 +5,11 @@ import { Redirect } from 'react-router-dom';
 // apollo
 import { useMutation, useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/project';
+import { GET_USERS } from '../../graphql/user';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import { ProjectCard, SelectOne } from '../../components';
+import { ProjectCard, UserCard, SelectOne } from '../../components';
 
 // utils
 import allSkillsData from '../../data/allSkillsData.json';
@@ -19,24 +20,31 @@ const SearchBar = () => {
 
   const {
     handleSubmit,
+    handleChange,
     values,
     errors,
     touched,
-    resetForm,
     setFieldValue,
     setFieldTouched,
+    resetForm,
   } = useFormik({
     initialValues: {
+      searchType: 'project',
       skill: '',
     },
     onSubmit: async ({ skill: { value } }) => {
+      console.log('VAL', value);
       if (!value) {
         value = '';
       }
-      await getProjects({ variables: { skill: value } });
+      if (searchType === 'project') {
+        await getProjects({ variables: { skill: value } });
+      } else {
+        await getUsers({ variables: { skill: value } });
+      }
     },
   });
-  const { skill } = values;
+  const { searchType, skill } = values;
 
   // Mounting the component: all prejects
   const { loading, data, refetch } = useQuery(GET_PROJECTS, {
@@ -44,8 +52,15 @@ const SearchBar = () => {
   });
   refetch();
 
-  // Search project by skill
+  // Search projects by skill
   const [getProjects] = useLazyQuery(GET_PROJECTS, {
+    onCompleted: (data) => {
+      setSearch(data);
+    },
+  });
+
+  // Search users by skill
+  const [getUsers] = useLazyQuery(GET_USERS, {
     onCompleted: (data) => {
       setSearch(data);
     },
@@ -96,10 +111,32 @@ const SearchBar = () => {
             </button>
             <button
               className="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
-              onClick={() => resetForm()}
+              onClick={resetForm}
             >
               Clear Search
             </button>
+          </div>
+          <div className="w-full">
+            <input
+              type="radio"
+              id="project"
+              name="searchType"
+              value="project"
+              onChange={handleChange}
+              checked={searchType === 'project' ? true : false}
+            />
+            <label className="mr-3" htmlFor="project">
+              Project
+            </label>
+            <input
+              type="radio"
+              id="user"
+              name="searchType"
+              value="user"
+              onChange={handleChange}
+              checked={searchType === 'user' ? true : false}
+            />
+            <label htmlFor="user">User</label>
           </div>
         </form>
       </div>
@@ -107,14 +144,23 @@ const SearchBar = () => {
       <div className="container my-2 mx-auto px-4 md:px-12">
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           {search
-            ? search.projects.map((project) => (
-                <div
-                  key={project._id}
-                  className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
-                >
-                  <ProjectCard project={project} handleJoin={handleJoin} />
-                </div>
-              ))
+            ? search.projects
+              ? search.projects.map((project) => (
+                  <div
+                    key={project._id}
+                    className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                  >
+                    <ProjectCard project={project} handleJoin={handleJoin} />
+                  </div>
+                ))
+              : search.users.map((user) => (
+                  <div
+                    key={user._id}
+                    className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                  >
+                    <UserCard user={user} />
+                  </div>
+                ))
             : data.projects.map((project) => (
                 <div
                   key={project._id}
