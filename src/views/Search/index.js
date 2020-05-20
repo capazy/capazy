@@ -33,7 +33,6 @@ const SearchBar = () => {
       skill: '',
     },
     onSubmit: async ({ skill: { value } }) => {
-      console.log('VAL', value);
       if (!value) {
         value = '';
       }
@@ -78,6 +77,12 @@ const SearchBar = () => {
     await setJoinSuccess(true);
   };
 
+  const handleReset = async () => {
+    await resetForm();
+    await setSearch(null);
+    await refetch();
+  };
+
   if (joinSuccess) {
     return <Redirect push to="/joined-projects" />;
   }
@@ -111,7 +116,7 @@ const SearchBar = () => {
             </button>
             <button
               className="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
-              onClick={resetForm}
+              onClick={handleReset}
             >
               Clear Search
             </button>
