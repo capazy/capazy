@@ -15,7 +15,12 @@ import { ProjectCard, UserCard, SelectOne } from '../../components';
 import allSkillsData from '../../data/allSkillsData.json';
 
 const SearchBar = () => {
-  const [search, setSearch] = useState(null);
+  const [searchState, setSearchState] = useState({
+    projects: null,
+    users: null,
+    onSearch: false,
+  });
+  const { projects, users, onSearch } = searchState;
   const [joinSuccess, setJoinSuccess] = useState(false);
 
   const {
@@ -27,6 +32,7 @@ const SearchBar = () => {
     setFieldValue,
     setFieldTouched,
     resetForm,
+    // handleReset,
   } = useFormik({
     initialValues: {
       searchType: 'project',
@@ -34,11 +40,11 @@ const SearchBar = () => {
     },
     onSubmit: async ({ skill: { value } }) => {
       if (!value) {
-        value = '';
-      }
-      if (searchType === 'project') {
-        await getProjects({ variables: { skill: value } });
+        setSearchState({ ...searchState, onSearch: false });
+        refetch();
       } else {
+        await setSearchState({ ...searchState, onSearch: true });
+        await getProjects({ variables: { skill: value } });
         await getUsers({ variables: { skill: value } });
       }
     },
@@ -54,14 +60,14 @@ const SearchBar = () => {
   // Search projects by skill
   const [getProjects] = useLazyQuery(GET_PROJECTS, {
     onCompleted: (data) => {
-      setSearch(data);
+      setSearchState({ ...searchState, projects: data, onSearch: true });
     },
   });
 
   // Search users by skill
   const [getUsers] = useLazyQuery(GET_USERS, {
     onCompleted: (data) => {
-      setSearch(data);
+      setSearchState({ ...searchState, users: data, onSearch: true });
     },
   });
 
@@ -77,17 +83,21 @@ const SearchBar = () => {
     await setJoinSuccess(true);
   };
 
-  const handleReset = async () => {
-    await resetForm();
-    await setSearch(null);
-    await refetch();
-  };
+  // const handleClear = async () => {
+  //   await handleReset();
+  //   await setSearchState({ projects: null, users: null, onSearch: false });
+  //   await refetch();
+  // };
 
   if (joinSuccess) {
     return <Redirect push to="/joined-projects" />;
   }
 
   if (loading || !data) {
+    return <p>Loading...</p>;
+  }
+
+  if (onSearch && (!projects || !users)) {
     return <p>Loading...</p>;
   }
 
@@ -116,7 +126,7 @@ const SearchBar = () => {
             </button>
             <button
               className="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
-              onClick={handleReset}
+              onClick={() => resetForm()}
             >
               Clear Search
             </button>
@@ -147,34 +157,51 @@ const SearchBar = () => {
       </div>
 
       <div className="container my-2 mx-auto px-4 md:px-12">
-        <div className="flex flex-wrap -mx-1 lg:-mx-4">
-          {search
-            ? search.projects
-              ? search.projects.map((project) => (
-                  <div
-                    key={project._id}
-                    className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
-                  >
-                    <ProjectCard project={project} handleJoin={handleJoin} />
-                  </div>
-                ))
-              : search.users.map((user) => (
-                  <div
-                    key={user._id}
-                    className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
-                  >
-                    <UserCard user={user} />
-                  </div>
-                ))
-            : data.projects.map((project) => (
-                <div
-                  key={project._id}
-                  className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
-                >
-                  <ProjectCard project={project} handleJoin={handleJoin} />
+        {!onSearch ? (
+          <div className="flex flex-wrap -mx-1 lg:-mx-4">
+            {data.projects.map((project) => (
+              <div
+                key={project._id}
+                className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+              >
+                <ProjectCard project={project} handleJoin={handleJoin} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Fragment>
+            {searchType === 'project' && (
+              <Fragment>
+                <p>Results: {projects.projects.length}</p>
+                <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                  {projects.projects.map((project) => (
+                    <div
+                      key={project._id}
+                      className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                    >
+                      <ProjectCard project={project} handleJoin={handleJoin} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-        </div>
+              </Fragment>
+            )}
+            {searchType === 'user' && (
+              <Fragment>
+                <p>Results: {users.users.length}</p>
+                <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                  {users.users.map((user) => (
+                    <div
+                      key={user._id}
+                      className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                    >
+                      <UserCard user={user} />
+                    </div>
+                  ))}
+                </div>
+              </Fragment>
+            )}
+          </Fragment>
+        )}
       </div>
     </Fragment>
   );
