@@ -10,7 +10,7 @@ const JoinedProjects = () => {
   //   update(_, { data }) {},
   // });
 
-  const { loading, data, refetch } = useQuery(GET_USER_JOINED_PROJECTS);
+  const { data, refetch } = useQuery(GET_USER_JOINED_PROJECTS);
   if (!data) return <p>Loading...</p>;
   refetch();
 

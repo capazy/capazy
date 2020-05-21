@@ -61,7 +61,14 @@ const Routes = () => {
       />
       <RouteWithLayout
         exact
-        path="/profile"
+        path="/profile/me"
+        layout={Layout}
+        component={Profile}
+      />
+
+      <RouteWithLayout
+        exact
+        path="/profile/:id"
         layout={Layout}
         component={Profile}
       />

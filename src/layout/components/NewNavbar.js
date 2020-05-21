@@ -53,7 +53,8 @@ const links = () => (
   </div>
 );
 const NewNavbar = () => {
-  const { logout } = useContext(UserContext);
+  const { logout, user } = useContext(UserContext);
+
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
 
@@ -121,7 +122,7 @@ const NewNavbar = () => {
                     <ul className="list-reset">
                       <li>
                         <Link
-                          to="/#"
+                          to={`/profile/${user._id}`}
                           className="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline"
                         >
                           My account

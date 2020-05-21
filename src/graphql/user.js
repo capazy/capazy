@@ -87,6 +87,23 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_USER_BY_ID = gql`
+  query userById($userId: ID!) {
+    userById(userId: $userId) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      # experience
+      companyName
+      companyDepartment
+      country
+    }
+  }
+`;
+
 export const GET_USER_CREATED_PROJECTS = gql`
   {
     user {
@@ -96,7 +113,7 @@ export const GET_USER_CREATED_PROJECTS = gql`
         title
         description
         type
-        deadline
+        # deadline
         published
         isOpen
         creator {
@@ -132,7 +149,7 @@ export const GET_USER_JOINED_PROJECTS = gql`
           title
           description
           type
-          deadline
+          # deadline
           published
           isOpen
           creator {
