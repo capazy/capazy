@@ -22,6 +22,7 @@ const CreatedProjects = () => {
   const { loading, data, refetch } = useQuery(GET_USER_CREATED_PROJECTS);
   if (loading) return <p>Loading...</p>;
   if (!data) return <p>No data</p>;
+  console.log(data);
   refetch();
 
   return (
