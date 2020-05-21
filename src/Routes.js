@@ -17,12 +17,14 @@ import {
   Profile,
   JoinedProjects,
   CreatedProjects,
+  Chat,
 } from './views';
 import Layout from './layout';
 
 const Routes = () => {
   return (
     <Switch>
+      <RouteWithLayout exact path="/chat" layout={Layout} component={Chat} />
       <RouteWithLayout
         exact
         path="/signup"
