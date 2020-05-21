@@ -38,11 +38,10 @@ const links = () => (
           <span className="pb-1 md:pb-0 text-sm">Created projects</span>
         </Link>
       </li>
-
       <li className="mr-6 my-2 md:my-0">
         <Link
           to="/project-form"
-          className="block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
+          className="md:hidden block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
         >
           <button className="btn-square bg-brand-blue text-white mx-2">
             Post a Project
@@ -53,7 +52,8 @@ const links = () => (
   </div>
 );
 const NewNavbar = () => {
-  const { logout } = useContext(UserContext);
+  const { logout, user } = useContext(UserContext);
+
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
 
@@ -61,16 +61,18 @@ const NewNavbar = () => {
     <div className="bg-grey-lightest font-sans leading-normal tracking-normal">
       <nav className="bg-white w-full z-10 pin-t shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
-          <div className="w-1/2 md:w-1/3 pl-2 md:pl-0">
+          <div className="flex w-1/2 md:w-1/2 pl-2 md:pl-0 my-auto ">
             <Link to="/">
               <img
                 src="https://res.cloudinary.com/dpnlmwgxh/image/upload/v1588518483/Main/text-blue_lbqwwy.png"
                 alt=""
-                className="h-12 md:h-14 text-left -ml-6 -mb-4 md:mb-1"
+                className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1"
               />
             </Link>
+            <div className="hidden md:block my-auto">{links()}</div>
           </div>
-          <div className="hidden md:block w-1/3 relative pull-right pl-4 pr-4 md:pr-0">
+
+          {/* <div className="hidden md:block w-2/4 relative pull-right pl-4 pr-4 md:pr-0">
             <input
               type="search"
               placeholder="Search"
@@ -88,9 +90,17 @@ const NewNavbar = () => {
                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
               </svg>
             </div>
-          </div>
-          <div className="w-1/2 md:w-1/3 pr-0">
+          </div> */}
+          <div className="w-1/2 md:w-1/2 pr-0 my-auto">
             <div className="flex relative inline-block float-right">
+              <Link
+                to="/project-form"
+                className="hidden mr-5 my-auto md:block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
+              >
+                <button className="btn-square bg-brand-blue text-white mx-2">
+                  Post a Project
+                </button>
+              </Link>
               <div className="relative text-sm">
                 <button
                   id="userButton"
@@ -121,7 +131,7 @@ const NewNavbar = () => {
                     <ul className="list-reset">
                       <li>
                         <Link
-                          to="/#"
+                          to={`/profile/${user._id}`}
                           className="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline"
                         >
                           My account
@@ -169,7 +179,7 @@ const NewNavbar = () => {
               </div>
             </div>
           </div>
-          <div className="hidden lg:block">{links()}</div>
+          {/* <div className="hidden lg:block">{links()}</div> */}
         </div>
         <div>{isOpen && links()}</div>
       </nav>

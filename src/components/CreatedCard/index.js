@@ -132,7 +132,7 @@ const CreatedCard = ({
                                   <td className="text-center py-3 px-4 text-xs">
                                     <Link
                                       className="hover:text-blue-500 "
-                                      to="#"
+                                      to={`profile/${postulated._id}`}
                                     >
                                       view profile
                                     </Link>

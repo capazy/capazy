@@ -21,8 +21,6 @@ const UserProvider = (props) => {
   });
   //context
 
-  //Alert context
-
   // apollo-signup
   const [createUser] = useMutation(CREATE_USER, {
     update(_, { data: { createUser: loginData } }) {
