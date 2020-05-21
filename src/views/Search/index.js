@@ -32,20 +32,16 @@ const SearchBar = () => {
     setFieldValue,
     setFieldTouched,
     resetForm,
-    // handleReset,
   } = useFormik({
     initialValues: {
       searchType: 'project',
       skill: '',
     },
-    onSubmit: async ({ skill: { value } }) => {
-      if (!value) {
-        setSearchState({ ...searchState, onSearch: false });
-        refetch();
-      } else {
-        await setSearchState({ ...searchState, onSearch: true });
-        await getProjects({ variables: { skill: value } });
-        await getUsers({ variables: { skill: value } });
+    onSubmit: ({ skill: { value } }) => {
+      if (value) {
+        setSearchState({ ...searchState, onSearch: true });
+        getProjects({ variables: { skill: value } });
+        getUsers({ variables: { skill: value } });
       }
     },
   });
@@ -83,11 +79,11 @@ const SearchBar = () => {
     await setJoinSuccess(true);
   };
 
-  // const handleClear = async () => {
-  //   await handleReset();
-  //   await setSearchState({ projects: null, users: null, onSearch: false });
-  //   await refetch();
-  // };
+  const handleReset = async () => {
+    setSearchState({ ...searchState, onSearch: false });
+    resetForm();
+    refetch();
+  };
 
   if (joinSuccess) {
     return <Redirect push to="/joined-projects" />;
@@ -124,12 +120,6 @@ const SearchBar = () => {
             >
               Search
             </button>
-            <button
-              className="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
-              onClick={() => resetForm()}
-            >
-              Clear Search
-            </button>
           </div>
           <div className="w-full">
             <input
@@ -154,6 +144,12 @@ const SearchBar = () => {
             <label htmlFor="user">User</label>
           </div>
         </form>
+        <button
+          className="mt-2 flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
+          onClick={handleReset}
+        >
+          Clear Search
+        </button>
       </div>
 
       <div className="container my-2 mx-auto px-4 md:px-12">

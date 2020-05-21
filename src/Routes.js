@@ -8,6 +8,7 @@ import RouteWithLayout from './router/RouteWithLayout';
 import {
   UserForm,
   Search,
+  Feed,
   Home,
   Signup,
   Login,
@@ -66,6 +67,7 @@ const Routes = () => {
         component={Profile}
       />
       <RouteWithLayout exact path="/" layout={Layout} component={Home} />
+      <RouteWithLayout exact path="/feed" layout={Layout} component={Feed} />
       <RouteWithLayout
         exact
         path="/search"
