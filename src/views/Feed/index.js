@@ -16,7 +16,9 @@ const Feed = () => {
     },
   });
 
-  const { loading, data, refetch } = useQuery(GET_PROJECTS);
+  const { loading, data, refetch } = useQuery(GET_PROJECTS, {
+    variables: { skill: '' },
+  });
   if (loading) return <p>Loading...</p>;
   refetch();
 
