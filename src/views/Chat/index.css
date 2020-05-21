@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+.App {
+  text-align: center;
+  height: 70vh;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-channel-preview {
   position: relative;
   cursor: pointer;
@@ -153,7 +158,7 @@
   color: #9e8cf5;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-avatar {
   display: inline-block;
   overflow: hidden;
@@ -222,7 +227,7 @@
   transform: translate(-23%, -23%) scale(0.5);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-badge {
   height: 20px;
   min-width: 20px;
@@ -239,9 +244,9 @@
   margin: 4px 6px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
-[class*="sendbird-label"] {
-  font-family: "Open Sans", sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+[class*='sendbird-label'] {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .sendbird-label--h-1 {
@@ -391,7 +396,7 @@
   color: #e53157;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-iconbutton {
   color: #825eeb;
   display: inline-block;
@@ -431,7 +436,7 @@
   background-color: #393939;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-channel-header {
   position: relative;
   height: 64px;
@@ -457,7 +462,7 @@
   top: 16px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-icon {
   display: inline-block;
 }
@@ -465,51 +470,51 @@
   outline: none;
 }
 
-.sendbird-theme--light .sendbird-color--primary [class*="fill"] {
+.sendbird-theme--light .sendbird-color--primary [class*='fill'] {
   fill: #7b53ef;
 }
 
-.sendbird-theme--dark .sendbird-color--primary [class*="fill"] {
+.sendbird-theme--dark .sendbird-color--primary [class*='fill'] {
   fill: #9e8cf5;
 }
 
-.sendbird-theme--light .sendbird-color--secondary [class*="fill"] {
+.sendbird-theme--light .sendbird-color--secondary [class*='fill'] {
   fill: rgba(0, 0, 0, 0.88);
 }
 
-.sendbird-theme--dark .sendbird-color--secondary [class*="fill"] {
+.sendbird-theme--dark .sendbird-color--secondary [class*='fill'] {
   fill: rgba(255, 255, 255, 0.88);
 }
 
-.sendbird-theme--light .sendbird-color--content [class*="fill"] {
+.sendbird-theme--light .sendbird-color--content [class*='fill'] {
   fill: rgba(255, 255, 255, 0.88);
 }
 
-.sendbird-theme--dark .sendbird-color--content [class*="fill"] {
+.sendbird-theme--dark .sendbird-color--content [class*='fill'] {
   fill: rgba(0, 0, 0, 0.88);
 }
 
-.sendbird-color--white [class*="fill"] {
+.sendbird-color--white [class*='fill'] {
   fill: #ffffff;
 }
 
-.sendbird-theme--light .sendbird-color--sent [class*="fill"] {
+.sendbird-theme--light .sendbird-color--sent [class*='fill'] {
   fill: rgba(0, 0, 0, 0.38);
 }
 
-.sendbird-theme--dark .sendbird-color--sent [class*="fill"] {
+.sendbird-theme--dark .sendbird-color--sent [class*='fill'] {
   fill: rgba(255, 255, 255, 0.38);
 }
 
-.sendbird-theme--light .sendbird-color--read [class*="fill"] {
+.sendbird-theme--light .sendbird-color--read [class*='fill'] {
   fill: #2eba9f;
 }
 
-.sendbird-theme--dark .sendbird-color--read [class*="fill"] {
+.sendbird-theme--dark .sendbird-color--read [class*='fill'] {
   fill: #6fd6be;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-create-channel--content {
   width: 480px;
   max-height: 552px;
@@ -569,7 +574,7 @@
   right: 0;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-modal {
   position: fixed;
   top: 0;
@@ -642,13 +647,13 @@
   background-color: rgba(0, 0, 0, 0.32);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-button {
   display: inline-block;
   box-shadow: none;
   border-radius: 4px;
   padding: 0px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   cursor: pointer;
 }
 .sendbird-button:hover {
@@ -912,7 +917,7 @@
   color: rgba(0, 0, 0, 0.88);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-checkbox {
   display: block;
   position: relative;
@@ -981,7 +986,7 @@
 }
 
 .sendbird-checkbox--checkmark:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -1012,7 +1017,7 @@
   transform: rotate(45deg);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-dropdown__menu {
   position: absolute;
   top: 100%;
@@ -1074,7 +1079,7 @@
     0 3px 14px 2px rgba(0, 0, 0, 0.08), 0 8px 10px 1px rgba(0, 0, 0, 0.12);
   background-color: #2c2c2c;
 }
-.sendbird-dropdown__reaction-bar > [class*="sendbird-reaction-button"] {
+.sendbird-dropdown__reaction-bar > [class*='sendbird-reaction-button'] {
   margin: 4px;
 }
 
@@ -1087,7 +1092,7 @@
   height: 100%;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-place-holder {
   display: -webkit-box;
   display: flex;
@@ -1132,7 +1137,7 @@
   margin-right: 4px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-loader {
   display: inline-block;
   -webkit-animation: 1s infinite linear;
@@ -1163,7 +1168,7 @@
   }
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-channel-list {
   width: 320px;
   height: 100%;
@@ -1195,7 +1200,7 @@
   overflow-x: hidden;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-conversation {
   display: -webkit-box;
   display: flex;
@@ -1251,7 +1256,7 @@
 .sendbird-conversation__scroll-container .sendbird-conversation__padding {
   -webkit-box-flex: 1;
   flex: 1 1 0;
-  background-color: #F7F7F7
+  background-color: #f7f7f7;
 }
 
 .sendbird-conversation__footer {
@@ -1262,7 +1267,7 @@
   bottom: 8px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-conversation__messages .sendbird-conversation__messages-padding {
   padding-left: 24px;
   padding-right: 24px;
@@ -1275,7 +1280,7 @@
   padding-bottom: 8px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-message {
   position: relative;
 }
@@ -1320,7 +1325,7 @@
   top: 2px;
 }
 .sendbird-user-message--outgoing
-  .sendbird-user-message__more[class*="--pressed"] {
+  .sendbird-user-message__more[class*='--pressed'] {
   display: block !important;
 }
 .sendbird-user-message--outgoing .sendbird-user-message__tooltip {
@@ -1425,7 +1430,7 @@
   right: 0px;
 }
 .sendbird-user-message--incoming
-  .sendbird-user-message__more[class*="--pressed"] {
+  .sendbird-user-message__more[class*='--pressed'] {
   display: block !important;
 }
 
@@ -1437,7 +1442,7 @@
   display: inline-block;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-reaction-button {
   border-radius: 8px;
   display: inline-block;
@@ -1477,7 +1482,7 @@
   display: block !important;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-message-status {
   display: -webkit-inline-box;
   display: inline-flex;
@@ -1511,7 +1516,7 @@
   margin-left: 4px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-admin-message {
   display: -webkit-box;
   display: flex;
@@ -1525,7 +1530,7 @@
   display: flex;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-thumbnail {
   cursor: pointer;
   text-align: right;
@@ -1607,7 +1612,7 @@
   border-radius: 16px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-file-message--outgoing {
   text-align: right;
 }
@@ -1773,7 +1778,7 @@
   right: 0px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-textbutton {
   text-decoration: underline;
   cursor: pointer;
@@ -1784,7 +1789,7 @@
   cursor: pointer;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-theme--light .sendbird-color--onbackground-1 {
   color: rgba(0, 0, 0, 0.88);
 }
@@ -1897,7 +1902,7 @@
   background-color: #e53157;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-separator {
   width: 100%;
   display: -webkit-box;
@@ -1924,7 +1929,7 @@
   white-space: nowrap;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-message-input {
   display: inline-block;
   width: 100%;
@@ -1944,7 +1949,7 @@
   padding: 18px 64px 18px 16px;
   box-sizing: border-box;
   resize: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: inherit;
 }
 .sendbird-theme--light
@@ -2001,7 +2006,7 @@
   pointer-events: none;
   top: 18px;
   left: 16px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 1.43;
 }
@@ -2078,7 +2083,7 @@
   fill: rgba(255, 255, 255, 0.38);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-fileviewer {
   width: 100%;
   height: 100%;
@@ -2232,7 +2237,7 @@
   align-items: center;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-notification {
   margin-top: 8px;
   margin-left: 24px;
@@ -2272,7 +2277,7 @@
   margin-right: 8px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-chat-header {
   position: relative;
   display: -webkit-box;
@@ -2342,7 +2347,7 @@
   margin-right: 26px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-channel-settings {
   height: 100%;
   width: 320px;
@@ -2468,7 +2473,7 @@
   fill: #e53157;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-channel-profile {
   position: relative;
   text-align: center;
@@ -2523,9 +2528,9 @@
   height: 40px;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-input {
   display: inline-block;
   width: 100%;
@@ -2536,7 +2541,7 @@
   width: 100%;
   height: 100%;
   border-radius: 4px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -2587,7 +2592,7 @@
   pointer-events: none;
   top: 10px;
   left: 16px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 1.43;
 }
@@ -2602,7 +2607,7 @@
   margin: 4px 0;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 .sendbird-members-accordion {
   padding: 8px 16px 16px 16px;
   position: relative;
@@ -2639,7 +2644,7 @@
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: start;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 8px;
 }
 .sendbird-members-accordion
