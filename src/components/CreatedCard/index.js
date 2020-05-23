@@ -114,30 +114,41 @@ const CreatedCard = ({
                                       ))}
                                     </span>
                                   </td>
-                                  {console.log(
-                                    vacancy.selectedUser._id !== postulated._id
-                                  )}
-                                  <td className="text-right py-3 px-4">
-                                    {postulated.joins.find(
+
+                                  {!vacancy.selectedUser._id ? (
+                                    <td className="text-right py-3 px-4">
+                                      {postulated.joins.find(
+                                        (join) =>
+                                          join.vacancy._id === vacancy._id
+                                      ).status === 'postulated' ? (
+                                        // &&
+                                        // vacancy.selectedUser._id !==
+                                        //   postulated._id ? (
+                                        <button
+                                          className="btn-small"
+                                          to="#"
+                                          onClick={() =>
+                                            handleSelect(
+                                              postulated._id,
+                                              vacancy._id
+                                            )
+                                          }
+                                        >
+                                          Select
+                                        </button>
+                                      ) : null}
+                                    </td>
+                                  ) : postulated.joins.find(
                                       (join) => join.vacancy._id === vacancy._id
                                     ).status === 'selected' ? (
+                                    <td className="text-right py-3 px-4">
                                       <p>Selected</p>
-                                    ) : vacancy.selectedUser._id !==
-                                      postulated._id ? null : (
-                                      <button
-                                        className="btn-small"
-                                        to="#"
-                                        onClick={() =>
-                                          handleSelect(
-                                            postulated._id,
-                                            vacancy._id
-                                          )
-                                        }
-                                      >
-                                        Select
-                                      </button>
-                                    )}
-                                  </td>
+                                    </td>
+                                  ) : (
+                                    <td className="text-right py-3 px-4">
+                                      <p>Not selected</p>
+                                    </td>
+                                  )}
 
                                   <td className="text-center py-3 px-4 text-xs">
                                     <Link
