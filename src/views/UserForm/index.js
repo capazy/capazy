@@ -57,29 +57,6 @@ const UserForm = ({ match }) => {
 
   useEffect(() => {
     if (!isCreateMode && dataUser !== null) {
-      // getCurrentUser().then((dataUser) => {
-      //   const fields = [
-      //     'expertise',
-      //     'companyName',
-      //     'companyDepartment',
-      //     'description',
-      //   ];
-      //   fields.forEach((field) => {
-      //     setFieldValue(field, dataUser[field], false);
-      //     setFieldValue('country', dataUser['country'], false);
-      //     setFieldValue('skills', originalArray(dataUser['skills']), false);
-      //     setFieldValue(
-      //       'languages',
-      //       originalArray(dataUser['languages']),
-      //       false
-      //     );
-      //     setFieldValue(
-      //       'additionalSkills',
-      //       originalArray(dataUser['additionalSkills']),
-      //       false
-      //     );
-      //   });
-      // });
       const fields = [
         'expertise',
         'companyName',
