@@ -62,6 +62,8 @@ export const UPDATE_USER = gql`
       lastName
       description
       skills
+      expertise
+      additionalSkills
       languages
       companyName
       companyDepartment
@@ -79,10 +81,11 @@ export const GET_USER = gql`
       description
       skills
       languages
-      # experience
+      expertise
       companyName
       companyDepartment
       country
+      additionalSkills
     }
   }
 `;

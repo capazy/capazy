@@ -5,3 +5,4 @@ export { default as CreatedCard } from './CreatedCard';
 export { default as JoinedCard } from './JoinedCard';
 export { default as UserCard } from './UserCard';
 export { default as Alert } from './Alert';
+export { default as LoadingCard } from './LoadingCard';

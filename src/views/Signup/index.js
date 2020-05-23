@@ -25,7 +25,7 @@ const SignUp = () => {
   });
 
   if (user) {
-    return <Redirect push to="/user-form" />;
+    return <Redirect push to="/user/create" />;
   }
 
   return (

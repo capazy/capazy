@@ -7,7 +7,7 @@ const CreatedCard = ({
 }) => {
   return (
     <div className="my-10">
-      <div className="max-w-md w-full lg:max-w-full lg:flex border-r border-b border-l border-t  ">
+      <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t  ">
         <div
           className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
           style={{
@@ -16,7 +16,7 @@ const CreatedCard = ({
           }}
           title="Woman holding a mug"
         ></div>
-        <div className="py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
+        <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
           <div className="flex mb-8">
             <img
               className="hidden lg:block flex-initial mr-2 h-48"

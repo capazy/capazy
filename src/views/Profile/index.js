@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // context
-// import { UserContext } from '../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 // apollo
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER_BY_ID } from '../../graphql/user';
+import { Link } from 'react-router-dom';
 
 // components
 
 // utils
 
 const Profile = ({ match }) => {
-  // const { user } = useContext(UserContext);
-  // if (!user) return <p>Loading...</p>;
+  const { user } = useContext(UserContext);
   const { loading, data, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.id },
   });
+
   refetch();
 
   if (loading) return 'loading......';
+  if (!user) return <p>Loading...</p>;
 
+  const { _id } = user;
   const {
     lastName,
     firstName,
@@ -29,6 +32,8 @@ const Profile = ({ match }) => {
     languages,
     country,
   } = data.userById;
+
+  const isOwner = match.params.id === _id;
 
   return (
     <div className="md:mx-32  h-full">
@@ -70,12 +75,19 @@ const Profile = ({ match }) => {
                 </div>
               </div>
               <div className="mt-3 md:my-auto">
-                <button className="rounded-full bg-blue text-white antialiased font-bold bg-green-600 px-6 py-2 mr-2 w-full">
-                  Contact
-                </button>
-                {/* <button className="rounded-full border-2 border-grey font-semibold text-black px-4 py-2">
-                  Message
-                </button> */}
+                {!isOwner ? (
+                  <Link to="#">
+                    <button className="rounded-full bg-blue text-white antialiased font-bold bg-green-600 px-6 py-2 mr-2 w-full">
+                      Contact
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to={`/user/edit/${_id}`}>
+                    <button className="w-full rounded-full bg-blue text-white antialiased font-bold bg-gray-500 px-6 py-2 mr-2 ">
+                      Edit Profile
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

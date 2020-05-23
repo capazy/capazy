@@ -36,11 +36,12 @@ const UserProvider = (props) => {
   });
 
   //Get User
-  const [getCurrentUser] = useLazyQuery(GET_USER, {
+  const [getCurrentUser, { called, loading }] = useLazyQuery(GET_USER, {
     onCompleted: (data) => {
       dispatch({ type: 'LOAD_USER', payload: data.user });
     },
   });
+  const userLoading = called && loading;
 
   //Update User
   const [updateUser] = useMutation(UPDATE_USER, {
@@ -81,6 +82,7 @@ const UserProvider = (props) => {
       value={{
         user: state.user,
         loading: state.loading,
+        userLoading,
         signup,
         login,
         update,
