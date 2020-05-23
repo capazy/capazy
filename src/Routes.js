@@ -58,7 +58,13 @@ const Routes = () => {
       <RouteWithLayout exact path="/login" layout={Layout} component={Login} />
       <RouteWithLayout
         exact
-        path="/user-form"
+        path="/user/create"
+        layout={Layout}
+        component={UserForm}
+      />
+      <RouteWithLayout
+        exact
+        path="/user/edit/:id"
         layout={Layout}
         component={UserForm}
       />

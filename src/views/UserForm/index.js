@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
@@ -13,11 +13,14 @@ import languagesData from '../../data/languagesData.json';
 import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
 import { UserContext } from '../../context/UserContext';
+import { originalArray } from '../../utils/originalArray';
 
-const UserForm = () => {
-  const { update } = useContext(UserContext);
+const UserForm = ({ match }) => {
+  const { update, user: dataUser, userLoading } = useContext(UserContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
+  const { id } = match.params;
+  const isCreateMode = !id;
 
   const {
     handleSubmit,
@@ -51,6 +54,56 @@ const UserForm = () => {
       resetForm();
     },
   });
+
+  useEffect(() => {
+    if (!isCreateMode && dataUser !== null) {
+      // getCurrentUser().then((dataUser) => {
+      //   const fields = [
+      //     'expertise',
+      //     'companyName',
+      //     'companyDepartment',
+      //     'description',
+      //   ];
+      //   fields.forEach((field) => {
+      //     setFieldValue(field, dataUser[field], false);
+      //     setFieldValue('country', dataUser['country'], false);
+      //     setFieldValue('skills', originalArray(dataUser['skills']), false);
+      //     setFieldValue(
+      //       'languages',
+      //       originalArray(dataUser['languages']),
+      //       false
+      //     );
+      //     setFieldValue(
+      //       'additionalSkills',
+      //       originalArray(dataUser['additionalSkills']),
+      //       false
+      //     );
+      //   });
+      // });
+      const fields = [
+        'expertise',
+        'companyName',
+        'companyDepartment',
+        'description',
+      ];
+      fields.forEach((field) => {
+        setFieldValue(field, dataUser[field], false);
+        setFieldValue('country', dataUser['country'], false);
+        setFieldValue('skills', originalArray(dataUser['skills']), false);
+        setFieldValue('languages', originalArray(dataUser['languages']), false);
+        setFieldValue(
+          'additionalSkills',
+          originalArray(dataUser['additionalSkills']),
+          false
+        );
+      });
+    }
+  }, [dataUser, isCreateMode, setFieldValue]);
+
+  console.log('USER', dataUser);
+  console.log('values', values);
+  if (userLoading) return <p>Loading....</p>;
+
   if (updateSuccess) {
     return <Redirect push to="/feed" />;
   }
@@ -61,6 +114,8 @@ const UserForm = () => {
     companyName,
     companyDepartment,
     additionalSkills,
+    expertise,
+    country,
   } = values;
 
   const handleSkills = (e) => {
@@ -171,15 +226,15 @@ const UserForm = () => {
                 id="country"
                 name="country"
                 onChange={handleChange}
-                defaultValue="Country"
+                defaultValue="country"
                 className="form-input bg-white"
               >
                 <option
-                  value="Country"
+                  value="country"
                   disabled
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 >
-                  Country
+                  {country}
                 </option>
                 {countriesData.map((item) => (
                   <option key={item} value={item}>
@@ -205,9 +260,7 @@ const UserForm = () => {
         <div className="mb-2">
           <h1 className="text-gray-900 text-xl mb-1">Skills</h1>
           <div className="mb-4 ">
-            <label className="form-label" htmlFor="Email">
-              Expertise
-            </label>
+            <label className="form-label">Expertise</label>
             <div className="inline-block relative w-full">
               <select
                 id="expertise"
@@ -224,7 +277,7 @@ const UserForm = () => {
                   disabled
                   className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 >
-                  Expertise
+                  {expertise}
                 </option>
                 {skillsData.map((item) => (
                   <option
