@@ -75,8 +75,12 @@ const SearchBar = () => {
   });
 
   const handleJoin = async (vacancyId) => {
-    await joinVacancy({ variables: { vacancyId } });
-    await setJoinSuccess(true);
+    try {
+      await joinVacancy({ variables: { vacancyId } });
+      await setJoinSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleReset = async () => {

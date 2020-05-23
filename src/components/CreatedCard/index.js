@@ -114,21 +114,31 @@ const CreatedCard = ({
                                       ))}
                                     </span>
                                   </td>
-
+                                  {console.log(
+                                    vacancy.selectedUser._id !== postulated._id
+                                  )}
                                   <td className="text-right py-3 px-4">
-                                    <button
-                                      className="btn-small"
-                                      to="#"
-                                      onClick={() =>
-                                        handleSelect(
-                                          postulated._id,
-                                          vacancy._id
-                                        )
-                                      }
-                                    >
-                                      Select
-                                    </button>
+                                    {postulated.joins.find(
+                                      (join) => join.vacancy._id === vacancy._id
+                                    ).status === 'selected' ? (
+                                      <p>Selected</p>
+                                    ) : vacancy.selectedUser._id !==
+                                      postulated._id ? null : (
+                                      <button
+                                        className="btn-small"
+                                        to="#"
+                                        onClick={() =>
+                                          handleSelect(
+                                            postulated._id,
+                                            vacancy._id
+                                          )
+                                        }
+                                      >
+                                        Select
+                                      </button>
+                                    )}
                                   </td>
+
                                   <td className="text-center py-3 px-4 text-xs">
                                     <Link
                                       className="hover:text-blue-500 "

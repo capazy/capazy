@@ -1,31 +1,5 @@
 import React from 'react';
 
-// {
-//   user {
-//     _id
-//     joinedProjects {
-//       title
-//       experience
-//       skills
-//       project {
-//         _id
-//         title
-//         description
-//         type
-//         deadline
-//         published
-//         isOpen
-//         creator {
-//           _id
-//         }
-//         vacancies {
-//           _id
-//         }
-//       }
-//     }
-//   }
-// }
-
 const JoinedCard = ({
   vacancy: {
     title: titleVancancy,
