@@ -9,7 +9,12 @@ import { GET_USERS } from '../../graphql/user';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import { ProjectCard, UserCard, SelectOne } from '../../components';
+import {
+  ProjectCard,
+  UserCard,
+  SelectOne,
+  LoadingCard,
+} from '../../components';
 
 // utils
 import allSkillsData from '../../data/allSkillsData.json';
@@ -94,11 +99,11 @@ const SearchBar = () => {
   }
 
   if (loading || !data) {
-    return <p>Loading...</p>;
+    return <LoadingCard />;
   }
 
   if (onSearch && (!projects || !users)) {
-    return <p>Loading...</p>;
+    return <LoadingCard />;
   }
 
   return (

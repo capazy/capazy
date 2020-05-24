@@ -88,4 +88,6 @@
   @apply bg-red-200 border-t-4 border-red-500 text-red-700;
 }
 
+/* LOADING */
+
 @tailwind utilities;
