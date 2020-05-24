@@ -167,6 +167,9 @@ export const GET_USER_JOINED_PROJECTS = gql`
         title
         experience
         skills
+        selectedUser {
+          _id
+        }
         project {
           _id
           title

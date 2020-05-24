@@ -142,11 +142,15 @@ const CreatedCard = ({
                                       (join) => join.vacancy._id === vacancy._id
                                     ).status === 'selected' ? (
                                     <td className="text-right py-3 px-4">
-                                      <p>Selected</p>
+                                      <span className="inline-block bg-green-300 px-2 p-0 text-sm rounded-full text-gray-700">
+                                        Selected
+                                      </span>
                                     </td>
                                   ) : (
                                     <td className="text-right py-3 px-4">
-                                      <p>Not selected</p>
+                                      <span className="inline-block bg-red-300 px-2 p-0 text-sm rounded-full text-gray-700">
+                                        Not Selected
+                                      </span>
                                     </td>
                                   )}
 
