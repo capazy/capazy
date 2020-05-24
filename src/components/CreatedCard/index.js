@@ -64,9 +64,15 @@ const CreatedCard = ({
                           ))}
                         </span>
                         <div className=" py-1">
-                          <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
-                            open
-                          </span>
+                          {!vacancy.selectedUser._id ? (
+                            <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
+                              open
+                            </span>
+                          ) : (
+                            <span className="inline-block bg-red-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
+                              closed
+                            </span>
+                          )}
                         </div>
                         <div className=" py-1">
                           <label
@@ -117,26 +123,18 @@ const CreatedCard = ({
 
                                   {!vacancy.selectedUser._id ? (
                                     <td className="text-right py-3 px-4">
-                                      {postulated.joins.find(
-                                        (join) =>
-                                          join.vacancy._id === vacancy._id
-                                      ).status === 'postulated' ? (
-                                        // &&
-                                        // vacancy.selectedUser._id !==
-                                        //   postulated._id ? (
-                                        <button
-                                          className="btn-small"
-                                          to="#"
-                                          onClick={() =>
-                                            handleSelect(
-                                              postulated._id,
-                                              vacancy._id
-                                            )
-                                          }
-                                        >
-                                          Select
-                                        </button>
-                                      ) : null}
+                                      <button
+                                        className="btn-small"
+                                        to="#"
+                                        onClick={() =>
+                                          handleSelect(
+                                            postulated._id,
+                                            vacancy._id
+                                          )
+                                        }
+                                      >
+                                        Select
+                                      </button>
                                     </td>
                                   ) : postulated.joins.find(
                                       (join) => join.vacancy._id === vacancy._id
