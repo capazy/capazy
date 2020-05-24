@@ -16,13 +16,16 @@ const CreatedProjects = () => {
   });
 
   const handleSelect = async (selectedUserId, vacancyId) => {
-    await selectUser({ variables: { selectedUserId, vacancyId } });
+    try {
+      await selectUser({ variables: { selectedUserId, vacancyId } });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { loading, data, refetch } = useQuery(GET_USER_CREATED_PROJECTS);
   if (loading) return <p>Loading...</p>;
   if (!data) return <p>No data</p>;
-  console.log(data);
   refetch();
 
   return (

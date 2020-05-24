@@ -64,9 +64,15 @@ const CreatedCard = ({
                           ))}
                         </span>
                         <div className=" py-1">
-                          <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
-                            open
-                          </span>
+                          {!vacancy.selectedUser._id ? (
+                            <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
+                              open
+                            </span>
+                          ) : (
+                            <span className="inline-block bg-red-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
+                              closed
+                            </span>
+                          )}
                         </div>
                         <div className=" py-1">
                           <label
@@ -115,20 +121,37 @@ const CreatedCard = ({
                                     </span>
                                   </td>
 
-                                  <td className="text-right py-3 px-4">
-                                    <button
-                                      className="btn-small"
-                                      to="#"
-                                      onClick={() =>
-                                        handleSelect(
-                                          postulated._id,
-                                          vacancy._id
-                                        )
-                                      }
-                                    >
-                                      Select
-                                    </button>
-                                  </td>
+                                  {!vacancy.selectedUser._id ? (
+                                    <td className="text-right py-3 px-4">
+                                      <button
+                                        className="btn-small"
+                                        to="#"
+                                        onClick={() =>
+                                          handleSelect(
+                                            postulated._id,
+                                            vacancy._id
+                                          )
+                                        }
+                                      >
+                                        Select
+                                      </button>
+                                    </td>
+                                  ) : postulated.joins.find(
+                                      (join) => join.vacancy._id === vacancy._id
+                                    ).status === 'selected' ? (
+                                    <td className="text-right py-3 px-4">
+                                      <span className="inline-block bg-green-300 px-2 p-0 text-sm rounded-full text-gray-700">
+                                        Selected
+                                      </span>
+                                    </td>
+                                  ) : (
+                                    <td className="text-right py-3 px-4">
+                                      <span className="inline-block bg-red-300 px-2 p-0 text-sm rounded-full text-gray-700">
+                                        Not Selected
+                                      </span>
+                                    </td>
+                                  )}
+
                                   <td className="text-center py-3 px-4 text-xs">
                                     <Link
                                       className="hover:text-blue-500 "

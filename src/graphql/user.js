@@ -81,7 +81,6 @@ export const GET_USER = gql`
       description
       skills
       languages
-      expertise
       companyName
       companyDepartment
       country
@@ -99,7 +98,6 @@ export const GET_USERS = gql`
       description
       skills
       languages
-      # experience
       companyName
       companyDepartment
       country
@@ -116,7 +114,6 @@ export const GET_USER_BY_ID = gql`
       description
       skills
       languages
-      # experience
       companyName
       companyDepartment
       country
@@ -133,7 +130,6 @@ export const GET_USER_CREATED_PROJECTS = gql`
         title
         description
         type
-        # deadline
         published
         isOpen
         creator {
@@ -144,11 +140,21 @@ export const GET_USER_CREATED_PROJECTS = gql`
           title
           experience
           skills
+          selectedUser {
+            _id
+          }
           postulatedUsers {
             _id
             firstName
             lastName
             skills
+            joins {
+              _id
+              vacancy {
+                _id
+              }
+              status
+            }
           }
         }
       }
@@ -164,12 +170,14 @@ export const GET_USER_JOINED_PROJECTS = gql`
         title
         experience
         skills
+        selectedUser {
+          _id
+        }
         project {
           _id
           title
           description
           type
-          # deadline
           published
           isOpen
           creator {

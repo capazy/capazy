@@ -1,37 +1,13 @@
 import React from 'react';
 
-// {
-//   user {
-//     _id
-//     joinedProjects {
-//       title
-//       experience
-//       skills
-//       project {
-//         _id
-//         title
-//         description
-//         type
-//         deadline
-//         published
-//         isOpen
-//         creator {
-//           _id
-//         }
-//         vacancies {
-//           _id
-//         }
-//       }
-//     }
-//   }
-// }
-
 const JoinedCard = ({
   vacancy: {
     title: titleVancancy,
     experience,
     project: { description, type, deadLine, isOpen, published, title },
+    selectedUser: { _id: selectedUserId },
   },
+  currentUserId,
 }) => {
   return (
     <div>
@@ -52,9 +28,19 @@ const JoinedCard = ({
                 {experience}
               </p>
             </div>
-            <span className="inline-block bg-yellow-300 px-2 p-0 mt-2 mb-8 text-sm rounded-full text-gray-700 mr-2">
-              waiting
-            </span>
+            {!selectedUserId ? (
+              <span className="inline-block bg-yellow-300 px-2 p-0 mt-2 mb-8 text-sm rounded-full text-gray-700 mr-2">
+                Pending
+              </span>
+            ) : selectedUserId === currentUserId ? (
+              <span className="inline-block bg-green-300 px-2 p-0 mt-2 mb-8 text-sm rounded-full text-gray-700 mr-2">
+                Selected
+              </span>
+            ) : (
+              <span className="inline-block bg-red-300 px-2 p-0 mt-2 mb-8 text-sm rounded-full text-gray-700 mr-2">
+                Not Selected
+              </span>
+            )}
           </div>
           <div className="border-t">
             <p className="text-brand-blue font-semibold text-md mt-1">
