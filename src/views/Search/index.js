@@ -120,6 +120,7 @@ const SearchBar = () => {
                 onBlur={setFieldTouched}
                 error={errors.skill}
                 touched={touched.skill}
+                placeholder={'Search projects or users by skill...'}
               />
             </div>
             <p className="text-red-500 text-xs italic">{errors.skill}</p>

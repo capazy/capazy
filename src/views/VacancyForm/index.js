@@ -144,9 +144,10 @@ const VacancyForm = () => {
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Time Commitment
+            Time Commitment (hours)
           </label>
           <input
+            min="0"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="timeCommitment"
             type="number"
@@ -175,8 +176,8 @@ const VacancyForm = () => {
               <option value="test" disabled>
                 Test
               </option>
-              <option value="week">Week</option>
-              <option value="month">Month</option>
+              <option value="week">per week</option>
+              <option value="month">per month</option>
               {/* {experienceOptions.map((item) => (
                 <option key={item.label} value={item.value}>
                   {item.label}

@@ -111,12 +111,14 @@ const NewNavbar = () => {
                   <div className="bg-white rounded shadow-md mt-2 absolute mt-2 pin-t pin-r min-w-full overflow-auto z-30 ">
                     <ul className="list-reset">
                       <li>
-                        <Link
-                          to={`/profile/${user._id}`}
-                          className="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline"
-                        >
-                          My account
-                        </Link>
+                        <button onClick={() => setOpenLogout(!isOpenLogout)}>
+                          <Link
+                            to={`/profile/${user._id}`}
+                            className="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline"
+                          >
+                            My account
+                          </Link>
+                        </button>
                       </li>
                       <li>
                         <Link

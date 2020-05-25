@@ -1,7 +1,14 @@
 import React from 'react';
 import Select from 'react-select-virtualized';
 
-const SelectOneComponent = ({ options, value, onBlur, onChange, field }) => {
+const SelectOneComponent = ({
+  options,
+  value,
+  onBlur,
+  onChange,
+  field,
+  placeholder,
+}) => {
   const handleChange = (value) => {
     onChange(field, value);
   };
@@ -17,7 +24,7 @@ const SelectOneComponent = ({ options, value, onBlur, onChange, field }) => {
         onChange={handleChange}
         onBlur={handleBlur}
         value={value}
-        placeholder="Search projects by skill..."
+        placeholder={placeholder}
       />
     </div>
   );

@@ -17,9 +17,9 @@ const Chat = () => {
   return (
     <div className="App">
       <SendBirdApp
-        appId={'C372DF8C-8E5A-46C7-BC89-7F6060E5C941'}
+        appId={process.env.REACT_APP_SENDBIRD_APP_ID}
         userId={user._id}
-        nickname={user.firstName}
+        nickname={`${user.firstName} ${user.lastName}`}
       />
     </div>
   );

@@ -66,6 +66,6 @@ export const vacancyFormSchema = Yup.object({
         value: Yup.string().required(),
       })
     ),
-  timeCommitment: Yup.number().required(),
+  timeCommitment: Yup.number().positive().required(),
   timeCommitmentUnits: Yup.string().required(),
 });
