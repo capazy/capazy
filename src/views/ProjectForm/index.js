@@ -9,12 +9,24 @@ import { ProjectContext } from '../../context/ProjectContext';
 
 // utils
 import { projectFormSchema } from '../../utils/formikSchemas';
+import { setQueryStringWithoutPageReload } from '../../utils/setQueryStringWithoutPageReload';
+import VacancyForm from '../VacancyForm';
+import qs from 'qs';
+
+import { useEffect } from 'react';
+
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
-const ProjectForm = () => {
-  const { setProjectId } = useContext(ProjectContext);
+const ProjectForm = (props) => {
+  const { setProjectId, projectId } = useContext(ProjectContext);
+  const { location } = props;
+  const { projectId: projectIdQuery } = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  const [vancancies, setVacancies] = useState();
 
+  const isCreateMode = !projectIdQuery;
   const [createProject] = useMutation(CREATE_PROJECT, {
     update(
       _,
@@ -39,16 +51,24 @@ const ProjectForm = () => {
       startDate: '',
       endDate: '',
     },
-    validationSchema: projectFormSchema,
+    // validationSchema: projectFormSchema,
     onSubmit: async (values, { resetForm }) => {
       await createProject({ variables: values });
       await setState(true);
     },
   });
-
-  if (state) {
-    return <Redirect push to="/vacancy-form" />;
-  }
+  console.log('State', state);
+  console.log('mode', isCreateMode);
+  useEffect(() => {
+    if (state || !isCreateMode) {
+      setQueryStringWithoutPageReload(
+        location,
+        'projectId',
+        projectId || projectIdQuery
+      );
+      setVacancies(true);
+    }
+  }, [state, isCreateMode]);
 
   const { title, description, startDate, endDate } = values;
 
@@ -178,6 +198,7 @@ const ProjectForm = () => {
           </button>
         </div>
       </form>
+      {vancancies && <VacancyForm />}
     </div>
   );
 };
