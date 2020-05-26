@@ -71,7 +71,7 @@ const NewNavbar = () => {
                 className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1"
               />
             </Link>
-            <div className="hidden md:block my-auto">{links()}</div>
+            <div className="hidden lg:block my-auto">{links()}</div>
           </div>
 
           <div className="w-1/2 md:w-1/2 pr-0 my-auto">

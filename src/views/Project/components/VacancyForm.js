@@ -10,25 +10,27 @@ import { CREATE_VACANCY } from '../../../graphql/vacancy';
 import { ProjectContext } from '../../../context/ProjectContext';
 
 // components
-import { SelectMulti } from '../../../components';
+import { SelectMulti, TeamTable, Modal } from '../../../components';
 
 // utils
 import { transformArray } from '../../../utils/transformArray';
 import { vacancyFormSchema } from '../../../utils/formikSchemas';
 import allSkillsData from '../../../data/allSkillsData.json';
+import { useEffect } from 'react';
 const experienceOptions = [
   { value: 'beginner', label: 'Beginner' },
   { value: 'intermediate', label: 'Intermediate' },
   { value: 'advanced', label: 'Advanced' },
 ];
 
-const VacancyForm = () => {
-  const { projectId } = useContext(ProjectContext);
+const VacancyForm = (props) => {
+  const { projectId, project } = props;
   const [state, setState] = useState(null);
 
   const [vacancyInput] = useMutation(CREATE_VACANCY, {
     update(_, { data }) {
       setState(data);
+      console.log('STATE', state);
     },
   });
 
@@ -60,20 +62,25 @@ const VacancyForm = () => {
   const { title, skills, timeCommitment } = values;
 
   return (
-    <div className="pt-5 w-full max-w-md mx-auto my-auto">
+    <div className="pt-5 w-full max-w-xl mx-auto my-auto">
       <h1>Paso 2 de 2</h1>
+
+      {project && project.vacancies && (
+        <TeamTable vacancies={project.vacancies} />
+      )}
+      {/* <Modal /> */}
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        {state ? (
+        {/* {project ? (
           <Fragment>
             <h2>Vacancies</h2>
-            {state.createVacancy.project.vacancies.map((datum) => (
-              <p key={datum._id}>{datum._id}</p>
+            {project.vacancies.map((vacancy) => (
+              <TeamTable vacancy={vacancy} />
             ))}
           </Fragment>
-        ) : null}
+        ) : null} */}
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -204,7 +211,7 @@ const VacancyForm = () => {
           </button>
           <Link to="/search">
             <button className="btn bg-brand-blue text-white mb-0">
-              Finish
+              Publish
             </button>
           </Link>
         </div>

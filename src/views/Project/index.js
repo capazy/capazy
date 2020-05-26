@@ -17,7 +17,7 @@ const Project = (props) => {
   const { projectId: projectIdQuery } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const [vancancies, setVacancies] = useState();
+  // const [vancancies, setVacancies] = useState();
 
   const isCreateMode = projectIdQuery;
 
@@ -26,7 +26,6 @@ const Project = (props) => {
       if (projectId) {
         console.log('QUERY STRING');
         await setQueryStringWithoutPageReload(location, 'projectId', projectId);
-        await setVacancies(true);
       }
       if (projectIdQuery) {
         await setProjectId(projectIdQuery);
@@ -34,7 +33,7 @@ const Project = (props) => {
       }
     };
     fetchProjectIdQuery();
-  }, [projectId]);
+  }, [projectId, getProjectById, location, projectIdQuery, setProjectId]);
   console.log('project', project);
   return (
     <div>
@@ -45,7 +44,7 @@ const Project = (props) => {
         update={update}
         project={project}
       />
-      {projectId && <VacancyForm />}
+      {projectId && <VacancyForm projectId={projectId} project={project} />}
     </div>
   );
 };

@@ -808,7 +808,44 @@ video {
   color: rgba(197, 48, 48, var(--text-opacity));
 }
 
-/* LOADING */
+/* MODAL */
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.faster {
+  animation-duration: 500ms;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
 
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;

@@ -2,6 +2,7 @@ import React, { createContext, useState, useReducer } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { UPDATE_PROJECT, GET_PROJECT_BY_ID } from '../../graphql/project';
 import { projectReducer } from '../../reducers/projectReducer';
+import { setQueryStringWithoutPageReload } from '../../utils/setQueryStringWithoutPageReload';
 
 const ProjectContext = createContext({
   projectId: null,
@@ -40,9 +41,8 @@ const ProjectProvider = (props) => {
   //Reset Project
   const resetProject = async () => {
     try {
-      await dispatch({ type: 'RESET_PROJECT', payload: null });
       await setProjectId(null);
-      console.log('NEW STATE', project);
+      await dispatch({ type: 'RESET_PROJECT', payload: null });
     } catch (error) {
       console.log('RESET PROJETC', error);
     }
