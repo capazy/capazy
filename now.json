@@ -1,7 +1,8 @@
 {
   "build": {
     "env": {
-      "REACT_APP_APOLLO_API_URI": "@apollo-api-uri"
+      "REACT_APP_APOLLO_API_URI": "@apollo-api-uri",
+      "REACT_APP_SENDBIRD_APP_ID": "@add sendbird-app-id"
     }
   }
 }

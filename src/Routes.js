@@ -19,11 +19,18 @@ import {
   CreatedProjects,
   Chat,
 } from './views';
+import { FileUploader } from './components';
 import Layout from './layout';
 
 const Routes = () => {
   return (
     <Switch>
+      <RouteWithLayout
+        exact
+        path="/file"
+        layout={Layout}
+        component={FileUploader}
+      />
       <RouteWithLayout exact path="/chat" layout={Layout} component={Chat} />
       <RouteWithLayout
         exact
