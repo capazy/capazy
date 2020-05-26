@@ -54,7 +54,7 @@ const links = () => (
 );
 const NewNavbar = () => {
   const { logout, user } = useContext(UserContext);
-  const { setProjectId } = useContext(ProjectContext);
+  const { resetProject } = useContext(ProjectContext);
 
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
@@ -82,7 +82,7 @@ const NewNavbar = () => {
               >
                 <button
                   className="btn-square bg-brand-blue text-white mx-2"
-                  onClick={() => setProjectId(null)}
+                  onClick={() => resetProject()}
                 >
                   Post a Project
                 </button>

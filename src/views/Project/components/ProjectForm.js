@@ -29,8 +29,6 @@ const ProjectForm = (props) => {
     },
   });
 
-  const [state, setState] = useState(false);
-
   const {
     handleSubmit,
     values,
@@ -61,10 +59,26 @@ const ProjectForm = (props) => {
     },
   });
 
-  const { title, description, startDate, endDate } = values;
+  useEffect(() => {
+    if (projectId && project !== null) {
+      const fields = [
+        'title',
+        'description',
+        'startDate',
+        'endDate',
+        'published',
+        'type',
+      ];
+      fields.forEach((field) => {
+        setFieldValue(field, project[field], false);
+      });
+    }
+  }, [project, projectId, setFieldValue]);
 
+  const { title, description, startDate, endDate, type, published } = values;
+  console.log('ENDDATE', endDate);
   return (
-    <div className="pt-5 w-full max-w-md mx-auto my-auto">
+    <div className="pt-5 w-full max-w-xl mx-auto my-auto">
       <h1>Paso 1 de 2</h1>
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -110,7 +124,7 @@ const ProjectForm = (props) => {
             className="form-input bg-white"
           >
             <option value="Type" disabled>
-              Type
+              {type || 'Type'}
             </option>
             {projectTypes.map((item) => (
               <option key={item} value={item}>
@@ -139,7 +153,7 @@ const ProjectForm = (props) => {
             className="form-input bg-white"
           >
             <option value="Published" disabled>
-              Published
+              {published || 'Published'}
             </option>
             {projectPublished.map((item) => (
               <option key={item} value={item}>

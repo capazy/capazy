@@ -1,5 +1,4 @@
 export const projectReducer = (state, { type, payload }) => {
-  console.log('PAYLOAD', payload);
   switch (type) {
     case 'UPDATE_PROJECT':
       return {
@@ -10,6 +9,12 @@ export const projectReducer = (state, { type, payload }) => {
       return {
         ...state,
         project: payload,
+      };
+
+    case 'RESET_PROJECT':
+      return {
+        ...state,
+        project: null,
       };
     default:
       return state;

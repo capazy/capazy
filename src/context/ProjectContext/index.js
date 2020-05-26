@@ -28,6 +28,7 @@ const ProjectProvider = (props) => {
     },
   });
 
+  //update
   const update = async (values) => {
     try {
       await updateProject(values);
@@ -35,9 +36,27 @@ const ProjectProvider = (props) => {
       console.log('PROJECT ERROR', error);
     }
   };
+
+  //Reset Project
+  const resetProject = async () => {
+    try {
+      await dispatch({ type: 'RESET_PROJECT', payload: null });
+      await setProjectId(null);
+      console.log('NEW STATE', project);
+    } catch (error) {
+      console.log('RESET PROJETC', error);
+    }
+  };
   return (
     <ProjectContext.Provider
-      value={{ projectId, setProjectId, update, project, getProjectById }}
+      value={{
+        projectId,
+        setProjectId,
+        update,
+        project,
+        getProjectById,
+        resetProject,
+      }}
     >
       {props.children}
     </ProjectContext.Provider>
