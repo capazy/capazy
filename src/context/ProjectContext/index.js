@@ -1,6 +1,6 @@
 import React, { createContext, useState, useReducer } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_PROJECT } from '../../graphql/project';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { UPDATE_PROJECT, GET_PROJECT_BY_ID } from '../../graphql/project';
 import { projectReducer } from '../../reducers/projectReducer';
 
 const ProjectContext = createContext({
@@ -21,6 +21,13 @@ const ProjectProvider = (props) => {
     },
   });
 
+  //
+  const [getProjectById] = useLazyQuery(GET_PROJECT_BY_ID, {
+    onCompleted: (data) => {
+      dispatch({ type: 'GET_PROJECT_BY_ID', payload: data.projectById });
+    },
+  });
+
   const update = async (values) => {
     try {
       await updateProject(values);
@@ -30,7 +37,7 @@ const ProjectProvider = (props) => {
   };
   return (
     <ProjectContext.Provider
-      value={{ projectId, setProjectId, update, project }}
+      value={{ projectId, setProjectId, update, project, getProjectById }}
     >
       {props.children}
     </ProjectContext.Provider>

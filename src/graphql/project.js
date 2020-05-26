@@ -37,6 +37,27 @@ export const CREATE_PROJECT = gql`
   }
 `;
 
+export const GET_PROJECT_BY_ID = gql`
+  query projectById($projectId: ID!) {
+    projectById(projectId: $projectId) {
+      _id
+      title
+      description
+      type
+      startDate
+      endDate
+      published
+      isOpen
+      vacancies {
+        _id
+        title
+        experience
+        skills
+      }
+    }
+  }
+`;
+
 export const GET_PROJECTS = gql`
   query projects($skill: String!) {
     projects(skill: $skill) {
@@ -89,6 +110,12 @@ export const UPDATE_PROJECT = gql`
       endDate
       published
       isOpen
+      vacancies {
+        _id
+        title
+        experience
+        skills
+      }
     }
   }
 `;

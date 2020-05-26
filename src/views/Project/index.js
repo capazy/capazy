@@ -7,9 +7,13 @@ import { ProjectContext } from '../../context/ProjectContext';
 
 const Project = (props) => {
   const { location } = props;
-  const { setProjectId, projectId, update, project } = useContext(
-    ProjectContext
-  );
+  const {
+    setProjectId,
+    projectId,
+    update,
+    project,
+    getProjectById,
+  } = useContext(ProjectContext);
   const { projectId: projectIdQuery } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
@@ -26,10 +30,12 @@ const Project = (props) => {
       }
       if (projectIdQuery) {
         await setProjectId(projectIdQuery);
+        await getProjectById({ variables: { projectId: projectIdQuery } });
       }
     };
     fetchProjectIdQuery();
   }, [projectId]);
+  console.log('project', project);
   return (
     <div>
       <ProjectForm
