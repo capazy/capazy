@@ -10,3 +10,4 @@ export { default as Profile } from './Profile';
 export { default as JoinedProjects } from './JoinedProjects';
 export { default as CreatedProjects } from './CreatedProjects';
 export { default as Chat } from './Chat';
+export { default as Project } from './Project';

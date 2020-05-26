@@ -60,3 +60,35 @@ export const GET_PROJECTS = gql`
     }
   }
 `;
+
+export const UPDATE_PROJECT = gql`
+  mutation updateProject(
+    $projectId: ID!
+    $title: String!
+    $description: String!
+    $type: String!
+    $startDate: String!
+    $endDate: String!
+    $published: String!
+  ) {
+    updateProject(
+      projectInput: {
+        projectId: $projectId
+        title: $title
+        description: $description
+        type: $type
+        startDate: $startDate
+        endDate: $endDate
+        published: $published
+      }
+    ) {
+      title
+      description
+      type
+      startDate
+      endDate
+      published
+      isOpen
+    }
+  }
+`;

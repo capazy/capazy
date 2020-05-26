@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // context
 import { UserContext } from '../../context/UserContext';
 import Alert from '../../components/Alert';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const links = () => (
   <div
@@ -53,6 +54,7 @@ const links = () => (
 );
 const NewNavbar = () => {
   const { logout, user } = useContext(UserContext);
+  const { setProjectId } = useContext(ProjectContext);
 
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
@@ -75,10 +77,13 @@ const NewNavbar = () => {
           <div className="w-1/2 md:w-1/2 pr-0 my-auto">
             <div className="flex relative inline-block float-right">
               <Link
-                to="/project-form"
+                to="/project/create"
                 className="hidden mr-5 my-auto md:block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
               >
-                <button className="btn-square bg-brand-blue text-white mx-2">
+                <button
+                  className="btn-square bg-brand-blue text-white mx-2"
+                  onClick={() => setProjectId(null)}
+                >
                   Post a Project
                 </button>
               </Link>
