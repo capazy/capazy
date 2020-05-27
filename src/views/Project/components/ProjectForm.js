@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 
-// apollo
-import { useMutation } from '@apollo/react-hooks';
-import { CREATE_PROJECT } from '../../../graphql/project';
-
 // utils
 import { projectFormSchema } from '../../../utils/formikSchemas';
 
@@ -12,20 +8,7 @@ const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
 const ProjectForm = (props) => {
-  const { projectId, setProjectId, update, project } = props;
-
-  const [createProject] = useMutation(CREATE_PROJECT, {
-    update(
-      _,
-      {
-        data: {
-          createProject: { _id: projectId },
-        },
-      }
-    ) {
-      setProjectId(projectId);
-    },
-  });
+  const { projectId, update, project, createProject } = props;
 
   const {
     handleSubmit,
@@ -52,7 +35,7 @@ const ProjectForm = (props) => {
         values.projectId = projectId;
         console.log(values);
         update({ variables: values });
-        console.log('UPDATE', projectId);
+        console.log('UPDATE');
       }
     },
   });
@@ -74,7 +57,6 @@ const ProjectForm = (props) => {
   }, [project, projectId, setFieldValue]);
 
   const { title, description, startDate, endDate, type, published } = values;
-  console.log('ENDDATE', endDate);
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto">
       <h1>Paso 1 de 2</h1>

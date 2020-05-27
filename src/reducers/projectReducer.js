@@ -1,5 +1,10 @@
 export const projectReducer = (state, { type, payload }) => {
   switch (type) {
+    case 'CREATE_PROJECT':
+      return {
+        ...state,
+        project: payload,
+      };
     case 'UPDATE_PROJECT':
       return {
         ...state,

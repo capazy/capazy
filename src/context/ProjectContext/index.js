@@ -1,8 +1,12 @@
 import React, { createContext, useState, useReducer } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { UPDATE_PROJECT, GET_PROJECT_BY_ID } from '../../graphql/project';
+import {
+  UPDATE_PROJECT,
+  GET_PROJECT_BY_ID,
+  CREATE_PROJECT,
+} from '../../graphql/project';
 import { projectReducer } from '../../reducers/projectReducer';
-import { setQueryStringWithoutPageReload } from '../../utils/setQueryStringWithoutPageReload';
+import { CREATE_VACANCY } from '../../graphql/vacancy';
 
 const ProjectContext = createContext({
   projectId: null,
@@ -15,6 +19,14 @@ const ProjectProvider = (props) => {
   const { project } = state;
   const [projectId, setProjectId] = useState(null);
 
+  //Create
+  const [createProject] = useMutation(CREATE_PROJECT, {
+    update(_, { data }) {
+      dispatch({ type: 'CREATE_PROJECT', payload: data.createProject });
+      setProjectId(data.createProject._id);
+    },
+  });
+
   //Update
   const [updateProject] = useMutation(UPDATE_PROJECT, {
     update(_, { data: { updateProject: project } }) {
@@ -22,10 +34,16 @@ const ProjectProvider = (props) => {
     },
   });
 
-  //
+  //Get project
   const [getProjectById] = useLazyQuery(GET_PROJECT_BY_ID, {
     onCompleted: (data) => {
       dispatch({ type: 'GET_PROJECT_BY_ID', payload: data.projectById });
+    },
+  });
+
+  const [createVacancy] = useMutation(CREATE_VACANCY, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_PROJECT', payload: data.createVacancy });
     },
   });
 
@@ -56,6 +74,8 @@ const ProjectProvider = (props) => {
         project,
         getProjectById,
         resetProject,
+        createProject,
+        createVacancy,
       }}
     >
       {props.children}

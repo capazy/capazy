@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import qs from 'qs';
 import ProjectForm from './components/ProjectForm';
 import VacancyForm from './components/VacancyForm';
@@ -13,11 +13,12 @@ const Project = (props) => {
     update,
     project,
     getProjectById,
+    createProject,
+    createVacancy,
   } = useContext(ProjectContext);
   const { projectId: projectIdQuery } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  // const [vancancies, setVacancies] = useState();
 
   const isCreateMode = projectIdQuery;
 
@@ -34,7 +35,6 @@ const Project = (props) => {
     };
     fetchProjectIdQuery();
   }, [projectId, getProjectById, location, projectIdQuery, setProjectId]);
-  console.log('project', project);
   return (
     <div>
       <ProjectForm
@@ -43,8 +43,15 @@ const Project = (props) => {
         isCreateMode={isCreateMode}
         update={update}
         project={project}
+        createProject={createProject}
       />
-      {projectId && <VacancyForm projectId={projectId} project={project} />}
+      {projectId && (
+        <VacancyForm
+          projectId={projectId}
+          project={project}
+          createVacancy={createVacancy}
+        />
+      )}
     </div>
   );
 };
