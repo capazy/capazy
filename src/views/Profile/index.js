@@ -51,6 +51,8 @@ const Profile = ({ match }) => {
             fileName: 'profilePictureName',
             fileUrl: 'profilePictureUrl',
           }}
+          accept={'image/*'}
+          multiple={false}
         />
       )}
       <div className="font-sans leading-tight  bg-grey-lighter p-4">

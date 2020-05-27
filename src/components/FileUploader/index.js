@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { firebaseApp } from '../../firebase';
 import { useFormik } from 'formik';
 
-const FileUploader = ({ action, field }) => {
+const FileUploader = ({ action, field, accept, multiple }) => {
   const { handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       files: [],
@@ -27,7 +27,8 @@ const FileUploader = ({ action, field }) => {
         <form onSubmit={handleSubmit}>
           <input
             type="file"
-            multiple
+            accept={accept}
+            multiple={multiple}
             onChange={(e) => setFieldValue('files', Array.from(e.target.files))}
           />
           <button type="submit">Upload</button>
