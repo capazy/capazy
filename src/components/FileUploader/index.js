@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { firebaseApp } from './../../firebase';
+import { firebaseApp } from '../../firebase';
 import { useFormik } from 'formik';
 
-function FileUploader() {
+const FileUploader = ({ action, field }) => {
   const { handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       files: [],
@@ -13,26 +13,28 @@ function FileUploader() {
         const fileRef = storageRef.child(file.name);
         await fileRef.put(file);
         const formData = {
-          fileName: file.name,
-          fileUrl: await fileRef.getDownloadURL(),
+          [field.fileName]: file.name,
+          [field.fileUrl]: await fileRef.getDownloadURL(),
         };
-        console.log(formData);
+        await action(formData);
       });
     },
   });
 
   return (
     <Fragment>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          multiple
-          onChange={(e) => setFieldValue('files', Array.from(e.target.files))}
-        />
-        <button type="submit">Upload</button>
-      </form>
+      <div className="bg-red-600">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => setFieldValue('files', Array.from(e.target.files))}
+          />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
     </Fragment>
   );
-}
+};
 
 export default FileUploader;

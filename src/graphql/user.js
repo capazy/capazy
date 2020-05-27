@@ -42,6 +42,7 @@ export const UPDATE_USER = gql`
     $companyName: String
     $companyDepartment: String
     $country: String
+    $profilePictureUrl: String
   ) {
     updateUser(
       userInput: {
@@ -55,6 +56,7 @@ export const UPDATE_USER = gql`
         companyName: $companyName
         companyDepartment: $companyDepartment
         country: $country
+        profilePictureUrl: $profilePictureUrl
       }
     ) {
       _id
@@ -68,6 +70,7 @@ export const UPDATE_USER = gql`
       companyName
       companyDepartment
       country
+      profilePictureUrl
     }
   }
 `;
@@ -85,6 +88,7 @@ export const GET_USER = gql`
       companyDepartment
       country
       additionalSkills
+      profilePictureUrl
     }
   }
 `;
@@ -117,6 +121,7 @@ export const GET_USER_BY_ID = gql`
       companyName
       companyDepartment
       country
+      profilePictureUrl
     }
   }
 `;

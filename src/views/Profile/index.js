@@ -1,24 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+
 // context
 import { UserContext } from '../../context/UserContext';
+
 // apollo
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER_BY_ID } from '../../graphql/user';
 import { Link } from 'react-router-dom';
 
 // components
-
-// utils
+import { FileUploader } from '../../components';
 
 const Profile = ({ match }) => {
-  const { user } = useContext(UserContext);
+  const [openPrifilePictureModal, setOpenPrifilePictureModal] = useState(false);
+  const { user, update } = useContext(UserContext);
   const { loading, data, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.id },
   });
 
   refetch();
 
-  if (loading) return 'loading......';
+  if (loading) return <p>Loading...</p>;
   if (!user) return <p>Loading...</p>;
 
   const { _id } = user;
@@ -31,12 +33,26 @@ const Profile = ({ match }) => {
     companyDepartment,
     languages,
     country,
+    profilePictureUrl,
   } = data.userById;
 
   const isOwner = match.params.id === _id;
 
+  const handleChangeProfilePicture = () => {
+    setOpenPrifilePictureModal(!openPrifilePictureModal);
+  };
+
   return (
     <div className="md:mx-32  h-full">
+      {openPrifilePictureModal && (
+        <FileUploader
+          action={update}
+          field={{
+            fileName: 'profilePictureName',
+            fileUrl: 'profilePictureUrl',
+          }}
+        />
+      )}
       <div className="font-sans leading-tight  bg-grey-lighter p-4">
         <div className="bg-white rounded-lg overflow-hidden ">
           <div
@@ -51,7 +67,7 @@ const Profile = ({ match }) => {
               <div className="flex py-2">
                 <img
                   className="h-32 w-32 rounded-full border-4 border-white -mt-16 mr-4"
-                  src="https://images.unsplash.com/photo-1521818378484-02fdc09f03c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                  src={profilePictureUrl}
                   alt=""
                 />
                 <div className="grid grid-cols-1 ">
@@ -72,6 +88,9 @@ const Profile = ({ match }) => {
                     </svg>
                     <p>{country}</p>
                   </div>
+                  <button onClick={handleChangeProfilePicture}>
+                    Change profile picture
+                  </button>
                 </div>
               </div>
               <div className="mt-3 md:my-auto">
@@ -101,10 +120,13 @@ const Profile = ({ match }) => {
 
               <p className="mb-2">{description}</p>
               <p className="font-semibold">Languages:</p>
-              <div class="px-0 py-4">
-                {languages.map((lang) => (
-                  <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-600 mr-2">
-                    {lang}
+              <div className="px-0 py-4">
+                {languages.map((language) => (
+                  <span
+                    className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-600 mr-2"
+                    key={language}
+                  >
+                    {language}
                   </span>
                 ))}
               </div>
