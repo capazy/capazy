@@ -56,7 +56,6 @@ const links = () => (
 const NewNavbar = () => {
   const { logout, user } = useContext(UserContext);
   const { resetProject } = useContext(ProjectContext);
-
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
   const ref = useRef();
@@ -107,10 +106,12 @@ const NewNavbar = () => {
                 >
                   <img
                     className="w-8 h-8 rounded-full mr-4"
-                    src="http://i.pravatar.cc/300"
-                    alt="Avatar of User"
-                  />{' '}
-                  <span className="hidden md:inline-block">Hi, User </span>
+                    src={user.profilePictureUrl}
+                    alt=""
+                  />
+                  <span className="hidden md:inline-block">
+                    Hi, {user.firstName}
+                  </span>
                   <svg
                     className="pl-2 h-2"
                     version="1.1"
