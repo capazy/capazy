@@ -51,6 +51,7 @@ const ProjectProvider = (props) => {
   const update = async (values) => {
     try {
       await updateProject(values);
+      console.log(values);
     } catch (error) {
       console.log('PROJECT ERROR', error);
     }

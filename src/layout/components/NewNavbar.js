@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // context
 import { UserContext } from '../../context/UserContext';
 import Alert from '../../components/Alert';
 import { ProjectContext } from '../../context/ProjectContext';
+import useOutsideClick from '../../utils/useOutsideClik';
 
 const links = () => (
   <div
@@ -58,9 +59,20 @@ const NewNavbar = () => {
 
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
+  const ref = useRef();
+
+  useOutsideClick(ref, () => {
+    if (isOpen || isOpenLogout) {
+      setOpen(false);
+      setOpenLogout(false);
+    }
+  });
 
   return (
-    <div className="bg-grey-lightest font-sans leading-normal tracking-normal">
+    <div
+      className="bg-grey-lightest font-sans leading-normal tracking-normal"
+      ref={ref}
+    >
       <nav className="bg-white w-full z-10 pin-t shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
           <div className="flex w-1/2 md:w-1/2 pl-2 md:pl-0 my-auto ">

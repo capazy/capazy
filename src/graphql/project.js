@@ -84,13 +84,13 @@ export const GET_PROJECTS = gql`
 
 export const UPDATE_PROJECT = gql`
   mutation updateProject(
-    $projectId: ID!
-    $title: String!
-    $description: String!
-    $type: String!
-    $startDate: String!
-    $endDate: String!
-    $published: String!
+    $projectId: ID
+    $title: String
+    $description: String
+    $type: String
+    $startDate: String
+    $endDate: String
+    $published: String
   ) {
     updateProject(
       projectInput: {

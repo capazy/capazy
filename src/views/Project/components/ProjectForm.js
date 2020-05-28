@@ -26,7 +26,7 @@ const ProjectForm = (props) => {
       startDate: '',
       endDate: '',
     },
-    // validationSchema: projectFormSchema,
+    validationSchema: projectFormSchema,
     onSubmit: async (values, { resetForm }) => {
       if (!projectId) {
         await createProject({ variables: values });
@@ -58,10 +58,10 @@ const ProjectForm = (props) => {
 
   const { title, description, startDate, endDate, type, published } = values;
   return (
-    <div className="pt-5 w-full max-w-xl mx-auto my-auto">
-      <h1>Paso 1 de 2</h1>
+    <div className="pt-5 w-full">
+      <h1>Step 1 of 2</h1>
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
         onSubmit={handleSubmit}
       >
         <div className="mb-4">

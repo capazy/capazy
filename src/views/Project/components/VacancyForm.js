@@ -19,7 +19,6 @@ const VacancyForm = (props) => {
   const { projectId, project, createVacancy } = props;
   const [action, setAction] = useState(false);
 
-  console.log('Project', project);
   const {
     handleSubmit,
     values,
@@ -47,23 +46,13 @@ const VacancyForm = (props) => {
 
   const { title, skills, timeCommitment } = values;
 
-  console.log('PRO', project);
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto">
       <h1>Paso 2 de 2</h1>
       <TeamTable project={project} setAction={setAction} />
 
       <Modal action={action}>
-        <form className="max-w-xl pt-6  mb-4" onSubmit={handleSubmit}>
-          {/* {project ? (
-          <Fragment>
-            <h2>Vacancies</h2>
-            {project.vacancies.map((vacancy) => (
-              <TeamTable vacancy={vacancy} />
-            ))}
-          </Fragment>
-        ) : null} */}
-
+        <form className="w-full pt-4  mb-4 m-12" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Title
@@ -191,16 +180,18 @@ const VacancyForm = (props) => {
             </p>
           </div>
 
-          <div className="flex items-center justify-between">
-            <button className="btn bg-brand-blue text-white mb-0" type="submit">
-              Add vacancy
-            </button>
-
+          <div className="flex items-center justify-end">
             <button
-              className="btn bg-brand-blue text-white mb-0"
+              className="mb-3 rounded-full  items-center shadow bg-gray-500 px-4 py-2 text-white hover:bg-gray-400 m-2"
               onClick={() => setAction(false)}
             >
               close
+            </button>
+            <button
+              className="mb-3 rounded-full  items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
+              type="submit"
+            >
+              Add vacancy
             </button>
           </div>
         </form>

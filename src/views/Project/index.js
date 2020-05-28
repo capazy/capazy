@@ -20,8 +20,6 @@ const Project = (props) => {
     ignoreQueryPrefix: true,
   });
 
-  const isCreateMode = projectIdQuery;
-
   useEffect(() => {
     const fetchProjectIdQuery = async () => {
       if (projectId) {
@@ -35,12 +33,17 @@ const Project = (props) => {
     };
     fetchProjectIdQuery();
   }, [projectId, getProjectById, location, projectIdQuery, setProjectId]);
+
+  const publish = () => {
+    // const values = { projectid: projectId, isOpen: false };
+    // update({ variables: values });
+  };
+
   return (
-    <div>
+    <div className="max-w-lg mx-auto px-2">
       <ProjectForm
         setProjectId={setProjectId}
         projectId={projectId}
-        isCreateMode={isCreateMode}
         update={update}
         project={project}
         createProject={createProject}
@@ -52,6 +55,17 @@ const Project = (props) => {
           createVacancy={createVacancy}
         />
       )}
+      <div className="flex items-center justify-end mt-10">
+        <button className="mb-3 rounded-full  items-center shadow bg-gray-500 px-4 py-2 text-white hover:bg-gray-400 m-2">
+          Save
+        </button>
+        <button
+          className="mb-3 rounded-full  items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
+          onClick={() => publish()}
+        >
+          Publish
+        </button>
+      </div>
     </div>
   );
 };
