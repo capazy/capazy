@@ -88,6 +88,12 @@
   @apply bg-red-200 border-t-4 border-red-500 text-red-700;
 }
 
-/* LOADING */
+/* MODAL */
+.modal {
+  /* box-shadow: 0 2px 8px; */
+
+  /* top: 30vh; */
+  /* left: 5%; */
+}
 
 @tailwind utilities;

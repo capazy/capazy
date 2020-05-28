@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // context
 import { UserContext } from '../../context/UserContext';
 import Alert from '../../components/Alert';
+import { ProjectContext } from '../../context/ProjectContext';
+import useOutsideClick from '../../utils/useOutsideClik';
 
 const links = () => (
   <div
@@ -53,11 +55,23 @@ const links = () => (
 );
 const NewNavbar = () => {
   const { logout, user } = useContext(UserContext);
+  const { resetProject } = useContext(ProjectContext);
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
+  const ref = useRef();
+
+  useOutsideClick(ref, () => {
+    if (isOpen || isOpenLogout) {
+      setOpen(false);
+      setOpenLogout(false);
+    }
+  });
 
   return (
-    <div className="bg-grey-lightest font-sans leading-normal tracking-normal">
+    <div
+      className="bg-grey-lightest font-sans leading-normal tracking-normal"
+      ref={ref}
+    >
       <nav className="bg-white w-full z-10 pin-t shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
           <div className="flex w-1/2 md:w-1/2 pl-2 md:pl-0 my-auto ">
@@ -68,16 +82,19 @@ const NewNavbar = () => {
                 className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1"
               />
             </Link>
-            <div className="hidden md:block my-auto">{links()}</div>
+            <div className="hidden lg:block my-auto">{links()}</div>
           </div>
 
           <div className="w-1/2 md:w-1/2 pr-0 my-auto">
             <div className="flex relative inline-block float-right">
               <Link
-                to="/project-form"
+                to="/project/create"
                 className="hidden mr-5 my-auto md:block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
               >
-                <button className="btn-square bg-brand-blue text-white mx-2">
+                <button
+                  className="btn-square bg-brand-blue text-white mx-2"
+                  onClick={() => resetProject()}
+                >
                   Post a Project
                 </button>
               </Link>

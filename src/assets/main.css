@@ -808,7 +808,13 @@ video {
   color: rgba(197, 48, 48, var(--text-opacity));
 }
 
-/* LOADING */
+/* MODAL */
+
+.modal {
+  /* box-shadow: 0 2px 8px; */
+  /* top: 30vh; */
+  /* left: 5%; */
+}
 
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;

@@ -12,12 +12,12 @@ import {
   Home,
   Signup,
   Login,
-  ProjectForm,
   VacancyForm,
   Profile,
   JoinedProjects,
   CreatedProjects,
   Chat,
+  Project,
 } from './views';
 import Layout from './layout';
 
@@ -45,10 +45,11 @@ const Routes = () => {
       />
       <RouteWithLayout
         exact
-        path="/project-form"
+        path="/project/create"
         layout={Layout}
-        component={ProjectForm}
+        component={Project}
       />
+
       <RouteWithLayout
         exact
         path="/vacancy-form"

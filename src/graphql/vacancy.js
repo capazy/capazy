@@ -20,10 +20,21 @@ export const CREATE_VACANCY = gql`
       }
     ) {
       _id
-      project {
-        vacancies {
-          _id
-        }
+      title
+      description
+      type
+      startDate
+      endDate
+      published
+      isOpen
+      creator {
+        _id
+      }
+      vacancies {
+        _id
+        title
+        experience
+        skills
       }
     }
   }

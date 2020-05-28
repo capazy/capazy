@@ -1,36 +1,23 @@
-import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 
-// apollo
-import { useMutation } from '@apollo/react-hooks';
-import { CREATE_PROJECT } from '../../graphql/project';
-import { ProjectContext } from '../../context/ProjectContext';
-
 // utils
-import { projectFormSchema } from '../../utils/formikSchemas';
+import { projectFormSchema } from '../../../utils/formikSchemas';
+
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
-const ProjectForm = () => {
-  const { setProjectId } = useContext(ProjectContext);
+const ProjectForm = (props) => {
+  const { projectId, update, project, createProject } = props;
 
-  const [createProject] = useMutation(CREATE_PROJECT, {
-    update(
-      _,
-      {
-        data: {
-          createProject: { _id: projectId },
-        },
-      }
-    ) {
-      setProjectId(projectId);
-    },
-  });
-
-  const [state, setState] = useState(false);
-
-  const { handleSubmit, values, errors, touched, handleChange } = useFormik({
+  const {
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    handleChange,
+    setFieldValue,
+  } = useFormik({
     initialValues: {
       title: '',
       description: '',
@@ -41,22 +28,40 @@ const ProjectForm = () => {
     },
     validationSchema: projectFormSchema,
     onSubmit: async (values, { resetForm }) => {
-      await createProject({ variables: values });
-      await setState(true);
+      if (!projectId) {
+        await createProject({ variables: values });
+        console.log('CREATE');
+      } else {
+        values.projectId = projectId;
+        console.log(values);
+        update({ variables: values });
+        console.log('UPDATE');
+      }
     },
   });
 
-  if (state) {
-    return <Redirect push to="/vacancy-form" />;
-  }
+  useEffect(() => {
+    if (projectId && project !== null) {
+      const fields = [
+        'title',
+        'description',
+        'startDate',
+        'endDate',
+        'published',
+        'type',
+      ];
+      fields.forEach((field) => {
+        setFieldValue(field, project[field], false);
+      });
+    }
+  }, [project, projectId, setFieldValue]);
 
-  const { title, description, startDate, endDate } = values;
-
+  const { title, description, startDate, endDate, type, published } = values;
   return (
-    <div className="pt-5 w-full max-w-md mx-auto my-auto">
-      <h1>Paso 1 de 2</h1>
+    <div className="pt-5 w-full">
+      <h1>Step 1 of 2</h1>
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
@@ -99,7 +104,7 @@ const ProjectForm = () => {
             className="form-input bg-white"
           >
             <option value="Type" disabled>
-              Type
+              {type || 'Type'}
             </option>
             {projectTypes.map((item) => (
               <option key={item} value={item}>
@@ -128,7 +133,7 @@ const ProjectForm = () => {
             className="form-input bg-white"
           >
             <option value="Published" disabled>
-              Published
+              {published || 'Published'}
             </option>
             {projectPublished.map((item) => (
               <option key={item} value={item}>
