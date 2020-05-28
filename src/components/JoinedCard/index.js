@@ -4,7 +4,7 @@ const JoinedCard = ({
   vacancy: {
     title: titleVancancy,
     experience,
-    project: { description, type, deadLine, isOpen, published, title },
+    project: { description, type, startDate, endDate, title },
     selectedUser: { _id: selectedUserId },
   },
   currentUserId,
@@ -49,10 +49,11 @@ const JoinedCard = ({
 
           <p className="text-gray-700 text-base">{type}</p>
           <p className="text-gray-700 text-base">{description}</p>
+          <h2 className="text-md font-semibold text-gray-800">Start Date</h2>
+          <p className="py-2 text-sm text-gray-700">{startDate.slice(0, 10)}</p>
+          <h2 className="text-md font-semibold text-gray-800">End Date</h2>
+          <p className="py-2 text-sm text-gray-700">{endDate.slice(0, 10)}</p>
         </div>
-        {/* <div className="flex items-center mt-6">
-          <button className="btn-small">View project</button>
-        </div> */}
       </div>
     </div>
   );

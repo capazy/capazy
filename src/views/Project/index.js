@@ -1,9 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 import qs from 'qs';
+
+// components
 import ProjectForm from './components/ProjectForm';
 import VacancyForm from './components/VacancyForm';
-import { setQueryStringWithoutPageReload } from '../../utils/setQueryStringWithoutPageReload';
+
+// context
 import { ProjectContext } from '../../context/ProjectContext';
+
+// utils
+import { setQueryStringWithoutPageReload } from '../../utils/setQueryStringWithoutPageReload';
 
 const Project = (props) => {
   const { location } = props;
@@ -23,7 +29,6 @@ const Project = (props) => {
   useEffect(() => {
     const fetchProjectIdQuery = async () => {
       if (projectId) {
-        console.log('QUERY STRING');
         await setQueryStringWithoutPageReload(location, 'projectId', projectId);
       }
       if (projectIdQuery) {

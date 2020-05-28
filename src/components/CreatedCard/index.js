@@ -2,16 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CreatedCard = ({
-  project: {
-    title,
-    description,
-    type,
-    deadline,
-    published,
-    isOpen,
-    vacancies,
-    _id,
-  },
+  project: { title, description, type, startDate, endDate, vacancies, _id },
   handleSelect,
 }) => {
   return (
@@ -38,6 +29,16 @@ const CreatedCard = ({
                 {type}
               </p>
               <p className="text-gray-700 text-base">{description}</p>
+              <h2 className="text-md font-semibold text-gray-800">
+                Start Date
+              </h2>
+              <p className="py-2 text-sm text-gray-700">
+                {startDate.slice(0, 10)}
+              </p>
+              <h2 className="text-md font-semibold text-gray-800">End Date</h2>
+              <p className="py-2 text-sm text-gray-700">
+                {endDate.slice(0, 10)}
+              </p>
               <Link to={`/project/create?projectId=${_id}`}>
                 <button className="btn-small bg-brand-blue mt-2">Edit</button>
               </Link>

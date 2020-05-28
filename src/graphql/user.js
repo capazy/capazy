@@ -135,6 +135,8 @@ export const GET_USER_CREATED_PROJECTS = gql`
         title
         description
         type
+        startDate
+        endDate
         published
         isOpen
         creator {
@@ -183,6 +185,8 @@ export const GET_USER_JOINED_PROJECTS = gql`
           title
           description
           type
+          startDate
+          endDate
           published
           isOpen
           creator {

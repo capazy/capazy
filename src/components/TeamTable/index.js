@@ -17,7 +17,10 @@ const TeamTable = ({ project, setAction }) => {
             {project &&
               project.vacancies !== [] &&
               project.vacancies.map((vacancy) => (
-                <tr className="border-b hover:bg-orange-100 bg-gray-100 ">
+                <tr
+                  key={vacancy._id}
+                  className="border-b hover:bg-orange-100 bg-gray-100 "
+                >
                   <td className="p-1 px-2">
                     <p className="bg-transparent">{vacancy.title}</p>
                   </td>
@@ -50,7 +53,6 @@ const TeamTable = ({ project, setAction }) => {
         </table>
         {project && project.vacancies.length === 0 && (
           <section className="h-full overflow-auto p-8 w-full h-full flex flex-col">
-            {console.log(project.vacancies)}
             <span className="h-full w-full text-center flex flex-col items-center justify-center items-center mx-auto">
               <img
                 className="mx-auto w-32"
