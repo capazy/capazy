@@ -2,7 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CreatedCard = ({
-  project: { title, description, type, deadline, published, isOpen, vacancies },
+  project: {
+    title,
+    description,
+    type,
+    deadline,
+    published,
+    isOpen,
+    vacancies,
+    _id,
+  },
   handleSelect,
 }) => {
   return (
@@ -29,6 +38,9 @@ const CreatedCard = ({
                 {type}
               </p>
               <p className="text-gray-700 text-base">{description}</p>
+              <Link to={`/project/create?projectId=${_id}`}>
+                <button className="btn-small bg-brand-blue mt-2">Edit</button>
+              </Link>
             </div>
           </div>
 
