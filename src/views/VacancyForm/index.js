@@ -44,7 +44,7 @@ const VacancyForm = () => {
     initialValues: {
       projectId: projectId,
       title: '',
-      experience: 'Experience',
+      experience: '',
       skills: '',
       timeCommitment: '',
       timeCommitmentUnits: '',
