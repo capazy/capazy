@@ -10,7 +10,6 @@ import useOutsideClick from '../../utils/useOutsideClik';
 const NewNavbar = () => {
   const { logout, user } = useContext(UserContext);
   const { resetProject } = useContext(ProjectContext);
-
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
   const ref = useRef();
@@ -109,12 +108,12 @@ const NewNavbar = () => {
                   onClick={() => setOpenLogout(!isOpenLogout)}
                 >
                   <img
-                    className="w-8 h-8 rounded-full mr-4 "
-                    src="http://i.pravatar.cc/300"
-                    alt="Avatar of User"
-                  />{' '}
+                    className="w-8 h-8 rounded-full mr-4"
+                    src={user.profilePictureUrl}
+                    alt=""
+                  />
                   <span className="hidden md:inline-block">
-                    Hi, {user.firstName}{' '}
+                    Hi, {user.firstName}
                   </span>
                   <svg
                     className="pl-2 h-2"

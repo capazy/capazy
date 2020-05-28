@@ -19,7 +19,6 @@ const UserProvider = (props) => {
     user: null,
     tokenExp: null,
   });
-  //context
 
   // apollo-signup
   const [createUser] = useMutation(CREATE_USER, {

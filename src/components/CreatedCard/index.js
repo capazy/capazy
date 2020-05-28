@@ -16,7 +16,7 @@ const CreatedCard = ({
 }) => {
   return (
     <div className="my-10">
-      <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t  ">
+      <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t">
         <div
           className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
           style={{

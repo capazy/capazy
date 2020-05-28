@@ -5,6 +5,9 @@ import { Redirect } from 'react-router-dom';
 // components
 import { SelectMulti } from '../../components';
 
+// context
+import { UserContext } from '../../context/UserContext';
+
 // utils
 import skillsData from '../../data/skillsData.json';
 import allSkillsData from '../../data/allSkillsData.json';
@@ -12,7 +15,6 @@ import countriesData from '../../data/countriesData.json';
 import languagesData from '../../data/languagesData.json';
 import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
-import { UserContext } from '../../context/UserContext';
 import { originalArray } from '../../utils/originalArray';
 
 const UserForm = ({ match }) => {
@@ -77,8 +79,6 @@ const UserForm = ({ match }) => {
     }
   }, [dataUser, isCreateMode, setFieldValue]);
 
-  console.log('USER', dataUser);
-  console.log('values', values);
   if (userLoading) return <p>Loading....</p>;
 
   if (updateSuccess) {
