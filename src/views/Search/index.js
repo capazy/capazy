@@ -168,7 +168,7 @@ const SearchBar = () => {
             {data.projects.map((project) => (
               <div
                 key={project._id}
-                className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2  "
               >
                 <ProjectCard project={project} handleJoin={handleJoin} />
               </div>
@@ -183,7 +183,7 @@ const SearchBar = () => {
                   {projects.projects.map((project) => (
                     <div
                       key={project._id}
-                      className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
+                      className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2  "
                     >
                       <ProjectCard project={project} handleJoin={handleJoin} />
                     </div>

@@ -7,52 +7,6 @@ import Alert from '../../components/Alert';
 import { ProjectContext } from '../../context/ProjectContext';
 import useOutsideClick from '../../utils/useOutsideClik';
 
-const links = () => (
-  <div
-    className="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
-    id="nav-content"
-  >
-    <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
-      <li className="mr-6 my-2 md:my-0">
-        <Link
-          to="/search"
-          className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
-        >
-          <i className="fa fa-envelope fa-fw mr-3"></i>
-          <span className="pb-1 md:pb-0 text-sm">Search</span>
-        </Link>
-      </li>
-      <li className="mr-6 my-2 md:my-0">
-        <Link
-          to="/joined-projects"
-          className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
-        >
-          <i className="fas fa-tasks fa-fw mr-3"></i>
-          <span className="pb-1 md:pb-0 text-sm">Joined projects</span>
-        </Link>
-      </li>
-      <li className="mr-6 my-2 md:my-0">
-        <Link
-          to="/created-projects"
-          className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
-        >
-          <i className="fa fa-envelope fa-fw mr-3"></i>
-          <span className="pb-1 md:pb-0 text-sm">Created projects</span>
-        </Link>
-      </li>
-      <li className="mr-6 my-2 md:my-0">
-        <Link
-          to="/project-form"
-          className="md:hidden block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
-        >
-          <button className="btn-square bg-brand-blue text-white mx-2">
-            Post a Project
-          </button>
-        </Link>
-      </li>
-    </ul>
-  </div>
-);
 const NewNavbar = () => {
   const { logout, user } = useContext(UserContext);
   const { resetProject } = useContext(ProjectContext);
@@ -66,6 +20,55 @@ const NewNavbar = () => {
       setOpenLogout(false);
     }
   });
+  const links = () => (
+    <div
+      className="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
+      id="nav-content"
+    >
+      <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+        <li className="mr-6 my-2 md:my-0">
+          <Link
+            to="/search"
+            className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
+          >
+            <i className="fa fa-envelope fa-fw mr-3"></i>
+            <span className="pb-1 md:pb-0 text-sm">Search</span>
+          </Link>
+        </li>
+        <li className="mr-6 my-2 md:my-0">
+          <Link
+            to="/joined-projects"
+            className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
+          >
+            <i className="fas fa-tasks fa-fw mr-3"></i>
+            <span className="pb-1 md:pb-0 text-sm">Joined projects</span>
+          </Link>
+        </li>
+        <li className="mr-6 my-2 md:my-0">
+          <Link
+            to="/created-projects"
+            className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
+          >
+            <i className="fa fa-envelope fa-fw mr-3"></i>
+            <span className="pb-1 md:pb-0 text-sm">Created projects</span>
+          </Link>
+        </li>
+        <li className="md:hidden mr-6 my-2 md:my-0">
+          <Link
+            to="/create/project"
+            className=" block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
+          >
+            <button
+              className="btn-square bg-brand-blue text-white mx-2"
+              onClick={() => resetProject()}
+            >
+              Post a Project
+            </button>
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
 
   return (
     <div
@@ -89,7 +92,7 @@ const NewNavbar = () => {
             <div className="flex relative inline-block float-right">
               <Link
                 to="/project/create"
-                className="hidden mr-5 my-auto md:block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
+                className="hidden lg:block mr-5 my-auto md:block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
               >
                 <button
                   className="btn-square bg-brand-blue text-white mx-2"
@@ -98,7 +101,7 @@ const NewNavbar = () => {
                   Post a Project
                 </button>
               </Link>
-              <div className="relative text-sm">
+              <div className="relative text-sm my-auto">
                 <button
                   id="userButton"
                   className="flex items-center focus:outline-none mr-3 "
