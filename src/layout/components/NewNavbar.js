@@ -20,6 +20,10 @@ const NewNavbar = () => {
       setOpenLogout(false);
     }
   });
+
+  const image =
+    user.profilePictureUrl ||
+    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
   const links = () => (
     <div
       className="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
@@ -109,7 +113,7 @@ const NewNavbar = () => {
                 >
                   <img
                     className="w-8 h-8 rounded-full mr-4"
-                    src={user.profilePictureUrl}
+                    src={image}
                     alt=""
                   />
                   <span className="hidden md:inline-block">

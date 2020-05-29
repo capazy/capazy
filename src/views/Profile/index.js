@@ -33,10 +33,12 @@ const Profile = ({ match }) => {
     companyDepartment,
     languages,
     country,
-    profilePictureUrl,
   } = data.userById;
 
   const isOwner = match.params.id === _id;
+  const image =
+    user.profilePictureUrl ||
+    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
 
   const handleChangeProfilePicture = () => {
     setOpenPrifilePictureModal(!openPrifilePictureModal);
@@ -69,7 +71,7 @@ const Profile = ({ match }) => {
               <div className="flex py-2">
                 <img
                   className="h-32 w-32 rounded-full border-4 border-white -mt-16 mr-4"
-                  src={profilePictureUrl}
+                  src={image}
                   alt=""
                 />
                 <div className="grid grid-cols-1 ">

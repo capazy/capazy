@@ -15,11 +15,13 @@ const Main = (props) => {
 
   return (
     <div className="">
-      <div className="mx-auto ">
+      <div className="mx-auto">
         <main>
           {user ? <NewNavbar /> : <Navbar />}
 
-          <div className="container mx-auto mt-2 md:mt-2">{children}</div>
+          <div className="container max-w-screen-lg mx-auto mt-2 md:mt-2">
+            {children}
+          </div>
           <Footer />
         </main>
       </div>
