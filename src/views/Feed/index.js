@@ -38,11 +38,11 @@ const Feed = () => {
   return (
     <Fragment>
       <div className="container my-12 mx-auto px-4 md:px-12">
-        <div className="flex flex-wrap -mx-1 lg:-mx-4">
+        <div className="flex flex-wrap -mx-1 lg:-mx-4 justify-between">
           {data.projects.map((project) => (
             <div
               key={project._id}
-              className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2  "
+              className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2"
             >
               <ProjectCard project={project} handleJoin={handleJoin} />
             </div>

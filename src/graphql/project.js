@@ -91,6 +91,7 @@ export const UPDATE_PROJECT = gql`
     $startDate: String
     $endDate: String
     $published: String
+    $isOpen: Boolean
   ) {
     updateProject(
       projectInput: {
@@ -101,6 +102,7 @@ export const UPDATE_PROJECT = gql`
         startDate: $startDate
         endDate: $endDate
         published: $published
+        isOpen: $isOpen
       }
     ) {
       title

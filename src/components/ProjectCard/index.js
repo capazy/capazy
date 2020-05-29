@@ -6,8 +6,8 @@ const ProjectCard = ({
 }) => {
   return (
     <div
-      className="max-w-md bg-white shadow-md rounded-lg overflow-hidden my-2 "
-      style={{ height: '70vh' }}
+      className=" bg-white shadow-md rounded-lg overflow-hidden my-2 "
+      // style={{ height: '50vh' }}
     >
       <img
         className="w-full h-32 object-cover object-center"
@@ -20,10 +20,20 @@ const ProjectCard = ({
       <div className="py-4 px-4">
         <h1 className="text-md font-semibold text-gray-800">{type}</h1>
         <p className="py-2 text-sm text-gray-700">{description}</p>
-        <h2 className="text-md font-semibold text-gray-800">Start Date</h2>
-        <p className="py-2 text-sm text-gray-700">{startDate.slice(0, 10)}</p>
-        <h2 className="text-md font-semibold text-gray-800">End Date</h2>
-        <p className="py-2 text-sm text-gray-700">{endDate.slice(0, 10)}</p>
+        <div className="flex justify-around">
+          <div className="">
+            <h2 className="text-sm font-semibold text-gray-800">Start Date</h2>
+            <p className=" text-xs py-2 text-sm text-gray-700">
+              {startDate.slice(0, 10)}
+            </p>
+          </div>
+          <div className="">
+            <h2 className="text-sm font-semibold text-gray-800">End Date</h2>
+            <p className="text-xs py-2 text-sm text-gray-700">
+              {endDate.slice(0, 10)}
+            </p>
+          </div>
+        </div>
 
         {/* TABLE */}
         <div className=" mx-auto">
@@ -31,7 +41,7 @@ const ProjectCard = ({
             <h1 className="text-md font-semibold text-gray-800">Vacancies</h1>
             <table className="text-left border-collapse table-fixed w-full ">
               <tbody className="">
-                <div className="overflow-y-auto h-64 w-full ">
+                <div className="w-full ">
                   {vacancies.map((vacancy) => (
                     <tr key={vacancy._id} className=" ">
                       <td className="border-b border-grey-light w-1/2 px-1 py-2 ">

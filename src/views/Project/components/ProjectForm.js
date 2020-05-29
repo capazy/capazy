@@ -8,7 +8,7 @@ const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 const projectPublished = ['Department', 'Company', 'Globally'];
 
 const ProjectForm = (props) => {
-  const { projectId, update, project, createProject } = props;
+  const { projectId, update, project, create } = props;
 
   const {
     handleSubmit,
@@ -29,12 +29,12 @@ const ProjectForm = (props) => {
     validationSchema: projectFormSchema,
     onSubmit: async (values, { resetForm }) => {
       if (!projectId) {
-        await createProject({ variables: values });
+        await create(values);
         console.log('CREATE');
       } else {
         values.projectId = projectId;
         console.log(values);
-        update({ variables: values });
+        update(values);
         console.log('UPDATE');
       }
     },

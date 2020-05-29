@@ -47,11 +47,19 @@ const ProjectProvider = (props) => {
     },
   });
 
+  //Create
+  const create = async (values) => {
+    try {
+      await createProject({ variables: values });
+    } catch (error) {
+      console.log('PROJECT ERROR', error);
+    }
+  };
+
   //update
   const update = async (values) => {
     try {
-      await updateProject(values);
-      console.log(values);
+      await updateProject({ variables: values });
     } catch (error) {
       console.log('PROJECT ERROR', error);
     }
@@ -75,7 +83,7 @@ const ProjectProvider = (props) => {
         project,
         getProjectById,
         resetProject,
-        createProject,
+        create,
         createVacancy,
       }}
     >
