@@ -9,7 +9,7 @@ import { GET_USER_BY_ID } from '../../graphql/user';
 import { Link } from 'react-router-dom';
 
 // components
-import { FileUploader } from '../../components';
+import { FileUploader, Modal } from '../../components';
 
 const Profile = ({ match }) => {
   const [openPrifilePictureModal, setOpenPrifilePictureModal] = useState(false);
@@ -45,15 +45,18 @@ const Profile = ({ match }) => {
   return (
     <div className="md:mx-32  h-full">
       {openPrifilePictureModal && (
-        <FileUploader
-          action={update}
-          field={{
-            fileName: 'profilePictureName',
-            fileUrl: 'profilePictureUrl',
-          }}
-          accept={'image/*'}
-          multiple={false}
-        />
+        <Modal action={openPrifilePictureModal}>
+          <FileUploader
+            action={update}
+            field={{
+              fileName: 'profilePictureName',
+              fileUrl: 'profilePictureUrl',
+            }}
+            accept={'image/*'}
+            multiple={false}
+            handleOpen={setOpenPrifilePictureModal}
+          />
+        </Modal>
       )}
       <div className="font-sans leading-tight  bg-grey-lighter p-4">
         <div className="bg-white rounded-lg overflow-hidden ">

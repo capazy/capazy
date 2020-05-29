@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { firebaseApp } from '../../firebase';
 import { useFormik } from 'formik';
 
-const FileUploader = ({ action, field, accept, multiple }) => {
+const FileUploader = ({ action, field, accept, multiple, handleOpen }) => {
   const { handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       files: [],
@@ -17,13 +17,14 @@ const FileUploader = ({ action, field, accept, multiple }) => {
           [field.fileUrl]: await fileRef.getDownloadURL(),
         };
         await action(formData);
+        handleOpen(false);
       });
     },
   });
 
   return (
     <Fragment>
-      <div className="bg-red-600">
+      <div>
         <form onSubmit={handleSubmit}>
           <input
             type="file"
@@ -33,6 +34,7 @@ const FileUploader = ({ action, field, accept, multiple }) => {
           />
           <button type="submit">Upload</button>
         </form>
+        <button onClick={() => handleOpen(false)}>Cancel</button>
       </div>
     </Fragment>
   );
