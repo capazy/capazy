@@ -1,5 +1,8 @@
 import React from 'react';
 
+// components
+import { NoData } from '../index';
+
 const TeamTable = ({ project, setAction }) => {
   return (
     <div className="max-w-xl border-b-2">
@@ -52,18 +55,7 @@ const TeamTable = ({ project, setAction }) => {
           </tbody>
         </table>
         {project && project.vacancies.length === 0 && (
-          <section className="h-full overflow-auto p-8 w-full h-full flex flex-col">
-            <span className="h-full w-full text-center flex flex-col items-center justify-center items-center mx-auto">
-              <img
-                className="mx-auto w-32"
-                src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
-                alt="no data"
-              />
-              <span className="text-small text-gray-500">
-                You don't have vacancies yet
-              </span>
-            </span>
-          </section>
+          <NoData text={"You don't have vacancies yet"} />
         )}
         <div className="text-right">
           <button

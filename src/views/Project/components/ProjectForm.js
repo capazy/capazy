@@ -30,12 +30,10 @@ const ProjectForm = (props) => {
     onSubmit: async (values, { resetForm }) => {
       if (!projectId) {
         await create(values);
-        console.log('CREATE');
       } else {
         values.projectId = projectId;
         console.log(values);
-        update(values);
-        console.log('UPDATE');
+        await update(values);
       }
     },
   });
@@ -57,9 +55,10 @@ const ProjectForm = (props) => {
   }, [project, projectId, setFieldValue]);
 
   const { title, description, startDate, endDate, type, published } = values;
+
   return (
     <div className="pt-5 w-full">
-      <h1>Step 1 of 2</h1>
+      <h1>Step 1 of 2: Project info</h1>
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
         onSubmit={handleSubmit}

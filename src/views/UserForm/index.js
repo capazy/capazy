@@ -343,7 +343,7 @@ const UserForm = ({ match }) => {
 
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
-            send
+            Save
           </button>
         </div>
       </form>

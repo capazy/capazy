@@ -111,7 +111,10 @@ const CreatedCard = ({
                       <div className="tab-content overflow-hidden border-l-2 bg-gray-100 border-brand-blue leading-normal">
                         <div className=" ">
                           {vacancy.postulatedUsers.map((postulated, i) => (
-                            <table className="w-full border-collapse bg-white">
+                            <table
+                              key={postulated._id}
+                              className="w-full border-collapse bg-white"
+                            >
                               <tbody className="text-gray-700">
                                 <tr className={i % 2 === 0 && 'bg-gray-100'}>
                                   <td className="w-1/3 text-left py-0 px-2">

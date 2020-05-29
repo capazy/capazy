@@ -151,7 +151,6 @@ const VacancyForm = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="timeCommitment"
             type="number"
-            // placeholder="timeCommitment"
             onChange={handleChange}
             value={timeCommitment}
             invalid={
@@ -178,11 +177,6 @@ const VacancyForm = () => {
               </option>
               <option value="week">per week</option>
               <option value="month">per month</option>
-              {/* {experienceOptions.map((item) => (
-                <option key={item.label} value={item.value}>
-                  {item.label}
-                </option>
-              ))} */}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
               <svg
