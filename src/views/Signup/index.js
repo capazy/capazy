@@ -94,7 +94,7 @@ const SignUp = () => {
 
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
-            Sign Up
+            Sign up
           </button>
           <a
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
