@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 // components
-import { SelectMulti } from '../../components';
+import { SelectMulti, Modal, FileUploader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -18,9 +18,10 @@ import { transformArray } from '../../utils/transformArray';
 import { originalArray } from '../../utils/originalArray';
 
 const UserForm = ({ match }) => {
-  const { update, user: dataUser, userLoading } = useContext(UserContext);
+  const { update, user: userData, userLoading } = useContext(UserContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
+  const [openPrifilePictureModal, setOpenPrifilePictureModal] = useState(false);
   const { id } = match.params;
   const isCreateMode = !id;
 
@@ -58,7 +59,7 @@ const UserForm = ({ match }) => {
   });
 
   useEffect(() => {
-    if (!isCreateMode && dataUser !== null) {
+    if (!isCreateMode && userData !== null) {
       const fields = [
         'expertise',
         'companyName',
@@ -66,18 +67,18 @@ const UserForm = ({ match }) => {
         'description',
       ];
       fields.forEach((field) => {
-        setFieldValue(field, dataUser[field], false);
-        setFieldValue('country', dataUser['country'], false);
-        setFieldValue('skills', originalArray(dataUser['skills']), false);
-        setFieldValue('languages', originalArray(dataUser['languages']), false);
+        setFieldValue(field, userData[field], false);
+        setFieldValue('country', userData['country'], false);
+        setFieldValue('skills', originalArray(userData['skills']), false);
+        setFieldValue('languages', originalArray(userData['languages']), false);
         setFieldValue(
           'additionalSkills',
-          originalArray(dataUser['additionalSkills']),
+          originalArray(userData['additionalSkills']),
           false
         );
       });
     }
-  }, [dataUser, isCreateMode, setFieldValue]);
+  }, [userData, isCreateMode, setFieldValue]);
 
   if (userLoading) return <p>Loading....</p>;
 
@@ -108,8 +109,33 @@ const UserForm = ({ match }) => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        {/* COMPANY */}
         <div className="border-b-2 mb-2">
+          {/* PICTURE */}
+          <div className="mb-4">
+            <img
+              className="h-32 w-32 rounded-full"
+              src={userData && userData.profilePictureUrl}
+              alt=""
+            />
+            <button onClick={() => setOpenPrifilePictureModal(true)}>
+              Change profile picture
+            </button>
+            {openPrifilePictureModal && (
+              <Modal action={openPrifilePictureModal}>
+                <FileUploader
+                  action={update}
+                  field={{
+                    fileName: 'profilePictureName',
+                    fileUrl: 'profilePictureUrl',
+                  }}
+                  accept={'image/*'}
+                  multiple={false}
+                  handleOpen={setOpenPrifilePictureModal}
+                />
+              </Modal>
+            )}
+          </div>
+          {/* COMPANY */}
           <h1 className="text-gray-900 text-xl mb-1">Company</h1>
           <div className="mb-4">
             <label className="form-label">Name</label>
