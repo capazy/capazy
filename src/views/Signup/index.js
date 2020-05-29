@@ -96,12 +96,12 @@ const SignUp = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign up
           </button>
-          <a
+          {/* <a
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             href="/#"
           >
             Forgot Password?
-          </a>
+          </a> */}
         </div>
       </form>
     </div>
