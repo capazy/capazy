@@ -58,7 +58,10 @@ const ProjectForm = (props) => {
 
   return (
     <div className="pt-5 w-full">
-      <h1>Step 1 of 2: Project info</h1>
+      <h1 className="text-lg font-semibold pt-2 mb-4">
+        Step 1 of 2: Project info
+      </h1>
+
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
         onSubmit={handleSubmit}
@@ -176,11 +179,13 @@ const ProjectForm = (props) => {
         </div>
         <p className="form-error">{errors.endDate}</p>
 
-        <div className="flex items-center justify-between">
-          <button className="btn bg-brand-blue text-white mb-0" type="submit">
-            Next
-          </button>
-        </div>
+        {!projectId && (
+          <div className="text-right">
+            <button className="btn bg-brand-blue text-white mb-0" type="submit">
+              Next
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -48,7 +48,10 @@ const VacancyForm = (props) => {
 
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto">
-      <h1>Step 2 of 2: Vacancies info</h1>
+      <h1 className="text-lg font-semibold pt-2 mb-4">
+        Step 2 of 2: Vacancies info
+      </h1>
+
       <TeamTable project={project} setAction={setAction} />
 
       <Modal action={action}>
@@ -176,7 +179,7 @@ const VacancyForm = (props) => {
               close
             </button>
             <button
-              className="mb-3 rounded-full  items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
+              className="mb-3 rounded-full items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
               type="submit"
             >
               Add vacancy
