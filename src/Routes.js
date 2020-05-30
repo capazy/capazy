@@ -12,7 +12,6 @@ import {
   Home,
   Signup,
   Login,
-  VacancyForm,
   Profile,
   JoinedProjects,
   CreatedProjects,
@@ -50,12 +49,6 @@ const Routes = () => {
         component={Project}
       />
 
-      <RouteWithLayout
-        exact
-        path="/vacancy-form"
-        layout={Layout}
-        component={VacancyForm}
-      />
       <RouteWithLayout exact path="/login" layout={Layout} component={Login} />
       <RouteWithLayout
         exact

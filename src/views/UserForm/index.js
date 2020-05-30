@@ -102,7 +102,9 @@ const UserForm = ({ match }) => {
     );
     setSkillData(skills);
   };
-
+  const image =
+    (userData && userData.profilePictureUrl) ||
+    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
@@ -112,14 +114,23 @@ const UserForm = ({ match }) => {
         <div className="border-b-2 mb-2">
           {/* PICTURE */}
           <div className="mb-4">
-            <img
-              className="h-32 w-32 rounded-full"
-              src={userData && userData.profilePictureUrl}
-              alt=""
-            />
-            <button onClick={() => setOpenPrifilePictureModal(true)}>
-              Change profile picture
-            </button>
+            <div className="text-center p-6  border-b">
+              <img
+                className="h-24 w-24 rounded-full mx-auto"
+                src={image}
+                alt=""
+              />
+              <button
+                onClick={() => setOpenPrifilePictureModal(true)}
+                className="btn-small mt-3"
+              >
+                Change profile picture
+              </button>
+              <p className="pt-2 text-lg font-semibold">
+                {userData && `${userData.firstName} ${userData.lastName}`}
+              </p>
+            </div>
+
             {openPrifilePictureModal && (
               <Modal action={openPrifilePictureModal}>
                 <FileUploader
