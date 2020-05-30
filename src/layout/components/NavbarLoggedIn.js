@@ -61,12 +61,15 @@ const NavbarLoggedIn = () => {
 
         <li className="md:hidden mx-6 my-2 md:my-0">
           <Link
-            to="/create/project"
+            to="/project/create"
             className=" block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
           >
             <button
               className="btn-square bg-brand-blue text-white"
-              onClick={() => resetProject()}
+              onClick={() => {
+                resetProject();
+                setOpen(false);
+              }}
             >
               Post a Project
             </button>

@@ -123,6 +123,7 @@ const UserForm = ({ match }) => {
               <button
                 onClick={() => setOpenPrifilePictureModal(true)}
                 className="btn-small mt-3"
+                type="button"
               >
                 Change profile picture
               </button>

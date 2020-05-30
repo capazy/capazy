@@ -16,7 +16,7 @@ const experienceOptions = [
 ];
 
 const VacancyForm = (props) => {
-  const { projectId, project, createVacancy } = props;
+  const { projectId, project, createVacancy, deleteVacancy } = props;
   const [action, setAction] = useState(false);
 
   const {
@@ -32,13 +32,13 @@ const VacancyForm = (props) => {
       projectId: projectId,
       title: '',
       experience: 'beginner',
+      description: '',
       skills: '',
       timeCommitment: '',
       timeCommitmentUnits: 'perWeek',
     },
     validationSchema: vacancyFormSchema,
     onSubmit: async (values, { resetForm }) => {
-      console.log('values', values);
       values.skills = await transformArray(values, 'skills');
       await createVacancy({ variables: values });
       resetForm();
@@ -53,7 +53,11 @@ const VacancyForm = (props) => {
         Step 2 of 2: Vacancies info
       </h1>
 
-      <TeamTable project={project} setAction={setAction} />
+      <TeamTable
+        project={project}
+        setAction={setAction}
+        deleteVacancy={deleteVacancy}
+      />
 
       <Modal action={action}>
         <form className="w-full pt-4  mb-4 m-12" onSubmit={handleSubmit}>

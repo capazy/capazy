@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useContext,
-  useState,
-  Fragment,
-  useRef,
-} from 'react';
+import React, { useEffect, useContext, useState, Fragment } from 'react';
 import qs from 'qs';
 import { Redirect } from 'react-router-dom';
 
@@ -24,11 +18,11 @@ const Project = (props) => {
   const [isPublished, setIsPublished] = useState(false);
 
   // scroll to bottom when mounting vacancy-form component
-  const bottomPage = useRef(null);
-  const scrollToBottom = () => {
-    bottomPage.current.scrollIntoView();
-  };
-  useEffect(scrollToBottom);
+  // const bottomPage = useRef(null);
+  // const scrollToBottom = () => {
+  //   bottomPage.current.scrollIntoView();
+  // };
+  // useEffect(scrollToBottom);
 
   const {
     setProjectId,
@@ -38,6 +32,7 @@ const Project = (props) => {
     getProjectById,
     create,
     createVacancy,
+    deleteVacancy,
   } = useContext(ProjectContext);
   const { projectId: projectIdQuery } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -58,7 +53,7 @@ const Project = (props) => {
 
   const handlePublish = async () => {
     try {
-      const values = { projectId: projectId, isOpen: true };
+      const values = { ...project, projectId: projectId, isOpen: true };
       await update(values);
       setIsPublished(true);
       toggleAlert('Your project has been published', 'success');
@@ -87,6 +82,7 @@ const Project = (props) => {
               projectId={projectId}
               project={project}
               createVacancy={createVacancy}
+              deleteVacancy={deleteVacancy}
             />
 
             <div className="flex items-center justify-end mt-4">
@@ -107,7 +103,7 @@ const Project = (props) => {
           </Fragment>
         )}
       </div>
-      <div ref={bottomPage} />
+      {/* <div ref={bottomPage} /> */}
     </Fragment>
   );
 };

@@ -50,7 +50,6 @@ export const projectFormSchema = Yup.object({
   title: Yup.string().required(),
   description: Yup.string().required(),
   type: Yup.string().required(),
-  published: Yup.string().required(),
   startDate: Yup.string().required(),
   endDate: Yup.string().required(),
 });

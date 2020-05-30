@@ -7,7 +7,6 @@ export const CREATE_PROJECT = gql`
     $type: String!
     $startDate: String!
     $endDate: String!
-    $published: String!
   ) {
     createProject(
       projectInput: {
@@ -16,7 +15,6 @@ export const CREATE_PROJECT = gql`
         type: $type
         startDate: $startDate
         endDate: $endDate
-        published: $published
       }
     ) {
       _id
@@ -25,7 +23,6 @@ export const CREATE_PROJECT = gql`
       type
       startDate
       endDate
-      published
       isOpen
       creator {
         _id
@@ -46,7 +43,6 @@ export const GET_PROJECT_BY_ID = gql`
       type
       startDate
       endDate
-      published
       isOpen
       vacancies {
         _id
@@ -67,7 +63,6 @@ export const GET_PROJECTS = gql`
       type
       startDate
       endDate
-      published
       isOpen
       creator {
         _id
@@ -90,7 +85,6 @@ export const UPDATE_PROJECT = gql`
     $type: String
     $startDate: String
     $endDate: String
-    $published: String
     $isOpen: Boolean
   ) {
     updateProject(
@@ -101,7 +95,6 @@ export const UPDATE_PROJECT = gql`
         type: $type
         startDate: $startDate
         endDate: $endDate
-        published: $published
         isOpen: $isOpen
       }
     ) {
@@ -110,7 +103,6 @@ export const UPDATE_PROJECT = gql`
       type
       startDate
       endDate
-      published
       isOpen
       vacancies {
         _id

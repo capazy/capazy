@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import { projectFormSchema } from '../../../utils/formikSchemas';
 
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
-const projectPublished = ['Department', 'Company', 'Globally'];
 
 const ProjectForm = (props) => {
   const { projectId, update, project, create } = props;
@@ -21,18 +20,16 @@ const ProjectForm = (props) => {
     initialValues: {
       title: '',
       description: '',
-      type: '',
-      published: '',
+      type: 'One-Time',
       startDate: '',
       endDate: '',
     },
     validationSchema: projectFormSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       if (!projectId) {
         await create(values);
       } else {
         values.projectId = projectId;
-        console.log(values);
         await update(values);
       }
     },
@@ -40,21 +37,14 @@ const ProjectForm = (props) => {
 
   useEffect(() => {
     if (projectId && project !== null) {
-      const fields = [
-        'title',
-        'description',
-        'startDate',
-        'endDate',
-        'published',
-        'type',
-      ];
+      const fields = ['title', 'description', 'startDate', 'endDate', 'type'];
       fields.forEach((field) => {
         setFieldValue(field, project[field], false);
       });
     }
   }, [project, projectId, setFieldValue]);
 
-  const { title, description, startDate, endDate, type, published } = values;
+  const { title, description, startDate, endDate } = values;
 
   return (
     <div className="pt-5 w-full">
@@ -102,12 +92,9 @@ const ProjectForm = (props) => {
             id="type"
             name="type"
             onChange={handleChange}
-            defaultValue="Type"
+            defaultValue="One-Time"
             className="form-input bg-white"
           >
-            <option value="Type" disabled>
-              {type || 'Type'}
-            </option>
             {projectTypes.map((item) => (
               <option key={item} value={item}>
                 {item}
@@ -125,35 +112,6 @@ const ProjectForm = (props) => {
           </div>
         </div>
         <p className="form-error">{errors.type}</p>
-
-        <div className="mb-4 inline-block relative w-full">
-          <select
-            id="published"
-            name="published"
-            onChange={handleChange}
-            defaultValue="Published"
-            className="form-input bg-white"
-          >
-            <option value="Published" disabled>
-              {published || 'Published'}
-            </option>
-            {projectPublished.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-            <svg
-              className="fill-current h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-          </div>
-        </div>
-        <p className="form-error">{errors.published}</p>
 
         <div className="mb-4">
           <input
@@ -181,7 +139,11 @@ const ProjectForm = (props) => {
 
         {!projectId && (
           <div className="text-right">
-            <button className="btn bg-brand-blue text-white mb-0" type="submit">
+            <button
+              className="btn bg-brand-blue text-white mb-0"
+              type="submit"
+              id="#projectForm"
+            >
               Next
             </button>
           </div>

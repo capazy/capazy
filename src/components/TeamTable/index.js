@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 // components
 import { NoData } from '../index';
 
-const TeamTable = ({ project, setAction }) => {
+const TeamTable = ({ project, setAction, deleteVacancy }) => {
   return (
     <Fragment>
       <div className="max-w-xl border-b-2">
@@ -46,6 +46,9 @@ const TeamTable = ({ project, setAction }) => {
                       <button
                         type="button"
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() =>
+                          deleteVacancy({ vacancyId: vacancy._id })
+                        }
                       >
                         Delete
                       </button>

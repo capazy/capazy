@@ -6,7 +6,7 @@ import {
   CREATE_PROJECT,
 } from '../../graphql/project';
 import { projectReducer } from '../../reducers/projectReducer';
-import { CREATE_VACANCY } from '../../graphql/vacancy';
+import { CREATE_VACANCY, CANCEL_VACANCY } from '../../graphql/vacancy';
 
 const ProjectContext = createContext({
   projectId: null,
@@ -47,6 +47,12 @@ const ProjectProvider = (props) => {
     },
   });
 
+  const [cancelVacancy] = useMutation(CANCEL_VACANCY, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_PROJECT', payload: data.cancelVacancy });
+    },
+  });
+
   //Create
   const create = async (values) => {
     try {
@@ -60,6 +66,16 @@ const ProjectProvider = (props) => {
   const update = async (values) => {
     try {
       await updateProject({ variables: values });
+    } catch (error) {
+      console.log('PROJECT ERROR', error);
+    }
+  };
+
+  //cancel vacancy
+  const deleteVacancy = async (values) => {
+    try {
+      // console.log(values);
+      await cancelVacancy({ variables: values });
     } catch (error) {
       console.log('PROJECT ERROR', error);
     }
@@ -85,6 +101,7 @@ const ProjectProvider = (props) => {
         resetProject,
         create,
         createVacancy,
+        deleteVacancy,
       }}
     >
       {props.children}

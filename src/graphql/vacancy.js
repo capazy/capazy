@@ -27,7 +27,6 @@ export const CREATE_VACANCY = gql`
       type
       startDate
       endDate
-      published
       isOpen
       creator {
         _id
@@ -47,6 +46,25 @@ export const JOIN_VACANCY = gql`
   mutation joinVacancy($vacancyId: ID!) {
     joinVacancy(vacancyId: $vacancyId) {
       _id
+    }
+  }
+`;
+
+export const CANCEL_VACANCY = gql`
+  mutation cancelVacancy($vacancyId: ID!) {
+    cancelVacancy(vacancyId: $vacancyId) {
+      title
+      description
+      type
+      startDate
+      endDate
+      isOpen
+      vacancies {
+        _id
+        title
+        experience
+        skills
+      }
     }
   }
 `;
