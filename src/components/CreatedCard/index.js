@@ -23,25 +23,36 @@ const CreatedCard = ({
               src="https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
               alt="project"
             />
-            <div className="flex-initial">
-              <p className="text-gray-900 font-bold text-xl ">{title}</p>
-              <p className="text-sm text-gray-600 flex items-center mb-2">
-                {type}
-              </p>
-              <p className="text-gray-700 text-base">{description}</p>
-              <h2 className="text-md font-semibold text-gray-800">
-                Start Date
-              </h2>
-              <p className="py-2 text-sm text-gray-700">
-                {startDate.slice(0, 10)}
-              </p>
-              <h2 className="text-md font-semibold text-gray-800">End Date</h2>
-              <p className="py-2 text-sm text-gray-700">
-                {endDate.slice(0, 10)}
-              </p>
-              <Link to={`/project/create?projectId=${_id}`}>
-                <button className="btn-small bg-brand-blue mt-2">Edit</button>
-              </Link>
+
+            <div className="flex justify-between w-full my-2">
+              <div>
+                <p className="text-gray-900 font-bold text-xl ">{title}</p>
+                <p className="text-sm text-gray-600 flex items-center mb-2">
+                  {type}
+                </p>
+                <p className="text-gray-700 text-base">{description}</p>
+              </div>
+              <div className="text-center mt-1">
+                <h2 className="text-xxs md:text-xs font-semibold text-gray-800">
+                  Start Date
+                </h2>
+                <p className="text-xxs md:text-xs py-2 text-sm text-gray-700">
+                  {startDate.slice(0, 10)}
+                </p>
+              </div>
+              <div className="text-center mt-1">
+                <h2 className="text-xxs md:text-xs font-semibold text-gray-800">
+                  End Date
+                </h2>
+                <p className="text-xxs md:text-xs py-2 text-sm text-gray-700">
+                  {endDate.slice(0, 10)}
+                </p>
+              </div>
+              <div className=" text-center">
+                <Link to={`/project/create?projectId=${_id}`}>
+                  <button className="btn-small bg-brand-blue mt-2">Edit</button>
+                </Link>
+              </div>
             </div>
           </div>
 

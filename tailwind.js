@@ -12,6 +12,9 @@ module.exports = {
       height: {
         xlx: '800px',
       },
+      fontSize: {
+        xxs: '.5rem',
+      },
     },
   },
   variants: {},

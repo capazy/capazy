@@ -32,19 +32,21 @@ const VacancyForm = (props) => {
       projectId: projectId,
       title: '',
       experience: '',
+      description: '',
       skills: '',
       timeCommitment: '',
       timeCommitmentUnits: '',
     },
     validationSchema: vacancyFormSchema,
     onSubmit: async (values, { resetForm }) => {
+      console.log('values', values);
       values.skills = await transformArray(values, 'skills');
       await createVacancy({ variables: values });
       resetForm();
     },
   });
 
-  const { title, skills, timeCommitment } = values;
+  const { title, skills, timeCommitment, description } = values;
 
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto">
@@ -69,10 +71,25 @@ const VacancyForm = (props) => {
             <p className="text-red-500 text-xs italic">{errors.title}</p>
           </div>
 
+          <div className="mb-4 ">
+            <label className="form-label">Description</label>
+            <textarea
+              id="description"
+              rows="3"
+              cols="2"
+              placeholder="Vacancy description..."
+              onChange={handleChange}
+              value={description}
+              className="form-input"
+              invalid={
+                touched.description && errors.description ? true : undefined
+              }
+            ></textarea>
+            <p className="form-error">{errors.description}</p>
+          </div>
+
           <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
-              Experience
-            </label>
+            <label className="form-label">Experience</label>
             <div className="mb-4 inline-block relative w-full">
               <select
                 id="experience"
