@@ -49,6 +49,7 @@ export const GET_PROJECT_BY_ID = gql`
         title
         experience
         skills
+        description
       }
     }
   }
@@ -71,6 +72,7 @@ export const GET_PROJECTS = gql`
         _id
         title
         experience
+        description
         skills
       }
     }
@@ -108,6 +110,7 @@ export const UPDATE_PROJECT = gql`
         _id
         title
         experience
+        description
         skills
       }
     }

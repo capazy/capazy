@@ -63,6 +63,7 @@ export const CANCEL_VACANCY = gql`
         _id
         title
         experience
+        description
         skills
       }
     }

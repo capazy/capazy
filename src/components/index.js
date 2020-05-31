@@ -10,3 +10,4 @@ export { default as FileUploader } from './FileUploader';
 export { default as TeamTable } from './TeamTable';
 export { default as Modal } from './Modal';
 export { default as NoData } from './NoData';
+export { default as FeedCard } from './FeedCard';
