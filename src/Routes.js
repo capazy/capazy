@@ -16,7 +16,7 @@ import {
   JoinedProjects,
   CreatedProjects,
   Chat,
-  Project,
+  ProjectWizard,
 } from './views';
 import Layout from './layout';
 
@@ -46,7 +46,7 @@ const Routes = () => {
         exact
         path="/project/create"
         layout={Layout}
-        component={Project}
+        component={ProjectWizard}
       />
 
       <RouteWithLayout exact path="/login" layout={Layout} component={Login} />
