@@ -26,7 +26,6 @@ const VacancyForm = (props) => {
   } = props;
   const [action, setAction] = useState(false);
 
-  console.log('VAC', projectId);
   const {
     handleSubmit,
     values,
@@ -47,7 +46,9 @@ const VacancyForm = (props) => {
     },
     validationSchema: vacancyFormSchema,
     onSubmit: async (values, { resetForm }) => {
+      values.projectId = projectId;
       values.skills = await transformArray(values, 'skills');
+      console.log('VALUES', values);
       await createVacancy({ variables: values });
       resetForm();
     },
@@ -217,7 +218,7 @@ const VacancyForm = (props) => {
           </div>
         </form>
       </Modal>
-      <div className="text-left">
+      {/* <div className="text-left">
         <button
           className="btn bg-brand-blue text-white mb-0"
           type="submit"
@@ -226,14 +227,15 @@ const VacancyForm = (props) => {
         >
           Back
         </button>
-      </div>
+      </div> */}
       <div className="flex items-center justify-end mt-4">
-        {/* <button
+        <button
           className="mb-3 rounded-full items-center shadow bg-gray-500 px-4 py-2 text-white hover:bg-gray-400 m-2"
           // onClick={() => toggleAlert('Project saved', 'success')}
+          onClick={previousStep}
         >
-          Save
-        </button> */}
+          back
+        </button>
         <button
           className="mb-3 rounded-full  items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
           onClick={handlePublish}

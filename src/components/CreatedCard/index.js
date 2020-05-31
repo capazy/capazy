@@ -31,22 +31,7 @@ const CreatedCard = ({
                     {type}
                   </p>
                 </div>
-                <div className="text-center mt-1">
-                  <h2 className="text-xxs md:text-xs font-semibold text-gray-800">
-                    Start Date
-                  </h2>
-                  <p className="text-xxs md:text-xs py-2 text-sm text-gray-700">
-                    {startDate.slice(0, 10)}
-                  </p>
-                </div>
-                <div className="text-center mt-1">
-                  <h2 className="text-xxs md:text-xs font-semibold text-gray-800">
-                    End Date
-                  </h2>
-                  <p className="text-xxs md:text-xs py-2 text-sm text-gray-700">
-                    {endDate.slice(0, 10)}
-                  </p>
-                </div>
+
                 <div className=" text-center">
                   <Link to={`/project/create?projectId=${_id}`}>
                     <button className="btn-small bg-brand-blue mt-2">
@@ -56,6 +41,24 @@ const CreatedCard = ({
                 </div>
               </div>
               <div>
+                <div className="flex justify-start">
+                  <div className="text-center mt-1">
+                    <h2 className="text-xs font-semibold text-gray-800">
+                      Start Date
+                    </h2>
+                    <p className="text-xs py-2 text-sm text-gray-700">
+                      {startDate.slice(0, 10)}
+                    </p>
+                  </div>
+                  <div className="text-center mt-1 ml-4">
+                    <h2 className="text-xs font-semibold text-gray-800">
+                      End Date
+                    </h2>
+                    <p className="text-xs py-2 text-sm text-gray-700">
+                      {endDate.slice(0, 10)}
+                    </p>
+                  </div>
+                </div>
                 <p className="text-gray-700 text-base">{description}</p>
               </div>
             </div>

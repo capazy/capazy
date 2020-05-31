@@ -74,7 +74,6 @@ const ProjectProvider = (props) => {
   //cancel vacancy
   const deleteVacancy = async (values) => {
     try {
-      // console.log(values);
       await cancelVacancy({ variables: values });
     } catch (error) {
       console.log('PROJECT ERROR', error);
