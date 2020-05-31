@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 // components
-import { SelectMulti, Modal, FileUploader } from '../../components';
+import { SelectMulti, FileUploader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -21,7 +21,6 @@ const UserForm = ({ match }) => {
   const { update, user: userData, userLoading } = useContext(UserContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
-  const [openPrifilePictureModal, setOpenPrifilePictureModal] = useState(false);
   const { id } = match.params;
   const isCreateMode = !id;
 
@@ -120,21 +119,12 @@ const UserForm = ({ match }) => {
                 src={image}
                 alt=""
               />
-              <button
-                onClick={() => setOpenPrifilePictureModal(true)}
-                className="btn-small mt-3"
-                type="button"
-              >
-                Change profile picture
-              </button>
-              <p className="pt-2 text-lg font-semibold">
-                {userData && `${userData.firstName} ${userData.lastName}`}
-              </p>
-            </div>
-
-            {openPrifilePictureModal && (
-              <Modal action={openPrifilePictureModal}>
+              <div>
+                <button className="btn-small mt-3" type="button">
+                  <label htmlFor="upload">Change profile picture</label>
+                </button>
                 <FileUploader
+                  id={'upload'}
                   action={update}
                   field={{
                     fileName: 'profilePictureName',
@@ -142,10 +132,12 @@ const UserForm = ({ match }) => {
                   }}
                   accept={'image/*'}
                   multiple={false}
-                  handleOpen={setOpenPrifilePictureModal}
                 />
-              </Modal>
-            )}
+              </div>
+              <p className="pt-2 text-lg font-semibold">
+                {userData && `${userData.firstName} ${userData.lastName}`}
+              </p>
+            </div>
           </div>
           {/* COMPANY */}
           <h1 className="text-gray-900 text-xl mb-1">Company</h1>
@@ -162,7 +154,7 @@ const UserForm = ({ match }) => {
               invalid={
                 touched.companyName && errors.companyName ? true : undefined
               }
-            ></input>
+            />
 
             <p className="form-error">{errors.companyName}</p>
           </div>
@@ -183,7 +175,7 @@ const UserForm = ({ match }) => {
                   ? true
                   : undefined
               }
-            ></input>
+            />
 
             <p className="form-error">{errors.companyName}</p>
           </div>
