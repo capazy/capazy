@@ -2,22 +2,29 @@ import React, { Fragment } from 'react';
 import { firebaseApp } from '../../firebase';
 import { useFormik } from 'formik';
 
-const FileUploader = ({ action, field, accept, multiple, handleOpen }) => {
+const FileUploader = ({
+  projectId,
+  action,
+  field,
+  accept,
+  multiple,
+  handleOpen,
+}) => {
   const { handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       files: [],
     },
-    onSubmit: async ({ files }) => {
+    onSubmit: ({ files }) => {
+      let formData = [];
       const storageRef = firebaseApp.storage().ref();
       files.map(async (file) => {
         const fileRef = storageRef.child(file.name);
-        await fileRef.put(file);
-        const formData = {
+        fileRef.put(file);
+        formData.push({
           [field.fileName]: file.name,
           [field.fileUrl]: await fileRef.getDownloadURL(),
-        };
-        await action(formData);
-        handleOpen(false);
+        });
+        await action({ projectId, files: formData });
       });
     },
   });

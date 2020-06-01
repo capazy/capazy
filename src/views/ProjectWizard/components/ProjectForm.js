@@ -24,7 +24,7 @@ const ProjectForm = (props) => {
       startDate: '',
       endDate: '',
     },
-    validationSchema: projectFormSchema,
+    // validationSchema: projectFormSchema,
     onSubmit: async (values) => {
       if (!projectId) {
         await create(values);

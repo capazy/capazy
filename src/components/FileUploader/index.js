@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { firebaseApp } from '../../firebase';
-// import { useFormik } from 'formik';
 
-const FileUploader2 = ({ id, action, field, accept, multiple }) => {
-  const handleChange = async (e) => {
+const FileUploader = ({ id, projectId, action, field, accept, multiple }) => {
+  const oneFile = async (e) => {
     const file = e.target.files[0];
     const storageRef = firebaseApp.storage().ref();
     const fileRef = storageRef.child(file.name);
@@ -15,18 +14,31 @@ const FileUploader2 = ({ id, action, field, accept, multiple }) => {
     await action(formData);
   };
 
+  const multipleFiles = async (e) => {
+    let formData = [];
+    const files = Array.from(e.target.files);
+    const storageRef = firebaseApp.storage().ref();
+    files.map(async (file) => {
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      formData.push({
+        [field.fileName]: file.name,
+        [field.fileUrl]: await fileRef.getDownloadURL(),
+      });
+      await action({ projectId, files: formData });
+    });
+  };
+
   return (
-    <Fragment>
-      <input
-        type="file"
-        id={id}
-        accept={accept}
-        multiple={multiple}
-        onChange={handleChange}
-        style={{ display: 'none' }}
-      />
-    </Fragment>
+    <input
+      type="file"
+      id={id}
+      accept={accept}
+      multiple={multiple}
+      onChange={multiple ? multipleFiles : oneFile}
+      style={{ display: 'none' }}
+    />
   );
 };
 
-export default FileUploader2;
+export default FileUploader;

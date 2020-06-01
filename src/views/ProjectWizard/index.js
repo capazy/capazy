@@ -5,6 +5,7 @@ import qs from 'qs';
 
 // components
 import ProjectForm from './components/ProjectForm';
+import ProjectFiles from './components/ProjectFiles';
 import VacancyForm from './components/VacancyForm';
 
 // context
@@ -47,7 +48,6 @@ const Project = (props) => {
 
   const handlePublish = async () => {
     try {
-      console.log(projectId);
       const values = { projectId, isOpen: true };
       await update(values);
       setIsPublished(true);
@@ -72,6 +72,7 @@ const Project = (props) => {
             project={project}
             create={create}
           />
+          <ProjectFiles projectId={projectId} update={update} />
           <VacancyForm
             projectId={projectId}
             project={project}

@@ -48,7 +48,6 @@ const VacancyForm = (props) => {
     onSubmit: async (values, { resetForm }) => {
       values.projectId = projectId;
       values.skills = await transformArray(values, 'skills');
-      console.log('VALUES', values);
       await createVacancy({ variables: values });
       resetForm();
     },

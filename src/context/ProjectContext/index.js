@@ -58,7 +58,7 @@ const ProjectProvider = (props) => {
     try {
       await createProject({ variables: values });
     } catch (error) {
-      console.log('PROJECT ERROR', error);
+      console.log(error);
     }
   };
 
@@ -67,7 +67,7 @@ const ProjectProvider = (props) => {
     try {
       await updateProject({ variables: values });
     } catch (error) {
-      console.log('PROJECT ERROR', error);
+      console.log(error);
     }
   };
 
@@ -76,7 +76,7 @@ const ProjectProvider = (props) => {
     try {
       await cancelVacancy({ variables: values });
     } catch (error) {
-      console.log('PROJECT ERROR', error);
+      console.log(error);
     }
   };
 
