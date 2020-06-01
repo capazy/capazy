@@ -7,25 +7,26 @@ const FileUploader = ({ id, projectId, action, field, accept, multiple }) => {
     const storageRef = firebaseApp.storage().ref();
     const fileRef = storageRef.child(file.name);
     await fileRef.put(file);
-    const formData = {
+    const values = {
       [field.fileName]: file.name,
       [field.fileUrl]: await fileRef.getDownloadURL(),
     };
-    await action(formData);
+    await action(values);
   };
 
   const multipleFiles = async (e) => {
-    let formData = [];
     const files = Array.from(e.target.files);
     const storageRef = firebaseApp.storage().ref();
-    files.map(async (file) => {
+    const result = files.map(async (file) => {
       const fileRef = storageRef.child(file.name);
       await fileRef.put(file);
-      formData.push({
+      return {
         [field.fileName]: file.name,
         [field.fileUrl]: await fileRef.getDownloadURL(),
-      });
-      await action({ projectId, files: formData });
+      };
+    });
+    Promise.all(result).then((values) => {
+      action({ projectId, method: '$push', files: values });
     });
   };
 

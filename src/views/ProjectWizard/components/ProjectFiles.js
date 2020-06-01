@@ -8,7 +8,6 @@ import { ProjectContext } from '../../../context/ProjectContext';
 
 const ProjectFiles = ({ projectId, update, nextStep, previousStep }) => {
   const { project } = useContext(ProjectContext);
-  console.log(project);
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto shadow-md rounded">
       <div className="text-center mx-auto mb-4">

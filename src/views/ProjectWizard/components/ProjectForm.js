@@ -30,6 +30,7 @@ const ProjectForm = (props) => {
         await create(values);
       } else {
         values.projectId = projectId;
+        values.method = '$set';
         await update(values);
       }
       nextStep();
