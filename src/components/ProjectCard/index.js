@@ -19,16 +19,20 @@ const ProjectCard = ({
       </div>
       <div className="py-4 px-4">
         <h1 className="text-md font-semibold text-gray-800">{type}</h1>
-        <p className="py-2 text-sm text-gray-700">{description}</p>
-        <div className="flex justify-around">
+        <p className="py-2 text-sm text-gray-700 border-b">{description}</p>
+        <div className="flex justify-around my-2 border-b">
           <div className="">
-            <h2 className="text-sm font-semibold text-gray-800">Start Date</h2>
+            <h2 className="text-sm font-semibold text-gray-800 leading-none">
+              Start Date
+            </h2>
             <p className=" text-xs py-2 text-sm text-gray-700">
               {startDate.slice(0, 10)}
             </p>
           </div>
           <div className="">
-            <h2 className="text-sm font-semibold text-gray-800">End Date</h2>
+            <h2 className="text-sm font-semibold text-gray-800 leading-none">
+              End Date
+            </h2>
             <p className="text-xs py-2 text-sm text-gray-700">
               {endDate.slice(0, 10)}
             </p>
@@ -58,13 +62,16 @@ const ProjectCard = ({
                           </p>
                         ))}
                       </span>
+                      <p className="text-gray-800 text-sm">
+                        {vacancy.description}
+                      </p>
                     </td>
                     <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
                       <span className="inline-block bg-green-200 px-2 py-0 text-sm rounded-full text-gray-700 mr-2">
                         open
                       </span>
                     </td>
-                    <td className="w-1/4 py-1 px-6 border-b border-grey-light">
+                    <td className="w-1/4 py-1  border-b border-grey-light">
                       <button
                         onClick={() => handleJoin(vacancy._id)}
                         className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
