@@ -127,3 +127,27 @@ export const UPDATE_PROJECT = gql`
     }
   }
 `;
+
+export const DELETE_PROJECT_FILE = gql`
+  mutation deleteProjectFile($projectId: ID!, $fileId: ID!) {
+    deleteProjectFile(projectId: $projectId, fileId: $fileId) {
+      title
+      description
+      type
+      startDate
+      endDate
+      isOpen
+      files {
+        _id
+        name
+        url
+      }
+      vacancies {
+        _id
+        title
+        experience
+        skills
+      }
+    }
+  }
+`;

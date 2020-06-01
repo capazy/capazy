@@ -7,7 +7,6 @@ export { default as UserCard } from './UserCard';
 export { default as Alert } from './Alert';
 export { default as LoadingCard } from './LoadingCard';
 export { default as FileUploader } from './FileUploader';
-export { default as FileUploaderSubmit } from './FileUploaderSubmit';
 export { default as TeamTable } from './TeamTable';
 export { default as Modal } from './Modal';
 export { default as NoData } from './NoData';

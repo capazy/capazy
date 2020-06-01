@@ -7,7 +7,13 @@ import { FileUploader } from '../../../components';
 import { ProjectContext } from '../../../context/ProjectContext';
 
 const ProjectFiles = ({ projectId, update, nextStep, previousStep }) => {
-  const { project } = useContext(ProjectContext);
+  const { project, deleteFile } = useContext(ProjectContext);
+
+  const handleDelete = (fileId) => {
+    const values = { projectId, fileId };
+    deleteFile(values);
+  };
+
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto shadow-md rounded">
       <div className="text-center mx-auto mb-4">
@@ -28,15 +34,31 @@ const ProjectFiles = ({ projectId, update, nextStep, previousStep }) => {
       </div>
       <div>
         {project && project.files ? (
-          <ul>
-            {project.files.map((file) => (
-              <li key={file._id}>
-                <a href={file.url} target="_blank" rel="noopener noreferrer">
-                  {file.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <table>
+            <tbody>
+              {project.files.map((file) => (
+                <tr key={file._id}>
+                  <th>
+                    <button
+                      className="btn-small"
+                      onClick={() => handleDelete(file._id)}
+                    >
+                      X
+                    </button>
+                  </th>
+                  <th className="text-left">
+                    <a
+                      href={file.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {file.name}
+                    </a>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
           <p>No files</p>
         )}

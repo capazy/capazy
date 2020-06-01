@@ -217,29 +217,19 @@ const VacancyForm = (props) => {
           </div>
         </form>
       </Modal>
-      {/* <div className="text-left">
+
+      <div className="flex justify-between">
         <button
           className="btn bg-brand-blue text-white mb-0"
-          type="submit"
-          id="#projectForm"
           onClick={previousStep}
         >
           Back
         </button>
-      </div> */}
-      <div className="flex items-center justify-end mt-4">
         <button
-          className="mb-3 rounded-full items-center shadow bg-gray-500 px-4 py-2 text-white hover:bg-gray-400 m-2"
-          // onClick={() => toggleAlert('Project saved', 'success')}
-          onClick={previousStep}
-        >
-          back
-        </button>
-        <button
-          className="mb-3 rounded-full  items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
+          className="btn bg-brand-blue text-white mb-0"
           onClick={handlePublish}
         >
-          Publish
+          Post
         </button>
       </div>
     </div>

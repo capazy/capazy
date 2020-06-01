@@ -4,6 +4,7 @@ import {
   UPDATE_PROJECT,
   GET_PROJECT_BY_ID,
   CREATE_PROJECT,
+  DELETE_PROJECT_FILE,
 } from '../../graphql/project';
 import { projectReducer } from '../../reducers/projectReducer';
 import { CREATE_VACANCY, CANCEL_VACANCY } from '../../graphql/vacancy';
@@ -19,7 +20,8 @@ const ProjectProvider = (props) => {
   const { project } = state;
   const [projectId, setProjectId] = useState(null);
 
-  //Create
+  // APOLLO FUNTIONS
+  // create
   const [createProject] = useMutation(CREATE_PROJECT, {
     update(_, { data }) {
       dispatch({ type: 'CREATE_PROJECT', payload: data.createProject });
@@ -27,33 +29,43 @@ const ProjectProvider = (props) => {
     },
   });
 
-  //Update
+  // update
   const [updateProject] = useMutation(UPDATE_PROJECT, {
     update(_, { data: { updateProject: project } }) {
       dispatch({ type: 'UPDATE_PROJECT', payload: project });
     },
   });
 
-  //Get project
+  // get project
   const [getProjectById] = useLazyQuery(GET_PROJECT_BY_ID, {
     onCompleted: (data) => {
       dispatch({ type: 'GET_PROJECT_BY_ID', payload: data.projectById });
     },
   });
 
+  // create vacancy
   const [createVacancy] = useMutation(CREATE_VACANCY, {
     update(_, { data }) {
       dispatch({ type: 'UPDATE_PROJECT', payload: data.createVacancy });
     },
   });
 
+  // delete vacancy
   const [cancelVacancy] = useMutation(CANCEL_VACANCY, {
     update(_, { data }) {
       dispatch({ type: 'UPDATE_PROJECT', payload: data.cancelVacancy });
     },
   });
 
-  //Create
+  // delete project file
+  const [deleteProjectFile] = useMutation(DELETE_PROJECT_FILE, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_PROJECT', payload: data.deleteProjectFile });
+    },
+  });
+
+  // CONTEXT FUNTIONS
+  // Create
   const create = async (values) => {
     try {
       await createProject({ variables: values });
@@ -62,7 +74,7 @@ const ProjectProvider = (props) => {
     }
   };
 
-  //update
+  // update
   const update = async (values) => {
     try {
       await updateProject({ variables: values });
@@ -71,7 +83,7 @@ const ProjectProvider = (props) => {
     }
   };
 
-  //cancel vacancy
+  // cancel vacancy
   const deleteVacancy = async (values) => {
     try {
       await cancelVacancy({ variables: values });
@@ -80,7 +92,7 @@ const ProjectProvider = (props) => {
     }
   };
 
-  //Reset Project
+  // Reset Project
   const resetProject = async () => {
     try {
       await setProjectId(null);
@@ -89,6 +101,17 @@ const ProjectProvider = (props) => {
       console.log('RESET PROJETC', error);
     }
   };
+
+  // delete project file
+  const deleteFile = async (values) => {
+    try {
+      // console.log(values);
+      await deleteProjectFile({ variables: values });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ProjectContext.Provider
       value={{
@@ -101,6 +124,7 @@ const ProjectProvider = (props) => {
         create,
         createVacancy,
         deleteVacancy,
+        deleteFile,
       }}
     >
       {props.children}
