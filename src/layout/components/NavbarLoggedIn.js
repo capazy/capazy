@@ -91,7 +91,7 @@ const NavbarLoggedIn = () => {
               <img
                 src="https://res.cloudinary.com/dpnlmwgxh/image/upload/v1588518483/Main/text-blue_lbqwwy.png"
                 alt=""
-                className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1"
+                className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1 "
               />
             </Link>
             <div className="hidden lg:block my-auto">{links()}</div>
@@ -117,11 +117,11 @@ const NavbarLoggedIn = () => {
                   onClick={() => setOpenLogout(!isOpenLogout)}
                 >
                   <img
-                    className="w-8 h-8 rounded-full mr-4"
+                    className="w-8 h-8 rounded-full mr-4 object-cover object-center"
                     src={image}
                     alt=""
                   />
-                  <span className="hidden md:inline-block">
+                  <span className="hidden md:inline-block ">
                     Hi, {user.firstName}
                   </span>
                   <svg

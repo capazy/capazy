@@ -68,8 +68,8 @@ const CreatedCard = ({
             <div className="grid grid-cols-3 text-center border-b">
               <div className="col-start-1">
                 {' '}
-                <h1 className="text-md font-semibold text-gray-600">
-                  Vacancies
+                <h1 className="text-md text-left font-semibold text-gray-600">
+                  Vacancies (5)
                 </h1>
               </div>
               <div className="col-start-2">

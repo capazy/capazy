@@ -1,139 +1,106 @@
 import React, { useState } from 'react';
 import { Modal } from '../../components';
 import ProjectCard from '../ProjectCard';
-const FeedCard = ({
-  //   project: { title, description, type, startDate, endDate, vacancies },
-  project,
-  handleJoin,
-}) => {
+import { Link } from 'react-router-dom';
+const FeedCard = ({ project, handleJoin }) => {
+  const {
+    description,
+    title,
+    skills,
+    vacancies,
+    creator: { _id, profilePictureUrl, firstName, lastName, companyName },
+  } = project;
   const [openModal, setOpenModal] = useState();
   return (
-    // <div class="max-w-xl bg-white shadow-lg rounded-lg overflow-hidden my-10">
-    //   <div class="px-4 py-2">
-    //     <h1 class="text-gray-900 font-bold text-3xl uppercase">NIKE AIR</h1>
-    //     <p class="text-gray-600 text-sm mt-1">
-    //       Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quos
-    //       quidem sequi illum facere recusandae voluptatibus
-    //     </p>
-    //   </div>
-    //   <img
-    //     class="h-56 w-full object-cover mt-2"
-    //     src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-    //     alt="NIKE AIR"
-    //   />
-    //   <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
-    //     <h1 class="text-gray-200 font-bold text-xl">$129</h1>
-    //     <button class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">
-    //       Add to card
-    //     </button>
-    //   </div>
-    // </div>
-    <div
-      className=" bg-white shadow-md rounded-lg overflow-hidden my-2 "
-      // style={{ height: '50vh' }}
-    >
-      <img
-        className="w-full h-32 object-cover object-center"
-        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        alt="avatar"
-      />
-      <div className="flex items-center px-1 py-1 bg-gray-800">
-        <h1 className="mx-3 text-white font-semibold text-lg">
-          {project.title}
-        </h1>
+    <div className="border border-gray-200 h-auto border-t-0">
+      <div className="flex flex-shrink-0 p-4 pb-0 ">
+        <Link to={`/user/edit/${_id}`}>
+          <div className="flex items-center">
+            <div>
+              <img
+                className="inline-block h-10 w-10 rounded-full object-cover object-center"
+                src={profilePictureUrl}
+                alt=""
+              />
+            </div>
+            <div className="ml-3">
+              <p className="text-base leading-6 font-medium ">
+                {firstName} {lastName}{' '}
+                <span className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                  @{companyName} 16 April
+                </span>
+              </p>
+            </div>
+          </div>
+        </Link>
       </div>
-      <div className="py-4 px-4">
-        <h1 className="text-md font-semibold text-gray-800">{project.type}</h1>
-        <p className="py-2 text-sm text-gray-700 border-b">
-          {project.description}
-        </p>
-        <div className="flex justify-around my-2 py border-b">
-          <div className="">
-            <h2 className="text-sm font-semibold text-gray-800 leading-none">
-              Start Date
-            </h2>
-            <p className=" text-xs py-2 text-sm text-gray-700">
-              {project.startDate.slice(0, 10)}
-            </p>
-          </div>
-          <div className="">
-            <h2 className="text-sm font-semibold text-gray-800 leading-none">
-              End Date
-            </h2>
-            <p className="text-xs py-2 text-sm text-gray-700">
-              {project.endDate.slice(0, 10)}
-            </p>
-          </div>
-        </div>
 
-        {/* TABLE */}
-        <div className=" mx-auto">
-          <div className="bg-white rounded my-2 w-full">
-            <h1 className="text-md font-semibold text-gray-800">Vacancies</h1>
-            <table className="text-left border-collapse table-fixed w-full ">
-              <tbody className="w-full">
-                {/* <div className="w-full"> */}
-                {project.vacancies.map((vacancy) => (
-                  <tr key={vacancy._id} className=" ">
-                    <td className="border-b border-grey-light w-1/2 px-1 py-2 ">
-                      <span className="w-full py-3  ">
-                        <p className="text-gray-800 text-sm">{vacancy.title}</p>
-                        {vacancy.skills.map((skill, i) => (
-                          <p
-                            key={skill[i]}
-                            className="text-xs text-gray-500 font-medium"
-                          >
-                            {skill},
-                          </p>
-                        ))}
-                      </span>
-                    </td>
-                    <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
-                      <span className="inline-block bg-green-200 px-2 py-0 text-sm rounded-full text-gray-700 mr-2">
-                        open
-                      </span>
-                    </td>
-                    {/* <td className="w-1/4 py-1 px-6 border-b border-grey-light">
-                      <button
-                        onClick={() => handleJoin(vacancy._id)}
-                        className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
-                      >
-                        Apply
-                      </button>
-                    </td> */}
-                  </tr>
-                ))}
-                {/* </div> */}
-              </tbody>
-            </table>
-            <button
-              className="btn bg-green-300 w-full mt-3"
-              onClick={() => setOpenModal(!openModal)}
-            >
-              view more
-            </button>
-            <Modal action={openModal}>
-              <div className="mx-2">
-                <ProjectCard project={project} handleJoin={handleJoin} />
+      <div className="pl-16">
+        <p className="font-semibold">----> {title}</p>
+        <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
+          {description}
+          <br />
+          <span className="font-semibold">Skills:</span>
+          <span className="text-brand-blue text-sm">
+            {' '}
+            {skills.map((skill) => `#${skill} `)}
+          </span>
+          <br />
+          <span className="font-semibold">Vacancies:</span>
+          <span className="text-brand-blue text-sm">
+            {' '}
+            {vacancies.map((vacancy) => `#${vacancy.title} `)}
+          </span>
+        </p>
+
+        <div className="md:flex-shrink pr-4 pt-3">
+          <img
+            className="rounded-lg w-full h-64"
+            src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80"
+            alt="Woman paying for a purchase"
+          />
+        </div>
+        <div className="flex">
+          <div className="w-full">
+            <div className="flex items-center">
+              <div className="flex-1 text-center py-2 my-4">
+                <div className="flex justify-between items-center flex-row px-2 z-50 ">
+                  <p className="flex items-center text-gray-800 ">
+                    {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
+                    15 views
+                  </p>
+                  <button
+                    className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
+                    onClick={() => setOpenModal(!openModal)}
+                  >
+                    view more
+                  </button>
+                </div>
               </div>
-              <button
-                className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
-                onClick={() => setOpenModal(!openModal)}
-              >
-                <svg
-                  className="fill-current text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                >
-                  <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                </svg>
-              </button>
-            </Modal>
+            </div>
           </div>
         </div>
       </div>
+      <hr className="border-gray-300" />
+      <Modal action={openModal}>
+        <div className="mx-2">
+          <ProjectCard project={project} handleJoin={handleJoin} />
+        </div>
+        <button
+          className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
+          onClick={() => setOpenModal(!openModal)}
+        >
+          <svg
+            className="fill-current text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+          >
+            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+          </svg>
+        </button>
+      </Modal>
     </div>
   );
 };
