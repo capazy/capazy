@@ -62,7 +62,7 @@ const TeamTable = ({ project, setAction, deleteVacancy }) => {
           )}
           <div className="text-right">
             <button
-              className="btn bg-brand-blue text-white mb-0"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
               onClick={() => setAction(true)}
             >
               Add Vacancy

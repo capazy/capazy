@@ -72,12 +72,17 @@ const Project = (props) => {
             project={project}
             create={create}
           />
-          <ProjectFiles projectId={projectId} update={update} />
+
           <VacancyForm
             projectId={projectId}
             project={project}
             createVacancy={createVacancy}
             deleteVacancy={deleteVacancy}
+            handlePublish={handlePublish}
+          />
+          <ProjectFiles
+            projectId={projectId}
+            update={update}
             handlePublish={handlePublish}
           />
         </StepWizard>

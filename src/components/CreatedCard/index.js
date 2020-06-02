@@ -2,20 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CreatedCard = ({
-  project: { title, description, type, startDate, endDate, vacancies, _id },
+  project: {
+    title,
+    description,
+    type,
+    startDate,
+    endDate,
+    vacancies,
+    _id,
+    projectPictureUrl,
+  },
   handleSelect,
 }) => {
   return (
     <div className="my-10">
       <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t">
-        <div
-          className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-          style={{
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
-          }}
-          title="Woman holding a mug"
-        ></div>
+        {projectPictureUrl && (
+          <div
+            className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+            style={{
+              backgroundImage:
+                'url(https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
+            }}
+            title="Woman holding a mug"
+          ></div>
+        )}
         <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
           <div className="flex mb-8">
             <img

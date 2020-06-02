@@ -1,7 +1,15 @@
 import React from 'react';
 
 const ProjectCard = ({
-  project: { title, description, type, startDate, endDate, vacancies },
+  project: {
+    title,
+    description,
+    type,
+    startDate,
+    endDate,
+    vacancies,
+    projectPictureUrl,
+  },
   handleJoin,
 }) => {
   return (
@@ -9,11 +17,13 @@ const ProjectCard = ({
       className=" bg-white shadow-md rounded-lg overflow-hidden my-2 "
       // style={{ height: '50vh' }}
     >
-      <img
-        className="w-full h-32 object-cover object-center"
-        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        alt="avatar"
-      />
+      {projectPictureUrl && (
+        <img
+          className="w-full h-32 object-cover object-center"
+          src={projectPictureUrl}
+          alt="avatar"
+        />
+      )}
       <div className="flex items-center px-1 py-1 bg-gray-800">
         <h1 className="mx-3 text-white font-semibold text-lg">{title}</h1>
       </div>

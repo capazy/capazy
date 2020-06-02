@@ -8,6 +8,7 @@ const FeedCard = ({ project, handleJoin }) => {
     title,
     skills,
     vacancies,
+    projectPictureUrl,
     creator: { _id, profilePictureUrl, firstName, lastName, companyName },
   } = project;
   const [openModal, setOpenModal] = useState();
@@ -53,13 +54,15 @@ const FeedCard = ({ project, handleJoin }) => {
           </span>
         </p>
 
-        <div className="md:flex-shrink pr-4 pt-3">
-          <img
-            className="rounded-lg w-full h-64"
-            src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=448&q=80"
-            alt="Woman paying for a purchase"
-          />
-        </div>
+        {projectPictureUrl && (
+          <div className="md:flex-shrink pr-4 pt-3">
+            <img
+              className="rounded-lg w-full h-64 object-cover object-center"
+              src={projectPictureUrl}
+              alt="Woman paying for a purchase"
+            />
+          </div>
+        )}
         <div className="flex">
           <div className="w-full">
             <div className="flex items-center">
