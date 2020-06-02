@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 
+// components
+import { FileUploader } from '../../../components';
+
 // utils
 import { projectFormSchema } from '../../../utils/formikSchemas';
 
@@ -53,11 +56,29 @@ const ProjectForm = (props) => {
       <h1 className="text-lg font-semibold pt-2 mb-4">
         Step 1 of 2: Project info
       </h1>
-
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
         onSubmit={handleSubmit}
       >
+        <div>
+          <img src={project && project.projectPictureUrl} alt="" />
+        </div>
+        <div>
+          <button className="btn-small mt-3" type="button">
+            <label htmlFor="upload">Choose project picture</label>
+          </button>
+          <FileUploader
+            id={'upload'}
+            projectId={projectId}
+            action={update}
+            field={{
+              fileName: 'projectPictureName',
+              fileUrl: 'projectPictureUrl',
+            }}
+            accept={'image/*'}
+            multiple={false}
+          />
+        </div>
         <div className="mb-4">
           <label className="form-label">Title</label>
           <input

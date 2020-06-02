@@ -11,6 +11,11 @@ const FileUploader = ({ id, projectId, action, field, accept, multiple }) => {
       [field.fileName]: file.name,
       [field.fileUrl]: await fileRef.getDownloadURL(),
     };
+    if (projectId) {
+      values.projectId = projectId;
+      values.method = '$set';
+      await action(values);
+    }
     await action(values);
   };
 

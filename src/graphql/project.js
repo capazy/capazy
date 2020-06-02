@@ -24,6 +24,7 @@ export const CREATE_PROJECT = gql`
       startDate
       endDate
       isOpen
+      projectPictureUrl
       creator {
         _id
       }
@@ -44,6 +45,7 @@ export const GET_PROJECT_BY_ID = gql`
       startDate
       endDate
       isOpen
+      projectPictureUrl
       files {
         _id
         name
@@ -69,6 +71,7 @@ export const GET_PROJECTS = gql`
       startDate
       endDate
       isOpen
+      projectPictureUrl
       creator {
         _id
       }
@@ -93,6 +96,7 @@ export const UPDATE_PROJECT = gql`
     $endDate: String
     $isOpen: Boolean
     $files: [FileInput]
+    $projectPictureUrl: String
   ) {
     updateProject(
       projectInput: {
@@ -105,6 +109,7 @@ export const UPDATE_PROJECT = gql`
         endDate: $endDate
         isOpen: $isOpen
         files: $files
+        projectPictureUrl: $projectPictureUrl
       }
     ) {
       title
@@ -113,6 +118,7 @@ export const UPDATE_PROJECT = gql`
       startDate
       endDate
       isOpen
+      projectPictureUrl
       files {
         _id
         name
@@ -137,6 +143,7 @@ export const DELETE_PROJECT_FILE = gql`
       startDate
       endDate
       isOpen
+      projectPictureUrl
       files {
         _id
         name
