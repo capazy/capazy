@@ -9,7 +9,7 @@ import { GET_USER_BY_ID } from '../../graphql/user';
 import { Link } from 'react-router-dom';
 
 // components
-import { FileUploader } from '../../components';
+import { PictureUploader } from '../../components';
 
 const Profile = ({ match }) => {
   const { user, update } = useContext(UserContext);
@@ -81,15 +81,13 @@ const Profile = ({ match }) => {
                     <button className="btn-small mt-3" type="button">
                       <label htmlFor="upload">Change profile picture</label>
                     </button>
-                    <FileUploader
+                    <PictureUploader
                       id={'upload'}
                       action={update}
                       field={{
                         fileName: 'profilePictureName',
                         fileUrl: 'profilePictureUrl',
                       }}
-                      accept={'image/*'}
-                      multiple={false}
                     />
                   </div>
                 </div>

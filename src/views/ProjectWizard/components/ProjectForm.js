@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 // components
@@ -51,12 +52,12 @@ const ProjectForm = (props) => {
   const { title, description, startDate, endDate } = values;
 
   return (
-    <div className="pt-2 w-full">
+    <div className="w-full">
       <h1 className="text-lg font-semibold pt-2 mb-4">
         Step 1 of 3: Project info
       </h1>
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
+        className="bg-white shadow-md rounded px-8 py-6 mb-4"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
@@ -135,8 +136,16 @@ const ProjectForm = (props) => {
           />
         </div>
         <p className="form-error">{errors.endDate}</p>
-        <div className="text-right">
-          <button className="btn bg-brand-blue text-white mb-0" type="submit">
+
+        <div className="border-b-2 my-4" />
+
+        <div className="flex justify-between mt-5">
+          <Link to="/created-projects">
+            <button type="button" className="btn bg-brand-blue text-white mb-0">
+              Cancel
+            </button>
+          </Link>
+          <button type="submit" className="btn bg-brand-blue text-white mb-0">
             Next
           </button>
         </div>

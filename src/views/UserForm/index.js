@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 // components
-import { SelectMulti, FileUploader } from '../../components';
+import { SelectMulti, PictureUploader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -123,15 +123,13 @@ const UserForm = ({ match }) => {
                 <button className="btn-small mt-3" type="button">
                   <label htmlFor="upload">Change profile picture</label>
                 </button>
-                <FileUploader
+                <PictureUploader
                   id={'upload'}
                   action={update}
                   field={{
                     fileName: 'profilePictureName',
                     fileUrl: 'profilePictureUrl',
                   }}
-                  accept={'image/*'}
-                  multiple={false}
                 />
               </div>
               <p className="pt-2 text-lg font-semibold">
