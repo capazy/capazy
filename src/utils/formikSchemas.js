@@ -50,7 +50,6 @@ export const projectFormSchema = Yup.object({
   title: Yup.string().required(),
   description: Yup.string().required(),
   type: Yup.string().required(),
-  published: Yup.string().required(),
   startDate: Yup.string().required(),
   endDate: Yup.string().required(),
 });
@@ -58,6 +57,7 @@ export const projectFormSchema = Yup.object({
 export const vacancyFormSchema = Yup.object({
   title: Yup.string().required(),
   experience: Yup.string().required(),
+  description: Yup.string().required(),
   skills: Yup.array()
     .min(1, 'Pick at least 1 skill')
     .of(

@@ -5,6 +5,7 @@ const JoinedCard = ({
     title: titleVancancy,
     experience,
     project: { description, type, startDate, endDate, title },
+    project,
     selectedUser: { _id: selectedUserId },
   },
   currentUserId,

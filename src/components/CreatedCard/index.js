@@ -2,69 +2,116 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CreatedCard = ({
-  project: { title, description, type, startDate, endDate, vacancies, _id },
+  project: {
+    title,
+    description,
+    type,
+    startDate,
+    endDate,
+    vacancies,
+    _id,
+    projectPictureUrl,
+  },
   handleSelect,
 }) => {
   return (
     <div className="my-10">
       <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t">
-        <div
-          className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-          style={{
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
-          }}
-          title="Woman holding a mug"
-        ></div>
+        {projectPictureUrl && (
+          <div
+            className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+            style={{
+              backgroundImage: `url(${projectPictureUrl})`,
+            }}
+            title="Woman holding a mug"
+          ></div>
+        )}
         <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
           <div className="flex mb-8">
-            <img
-              className="hidden lg:block flex-initial mr-2 h-48"
-              src="https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-              alt="project"
-            />
-            <div className="flex-initial">
-              <p className="text-gray-900 font-bold text-xl ">{title}</p>
-              <p className="text-sm text-gray-600 flex items-center mb-2">
-                {type}
-              </p>
-              <p className="text-gray-700 text-base">{description}</p>
-              <h2 className="text-md font-semibold text-gray-800">
-                Start Date
-              </h2>
-              <p className="py-2 text-sm text-gray-700">
-                {startDate.slice(0, 10)}
-              </p>
-              <h2 className="text-md font-semibold text-gray-800">End Date</h2>
-              <p className="py-2 text-sm text-gray-700">
-                {endDate.slice(0, 10)}
-              </p>
-              <Link to={`/project/create?projectId=${_id}`}>
-                <button className="btn-small bg-brand-blue mt-2">Edit</button>
-              </Link>
+            {projectPictureUrl && (
+              <img
+                className="hidden lg:block flex-initial mr-2 h-48 w-64 object-cover object-center"
+                src={projectPictureUrl}
+                alt="project"
+              />
+            )}
+            <div className="w-full">
+              <div className="flex justify-between w-full my-1">
+                <div>
+                  <p className="text-gray-900 font-bold text-xl ">{title}</p>
+                  <p className="text-sm text-gray-600 flex items-center mb-2">
+                    {type}
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <Link to={`/project/create?projectId=${_id}`}>
+                    <button className="btn-small bg-brand-blue">Edit</button>
+                  </Link>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-start">
+                  <div className="text-center mt-1">
+                    <p className="text-xs font-semibold text-gray-800">
+                      Start Date
+                    </p>
+                    <p className="text-xs py-2 text-sm text-gray-700">
+                      {startDate.slice(0, 10)}
+                    </p>
+                  </div>
+                  <div className="text-center mt-1 ml-4">
+                    <p className="text-xs font-semibold text-gray-800">
+                      End Date
+                    </p>
+                    <p className="text-xs py-2 text-sm text-gray-700">
+                      {endDate.slice(0, 10)}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-gray-700 text-base">{description}</p>
+              </div>
             </div>
           </div>
 
           {/* TABLE */}
+
           <div className="bg-white rounded -mt-4">
-            <h1 className="text-md font-semibold text-gray-800">Vacancies</h1>
+            <div className="grid grid-cols-3 text-center border-b">
+              <div className="col-start-1">
+                {' '}
+                <h1 className="text-md text-left font-semibold text-gray-600">
+                  Vacancies ({vacancies.length})
+                </h1>
+              </div>
+              <div className="col-start-2">
+                {' '}
+                <h1 className="text-md font-semibold text-gray-600">
+                  Postuladed
+                </h1>
+              </div>
+              <div className="col-start-3">
+                {' '}
+                <h1 className="text-md font-semibold text-gray-600">Status</h1>
+              </div>
+            </div>
+
             <table className=" w-full border-collapse">
               <tbody>
                 {vacancies.map((vacancy) => (
                   <tr key={vacancy._id} className="w-full  ">
-                    <td className="tab border-b justify-arround">
+                    <td className="tab border-b ">
                       <input
                         className="absolute opacity-0"
                         id={vacancy._id}
                         type="checkbox"
                         name="tabs"
                       />
-                      <div className="flex">
-                        <span className="w-full py-1 ">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="col-start-1 ">
                           <h1 className="block text-gray-800 text-sm">
                             {vacancy.title}
                           </h1>
-
                           {vacancy.skills.map((skill, i) => (
                             <span key={skill}>
                               <p
@@ -75,45 +122,52 @@ const CreatedCard = ({
                               </p>
                             </span>
                           ))}
-                        </span>
-                        <div className=" py-1">
-                          {!vacancy.selectedUser._id ? (
-                            <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
-                              open
-                            </span>
-                          ) : (
-                            <span className="inline-block bg-red-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
-                              closed
-                            </span>
-                          )}
                         </div>
-                        <div className=" py-1">
-                          <label
-                            className="block text-gray-800 text-sm leading-normal cursor-pointer"
-                            htmlFor={vacancy._id}
-                          >
-                            {/* <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-2">
-                              open
-                            </span> */}
-                            <div className="inset-y-0 right-0 flex text-center px-2 mt-4 text-gray-600">
-                              <svg
-                                className="fill-current h-6 w-6"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                              </svg>
-                            </div>
-                          </label>
+                        <div className="col-start-2 text-center text-sm mt-2 ">
+                          {vacancy.postulatedUsers.length || 0}
+                        </div>
+                        <div className="col-start-3 text-center ">
+                          <span className="flex justify-center">
+                            {!vacancy.selectedUser._id ? (
+                              <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                                open
+                              </span>
+                            ) : (
+                              <span className="inline-block bg-red-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                                closed
+                              </span>
+                            )}
+                            <label
+                              className="text-gray-800 text-sm leading-normal cursor-pointer"
+                              htmlFor={vacancy._id}
+                            >
+                              <div className=" text-center px-1 mt-4 text-gray-600">
+                                <svg
+                                  className="fill-current h-6 w-6"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                              </div>
+                            </label>
+                          </span>
                         </div>
                       </div>
 
                       <div className="tab-content overflow-hidden border-l-2 bg-gray-100 border-brand-blue leading-normal">
                         <div className=" ">
                           {vacancy.postulatedUsers.map((postulated, i) => (
-                            <table className="w-full border-collapse bg-white">
+                            <table
+                              key={postulated._id}
+                              className="w-full border-collapse bg-white"
+                            >
                               <tbody className="text-gray-700">
-                                <tr className={i % 2 === 0 && 'bg-gray-100'}>
+                                <tr
+                                  className={
+                                    i % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+                                  }
+                                >
                                   <td className="w-1/3 text-left py-0 px-2">
                                     <span className="w-full  ">
                                       <h1 className="block text-gray-800 text-sm">

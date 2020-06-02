@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+
+// components
 
 // utils
 import { projectFormSchema } from '../../../utils/formikSchemas';
@@ -7,7 +10,7 @@ import { projectFormSchema } from '../../../utils/formikSchemas';
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 
 const ProjectForm = (props) => {
-  const { projectId, update, project, create } = props;
+  const { projectId, update, project, create, nextStep } = props;
 
   const {
     handleSubmit,
@@ -30,8 +33,10 @@ const ProjectForm = (props) => {
         await create(values);
       } else {
         values.projectId = projectId;
+        values.method = '$set';
         await update(values);
       }
+      nextStep();
     },
   });
 
@@ -47,13 +52,12 @@ const ProjectForm = (props) => {
   const { title, description, startDate, endDate } = values;
 
   return (
-    <div className="pt-5 w-full">
+    <div className="w-full">
       <h1 className="text-lg font-semibold pt-2 mb-4">
-        Step 1 of 2: Project info
+        Step 1 of 3: Project info
       </h1>
-
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 "
+        className="bg-white shadow-md rounded px-8 py-6 mb-4"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
@@ -65,11 +69,10 @@ const ProjectForm = (props) => {
             placeholder="Title"
             onChange={handleChange}
             value={title}
-            invalid={touched.title && errors.title ? true : undefined}
+            invalid={touched.title && errors.title ? 'true' : 'false'}
           />
           <p className="form-error">{errors.title}</p>
         </div>
-
         <div className="mb-4 ">
           <label className="form-label">Description</label>
           <textarea
@@ -81,12 +84,11 @@ const ProjectForm = (props) => {
             value={description}
             className="form-input"
             invalid={
-              touched.description && errors.description ? true : undefined
+              touched.description && errors.description ? 'true' : 'false'
             }
           ></textarea>
           <p className="form-error">{errors.description}</p>
         </div>
-
         <div className="mb-4 inline-block relative w-full">
           <select
             id="type"
@@ -112,7 +114,6 @@ const ProjectForm = (props) => {
           </div>
         </div>
         <p className="form-error">{errors.type}</p>
-
         <div className="mb-4">
           <input
             type="date"
@@ -124,7 +125,6 @@ const ProjectForm = (props) => {
           />
         </div>
         <p className="form-error">{errors.startDate}</p>
-
         <div className="mb-4">
           <input
             type="date"
@@ -137,17 +137,18 @@ const ProjectForm = (props) => {
         </div>
         <p className="form-error">{errors.endDate}</p>
 
-        {!projectId && (
-          <div className="text-right">
-            <button
-              className="btn bg-brand-blue text-white mb-0"
-              type="submit"
-              id="#projectForm"
-            >
-              Next
+        <div className="border-b-2 my-4" />
+
+        <div className="flex justify-between mt-5">
+          <Link to="/created-projects">
+            <button type="button" className="btn bg-brand-blue text-white mb-0">
+              Cancel
             </button>
-          </div>
-        )}
+          </Link>
+          <button type="submit" className="btn bg-brand-blue text-white mb-0">
+            Next
+          </button>
+        </div>
       </form>
     </div>
   );

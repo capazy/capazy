@@ -5,6 +5,7 @@ export const CREATE_VACANCY = gql`
     $projectId: ID!
     $title: String!
     $experience: String!
+    $description: String!
     $skills: [String!]
     $timeCommitment: Float!
     $timeCommitmentUnits: String!
@@ -14,6 +15,7 @@ export const CREATE_VACANCY = gql`
         projectId: $projectId
         title: $title
         experience: $experience
+        description: $description
         skills: $skills
         timeCommitment: $timeCommitment
         timeCommitmentUnits: $timeCommitmentUnits
@@ -25,7 +27,6 @@ export const CREATE_VACANCY = gql`
       type
       startDate
       endDate
-      published
       isOpen
       creator {
         _id
@@ -34,6 +35,7 @@ export const CREATE_VACANCY = gql`
         _id
         title
         experience
+        description
         skills
       }
     }
@@ -44,6 +46,26 @@ export const JOIN_VACANCY = gql`
   mutation joinVacancy($vacancyId: ID!) {
     joinVacancy(vacancyId: $vacancyId) {
       _id
+    }
+  }
+`;
+
+export const CANCEL_VACANCY = gql`
+  mutation cancelVacancy($vacancyId: ID!) {
+    cancelVacancy(vacancyId: $vacancyId) {
+      title
+      description
+      type
+      startDate
+      endDate
+      isOpen
+      vacancies {
+        _id
+        title
+        experience
+        description
+        skills
+      }
     }
   }
 `;

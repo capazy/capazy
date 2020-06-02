@@ -16,7 +16,7 @@ const experienceOptions = [
 ];
 
 const VacancyForm = (props) => {
-  const { projectId, project, createVacancy } = props;
+  const { projectId, project, createVacancy, deleteVacancy } = props;
   const [action, setAction] = useState(false);
 
   const {
@@ -31,10 +31,11 @@ const VacancyForm = (props) => {
     initialValues: {
       projectId: projectId,
       title: '',
-      experience: '',
+      experience: 'beginner',
+      description: '',
       skills: '',
       timeCommitment: '',
-      timeCommitmentUnits: '',
+      timeCommitmentUnits: 'perWeek',
     },
     validationSchema: vacancyFormSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -44,12 +45,19 @@ const VacancyForm = (props) => {
     },
   });
 
-  const { title, skills, timeCommitment } = values;
+  const { title, skills, timeCommitment, description } = values;
 
   return (
     <div className="pt-5 w-full max-w-xl mx-auto my-auto">
-      <h1>Paso 2 de 2</h1>
-      <TeamTable project={project} setAction={setAction} />
+      <h1 className="text-lg font-semibold pt-2 mb-4">
+        Step 2 of 2: Vacancies info
+      </h1>
+
+      <TeamTable
+        project={project}
+        setAction={setAction}
+        deleteVacancy={deleteVacancy}
+      />
 
       <Modal action={action}>
         <form className="w-full pt-4  mb-4 m-12" onSubmit={handleSubmit}>
@@ -69,21 +77,35 @@ const VacancyForm = (props) => {
             <p className="text-red-500 text-xs italic">{errors.title}</p>
           </div>
 
+          <div className="mb-4 ">
+            <label className="form-label">Description</label>
+            <textarea
+              id="description"
+              rows="3"
+              cols="2"
+              placeholder="Vacancy description..."
+              onChange={handleChange}
+              value={description}
+              className="form-input"
+              invalid={
+                touched.description && errors.description ? true : undefined
+              }
+            ></textarea>
+            <p className="form-error">{errors.description}</p>
+          </div>
+
           <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Experience
             </label>
-            <div className="mb-4 inline-block relative w-full">
+            <div className="inline-block relative w-full">
               <select
                 id="experience"
                 name="experience"
                 onChange={handleChange}
-                defaultValue="Experience"
+                defaultValue="beginner"
                 className="form-input bg-white"
               >
-                <option value="Experience" disabled>
-                  Experience
-                </option>
                 {experienceOptions.map((item) => (
                   <option key={item.label} value={item.value}>
                     {item.label}
@@ -104,7 +126,7 @@ const VacancyForm = (props) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
               Skills
             </label>
             <SelectMulti
@@ -120,64 +142,55 @@ const VacancyForm = (props) => {
             <p className="text-red-500 text-xs italic">{errors.skills}</p>
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Time Commitment
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="timeCommitment"
-              type="number"
-              // placeholder="timeCommitment"
-              onChange={handleChange}
-              value={timeCommitment}
-              invalid={
-                touched.timeCommitment && errors.timeCommitment
-                  ? true
-                  : undefined
-              }
-            />
-            <p className="text-red-500 text-xs italic">
-              {errors.timeCommitment}
-            </p>
-          </div>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Time Commitment in hours
+          </label>
 
-          <div className="mb-4">
-            <label className="block text-gray-500 text-sm font-bold mb-2">
-              Time Commitment Units
-            </label>
-            <div className="mb-4 inline-block relative w-full">
-              <select
-                id="timeCommitmentUnits"
-                name="timeCommitmentUnits"
+          <div className="flex flex-wrap">
+            <div className="mb-4 w-full sm:w-1/2 pr-2">
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="timeCommitment"
+                type="number"
                 onChange={handleChange}
-                defaultValue="test"
-                className="form-input bg-white"
-              >
-                <option value="test" disabled>
-                  Test
-                </option>
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-                {/* {experienceOptions.map((item) => (
-                <option key={item.label} value={item.value}>
-                  {item.label}
-                </option>
-              ))} */}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                <svg
-                  className="fill-current h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
+                value={timeCommitment}
+                invalid={
+                  touched.timeCommitment && errors.timeCommitment
+                    ? true
+                    : undefined
+                }
+              />
+              <p className="text-red-500 text-xs italic">
+                {errors.timeCommitment}
+              </p>
             </div>
-            <p className="text-red-500 text-xs italic">
-              {errors.timeCommitmentUnits}
-            </p>
+
+            <div className="mb-4 w-full sm:w-1/2 pl-2">
+              <div className="mb-4 inline-block relative w-full">
+                <select
+                  id="timeCommitmentUnits"
+                  name="timeCommitmentUnits"
+                  onChange={handleChange}
+                  defaultValue="perWeek"
+                  className="form-input bg-white"
+                >
+                  <option value="perWeek">per week</option>
+                  <option value="perMonth">per month</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                  <svg
+                    className="fill-current h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+              <p className="text-red-500 text-xs italic">
+                {errors.timeCommitmentUnits}
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center justify-end">
@@ -188,7 +201,7 @@ const VacancyForm = (props) => {
               close
             </button>
             <button
-              className="mb-3 rounded-full  items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
+              className="mb-3 rounded-full items-center shadow bg-brand-blue px-4 py-2 text-white hover:bg-blue-400 m-2"
               type="submit"
             >
               Add vacancy

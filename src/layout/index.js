@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // components
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import NewNavbar from './components/NewNavbar';
+import NavbarLoggedIn from './components/NavbarLoggedIn';
 
 // context
 import { UserContext } from '../context/UserContext';
@@ -17,8 +17,7 @@ const Main = (props) => {
     <div className="">
       <div className="mx-auto">
         <main>
-          {user ? <NewNavbar /> : <Navbar />}
-
+          {user ? <NavbarLoggedIn /> : <Navbar />}
           <div className="container max-w-screen-lg mx-auto mt-2 md:mt-2">
             {children}
           </div>

@@ -66,6 +66,7 @@ export const UPDATE_USER = gql`
       skills
       expertise
       additionalSkills
+      profilePictureUrl
       languages
       companyName
       companyDepartment
@@ -84,6 +85,7 @@ export const GET_USER = gql`
       description
       skills
       languages
+      expertise
       companyName
       companyDepartment
       country
@@ -101,6 +103,7 @@ export const GET_USERS = gql`
       lastName
       description
       skills
+      expertise
       languages
       companyName
       companyDepartment
@@ -118,6 +121,7 @@ export const GET_USER_BY_ID = gql`
       description
       skills
       languages
+      expertise
       companyName
       companyDepartment
       country
@@ -137,7 +141,7 @@ export const GET_USER_CREATED_PROJECTS = gql`
         type
         startDate
         endDate
-        published
+        projectPictureUrl
         isOpen
         creator {
           _id
@@ -174,6 +178,7 @@ export const GET_USER_JOINED_PROJECTS = gql`
     user {
       _id
       joinedProjects {
+        _id
         title
         experience
         skills
@@ -187,7 +192,6 @@ export const GET_USER_JOINED_PROJECTS = gql`
           type
           startDate
           endDate
-          published
           isOpen
           creator {
             _id

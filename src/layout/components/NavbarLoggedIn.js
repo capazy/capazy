@@ -7,7 +7,7 @@ import Alert from '../../components/Alert';
 import { ProjectContext } from '../../context/ProjectContext';
 import useOutsideClick from '../../utils/useOutsideClik';
 
-const NewNavbar = () => {
+const NavbarLoggedIn = () => {
   const { logout, user } = useContext(UserContext);
   const { resetProject } = useContext(ProjectContext);
   const [isOpen, setOpen] = useState(false);
@@ -24,47 +24,52 @@ const NewNavbar = () => {
   const image =
     user.profilePictureUrl ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
+
   const links = () => (
     <div
       className="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
       id="nav-content"
     >
       <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
-        <li className="mr-6 my-2 md:my-0">
+        <li className="mx-6 my-2 md:my-0">
           <Link
             to="/search"
-            className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
+            className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
           >
-            <i className="fa fa-envelope fa-fw mr-3"></i>
-            <span className="pb-1 md:pb-0 text-sm">Search</span>
+            <i className="fa fa-envelope fa-fw"></i>
+            <span className="md:pb-0 text-sm">Search</span>
           </Link>
         </li>
-        <li className="mr-6 my-2 md:my-0">
+        <li className="mx-6 my-2 md:my-0">
           <Link
             to="/joined-projects"
-            className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
+            className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
           >
-            <i className="fas fa-tasks fa-fw mr-3"></i>
-            <span className="pb-1 md:pb-0 text-sm">Joined projects</span>
+            <i className="fa fa-envelope fa-fw"></i>
+            <span className="md:pb-0 text-sm">Joined projects</span>
           </Link>
         </li>
-        <li className="mr-6 my-2 md:my-0">
+        <li className="mx-6 my-2 md:my-0">
           <Link
             to="/created-projects"
-            className="block py-1 md:py-1 pl-1 align-center no-underline hover:text-black border-b-2   rounded border-b-2 border-transparent text-gray-900 hover:border-brand-blue"
+            className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
           >
-            <i className="fa fa-envelope fa-fw mr-3"></i>
-            <span className="pb-1 md:pb-0 text-sm">Created projects</span>
+            <i className="fa fa-envelope fa-fw"></i>
+            <span className="md:pb-0 text-sm">Created projects</span>
           </Link>
         </li>
-        <li className="md:hidden mr-6 my-2 md:my-0">
+
+        <li className="md:hidden mx-6 my-2 md:my-0">
           <Link
-            to="/create/project"
-            className=" block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
+            to="/project/create"
+            className=" block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
           >
             <button
-              className="btn-square bg-brand-blue text-white mx-2"
-              onClick={() => resetProject()}
+              className="btn-square bg-brand-blue text-white"
+              onClick={() => {
+                resetProject();
+                setOpen(false);
+              }}
             >
               Post a Project
             </button>
@@ -82,11 +87,11 @@ const NewNavbar = () => {
       <nav className="bg-white w-full z-10 pin-t shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
           <div className="flex w-1/2 md:w-1/2 pl-2 md:pl-0 my-auto ">
-            <Link to="/">
+            <Link to="/feed">
               <img
                 src="https://res.cloudinary.com/dpnlmwgxh/image/upload/v1588518483/Main/text-blue_lbqwwy.png"
                 alt=""
-                className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1"
+                className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1 "
               />
             </Link>
             <div className="hidden lg:block my-auto">{links()}</div>
@@ -96,7 +101,7 @@ const NewNavbar = () => {
             <div className="flex relative inline-block float-right">
               <Link
                 to="/project/create"
-                className="hidden lg:block mr-5 my-auto md:block py-1 md:py-1 pl-1 align-middle text-grey no-underline hover:text-black border-b-2 border-white hover:border-red"
+                className="hidden lg:block mr-5 my-auto md:block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
               >
                 <button
                   className="btn-square bg-brand-blue text-white mx-2"
@@ -112,11 +117,11 @@ const NewNavbar = () => {
                   onClick={() => setOpenLogout(!isOpenLogout)}
                 >
                   <img
-                    className="w-8 h-8 rounded-full mr-4"
+                    className="w-8 h-8 rounded-full mr-4 object-cover object-center"
                     src={image}
                     alt=""
                   />
-                  <span className="hidden md:inline-block">
+                  <span className="hidden md:inline-block ">
                     Hi, {user.firstName}
                   </span>
                   <svg
@@ -124,8 +129,6 @@ const NewNavbar = () => {
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 129 129"
-                    // xmlns:xlink="http://www.w3.org/1999/xlink"
-                    // enable-background="new 0 0 129 129"
                   >
                     <g>
                       <path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
@@ -187,7 +190,6 @@ const NewNavbar = () => {
               </div>
             </div>
           </div>
-          {/* <div className="hidden lg:block">{links()}</div> */}
         </div>
         <div>{isOpen && links()}</div>
       </nav>
@@ -196,4 +198,4 @@ const NewNavbar = () => {
   );
 };
 
-export default NewNavbar;
+export default NavbarLoggedIn;

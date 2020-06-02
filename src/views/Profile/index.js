@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -9,10 +9,9 @@ import { GET_USER_BY_ID } from '../../graphql/user';
 import { Link } from 'react-router-dom';
 
 // components
-import { FileUploader, Modal } from '../../components';
+import { PictureUploader } from '../../components';
 
 const Profile = ({ match }) => {
-  const [openPrifilePictureModal, setOpenPrifilePictureModal] = useState(false);
   const { user, update } = useContext(UserContext);
   const { loading, data, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.id },
@@ -40,26 +39,8 @@ const Profile = ({ match }) => {
     user.profilePictureUrl ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
 
-  const handleChangeProfilePicture = () => {
-    setOpenPrifilePictureModal(!openPrifilePictureModal);
-  };
-
   return (
     <div className="md:mx-32  h-full">
-      {openPrifilePictureModal && (
-        <Modal action={openPrifilePictureModal}>
-          <FileUploader
-            action={update}
-            field={{
-              fileName: 'profilePictureName',
-              fileUrl: 'profilePictureUrl',
-            }}
-            accept={'image/*'}
-            multiple={false}
-            handleOpen={setOpenPrifilePictureModal}
-          />
-        </Modal>
-      )}
       <div className="font-sans leading-tight  bg-grey-lighter p-4">
         <div className="bg-white rounded-lg overflow-hidden ">
           <div
@@ -72,8 +53,9 @@ const Profile = ({ match }) => {
           <div className="border-b px-4 ">
             <div className="md:flex md:justify-between text-center  mb-4 ">
               <div className="flex py-2">
+                {/* mt-6 rounded-lg shadow-xl sm:h-64 sm:w-full sm:object-cover sm:object-center */}
                 <img
-                  className="h-32 w-32 rounded-full border-4 border-white -mt-16 mr-4"
+                  className="h-32 w-32 rounded-full border-4 border-white -mt-16 mr-4 object-cover object-center"
                   src={image}
                   alt=""
                 />
@@ -95,9 +77,19 @@ const Profile = ({ match }) => {
                     </svg>
                     <p>{country}</p>
                   </div>
-                  <button onClick={handleChangeProfilePicture}>
-                    Change profile picture
-                  </button>
+                  <div>
+                    <button className="btn-small mt-3" type="button">
+                      <label htmlFor="upload">Change profile picture</label>
+                    </button>
+                    <PictureUploader
+                      id={'upload'}
+                      action={update}
+                      field={{
+                        fileName: 'profilePictureName',
+                        fileUrl: 'profilePictureUrl',
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="mt-3 md:my-auto">

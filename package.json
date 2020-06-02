@@ -28,6 +28,7 @@
     "react-select": "^3.1.0",
     "react-select-virtualized": "^2.5.3",
     "react-spinners": "^0.8.3",
+    "react-step-wizard": "^5.3.2",
     "react-virtualized": "^9.21.2",
     "sendbird-uikit": "^1.0.2",
     "talkjs": "^0.14.2",
