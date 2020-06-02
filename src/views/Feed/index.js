@@ -38,22 +38,12 @@ const Feed = () => {
   return (
     <Fragment>
       <div className="container max-w-xl  my-8 mx-auto px-4 md:px-12">
-        <div className="flex flex-wrap -mx-1 lg:-mx-4 justify-between">
+        <div className="lex max-w-2xl mx-auto mt-4 justify-between">
           {data.projects.map((project) => (
             <div key={project._id} className="my-1 px-1 w-full">
               <FeedCard project={project} handleJoin={handleJoin} />
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="flex max-w-2xl mx-auto mt-4">
-        <div className="hidden md:block w-2/5 h-12 py-4 h-auto">
-          <p>Left</p>
-        </div>
-
-        <div className="hidden md:block w-2/5 ">
-          <p>Right</p>
         </div>
       </div>
     </Fragment>

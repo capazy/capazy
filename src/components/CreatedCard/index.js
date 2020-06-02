@@ -69,7 +69,7 @@ const CreatedCard = ({
               <div className="col-start-1">
                 {' '}
                 <h1 className="text-md text-left font-semibold text-gray-600">
-                  Vacancies (5)
+                  Vacancies ({vacancies.length})
                 </h1>
               </div>
               <div className="col-start-2">

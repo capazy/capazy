@@ -14,7 +14,7 @@ const FeedCard = ({ project, handleJoin }) => {
   return (
     <div className="border border-gray-200 h-auto border-t-0">
       <div className="flex flex-shrink-0 p-4 pb-0 ">
-        <Link to={`/user/edit/${_id}`}>
+        <Link to={`profile/${_id}`}>
           <div className="flex items-center">
             <div>
               <img
