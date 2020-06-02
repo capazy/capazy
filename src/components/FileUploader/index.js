@@ -1,42 +1,49 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { firebaseApp } from '../../firebase';
-import { useFormik } from 'formik';
 
-const FileUploader = ({ action, field, accept, multiple, handleOpen }) => {
-  const { handleSubmit, setFieldValue } = useFormik({
-    initialValues: {
-      files: [],
-    },
-    onSubmit: async ({ files }) => {
-      const storageRef = firebaseApp.storage().ref();
-      files.map(async (file) => {
-        const fileRef = storageRef.child(file.name);
-        await fileRef.put(file);
-        const formData = {
-          [field.fileName]: file.name,
-          [field.fileUrl]: await fileRef.getDownloadURL(),
-        };
-        await action(formData);
-        handleOpen(false);
-      });
-    },
-  });
+const FileUploader = ({ id, projectId, action, field, accept, multiple }) => {
+  const oneFile = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = firebaseApp.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    const values = {
+      [field.fileName]: file.name,
+      [field.fileUrl]: await fileRef.getDownloadURL(),
+    };
+    if (projectId) {
+      values.projectId = projectId;
+      values.method = '$set';
+      await action(values);
+    }
+    await action(values);
+  };
+
+  const multipleFiles = async (e) => {
+    const files = Array.from(e.target.files);
+    const storageRef = firebaseApp.storage().ref();
+    const result = files.map(async (file) => {
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      return {
+        [field.fileName]: file.name,
+        [field.fileUrl]: await fileRef.getDownloadURL(),
+      };
+    });
+    Promise.all(result).then((values) => {
+      action({ projectId, method: '$push', files: values });
+    });
+  };
 
   return (
-    <Fragment>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            accept={accept}
-            multiple={multiple}
-            onChange={(e) => setFieldValue('files', Array.from(e.target.files))}
-          />
-          <button type="submit">Upload</button>
-        </form>
-        <button onClick={() => handleOpen(false)}>Cancel</button>
-      </div>
-    </Fragment>
+    <input
+      type="file"
+      id={id}
+      accept={accept}
+      multiple={multiple}
+      onChange={multiple ? multipleFiles : oneFile}
+      style={{ display: 'none' }}
+    />
   );
 };
 

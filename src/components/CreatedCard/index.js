@@ -151,7 +151,11 @@ const CreatedCard = ({
                               className="w-full border-collapse bg-white"
                             >
                               <tbody className="text-gray-700">
-                                <tr className={i % 2 === 0 && 'bg-gray-100'}>
+                                <tr
+                                  className={
+                                    i % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+                                  }
+                                >
                                   <td className="w-1/3 text-left py-0 px-2">
                                     <span className="w-full  ">
                                       <h1 className="block text-gray-800 text-sm">
