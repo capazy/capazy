@@ -21,19 +21,20 @@ const CreatedCard = ({
           <div
             className="lg:hidden h-48 lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
             style={{
-              backgroundImage:
-                'url(https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
+              backgroundImage: `url(${projectPictureUrl})`,
             }}
             title="Woman holding a mug"
           ></div>
         )}
         <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
           <div className="flex mb-8">
-            <img
-              className="hidden lg:block flex-initial mr-2 h-48"
-              src="https://images.unsplash.com/photo-1511268559489-34b624fbfcf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-              alt="project"
-            />
+            {projectPictureUrl && (
+              <img
+                className="hidden lg:block flex-initial mr-2 h-48 w-64 object-cover object-center"
+                src={projectPictureUrl}
+                alt="project"
+              />
+            )}
             <div className="w-full">
               <div className="flex justify-between w-full my-1">
                 <div>

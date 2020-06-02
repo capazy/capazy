@@ -141,6 +141,7 @@ export const GET_USER_CREATED_PROJECTS = gql`
         type
         startDate
         endDate
+        projectPictureUrl
         isOpen
         creator {
           _id
