@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { firebaseApp } from '../../../firebase';
 
 // components
 import { FileUploader } from '../../../components';
@@ -9,8 +10,11 @@ import { ProjectContext } from '../../../context/ProjectContext';
 const ProjectFiles = ({ projectId, update, nextStep, previousStep }) => {
   const { project, deleteFile } = useContext(ProjectContext);
 
-  const handleDelete = (fileId) => {
+  const handleDelete = (fileId, fileName) => {
     const values = { projectId, fileId };
+    const storageRef = firebaseApp.storage().ref();
+    const fileRef = storageRef.child(fileName);
+    fileRef.delete();
     deleteFile(values);
   };
 
@@ -41,7 +45,7 @@ const ProjectFiles = ({ projectId, update, nextStep, previousStep }) => {
                   <th>
                     <button
                       className="btn-small"
-                      onClick={() => handleDelete(file._id)}
+                      onClick={() => handleDelete(file._id, file.name)}
                     >
                       X
                     </button>
