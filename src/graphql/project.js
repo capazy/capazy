@@ -73,8 +73,13 @@ export const GET_PROJECTS = gql`
       endDate
       isOpen
       projectPictureUrl
+      skills
       creator {
         _id
+        firstName
+        lastName
+        profilePictureUrl
+        companyName
       }
       vacancies {
         _id

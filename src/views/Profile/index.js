@@ -53,8 +53,9 @@ const Profile = ({ match }) => {
           <div className="border-b px-4 ">
             <div className="md:flex md:justify-between text-center  mb-4 ">
               <div className="flex py-2">
+                {/* mt-6 rounded-lg shadow-xl sm:h-64 sm:w-full sm:object-cover sm:object-center */}
                 <img
-                  className="h-32 w-32 rounded-full border-4 border-white -mt-16 mr-4"
+                  className="h-32 w-32 rounded-full border-4 border-white -mt-16 mr-4 object-cover object-center"
                   src={image}
                   alt=""
                 />

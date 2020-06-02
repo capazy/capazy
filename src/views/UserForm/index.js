@@ -115,7 +115,7 @@ const UserForm = ({ match }) => {
           <div className="mb-4">
             <div className="text-center p-6  border-b">
               <img
-                className="h-24 w-24 rounded-full mx-auto"
+                className="h-24 w-24 rounded-full mx-auto object-cover object-center"
                 src={image}
                 alt=""
               />
