@@ -2,13 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const UserCard = ({
-  user: { _id, firstName, lastName, country, description },
+  user: { _id, firstName, lastName, country, description, profilePictureUrl },
 }) => {
+  const image =
+    profilePictureUrl ||
+    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
   return (
     <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden my-2">
       <img
         className="w-full h-32 object-cover object-center"
-        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+        src={image}
         alt="avatar"
       />
       <div className="flex items-center px-6 py-1 bg-gray-800">

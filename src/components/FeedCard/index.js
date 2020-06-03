@@ -11,6 +11,10 @@ const FeedCard = ({ project, handleJoin }) => {
     projectPictureUrl,
     creator: { _id, profilePictureUrl, firstName, lastName, companyName },
   } = project;
+
+  const image =
+    profilePictureUrl ||
+    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
   const [openModal, setOpenModal] = useState();
   return (
     <div className="border border-gray-200 h-auto border-t-0">
@@ -20,7 +24,7 @@ const FeedCard = ({ project, handleJoin }) => {
             <div>
               <img
                 className="inline-block h-10 w-10 rounded-full object-cover object-center"
-                src={profilePictureUrl}
+                src={image}
                 alt=""
               />
             </div>
@@ -39,7 +43,7 @@ const FeedCard = ({ project, handleJoin }) => {
       <div className="pl-16">
         <p className="font-semibold">----> {title}</p>
         <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
-          {description}
+          {description.substr(0, 200)}....
           <br />
           <span className="font-semibold">Skills:</span>
           <span className="text-brand-blue text-sm">
@@ -90,11 +94,11 @@ const FeedCard = ({ project, handleJoin }) => {
           <ProjectCard project={project} handleJoin={handleJoin} />
         </div>
         <button
-          className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
+          className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-sm z-50 rounded-full bg-white"
           onClick={() => setOpenModal(!openModal)}
         >
           <svg
-            className="fill-current text-white"
+            className="fill-current text-black bg-white rounded-full"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"

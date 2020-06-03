@@ -9,10 +9,9 @@ import { GET_USER_BY_ID } from '../../graphql/user';
 import { Link } from 'react-router-dom';
 
 // components
-import { PictureUploader } from '../../components';
 
 const Profile = ({ match }) => {
-  const { user, update } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { loading, data, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.id },
   });
@@ -32,11 +31,12 @@ const Profile = ({ match }) => {
     companyDepartment,
     languages,
     country,
+    profilePictureUrl,
   } = data.userById;
 
   const isOwner = match.params.id === _id;
   const image =
-    user.profilePictureUrl ||
+    profilePictureUrl ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
 
   return (
@@ -76,19 +76,6 @@ const Profile = ({ match }) => {
                       />
                     </svg>
                     <p>{country}</p>
-                  </div>
-                  <div>
-                    <button className="btn-small mt-3" type="button">
-                      <label htmlFor="upload">Change profile picture</label>
-                    </button>
-                    <PictureUploader
-                      id={'upload'}
-                      action={update}
-                      field={{
-                        fileName: 'profilePictureName',
-                        fileUrl: 'profilePictureUrl',
-                      }}
-                    />
                   </div>
                 </div>
               </div>
