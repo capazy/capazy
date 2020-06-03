@@ -105,7 +105,6 @@ const ProjectProvider = (props) => {
   // delete project file
   const deleteFile = async (values) => {
     try {
-      // console.log(values);
       await deleteProjectFile({ variables: values });
     } catch (error) {
       console.log(error);

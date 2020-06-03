@@ -96,4 +96,11 @@
   /* left: 5%; */
 }
 
+.masonry-with-columns {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 1000px;
+}
+
 @tailwind utilities;

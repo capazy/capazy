@@ -46,7 +46,7 @@ const NavbarLoggedIn = () => {
             className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
           >
             <i className="fa fa-envelope fa-fw"></i>
-            <span className="md:pb-0 text-sm">Joined projects</span>
+            <span className="md:pb-0 text-sm">My feed</span>
           </Link>
         </li>
         <li className="mx-6 my-2 md:my-0">
@@ -55,7 +55,7 @@ const NavbarLoggedIn = () => {
             className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
           >
             <i className="fa fa-envelope fa-fw"></i>
-            <span className="md:pb-0 text-sm">Created projects</span>
+            <span className="md:pb-0 text-sm">Posted projects</span>
           </Link>
         </li>
 

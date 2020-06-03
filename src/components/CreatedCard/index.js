@@ -14,6 +14,7 @@ const CreatedCard = ({
   },
   handleSelect,
 }) => {
+  console.log(projectPictureUrl);
   return (
     <div className="my-10">
       <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t">
@@ -23,7 +24,7 @@ const CreatedCard = ({
             style={{
               backgroundImage: `url(${projectPictureUrl})`,
             }}
-            title="Woman holding a mug"
+            title={title}
           ></div>
         )}
         <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">

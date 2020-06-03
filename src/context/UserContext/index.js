@@ -57,14 +57,19 @@ const UserProvider = (props) => {
 
   // login
   const login = async (data) => {
-    await loginUser({ variables: data });
-    await getCurrentUser();
+    try {
+      await loginUser({ variables: data });
+      await getCurrentUser();
+      toggleAlert('Welcome back!', 'success');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const update = async (data) => {
     try {
       await updateUser({ variables: data });
-      toggleAlert('Hello', 'success');
+      toggleAlert('Profile updated', 'success');
     } catch (error) {
       toggleAlert('error', 'error');
     }
