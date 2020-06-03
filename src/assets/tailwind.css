@@ -88,19 +88,15 @@
   @apply bg-red-200 border-t-4 border-red-500 text-red-700;
 }
 
-/* MODAL */
-.modal {
-  /* box-shadow: 0 2px 8px; */
-
-  /* top: 30vh; */
-  /* left: 5%; */
+.mansonry {
+  column-count: 2;
+  column-gap: 0.5rem;
 }
 
-.masonry-with-columns {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-height: 1000px;
+@media screen and (max-width: 768px) {
+  .mansonry {
+    column-count: 1;
+  }
 }
 
 @tailwind utilities;

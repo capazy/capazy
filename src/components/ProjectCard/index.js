@@ -14,7 +14,7 @@ const ProjectCard = ({
 }) => {
   return (
     <div
-      className=" bg-white shadow-md rounded-lg overflow-hidden my-2 "
+      className="bg-white shadow-md rounded-lg overflow-hidden my-2"
       // style={{ height: '50vh' }}
     >
       {projectPictureUrl && (

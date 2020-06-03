@@ -808,12 +808,15 @@ video {
   color: rgba(197, 48, 48, var(--text-opacity));
 }
 
-/* MODAL */
+.mansonry {
+  column-count: 2;
+  column-gap: 0.5rem;
+}
 
-.modal {
-  /* box-shadow: 0 2px 8px; */
-  /* top: 30vh; */
-  /* left: 5%; */
+@media screen and (max-width: 768px) {
+  .mansonry {
+    column-count: 1;
+  }
 }
 
 .space-y-0 > :not(template) ~ :not(template) {

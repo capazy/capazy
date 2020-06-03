@@ -10,4 +10,3 @@ export { default as CreatedProjects } from './CreatedProjects';
 export { default as Chat } from './Chat';
 export { default as Project } from './Project';
 export { default as ProjectWizard } from './ProjectWizard';
-export { default as Grid } from './Grid';

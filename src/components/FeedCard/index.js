@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Modal } from '../../components';
-import ProjectCard from '../ProjectCard';
 import { Link } from 'react-router-dom';
+import './index.css';
+
+// components
+import { Modal, ProjectCard } from '../../components';
+
 const FeedCard = ({ project, handleJoin }) => {
   const {
     description,
@@ -17,7 +20,7 @@ const FeedCard = ({ project, handleJoin }) => {
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
   const [openModal, setOpenModal] = useState();
   return (
-    <div className="border border-gray-200 h-auto border-t-0">
+    <div className="inline-block mb-2 w-100 box-border border border-gray-200">
       <div className="flex flex-shrink-0 p-4 pb-0 ">
         <Link to={`profile/${_id}`}>
           <div className="flex items-center">

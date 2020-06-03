@@ -14,7 +14,6 @@ const CreatedCard = ({
   },
   handleSelect,
 }) => {
-  console.log(projectPictureUrl);
   return (
     <div className="my-10">
       <div className="max-w-lg w-full lg:max-w-full lg:flex border-r border-b border-l border-t">
