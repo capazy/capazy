@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 
 import RouteWithLayout from './router/RouteWithLayout';
 
@@ -17,12 +17,14 @@ import {
   CreatedProjects,
   Chat,
   ProjectWizard,
+  Grid,
 } from './views';
 import Layout from './layout';
 
 const Routes = () => {
   return (
     <Switch>
+      <Route exact path="/grid" component={Grid} />
       <RouteWithLayout exact path="/chat" layout={Layout} component={Chat} />
       <RouteWithLayout
         exact
