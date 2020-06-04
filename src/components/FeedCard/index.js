@@ -73,10 +73,21 @@ const FeedCard = ({ project, handleJoin }) => {
           <div className="w-full">
             <div className="flex items-center">
               <div className="flex-1 text-center py-2 my-4">
-                <div className="flex justify-between items-center flex-row px-2 z-50 ">
+                <div className="flex justify-between items-center flex-row px-2 z-50 text-xs md:text-sm">
                   <p className="flex items-center text-gray-800 ">
                     {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
                     15 views
+                  </p>{' '}
+                  <p className="flex items-center text-gray-800 ">
+                    {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
+                    {vacancies.length} vacan
+                  </p>
+                  <p className="flex items-center text-gray-800 ">
+                    {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
+                    {vacancies.postulatedUsers
+                      ? vacancies.postulatedUsers.length
+                      : 0}{' '}
+                    post
                   </p>
                   <button
                     className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
