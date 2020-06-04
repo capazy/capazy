@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { ProjectContext } from '../../context/ProjectContext';
 
 // components
 import { Modal, ProjectCard } from '../../components';
 
 const FeedCard = ({ project, handleJoin }) => {
-  console.log(project);
+  const { update } = useContext(ProjectContext);
+
   const {
     description,
     title,
@@ -13,13 +15,17 @@ const FeedCard = ({ project, handleJoin }) => {
     vacancies,
     projectPictureUrl,
     updatedAt,
+    views,
+    _id: projectId,
     creator: { _id, profilePictureUrl, firstName, lastName, companyName },
   } = project;
 
-  const date = new Date(updatedAt).toLocaleDateString('en-CA', {
+  const date = new Date(updatedAt).toLocaleDateString('en', {
     month: 'long',
     day: 'numeric',
   });
+  console.log('date', date);
+  console.log('updated', updatedAt);
 
   const image =
     profilePictureUrl ||
@@ -83,7 +89,7 @@ const FeedCard = ({ project, handleJoin }) => {
                 <div className="flex justify-between items-center flex-row px-2 z-50 text-sm">
                   <p className="flex items-center text-gray-800 ">
                     {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
-                    15 views
+                    {views} views
                   </p>{' '}
                   <p className="flex items-center text-gray-800 ">
                     {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
@@ -94,7 +100,14 @@ const FeedCard = ({ project, handleJoin }) => {
                   </p>
                   <button
                     className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
-                    onClick={() => setOpenModal(!openModal)}
+                    onClick={() => {
+                      setOpenModal(!openModal);
+                      update({
+                        projectId,
+                        views: views + 1,
+                        method: '$set',
+                      });
+                    }}
                   >
                     view more
                   </button>

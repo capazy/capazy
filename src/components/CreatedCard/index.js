@@ -133,7 +133,7 @@ const CreatedCard = ({
                                 open
                               </span>
                             ) : (
-                              <span className="inline-block bg-red-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                              <span className="inline-block bg-yellow-400 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
                                 closed
                               </span>
                             )}
