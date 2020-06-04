@@ -246,7 +246,6 @@ const VacancyForm = (props) => {
               }
               onClick={nextStep}
             >
-              {console.log(disable)}
               Next
             </button>
           </div>
