@@ -12,6 +12,7 @@ const PictureUploader = ({ id, projectId, action, field }) => {
     const file = e.target.files[0];
     const storageRef = firebaseApp.storage().ref();
     const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
     const values = {
       [field.fileName]: file.name,
       [field.fileUrl]: await fileRef.getDownloadURL(),
