@@ -15,8 +15,8 @@ const Main = (props) => {
 
   return (
     <div className="">
-      <div className="mx-auto">
-        <main>
+      <div className="mx-auto ">
+        <main className="">
           {user ? <NavbarLoggedIn /> : <Navbar />}
           <div className="container max-w-screen-lg mx-auto mt-2 md:mt-2">
             {children}

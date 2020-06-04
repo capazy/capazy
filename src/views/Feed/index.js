@@ -40,7 +40,7 @@ const Feed = () => {
       <div className="container max-w-xl  my-8 mx-auto md:px-4 md:px-12">
         <div className=" mx-auto mt-4 justify-between">
           {data.projects.map((project) => (
-            <div key={project._id} className="my-1 md:px-1 w-full">
+            <div key={project._id} className="md:px-1 w-full">
               <FeedCard project={project} handleJoin={handleJoin} />
             </div>
           ))}

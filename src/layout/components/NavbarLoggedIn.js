@@ -27,7 +27,7 @@ const NavbarLoggedIn = () => {
 
   const links = () => (
     <div
-      className="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
+      className="flex-grow max-w-screen-lg lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
       id="nav-content"
     >
       <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
@@ -81,11 +81,11 @@ const NavbarLoggedIn = () => {
 
   return (
     <div
-      className="bg-grey-lightest font-sans leading-normal tracking-normal"
+      className="bg-grey-lightest font-sans leading-normal tracking-normal "
       ref={ref}
     >
-      <nav className="bg-white w-full z-10 pin-t shadow">
-        <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
+      <nav className="bg-white w-full z-10 pin-t shadow ">
+        <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0 max-w-screen-lg mx-auto">
           <div className="flex w-1/2 md:w-1/2 pl-2 md:pl-0 my-auto ">
             <Link to="/feed">
               <img

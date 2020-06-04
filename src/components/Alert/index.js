@@ -16,7 +16,7 @@ const Alert = () => {
         title="close"
         htmlFor="banneralert"
       >
-        <div className="container mx-auto flex justify-between items-center my-1">
+        <div className="container mx-auto flex justify-between items-center my-1 max-w-screen-lg mx-auto">
           {message}
           <svg
             className="fill-current text-black"

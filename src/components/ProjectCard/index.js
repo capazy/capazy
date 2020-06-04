@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 const ProjectCard = ({
   project: {
@@ -12,6 +13,16 @@ const ProjectCard = ({
   },
   handleJoin,
 }) => {
+  const {
+    user: { _id: userId },
+  } = useContext(UserContext);
+
+  const userAlreadyApplied = (vacancy) => {
+    let result = vacancy.postulatedUsers.find((user) => user._id === userId);
+    console.log(result);
+    return result;
+  };
+
   return (
     <div
       className="bg-white shadow-md rounded-lg overflow-hidden my-2"
@@ -82,12 +93,20 @@ const ProjectCard = ({
                       </span>
                     </td>
                     <td className="w-1/4 py-1  border-b border-grey-light">
-                      <button
-                        onClick={() => handleJoin(vacancy._id)}
-                        className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
-                      >
-                        Apply
-                      </button>
+                      {userAlreadyApplied(vacancy) ? (
+                        <div class="flex flex-shrink-0 text-xs items-center pr-2">
+                          <div class="bg-green-200 text-green-700 px-2 py-1 rounded-r">
+                            You already apply
+                          </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleJoin(vacancy._id)}
+                          className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
+                        >
+                          Apply
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -57,6 +57,9 @@ export const GET_PROJECT_BY_ID = gql`
         experience
         skills
         description
+        postulatedUsers {
+          _id
+        }
       }
     }
   }
@@ -87,6 +90,9 @@ export const GET_PROJECTS = gql`
         experience
         description
         skills
+        postulatedUsers {
+          _id
+        }
       }
     }
   }
@@ -136,6 +142,9 @@ export const UPDATE_PROJECT = gql`
         title
         experience
         skills
+        postulatedUsers {
+          _id
+        }
       }
     }
   }
