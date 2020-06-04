@@ -1,31 +1,47 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { firebaseApp } from '../../firebase';
 
+// components
+import { ProgressBar } from '../index';
+
 const FileUploader = ({ id, projectId, action, field }) => {
+  const [progress, setProgress] = useState(0);
+
   const handleChange = async (e) => {
-    const files = Array.from(e.target.files);
+    const file = e.target.files[0];
     const storageRef = firebaseApp.storage().ref();
-    const result = files.map(async (file) => {
-      const fileRef = storageRef.child(file.name);
-      await fileRef.put(file);
-      return {
-        [field.fileName]: file.name,
-        [field.fileUrl]: await fileRef.getDownloadURL(),
-      };
-    });
-    Promise.all(result).then((values) => {
-      action({ projectId, method: '$push', files: values });
-    });
+    const fileRef = storageRef.child(file.name);
+    const uploadTask = fileRef.put(file);
+    await uploadTask.on(
+      'state_changed',
+      function (snapshot) {
+        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      },
+      (error) => {
+        console.log(error);
+      },
+      async () => {
+        const values = {
+          [field.fileName]: file.name,
+          [field.fileUrl]: await uploadTask.snapshot.ref.getDownloadURL(),
+        };
+        action({ projectId, method: '$push', files: values });
+      }
+    );
   };
 
   return (
-    <input
-      type="file"
-      id={id}
-      multiple
-      onChange={handleChange}
-      style={{ display: 'none' }}
-    />
+    <Fragment>
+      {progress === 0 || progress === 100 ? null : (
+        <ProgressBar progress={progress} />
+      )}
+      <input
+        type="file"
+        id={id}
+        onChange={handleChange}
+        style={{ display: 'none' }}
+      />
+    </Fragment>
   );
 };
 
