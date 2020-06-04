@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Switch, Redirect } from 'react-router-dom';
 
-import RouteWithLayout from './router/RouteWithLayout';
+import PrivateRoute from './router/PrivateRoute';
+import Route from './router/Route';
 
 // Views
 import {
@@ -23,66 +24,56 @@ import Layout from './layout';
 const Routes = () => {
   return (
     <Switch>
-      <RouteWithLayout exact path="/chat" layout={Layout} component={Chat} />
-      <RouteWithLayout
-        exact
-        path="/signup"
-        layout={Layout}
-        component={Signup}
-      />
-      <RouteWithLayout
+      <Route exact path="/" layout={Layout} component={Home} />
+      <Route exact path="/signup" layout={Layout} component={Signup} />
+      <Route exact path="/login" layout={Layout} component={Login} />
+      <PrivateRoute exact path="/chat" layout={Layout} component={Chat} />
+      <PrivateRoute
         exact
         path="/joined-projects"
         layout={Layout}
         component={JoinedProjects}
       />
-      <RouteWithLayout
+      <PrivateRoute
         exact
         path="/created-projects"
         layout={Layout}
         component={CreatedProjects}
       />
-      <RouteWithLayout
+      <PrivateRoute
         exact
         path="/project/create"
         layout={Layout}
         component={ProjectWizard}
       />
 
-      <RouteWithLayout exact path="/login" layout={Layout} component={Login} />
-      <RouteWithLayout
+      <PrivateRoute
         exact
         path="/user/create"
         layout={Layout}
         component={UserForm}
       />
-      <RouteWithLayout
+      <PrivateRoute
         exact
         path="/user/edit/:id"
         layout={Layout}
         component={UserForm}
       />
-      <RouteWithLayout
+      <PrivateRoute
         exact
         path="/profile/me"
         layout={Layout}
         component={Profile}
       />
 
-      <RouteWithLayout
+      <PrivateRoute
         exact
         path="/profile/:id"
         layout={Layout}
         component={Profile}
       />
-      <RouteWithLayout exact path="/" layout={Layout} component={Home} />
-      <RouteWithLayout exact path="/feed" layout={Layout} component={Feed} />
-      <RouteWithLayout
-        exact
-        path="/search"
-        layout={Layout}
-        component={Search}
-      />
+      <PrivateRoute exact path="/feed" layout={Layout} component={Feed} />
+      <PrivateRoute exact path="/search" layout={Layout} component={Search} />
 
       <Redirect
         to={{
