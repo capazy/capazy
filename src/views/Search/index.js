@@ -9,13 +9,7 @@ import { GET_USERS } from '../../graphql/user';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import {
-  ProjectCard,
-  UserCard,
-  SelectOne,
-  LoadingCard,
-  FeedCard,
-} from '../../components';
+import { UserCard, SelectOne, LoadingCard, FeedCard } from '../../components';
 
 // utils
 import allSkillsData from '../../data/allSkillsData.json';
@@ -177,13 +171,10 @@ const SearchBar = () => {
             {searchType === 'project' && (
               <Fragment>
                 <p>Results: {projects.projects.length}</p>
-                <div className="flex flex-wrap -mx-1 lg:-mx-4">
+                <div className="mansonry">
                   {projects.projects.map((project) => (
-                    <div
-                      key={project._id}
-                      className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  "
-                    >
-                      <ProjectCard project={project} handleJoin={handleJoin} />
+                    <div key={project._id}>
+                      <FeedCard project={project} handleJoin={handleJoin} />
                     </div>
                   ))}
                 </div>
