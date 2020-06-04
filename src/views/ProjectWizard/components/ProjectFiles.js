@@ -6,6 +6,7 @@ import { FileUploader, PictureUploader, NoData } from '../../../components';
 
 // context
 import { ProjectContext } from '../../../context/ProjectContext';
+import { Link } from 'react-router-dom';
 
 const ProjectFiles = ({
   projectId,
@@ -28,7 +29,7 @@ const ProjectFiles = ({
     <Fragment>
       <div className="w-full">
         <h1 className="text-lg font-semibold pt-2 mb-4">
-          Step 3 of 3: Support files
+          Step 3 of 3: Support files (optional)
         </h1>
         <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
           <div className="text-center mx-auto mb-4">
@@ -113,18 +114,27 @@ const ProjectFiles = ({
           <div className="border-b-2 my-4" />
 
           <div className="flex justify-between mt-5">
-            <button
-              className="btn bg-brand-blue text-white mb-0"
-              onClick={previousStep}
-            >
-              Back
-            </button>
-            <button
-              className="btn bg-brand-blue text-white mb-0"
-              onClick={handlePublish}
-            >
-              Post
-            </button>
+            <div>
+              <button
+                className="btn bg-brand-blue text-white mb-0"
+                onClick={previousStep}
+              >
+                Back
+              </button>
+            </div>
+            <div>
+              <Link to="/created-projects">
+                <button className="btn bg-gray-400 text-white mb-0 mr-3">
+                  Save
+                </button>
+              </Link>
+              <button
+                className="btn bg-brand-blue text-white mb-0"
+                onClick={handlePublish}
+              >
+                Post
+              </button>
+            </div>
           </div>
         </div>
       </div>

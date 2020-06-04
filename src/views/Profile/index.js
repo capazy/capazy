@@ -81,7 +81,7 @@ const Profile = ({ match }) => {
               </div>
               <div className="mt-3 md:my-auto">
                 {!isOwner ? (
-                  <Link to="#">
+                  <Link to="/chat">
                     <button className="rounded-full bg-blue text-white antialiased font-bold bg-green-600 px-6 py-2 mr-2 w-full">
                       Contact
                     </button>

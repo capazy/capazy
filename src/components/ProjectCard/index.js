@@ -19,7 +19,6 @@ const ProjectCard = ({
 
   const userAlreadyApplied = (vacancy) => {
     let result = vacancy.postulatedUsers.find((user) => user._id === userId);
-    console.log(result);
     return result;
   };
 
@@ -88,18 +87,27 @@ const ProjectCard = ({
                       </p>
                     </td>
                     <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
-                      <span className="inline-block bg-green-200 px-2 py-0 text-sm rounded-full text-gray-700 mr-2">
+                      {/* <span className="inline-block bg-green-200 px-2 py-0 text-sm rounded-full text-gray-700 mr-2">
                         open
-                      </span>
+                      </span> */}
+                      {!vacancy.selectedUser._id ? (
+                        <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                          open
+                        </span>
+                      ) : (
+                        <span className="inline-block bg-yellow-400 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                          closed
+                        </span>
+                      )}
                     </td>
                     <td className="w-1/4 py-1  border-b border-grey-light">
                       {userAlreadyApplied(vacancy) ? (
-                        <div class="flex flex-shrink-0 text-xs items-center pr-2">
-                          <div class="bg-green-200 text-green-700 px-2 py-1 rounded-r">
-                            You already apply
+                        <div className="flex flex-shrink-0 text-xs items-center pr-2">
+                          <div className="bg-green-200 text-green-700 px-2 py-1 rounded-r">
+                            Already applied
                           </div>
                         </div>
-                      ) : (
+                      ) : vacancy.selectedUser._id ? null : (
                         <button
                           onClick={() => handleJoin(vacancy._id)}
                           className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"

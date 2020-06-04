@@ -4,7 +4,7 @@
 
 /* BUTTONS */
 .btn {
-  @apply inline-block px-5 py-3 rounded-lg uppercase tracking-wider font-semibold  text-sm;
+  @apply inline-block px-4 py-2 rounded-lg uppercase tracking-wider font-semibold  text-sm;
 }
 
 .btn:focus {

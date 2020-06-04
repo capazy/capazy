@@ -81,10 +81,10 @@ const NavbarLoggedIn = () => {
 
   return (
     <div
-      className="bg-grey-lightest font-sans leading-normal tracking-normal "
+      className="bg-grey-lightest font-sans leading-normal tracking-normal"
       ref={ref}
     >
-      <nav className="bg-white w-full z-10 pin-t shadow ">
+      <nav className="bg-white w-full z-10 pin-t shadow top-0 fixed">
         <div className="w-full container mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0 max-w-screen-lg mx-auto">
           <div className="flex w-1/2 md:w-1/2 pl-2 md:pl-0 my-auto ">
             <Link to="/feed">
@@ -150,7 +150,7 @@ const NavbarLoggedIn = () => {
                       </li>
                       <li>
                         <Link
-                          to="/#"
+                          to="/chat"
                           className="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline"
                         >
                           Notifications

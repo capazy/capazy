@@ -46,6 +46,7 @@ export const GET_PROJECT_BY_ID = gql`
       endDate
       isOpen
       projectPictureUrl
+      updatedAt
       files {
         _id
         name
@@ -57,6 +58,9 @@ export const GET_PROJECT_BY_ID = gql`
         experience
         skills
         description
+        selectedUser {
+          _id
+        }
         postulatedUsers {
           _id
         }
@@ -77,6 +81,8 @@ export const GET_PROJECTS = gql`
       isOpen
       projectPictureUrl
       skills
+      updatedAt
+      views
       creator {
         _id
         firstName
@@ -90,6 +96,9 @@ export const GET_PROJECTS = gql`
         experience
         description
         skills
+        selectedUser {
+          _id
+        }
         postulatedUsers {
           _id
         }
@@ -105,6 +114,7 @@ export const UPDATE_PROJECT = gql`
     $title: String
     $description: String
     $type: String
+    $views: Int
     $startDate: String
     $endDate: String
     $isOpen: Boolean
@@ -118,6 +128,7 @@ export const UPDATE_PROJECT = gql`
         title: $title
         description: $description
         type: $type
+        views: $views
         startDate: $startDate
         endDate: $endDate
         isOpen: $isOpen
@@ -132,6 +143,8 @@ export const UPDATE_PROJECT = gql`
       endDate
       isOpen
       projectPictureUrl
+      updatedAt
+      views
       files {
         _id
         name
@@ -142,6 +155,9 @@ export const UPDATE_PROJECT = gql`
         title
         experience
         skills
+        selectedUser {
+          _id
+        }
         postulatedUsers {
           _id
         }

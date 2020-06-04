@@ -9,7 +9,6 @@ import { FeedCard } from '../../components';
 
 const Feed = () => {
   const [joinSuccess, setJoinSuccess] = useState(false);
-
   const [joinVacancy] = useMutation(JOIN_VACANCY, {
     update(_, { data }) {
       console.log('Vacancy', data);

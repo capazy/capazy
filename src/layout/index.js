@@ -18,7 +18,10 @@ const Main = (props) => {
       <div className="mx-auto ">
         <main className="">
           {user ? <NavbarLoggedIn /> : <Navbar />}
-          <div className="container max-w-screen-lg mx-auto mt-2 md:mt-2">
+          <div
+            className="container max-w-screen-lg mx-auto mt-2 md:mt-2"
+            style={{ paddingTop: '3rem' }}
+          >
             {children}
           </div>
           <Footer />
