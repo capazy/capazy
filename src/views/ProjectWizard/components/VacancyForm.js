@@ -8,6 +8,7 @@ import { SelectMulti, TeamTable, Modal } from '../../../components';
 import { transformArray } from '../../../utils/transformArray';
 import { vacancyFormSchema } from '../../../utils/formikSchemas';
 import allSkillsData from '../../../data/allSkillsData.json';
+import { useEffect } from 'react';
 
 const experienceOptions = [
   { value: 'beginner', label: 'Beginner' },
@@ -22,7 +23,6 @@ const VacancyForm = (props) => {
     createVacancy,
     deleteVacancy,
     previousStep,
-
     nextStep,
   } = props;
   const [action, setAction] = useState(false);
@@ -55,6 +55,15 @@ const VacancyForm = (props) => {
   });
 
   const { title, skills, timeCommitment, description } = values;
+
+  const [disable, setDisable] = useState(true);
+  useEffect(() => {
+    if (project && project.vacancies.length > 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }, [project]);
 
   return (
     <Fragment>
@@ -229,9 +238,15 @@ const VacancyForm = (props) => {
               Back
             </button>
             <button
-              className="btn bg-brand-blue text-white mb-0"
+              disabled={disable}
+              className={
+                disable
+                  ? 'btn bg-gray-500 text-white mb-0'
+                  : `btn bg-brand-blue text-white mb-0`
+              }
               onClick={nextStep}
             >
+              {console.log(disable)}
               Next
             </button>
           </div>

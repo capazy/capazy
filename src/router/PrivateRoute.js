@@ -1,23 +1,25 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { Route } from 'react-router-dom';
+// import { UserContext } from '../context/UserContext';
 
 const RouteWithLayout = (props) => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   const { layout: Layout, component: Component, ...rest } = props;
 
   return (
     <Route
       {...rest}
-      render={(matchProps) =>
-        !user ? (
-          <Redirect to="/" />
-        ) : (
+      render={
+        (matchProps) => (
+          // !user ? (
+          //   <Redirect to="/" />
+          // ) : (
           <Layout>
             <Component {...matchProps} />
           </Layout>
         )
+        // )
       }
     />
   );
