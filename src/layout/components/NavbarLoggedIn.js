@@ -150,7 +150,7 @@ const NavbarLoggedIn = () => {
                       </li>
                       <li>
                         <Link
-                          to="/#"
+                          to="/chat"
                           className="px-4 py-2 block text-black hover:bg-grey-light no-underline hover:no-underline"
                         >
                           Notifications

@@ -9,6 +9,7 @@ import { transformArray } from '../../../utils/transformArray';
 import { vacancyFormSchema } from '../../../utils/formikSchemas';
 import allSkillsData from '../../../data/allSkillsData.json';
 import { useEffect } from 'react';
+import toggleAlert from '../../../utils/toggleAlert';
 
 const experienceOptions = [
   { value: 'beginner', label: 'Beginner' },
@@ -50,6 +51,8 @@ const VacancyForm = (props) => {
       values.projectId = projectId;
       values.skills = await transformArray(values, 'skills');
       await createVacancy({ variables: values });
+      setAction(false);
+      toggleAlert('Vacancy created', 'success');
       resetForm();
     },
   });
@@ -79,7 +82,10 @@ const VacancyForm = (props) => {
           />
 
           <Modal action={action}>
-            <form className="w-full pt-4  mb-4 m-12" onSubmit={handleSubmit}>
+            <form className="w-full pt-2  mb-4 m-12" onSubmit={handleSubmit}>
+              <label className="block text-gray-900 text-xl font-bold mb-2 mx-auto text-center">
+                Vacancy
+              </label>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                   Title
