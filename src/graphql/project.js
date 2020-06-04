@@ -46,6 +46,7 @@ export const GET_PROJECT_BY_ID = gql`
       endDate
       isOpen
       projectPictureUrl
+      updatedAt
       files {
         _id
         name
@@ -77,6 +78,7 @@ export const GET_PROJECTS = gql`
       isOpen
       projectPictureUrl
       skills
+      updatedAt
       creator {
         _id
         firstName
@@ -132,6 +134,7 @@ export const UPDATE_PROJECT = gql`
       endDate
       isOpen
       projectPictureUrl
+      updatedAt
       files {
         _id
         name
