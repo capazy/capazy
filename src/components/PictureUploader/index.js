@@ -11,18 +11,37 @@ const PictureUploader = ({ id, projectId, action, field }) => {
   const handleChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = firebaseApp.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
-    const values = {
-      [field.fileName]: file.name,
-      [field.fileUrl]: await fileRef.getDownloadURL(),
-    };
-    if (projectId) {
-      values.projectId = projectId;
-      values.method = '$set';
-      await action(values);
-    }
-    await action(values);
+    let uploadTask = storageRef.child(file.name).put(file);
+
+    uploadTask.on(
+      'state_changed',
+      function (snapshot) {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+      },
+      function (error) {
+        // Handle unsuccessful uploads
+      },
+      function () {
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          console.log('File available at', downloadURL);
+        });
+      }
+    );
+    // uploadTask.on('state_changed', (snapshot) => {
+    //   let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //   console.log('Upload is ' + progress + '% done');
+    // });
+    // const values = {
+    //   [field.fileName]: file.name,
+    //   [field.fileUrl]: await fileRef.getDownloadURL(),
+    // };
+    // if (projectId) {
+    //   values.projectId = projectId;
+    //   values.method = '$set';
+    //   await action(values);
+    // }
+    // await action(values);
   };
 
   return (
