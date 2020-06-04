@@ -28,7 +28,7 @@ const ProjectFiles = ({
     <Fragment>
       <div className="w-full">
         <h1 className="text-lg font-semibold pt-2 mb-4">
-          Step 3 of 3: Support files
+          Step 3 of 3: Support files (optional)
         </h1>
         <div className="bg-white shadow-md rounded px-8 py-6 mb-4">
           <div className="text-center mx-auto mb-4">

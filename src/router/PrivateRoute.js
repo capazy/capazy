@@ -1,25 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
-// import { UserContext } from '../context/UserContext';
+import { Route, Redirect } from 'react-router-dom';
 
 const RouteWithLayout = (props) => {
-  // const { user } = useContext(UserContext);
   const { layout: Layout, component: Component, ...rest } = props;
-
+  const token = localStorage.getItem('token');
   return (
     <Route
       {...rest}
-      render={
-        (matchProps) => (
-          // !user ? (
-          //   <Redirect to="/" />
-          // ) : (
+      render={(matchProps) =>
+        !token ? (
+          <Redirect to="/login" />
+        ) : (
           <Layout>
             <Component {...matchProps} />
           </Layout>
         )
-        // )
       }
     />
   );
