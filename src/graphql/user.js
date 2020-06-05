@@ -193,11 +193,30 @@ export const GET_USER_JOINED_PROJECTS = gql`
           startDate
           endDate
           isOpen
+          projectPictureUrl
+          updatedAt
           creator {
             _id
+            firstName
+            lastName
+          }
+          files {
+            _id
+            name
+            url
           }
           vacancies {
             _id
+            title
+            experience
+            skills
+            description
+            selectedUser {
+              _id
+            }
+            postulatedUsers {
+              _id
+            }
           }
         }
       }

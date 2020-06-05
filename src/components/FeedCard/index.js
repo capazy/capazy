@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { ProjectContext } from '../../context/ProjectContext';
 
 // components
@@ -26,6 +27,15 @@ const FeedCard = ({ project, handleJoin }) => {
   });
   // console.log('date', date);
   // console.log('updated', updatedAt);
+
+  const sumOfPostulated = (vacancies) => {
+    let arr = [];
+    vacancies.map((vacancy) => arr.push(vacancy.postulatedUsers.length));
+    var sum = arr.reduce((a, b) => {
+      return a + b;
+    }, 0);
+    return sum;
+  };
 
   const image =
     profilePictureUrl ||
@@ -91,10 +101,7 @@ const FeedCard = ({ project, handleJoin }) => {
                     {views} views
                   </p>{' '}
                   <p className="flex items-center text-gray-800 ">
-                    {vacancies.postulatedUsers
-                      ? vacancies.postulatedUsers.length
-                      : 0}{' '}
-                    applicants
+                    {sumOfPostulated(vacancies)} applicants
                   </p>
                   <button
                     className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
