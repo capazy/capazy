@@ -1301,7 +1301,7 @@
 .sendbird-theme--light
   .sendbird-user-message--outgoing:hover
   .sendbird-user-message__tooltip {
-  background-color: #000;
+  background-color: #ccc7f2;
 }
 .sendbird-theme--dark
   .sendbird-user-message--outgoing:hover
@@ -2703,6 +2703,7 @@
     width: 320px;
   }
 }
+/* TODO */
 @media screen and (max-width: 600px) {
   .sendbird-app__wrap .sendbird-app__channellist-wrap {
     display: none;
@@ -2714,6 +2715,7 @@
   top: 0;
   right: 0;
   height: 100%;
+  z-index: 10;
 }
 
 /*# sourceMappingURL=index.css.map */

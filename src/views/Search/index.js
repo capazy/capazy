@@ -173,7 +173,7 @@ const SearchBar = () => {
                 <p>Results: {projects.projects.length}</p>
                 <div className="mansonry">
                   {projects.projects.map((project) => (
-                    <div key={project._id} className="m-10">
+                    <div key={project._id}>
                       <FeedCard project={project} handleJoin={handleJoin} />
                     </div>
                   ))}

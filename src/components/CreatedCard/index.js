@@ -11,6 +11,7 @@ const CreatedCard = ({
     vacancies,
     _id,
     projectPictureUrl,
+    files,
   },
   handleSelect,
 }) => {
@@ -27,7 +28,7 @@ const CreatedCard = ({
           ></div>
         )}
         <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
-          <div className="flex mb-8">
+          <div className="flex">
             {projectPictureUrl && (
               <img
                 className="hidden lg:block flex-initial mr-2 h-48 w-64 object-cover object-center"
@@ -50,29 +51,55 @@ const CreatedCard = ({
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="flex justify-start">
-                  <div className="text-center mt-1">
-                    <p className="text-xs font-semibold text-gray-800">
-                      Start Date
-                    </p>
-                    <p className="text-xs py-2 text-sm text-gray-700">
-                      {startDate.slice(0, 10)}
-                    </p>
-                  </div>
-                  <div className="text-center mt-1 ml-4">
-                    <p className="text-xs font-semibold text-gray-800">
-                      End Date
-                    </p>
-                    <p className="text-xs py-2 text-sm text-gray-700">
-                      {endDate.slice(0, 10)}
-                    </p>
-                  </div>
+              <div className="flex justify-left mb-2">
+                <div className="mr-4">
+                  <h2 className="text-sm font-semibold text-gray-800 leading-none">
+                    Start Date
+                  </h2>
+                  <p className=" text-xs pt-2 text-sm text-gray-700">
+                    {startDate.slice(0, 10)}
+                  </p>
                 </div>
+                <div>
+                  <h2 className="text-sm font-semibold text-gray-800 leading-none">
+                    End Date
+                  </h2>
+                  <p className="text-xs pt-2 text-sm text-gray-700">
+                    {endDate.slice(0, 10)}
+                  </p>
+                </div>
+              </div>
+              <div>
                 <p className="text-gray-700 text-base">{description}</p>
               </div>
             </div>
           </div>
+
+          {files && files.length >= 1 ? (
+            <div className="mb-6 border-b-2 py-2">
+              <h1 className="text-md font-semibold text-gray-800">
+                Supprting Files
+              </h1>
+              <table>
+                <tbody>
+                  {files.map((file) => (
+                    // <tr key={file._id}>
+                    <th className="text-left pr-4" key={file._id}>
+                      <a
+                        href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                      >
+                        {file.name}
+                      </a>
+                    </th>
+                    // </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
 
           {/* TABLE */}
 
@@ -87,7 +114,7 @@ const CreatedCard = ({
               <div className="col-start-2">
                 {' '}
                 <h1 className="text-md font-semibold text-gray-600">
-                  Postuladed
+                  Applicants
                 </h1>
               </div>
               <div className="col-start-3">

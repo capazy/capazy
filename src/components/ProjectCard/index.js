@@ -117,9 +117,6 @@ const ProjectCard = ({
                       </p>
                     </td>
                     <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
-                      {/* <span className="inline-block bg-green-200 px-2 py-0 text-sm rounded-full text-gray-700 mr-2">
-                        open
-                      </span> */}
                       {!vacancy.selectedUser._id ? (
                         <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
                           open
@@ -148,7 +145,6 @@ const ProjectCard = ({
                     </td>
                   </tr>
                 ))}
-                {/* </div> */}
               </tbody>
             </table>
           </div>

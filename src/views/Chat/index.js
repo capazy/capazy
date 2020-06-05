@@ -15,7 +15,7 @@ const Chat = () => {
   }
 
   return (
-    <div className="App">
+    <div className="App mt-6">
       <SendBirdApp
         appId={process.env.REACT_APP_SENDBIRD_APP_ID}
         userId={user._id}

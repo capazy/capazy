@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { ProjectContext } from '../../context/ProjectContext';
 
 // components
@@ -7,6 +8,7 @@ import { Modal, ProjectCard } from '../../components';
 
 const FeedCard = ({ project, handleJoin }) => {
   const { update } = useContext(ProjectContext);
+  const [readMore, setReadMore] = useState(false);
 
   const {
     description,
@@ -26,6 +28,15 @@ const FeedCard = ({ project, handleJoin }) => {
   });
   // console.log('date', date);
   // console.log('updated', updatedAt);
+
+  const sumOfPostulated = (vacancies) => {
+    let arr = [];
+    vacancies.map((vacancy) => arr.push(vacancy.postulatedUsers.length));
+    var sum = arr.reduce((a, b) => {
+      return a + b;
+    }, 0);
+    return sum;
+  };
 
   const image =
     profilePictureUrl ||
@@ -56,17 +67,43 @@ const FeedCard = ({ project, handleJoin }) => {
       </div>
 
       <div className="pl-16">
-        <p className="font-semibold">----> {title}</p>
-        <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
-          {description.substr(0, 200)}....
-          <br />
-          <span className="font-semibold">Skills:</span>
+        <h1 className="font-semibold text-xl">{title}</h1>
+        {description.length > 200 && !readMore ? (
+          <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
+            {description.substr(0, 200)}...{' '}
+            <span>
+              <button
+                className="text-brand-blue"
+                onClick={() => setReadMore(!readMore)}
+              >
+                read more
+              </button>
+            </span>
+          </p>
+        ) : (
+          <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
+            {description}{' '}
+            <span>
+              {description.length > 200 && (
+                <button
+                  className="text-brand-blue"
+                  onClick={() => setReadMore(!readMore)}
+                >
+                  read less
+                </button>
+              )}
+            </span>
+          </p>
+        )}
+        <p className="font-semibold text-gray-700">
+          Skills:
           <span className="text-brand-blue text-sm">
             {' '}
             {skills.map((skill) => `#${skill} `)}
           </span>
-          <br />
-          <span className="font-semibold">Vacancies ({vacancies.length}):</span>
+        </p>
+        <p className="font-semibold text-gray-700">
+          Vacancies ({vacancies.length}):
           <span className="text-brand-blue text-sm">
             {' '}
             {vacancies.map((vacancy) => `#${vacancy.title} `)}
@@ -87,28 +124,29 @@ const FeedCard = ({ project, handleJoin }) => {
             <div className="flex items-center">
               <div className="flex-1 text-center py-2 my-4">
                 <div className="flex justify-between items-center flex-row px-2 z-50 text-xs md:text-sm">
-                  <p className="flex items-center text-gray-800 ">
-                    {views} views
-                  </p>{' '}
-                  <p className="flex items-center text-gray-800 ">
-                    {vacancies.postulatedUsers
-                      ? vacancies.postulatedUsers.length
-                      : 0}{' '}
-                    applicants
-                  </p>
-                  <button
-                    className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
-                    onClick={() => {
-                      setOpenModal(!openModal);
-                      update({
-                        projectId,
-                        views: views + 1,
-                        method: '$set',
-                      });
-                    }}
-                  >
-                    view more
-                  </button>
+                  <div className="flex justify-left">
+                    <p className="flex items-center text-gray-800 mr-4">
+                      {views} views
+                    </p>
+                    <p className="flex items-center text-gray-800 ">
+                      {sumOfPostulated(vacancies)} applicants
+                    </p>
+                  </div>
+                  <div>
+                    <button
+                      className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
+                      onClick={() => {
+                        setOpenModal(!openModal);
+                        update({
+                          projectId,
+                          views: views + 1,
+                          method: '$set',
+                        });
+                      }}
+                    >
+                      view more
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
