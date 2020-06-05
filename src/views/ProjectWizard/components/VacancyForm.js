@@ -87,9 +87,7 @@ const VacancyForm = (props) => {
                 Vacancy
               </label>
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Title
-                </label>
+                <label className="form-label">Title</label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="title"
@@ -120,9 +118,7 @@ const VacancyForm = (props) => {
               </div>
 
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Experience
-                </label>
+                <label className="form-label mt-0">Experience</label>
                 <div className="inline-block relative w-full">
                   <select
                     id="experience"
@@ -179,6 +175,7 @@ const VacancyForm = (props) => {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="timeCommitment"
                     type="number"
+                    min="0"
                     onChange={handleChange}
                     value={timeCommitment}
                     invalid={

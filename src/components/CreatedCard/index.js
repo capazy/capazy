@@ -189,7 +189,7 @@ const CreatedCard = ({
                                   </td>
 
                                   {!vacancy.selectedUser._id ? (
-                                    <td className="text-right py-3 px-4">
+                                    <td className="text-center py-3 px-4">
                                       <button
                                         className="btn-small"
                                         to="#"

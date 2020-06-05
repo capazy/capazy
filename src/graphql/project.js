@@ -47,6 +47,11 @@ export const GET_PROJECT_BY_ID = gql`
       isOpen
       projectPictureUrl
       updatedAt
+      creator {
+        _id
+        firstName
+        lastName
+      }
       files {
         _id
         name
@@ -89,6 +94,11 @@ export const GET_PROJECTS = gql`
         lastName
         profilePictureUrl
         companyName
+      }
+      files {
+        _id
+        name
+        url
       }
       vacancies {
         _id

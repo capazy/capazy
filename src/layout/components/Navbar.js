@@ -28,7 +28,7 @@ const links = () => (
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   return (
-    <nav className=" w-full z-10 top-0 bg-white border-b-2 ">
+    <nav className=" w-full z-10 top-0 bg-white border-b-2 top-0 fixed ">
       <div className="container mx-auto sm:flex sm:justify-between sm:items-center max-w-screen-lg mx-auto">
         <div className="flex  items-end justify-between px-4 py-3 sm:p-0">
           <div className="-ml-8">

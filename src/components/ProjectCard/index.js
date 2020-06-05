@@ -10,6 +10,8 @@ const ProjectCard = ({
     endDate,
     vacancies,
     projectPictureUrl,
+    files,
+    creator: { firstName, lastName },
   },
   handleJoin,
 }) => {
@@ -34,9 +36,13 @@ const ProjectCard = ({
           alt="avatar"
         />
       )}
-      <div className="flex items-center px-1 py-1 bg-gray-800">
+      <div className="flex items-center justify-between px-1 py-1 bg-gray-800">
         <h1 className="mx-3 text-white font-semibold text-lg">{title}</h1>
+        <h1 className="mx-3 text-gray-200 font-semibold text-sm italic">
+          by {firstName} {lastName}
+        </h1>
       </div>
+
       <div className="py-4 px-4">
         <h1 className="text-md font-semibold text-gray-800">{type}</h1>
         <p className="py-2 text-sm text-gray-700 border-b">{description}</p>
@@ -58,6 +64,30 @@ const ProjectCard = ({
             </p>
           </div>
         </div>
+        {/* FILES */}
+        {files && files.length >= 1 ? (
+          <div className="mb-4 border-b-2 py-2">
+            <h1 className="text-md font-semibold text-gray-800">Files</h1>
+            <table>
+              <tbody>
+                {files.map((file) => (
+                  <tr key={file._id}>
+                    <th className="text-left">
+                      <a
+                        href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                      >
+                        {file.name}
+                      </a>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
 
         {/* TABLE */}
         <div className=" mx-auto">

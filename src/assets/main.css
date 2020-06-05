@@ -707,8 +707,8 @@ video {
 .form-label {
   display: block;
   --text-opacity: 1;
-  color: #a0aec0;
-  color: rgba(160, 174, 192, var(--text-opacity));
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
   font-size: 0.875rem;
   font-weight: 700;
   margin-bottom: 0.5rem;

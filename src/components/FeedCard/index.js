@@ -24,8 +24,8 @@ const FeedCard = ({ project, handleJoin }) => {
     month: 'long',
     day: 'numeric',
   });
-  console.log('date', date);
-  console.log('updated', updatedAt);
+  // console.log('date', date);
+  // console.log('updated', updatedAt);
 
   const image =
     profilePictureUrl ||

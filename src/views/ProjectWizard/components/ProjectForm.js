@@ -77,7 +77,7 @@ const ProjectForm = (props) => {
           <label className="form-label">Description</label>
           <textarea
             id="description"
-            rows="4"
+            rows="10"
             cols="10"
             placeholder="Project description..."
             onChange={handleChange}
@@ -89,6 +89,7 @@ const ProjectForm = (props) => {
           ></textarea>
           <p className="form-error">{errors.description}</p>
         </div>
+        <label className="form-label">Type</label>
         <div className="mb-4 inline-block relative w-full">
           <select
             id="type"
@@ -115,6 +116,7 @@ const ProjectForm = (props) => {
         </div>
         <p className="form-error">{errors.type}</p>
         <div className="mb-4">
+          <label className="form-label">Start Date</label>
           <input
             type="date"
             id="startDate"
@@ -126,6 +128,8 @@ const ProjectForm = (props) => {
         </div>
         <p className="form-error">{errors.startDate}</p>
         <div className="mb-4">
+          <label className="form-label">End Date</label>
+
           <input
             type="date"
             id="endDate"
