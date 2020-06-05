@@ -86,7 +86,7 @@ const FeedCard = ({ project, handleJoin }) => {
           <div className="w-full">
             <div className="flex items-center">
               <div className="flex-1 text-center py-2 my-4">
-                <div className="flex justify-between items-center flex-row px-2 z-50 text-sm">
+                <div className="flex justify-between items-center flex-row px-2 z-50 text-xs md:text-sm">
                   <p className="flex items-center text-gray-800 ">
                     {views} views
                   </p>{' '}
