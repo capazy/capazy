@@ -1,8 +1,8 @@
 [
   {
     "expertise": {
-      "value": "Websites, IT & Software",
-      "label": "Websites, IT & Software"
+      "value": "Software, Programming and IT",
+      "label": "Software, Programming and IT"
     },
     "skills": [
       { "value": ".NET", "label": ".NET" },
@@ -885,8 +885,8 @@
   },
   {
     "expertise": {
-      "value": "Mobile Phones & Computing",
-      "label": "Mobile Phones & Computing"
+      "value": "Computing and Mbile Phones",
+      "label": "Computing and Mbile Phones"
     },
     "skills": [
       { "value": "Amazon Fire", "label": "Amazon Fire" },
@@ -918,8 +918,8 @@
   },
   {
     "expertise": {
-      "value": "Writing & Content",
-      "label": "Writing & Content"
+      "value": "Content and Writing",
+      "label": "Content and Writing"
     },
     "skills": [
       { "value": "Abnormal Psychology", "label": "Abnormal Psychology" },
@@ -999,8 +999,8 @@
   },
   {
     "expertise": {
-      "value": "Design, Media & Architecture",
-      "label": "Design, Media & Architecture"
+      "value": "Digital Media and Design",
+      "label": "Digital Media and Design"
     },
     "skills": [
       { "value": "2D Animation", "label": "2D Animation" },
@@ -1194,8 +1194,8 @@
   },
   {
     "expertise": {
-      "value": "Data Entry & Admin",
-      "label": "Data Entry & Admin"
+      "value": "Administration and Data Entry",
+      "label": "Administration and Data Entry"
     },
     "skills": [
       { "value": "ABBYY FineReader", "label": "ABBYY FineReader" },
@@ -1263,8 +1263,8 @@
   },
   {
     "expertise": {
-      "value": "Engineering & Science",
-      "label": "Engineering & Science"
+      "value": "Science and Engineering",
+      "label": "Science and Engineering"
     },
     "skills": [
       { "value": "802.11", "label": "802.11" },
@@ -1598,8 +1598,8 @@
   },
   {
     "expertise": {
-      "value": "Product Sourcing & Manufacturing",
-      "label": "Product Sourcing & Manufacturing"
+      "value": "Manufacturing and Product Sourcing",
+      "label": "Manufacturing and Product Sourcing"
     },
     "skills": [
       { "value": "3D Printing", "label": "3D Printing" },
@@ -1624,8 +1624,8 @@
   },
   {
     "expertise": {
-      "value": "Sales & Marketing",
-      "label": "Sales & Marketing"
+      "value": "Sales, Marketing and Forecasting",
+      "label": "Sales, Marketing and Forecasting"
     },
     "skills": [
       {
@@ -1751,8 +1751,8 @@
   },
   {
     "expertise": {
-      "value": "Freight, Shipping & Transportation",
-      "label": "Freight, Shipping & Transportation"
+      "value": "Transportation and Logistics",
+      "label": "Transportation and Logistics"
     },
     "skills": [
       { "value": "Bicycle Courier", "label": "Bicycle Courier" },
@@ -1793,8 +1793,8 @@
   },
   {
     "expertise": {
-      "value": "Business, Accounting, Human Resources & Legal",
-      "label": "Business, Accounting, Human Resources & Legal"
+      "value": "Business, Accounting, Legal and Human Resources",
+      "label": "Business, Accounting, Legal and Human Resources"
     },
     "skills": [
       { "value": "A/R analysis", "label": "A/R analysis" },
@@ -2057,8 +2057,8 @@
   },
   {
     "expertise": {
-      "value": "Translation & Languages",
-      "label": "Translation & Languages"
+      "value": "Languages and Translation",
+      "label": "Languages and Translation"
     },
     "skills": [
       { "value": "Afrikaans", "label": "Afrikaans" },
@@ -2143,8 +2143,8 @@
   },
   {
     "expertise": {
-      "value": "Local Jobs & Services",
-      "label": "Local Jobs & Services"
+      "value": "Local Jobs",
+      "label": "Local Jobs"
     },
     "skills": [
       { "value": "A&E", "label": "A&E" },

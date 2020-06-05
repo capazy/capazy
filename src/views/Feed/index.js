@@ -1,13 +1,20 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { App as SendBirdApp } from 'sendbird-uikit';
 
 // apollo
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
+
+// components
 import { FeedCard } from '../../components';
 
+// context
+import { UserContext } from '../../context/UserContext';
+
 const Feed = () => {
+  const { user } = useContext(UserContext);
   const [joinSuccess, setJoinSuccess] = useState(false);
   const [joinVacancy] = useMutation(JOIN_VACANCY, {
     update(_, { data }) {
@@ -36,6 +43,13 @@ const Feed = () => {
 
   return (
     <Fragment>
+      <div className="App hidden">
+        <SendBirdApp
+          appId={process.env.REACT_APP_SENDBIRD_APP_ID}
+          userId={user._id}
+          nickname={`${user.firstName} ${user.lastName}`}
+        />
+      </div>
       <div className="container max-w-3xl  my-8 mx-auto md:px-4 md:px-12">
         <div className=" mx-auto mt-4 justify-between">
           {data.projects.map((project) => (

@@ -18,17 +18,12 @@ const Why = () => {
                 href="/#"
                 className="flex flex-wrap no-underline hover:no-underline"
               >
-                <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                  xGETTING STARTED
-                </p>
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
                   Team Work
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                Good teamwork helps to build morale in the workplace, 
-                which makes workers more productive and ultimately improves profits
-                
-
+                  Good teamwork helps to build morale in the workplace, which
+                  makes workers more productive and ultimately improves profits
                 </p>
               </a>
             </div>
@@ -47,22 +42,20 @@ const Why = () => {
                 href="/#"
                 className="flex flex-wrap no-underline hover:no-underline"
               >
-                <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                  xGETTING STARTED
-                </p>
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
                   Problem Solving
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                Problem-solving is easier – since people with different skills and 
-                knowledge will work together to produce a creative solution
+                  Problem-solving is easier – since people with different skills
+                  and knowledge will work together to produce a creative
+                  solution
                 </p>
               </a>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <div className="flex items-center justify-center">
                 <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                Learn More
+                  Learn More
                 </button>
               </div>
             </div>
@@ -74,23 +67,20 @@ const Why = () => {
                 href="/#"
                 className="flex flex-wrap no-underline hover:no-underline"
               >
-                <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                  xGETTING STARTED
-                </p>
-
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
                   Cost Reduction
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
                   Reduce the cost allocated to temporary hires due to lack of
-                  resources within your team. There is Capacity available within!!
+                  resources within your team. There is Capacity available
+                  within!!
                 </p>
               </a>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <div className="flex items-center justify-center">
                 <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                Learn More
+                  Learn More
                 </button>
               </div>
             </div>

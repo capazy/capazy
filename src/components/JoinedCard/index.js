@@ -5,15 +5,17 @@ import { Link } from 'react-router-dom';
 
 const JoinedCard = ({
   vacancy: {
-    title: titleVancancy,
+    title: vacancyTitle,
     experience,
+    description: vacancyDescription,
+    postulatedUsers,
     project: {
       description,
       type,
       startDate,
       endDate,
-      title,
-      creator: { _id: creatorId },
+      title: projectTitle,
+      creator: { _id: creatorId, firstName, lastName },
     },
     project,
     selectedUser: { _id: selectedUserId },
@@ -22,7 +24,7 @@ const JoinedCard = ({
   handleJoin,
 }) => {
   const [openModal, setOpenModal] = useState(false);
-  console.log('Projec', project);
+
   return (
     <div className="w-full lg:max-w-full lg:flex">
       {project.projectPictureUrl && (
@@ -37,12 +39,13 @@ const JoinedCard = ({
       <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
         <div className=" flex justify-between">
           <div>
-            <p className="text-gray-900 font-bold text-xl">{titleVancancy}</p>
-            <p className="text-sm text-gray-600 flex items-center mb-2">
-              {experience}
+            <p className="text-gray-900 font-bold text-xl">
+              Vacancy: {vacancyTitle}
+            </p>
+            <p className="text-sm text-gray-600 flex items-center">
+              Total applicants: {postulatedUsers.length}
             </p>
           </div>
-          <Link to={`/profile/${creatorId}`}>Creator</Link>
           {!selectedUserId ? (
             <span className="inline-block bg-yellow-300 px-2 p-0 mt-2 mb-8 text-sm rounded-full text-gray-700 mr-2">
               Pending
@@ -57,21 +60,61 @@ const JoinedCard = ({
             </span>
           )}
         </div>
-        <div className="border-t">
-          <button onClick={() => setOpenModal(true)}>
-            <p className="text-brand-blue font-semibold text-md mt-1">
-              Project details
+        <p className="text-gray-700 text-base mt-2">{vacancyDescription}</p>
+
+        <div className="border-t mt-4">
+          <div className="mb-2">
+            <p className="text-gray-700 text-base mt-2">
+              Project:{' '}
+              <span>
+                {' '}
+                <button onClick={() => setOpenModal(true)}>
+                  <p className="text-brand-blue font-semibold text-md mt-1">
+                    {projectTitle}
+                  </p>
+                </button>
+              </span>
             </p>
-          </button>
+          </div>
 
-          <p className="text-gray-900 font-bold text-base">{title}</p>
+          <div className="mb-2">
+            <p className="text-gray-700 text-base">{description}</p>
+          </div>
 
-          <p className="text-gray-700 text-base">{type}</p>
-          <p className="text-gray-700 text-base">{description}</p>
-          <h2 className="text-md font-semibold text-gray-800">Start Date</h2>
-          <p className="py-2 text-sm text-gray-700">{startDate.slice(0, 10)}</p>
-          <h2 className="text-md font-semibold text-gray-800">End Date</h2>
-          <p className="py-2 text-sm text-gray-700">{endDate.slice(0, 10)}</p>
+          <div className="flex justify-left mb-2">
+            <div className="mr-4">
+              <h2 className="text-sm font-semibold text-gray-800 leading-none">
+                Start Date
+              </h2>
+              <p className=" text-xs pt-2 text-sm text-gray-700">
+                {startDate.slice(0, 10)}
+              </p>
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold text-gray-800 leading-none">
+                End Date
+              </h2>
+              <p className="text-xs pt-2 text-sm text-gray-700">
+                {endDate.slice(0, 10)}
+              </p>
+            </div>
+          </div>
+
+          <div className="mb-2">
+            <p className="text-gray-700 text-base">
+              Contact:{' '}
+              <span>
+                {' '}
+                <Link to={`/profile/${creatorId}`}>
+                  <button tag={Link} to={`/profile/${creatorId}`}>
+                    <p className="text-brand-blue font-semibold text-md mt-1">
+                      {firstName} {lastName}
+                    </p>
+                  </button>
+                </Link>
+              </span>
+            </p>
+          </div>
         </div>
       </div>
       <Modal action={openModal}>

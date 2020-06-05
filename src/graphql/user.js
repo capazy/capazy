@@ -146,6 +146,11 @@ export const GET_USER_CREATED_PROJECTS = gql`
         creator {
           _id
         }
+        files {
+          _id
+          name
+          url
+        }
         vacancies {
           _id
           title
@@ -182,6 +187,10 @@ export const GET_USER_JOINED_PROJECTS = gql`
         title
         experience
         skills
+        description
+        postulatedUsers {
+          _id
+        }
         selectedUser {
           _id
         }

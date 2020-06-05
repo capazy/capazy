@@ -6,7 +6,7 @@ const How = () => {
       <section className="bg-gray-100 border-b py-8">
         <div className="container max-w-5xl mx-auto m-8">
           <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-            Benefits for the Work Force
+            Benefits for the work force
           </h1>
           <div className="w-full mb-4">
             <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
@@ -18,18 +18,9 @@ const How = () => {
                 Holistic view of the entire organization
               </h3>
               <p className="text-gray-600 mb-8">
-                Capacity eliminates hierarchy that impairs execution by
-                allowing all talent within the organization to freely chose to colaborate 
+                Capacity eliminates hierarchy that impairs execution by allowing
+                all talent within the organization to freely chose to colaborate
                 on a compelling project
-                <br />
-                <br />
-                Take a Look How:
-                <a
-                  className="text-orange-500 underline"
-                  href="https://undraw.co/"
-                >
-                  undraw.co
-                </a>
               </p>
             </div>
             <div className="w-full sm:w-1/2 p-6">
@@ -472,18 +463,9 @@ const How = () => {
                 </h3>
                 <p className="text-gray-600 mb-8">
                   Get exposure within your organization by providing meaningful
-                  support when capacity is a major constrain; 
-                  develop relationships and strong ties within the company by mutual 
-                  colaboration 
-                  <br />
-                  <br />
-                  Images from:
-                  <a
-                    className="text-orange-500 underline"
-                    href="https://undraw.co/"
-                  >
-                    undraw.co
-                  </a>
+                  support when capacity is a major constrain; develop
+                  relationships and strong ties within the company by mutual
+                  colaboration
                 </p>
               </div>
             </div>

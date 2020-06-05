@@ -1,5 +1,5 @@
 {
-  "Websites, IT & Software": [
+  "Software, Programming and IT": [
     ".NET",
     ".NET Core",
     "4D",
@@ -739,7 +739,7 @@
     "Zoho Creator"
   ],
 
-  "Mobile Phones & Computing": [
+  "Computing and Mbile Phones": [
     "Amazon Fire",
     "Amazon Kindle",
     "Android",
@@ -767,7 +767,7 @@
     "Windows Phone"
   ],
 
-  "Writing & Content": [
+  "Content and Writing": [
     "Abnormal Psychology",
     "Abstract",
     "Academic Medicine",
@@ -837,7 +837,7 @@
     "Writing"
   ],
 
-  "Design, Media & Architecture": [
+  "Digital Media and Design": [
     "2D Animation",
     "360-degree video",
     "3D Animation",
@@ -1006,7 +1006,7 @@
     "Zbrush"
   ],
 
-  "Data Entry & Admin": [
+  "Administration and Data Entry": [
     "ABBYY FineReader",
     "Academic Administration",
     "ANOVA",
@@ -1058,7 +1058,7 @@
     "Web Search"
   ],
 
-  "Engineering & Science": [
+  "Science and Engineering": [
     "802.11",
     "A&P",
     "A1 Assessor",
@@ -1271,7 +1271,7 @@
     "Zwave"
   ],
 
-  "Product Sourcing & Manufacturing": [
+  "Manufacturing and Product Sourcing": [
     "3D Printing",
     "Alerting",
     "Amazon",
@@ -1289,7 +1289,7 @@
     "Supply Chain"
   ],
 
-  "Sales & Marketing": [
+  "Sales, Marketing and Forecasting": [
     "ABR Accredited Buyer Representative",
     "ABR Designation",
     "Ad Planning & Buying",
@@ -1384,7 +1384,7 @@
     "WooCommerce"
   ],
 
-  "Freight, Shipping & Transportation": [
+  "Transportation and Logistics": [
     "Bicycle Courier",
     "Car Courier",
     "Car Driving",
@@ -1421,7 +1421,7 @@
     "Van Courier"
   ],
 
-  "Business, Accounting, Human Resources & Legal": [
+  "Business, Accounting, Legal and Human Resources": [
     "A/R analysis",
     "A/R Collections",
     "A/R Management",
@@ -1608,7 +1608,7 @@
     "Xero"
   ],
 
-  "Translation & Languages": [
+  "Languages and Translation": [
     "Afrikaans",
     "Albanian",
     "Arabic",
@@ -1680,7 +1680,7 @@
     "Yiddish"
   ],
 
-  "Local Jobs & Services": [
+  "Local Jobs": [
     "A&E",
     "Abatement",
     "ABO Certified",

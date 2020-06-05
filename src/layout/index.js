@@ -19,7 +19,7 @@ const Main = (props) => {
         <main className="">
           {user ? <NavbarLoggedIn /> : <Navbar />}
           <div
-            className="container max-w-screen-lg mx-auto mt-2 md:mt-2"
+            className="container max-w-screen-lg mx-auto"
             style={{ paddingTop: '3rem' }}
           >
             {children}
