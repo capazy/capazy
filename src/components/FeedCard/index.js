@@ -88,11 +88,9 @@ const FeedCard = ({ project, handleJoin }) => {
               <div className="flex-1 text-center py-2 my-4">
                 <div className="flex justify-between items-center flex-row px-2 z-50 text-sm">
                   <p className="flex items-center text-gray-800 ">
-                    {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
                     {views} views
                   </p>{' '}
                   <p className="flex items-center text-gray-800 ">
-                    {/* <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2 "></span> */}
                     {vacancies.postulatedUsers
                       ? vacancies.postulatedUsers.length
                       : 0}{' '}

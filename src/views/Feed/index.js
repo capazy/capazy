@@ -36,7 +36,7 @@ const Feed = () => {
 
   return (
     <Fragment>
-      <div className="container max-w-xl  my-8 mx-auto md:px-4 md:px-12">
+      <div className="container max-w-3xl  my-8 mx-auto md:px-4 md:px-12">
         <div className=" mx-auto mt-4 justify-between">
           {data.projects.map((project) => (
             <div key={project._id} className="md:px-1 w-full">
