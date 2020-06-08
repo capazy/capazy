@@ -8,7 +8,7 @@ import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import { FeedCard } from '../../components';
+import { FeedCard, LoadingCard } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -40,7 +40,7 @@ const Feed = () => {
   if (joinSuccess) {
     return <Redirect push to="/joined-projects" />;
   }
-
+  if (!user) return <LoadingCard />;
   return (
     <Fragment>
       <div className="App hidden">

@@ -113,9 +113,9 @@ const FeedCard = ({ project, handleJoin }) => {
         {projectPictureUrl && (
           <div className="md:flex-shrink pr-4 pt-3">
             <img
-              className="rounded-lg w-full h-64 object-cover object-center"
+              className="rounded-lg w-full h-64  object-cover object-center  overflow-hidden"
               src={projectPictureUrl}
-              alt="Woman paying for a purchase"
+              alt={title}
             />
           </div>
         )}
