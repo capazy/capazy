@@ -26,8 +26,8 @@ const Why = () => {
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <img
-                className="w-full  z-50"
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                className="w-full  z-50 h-48"
+                src="https://res.cloudinary.com/dpnlmwgxh/image/upload/v1591630046/Main/team_work_bnwmsp.svg"
                 alt=""
               />
             </div>
@@ -49,7 +49,7 @@ const Why = () => {
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <img
                 className="w-full  z-50"
-                src="https://images.unsplash.com/photo-1586527155314-1d25428324ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                src="https://res.cloudinary.com/dpnlmwgxh/image/upload/v1591629941/Main/problem_ne8obd.svg"
                 alt=""
               />
             </div>
@@ -74,7 +74,7 @@ const Why = () => {
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <img
                 className="w-full  z-50"
-                src="https://images.unsplash.com/photo-1515606378517-3451a4fa2e12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                src="https://res.cloudinary.com/dpnlmwgxh/image/upload/v1591630134/Main/saving_uiy71p.svg"
                 alt=""
               />
             </div>
