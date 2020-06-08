@@ -17,7 +17,7 @@ const links = () => (
       Login
     </Link>
 
-    <Link to="/project-form">
+    <Link to="/signup">
       <button className="btn-square bg-brand-blue text-white mx-2">
         Post a Project
       </button>
@@ -102,7 +102,7 @@ const Navbar = () => {
               >
                 Projects
               </Link>
-              <Link to="/project-form">
+              <Link to="/signup">
                 <button className="btn-square bg-brand-blue text-white mx-2">
                   Post a Project
                 </button>
