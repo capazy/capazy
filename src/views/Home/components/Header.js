@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <div className="pt-5">
@@ -11,10 +11,11 @@ const Header = () => {
           <p className="leading-normal text-2xl mb-8">
             Bring visibility of all projects to the entire organization
           </p>
-
-          <button className="btn-rounded bg-brand-blue text-white my-6 py-4 px-8 z-0 ">
-            Learn How
-          </button>
+          <Link to="/signup">
+            <button className="btn-rounded bg-brand-blue text-white my-6 py-4 px-8 z-0 ">
+              Get started
+            </button>
+          </Link>
         </div>
         <div className="w-full md:w-3/5 text-center">
           <img

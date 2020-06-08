@@ -14,10 +14,7 @@ const Why = () => {
 
           <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-              <a
-                href="/#"
-                className="flex flex-wrap no-underline hover:no-underline"
-              >
+              <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
                   Team Work
                 </div>
@@ -25,23 +22,20 @@ const Why = () => {
                   Good teamwork helps to build morale in the workplace, which
                   makes workers more productive and ultimately improves profits
                 </p>
-              </a>
+              </span>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-              <div className="flex items-center justify-center">
-                <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                  Learn More
-                </button>
-              </div>
+              <img
+                className="w-full  z-50"
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                alt=""
+              />
             </div>
           </div>
 
           <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-              <a
-                href="/#"
-                className="flex flex-wrap no-underline hover:no-underline"
-              >
+              <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
                   Problem Solving
                 </div>
@@ -50,14 +44,14 @@ const Why = () => {
                   and knowledge will work together to produce a creative
                   solution
                 </p>
-              </a>
+              </span>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-              <div className="flex items-center justify-center">
-                <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                  Learn More
-                </button>
-              </div>
+              <img
+                className="w-full  z-50"
+                src="https://images.unsplash.com/photo-1586527155314-1d25428324ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                alt=""
+              />
             </div>
           </div>
 
@@ -78,11 +72,11 @@ const Why = () => {
               </a>
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-              <div className="flex items-center justify-center">
-                <button className="btn-rounded bg-brand-blue mx-auto lg:mx-0 gradient text-white  my-6 py-4 px-8 ">
-                  Learn More
-                </button>
-              </div>
+              <img
+                className="w-full  z-50"
+                src="https://images.unsplash.com/photo-1515606378517-3451a4fa2e12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                alt=""
+              />
             </div>
           </div>
         </div>
