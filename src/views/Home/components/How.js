@@ -24,12 +24,12 @@ const How = () => {
                 <br />
                 <br />
                 Take a Look How:
-                <a
+                {/* <a
                   className="text-orange-500 underline"
                   href="https://undraw.co/"
                 >
                   undraw.co
-                </a>
+                </a> */}
               </p>
             </div>
             <div className="w-full sm:w-1/2 p-6">
@@ -478,12 +478,12 @@ const How = () => {
                   <br />
                   <br />
                   Images from:
-                  <a
+                  {/* <a
                     className="text-orange-500 underline"
                     href="https://undraw.co/"
                   >
                     undraw.co
-                  </a>
+                  </a> */}
                 </p>
               </div>
             </div>
