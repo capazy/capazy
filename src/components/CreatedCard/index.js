@@ -28,7 +28,7 @@ const CreatedCard = ({
           ></div>
         )}
         <div className="w-full py-4 bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 flex flex-col justify-between leading-normal">
-          <div className="flex">
+          <div className="flex mb-6">
             {projectPictureUrl && (
               <img
                 className="hidden lg:block flex-initial mr-2 h-48 w-64 object-cover object-center"
