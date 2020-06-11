@@ -20,7 +20,7 @@ const Categories = () => {
     <div>
       <footer className="bg-white">
         <div className="container mx-auto  px-8 ">
-          <h1 className="mx-auto text-center uppercase text-gray-900 md:mb-6 font-semibold">
+          <h1 className="mx-auto text-center uppercase text-base font-semibold text-gray-900 md:mb-6 font-semibold">
             Our Categories
           </h1>
           <div className="w-full flex flex-col md:flex-row py-6">
@@ -35,24 +35,26 @@ const Categories = () => {
             </div> */}
 
             <div className="flex-1">
-              <p className="uppercase text-gray-500 md:mb-6">Tech</p>
+              <p className="uppercase text-base font-semibold text-gray-500 md:mb-6">
+                Tech
+              </p>
               <ul className="list-reset mb-6">
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2">
                     Software, Programming and IT
                   </span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Computing and Mobile Phones
                   </span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Science and Engineering
                   </span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Administration and Data Entry
                   </span>
@@ -60,20 +62,22 @@ const Categories = () => {
               </ul>
             </div>
             <div className="flex-1">
-              <p className="uppercase text-gray-500 md:mb-6">Business</p>
+              <p className="uppercase text-base font-semibold text-gray-500 md:mb-6">
+                Business
+              </p>
               <ul className="list-reset mb-6">
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Manufacturing and Product Sourcing
                   </span>
                 </li>
 
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Sales, Marketing and Forecasting
                   </span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Business, Accounting, Legal and Human Resources
                   </span>
@@ -82,14 +86,16 @@ const Categories = () => {
             </div>
 
             <div className="flex-1">
-              <p className="uppercase text-gray-500 md:mb-6">Content</p>
+              <p className="uppercase text-base font-semibold text-gray-500 md:mb-6">
+                Content
+              </p>
               <ul className="list-reset mb-6">
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Content and Writing
                   </span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Digital Media and Design
                   </span>
@@ -97,17 +103,19 @@ const Categories = () => {
               </ul>
             </div>
             <div className="flex-1">
-              <p className="uppercase text-gray-500 md:mb-6">Others</p>
+              <p className="uppercase text-base font-semibold text-gray-500 md:mb-6">
+                Others
+              </p>
               <ul className="list-reset mb-6">
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Languages and Translation
                   </span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">Local Jobs</span>
                 </li>
-                <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+                <li className="mt-2 inline-block mr-2 md:block md:mr-0 text-xs">
                   <span className="text-gray-600 mr-2 ">
                     Digital Media and Design
                   </span>
