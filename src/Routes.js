@@ -30,6 +30,12 @@ const Routes = () => {
       <PrivateRoute exact path="/chat" layout={Layout} component={Chat} />
       <PrivateRoute
         exact
+        path="/chat/:channelURL"
+        layout={Layout}
+        component={Chat}
+      />
+      <PrivateRoute
+        exact
         path="/joined-projects"
         layout={Layout}
         component={JoinedProjects}
