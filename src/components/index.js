@@ -14,3 +14,4 @@ export { default as NoData } from './NoData';
 export { default as FeedCard } from './FeedCard';
 export { default as SearchCard } from './SearchCard';
 export { default as ProgressBar } from './ProgressBar';
+export { default as ChatLayout } from './ChatLayout';

@@ -5,34 +5,80 @@ import './index.css';
 
 // context
 import { UserContext } from '../../context/UserContext';
-import { connectSB } from '../../chat/connect';
-import { createOpenChannelList } from '../../chat/createOpenChannelList';
 
-const Chat = ({ history }) => {
+import {
+  connectSB,
+  createGroupChannel,
+  createGroupChannelList,
+} from '../../chat';
+import { ChatLayout } from '../../components';
+import { getChannel, getMessages, exitChannel } from '../../chat/utils/helpers';
+
+const Chat = () => {
   const { user } = useContext(UserContext);
   const [sb, setSB] = useState();
   const [channels, setChannels] = useState();
 
+  //conversationState
+  const [conversation, setConversation] = useState({
+    loading: true,
+    channel: '',
+    messages: [],
+    channelName: '',
+    participants: [],
+  });
+
+  const { channel } = conversation;
+
+  console.log('SendBird', sb);
   useEffect(() => {
     if (sb) {
-      createOpenChannelList(sb, setChannels);
+      createGroupChannelList(sb, setChannels);
+      //messages
+      messages(sb);
     }
-  }, [sb]);
+  }, [sb, user]);
 
-  const enterChannel = (sb, channelURL) => {
-    console.log('CHANNEL_URL', channelURL);
-    return new Promise(async (resolve) => {
-      sb.OpenChannel.getChannel(channelURL, (channel, error) => {
-        if (error) return console.log(error);
-        channel.enter((response, error) => {
-          if (error) return console.log(error);
-          resolve(channel);
-          console.log('CHANNEL_URK', channel);
-          history.push(`/chat/${channel.url}`);
-        });
-      });
-    });
+  const onUnload = (event) => {
+    event.preventDefault();
+    exitChannel(sb, channel); // this might need to be logout
+    // Chrome requires returnValue to be set
+    event.returnValue = '';
   };
+  const transformMessage = (sb, messageObj) => {
+    const messageContent = messageObj.message;
+    const userName = sb.currentUser.userId;
+    const senderName = messageObj._sender.userId;
+    // This check is needed when loading previous messages,
+    // as they won't be tagged with "You" for the senderName.
+    if (senderName === userName) {
+      return { sender: 'You', message: messageContent };
+    }
+    return { sender: senderName, message: messageContent };
+  };
+
+  const messages = async (sb) => {
+    const channelURL =
+      'sendbird_group_channel_103282792_b092a9839bbe959cab3b2d279496bf149cd024be';
+    const channel = await getChannel(sb, channelURL);
+    let initialParticipants = await channel.members;
+    let prevMessages = await getMessages(channel);
+    prevMessages = prevMessages.map((message) => {
+      return transformMessage(sb, message);
+    });
+    // window.addEventListener('beforeunload', onUnload);
+    await setConversation({
+      channel: channel,
+      channelName: channel.name,
+      messages: prevMessages,
+      participants: initialParticipants,
+      loading: false,
+    });
+    // addChannelHandler(sb, channel, this.updateParticipants, this.addNewMessage);
+    console.log('channel', channel);
+    console.log('participants', initialParticipants);
+  };
+  console.log('conversation', conversation);
 
   if (!user) {
     return <p>Loading...</p>;
@@ -40,30 +86,18 @@ const Chat = ({ history }) => {
 
   return (
     <div className="App mt-6">
-      {/* <SendBirdApp
-        appId={process.env.REACT_APP_SENDBIRD_APP_ID}
-        userId={user._id}
-        nickname={`${user.firstName} ${user.lastName}`}
-      /> */}
-      <button
-        className="btn bg-teal-600"
-        onClick={connectSB(user._id, setSB, history)}
-      >
+      <button className="btn bg-teal-600" onClick={connectSB(user._id, setSB)}>
         Connect
       </button>
       {sb && (
         <button
           className="btn bg-teal-200"
-          onClick={() =>
-            enterChannel(
-              sb,
-              'sendbird_open_channel_1347_59e1c79ef2cd0b149e45cde9a60a34efc7f00ae8'
-            )
-          }
+          onClick={() => createGroupChannel(sb, '5ebdeb3ef9e3190008c40907')}
         >
-          Create channel
+          Create GroupChannel
         </button>
       )}
+      <ChatLayout sb={sb} user={user} conversation={conversation} />
     </div>
   );
 };
