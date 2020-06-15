@@ -13,6 +13,7 @@ import {
 } from '../../chat';
 import { ChatLayout } from '../../components';
 import { getChannel, getMessages, exitChannel } from '../../chat/utils/helpers';
+import { addChannelHandler } from '../../chat/utils/channelHandler';
 
 const Chat = () => {
   const { user } = useContext(UserContext);
@@ -28,8 +29,6 @@ const Chat = () => {
     participants: [],
   });
 
-  const { channel } = conversation;
-
   console.log('SendBird', sb);
   useEffect(() => {
     if (sb) {
@@ -39,13 +38,7 @@ const Chat = () => {
     }
   }, [sb, user]);
 
-  const onUnload = (event) => {
-    event.preventDefault();
-    exitChannel(sb, channel); // this might need to be logout
-    // Chrome requires returnValue to be set
-    event.returnValue = '';
-  };
-  const transformMessage = (sb, messageObj) => {
+  const transformMessage = (messageObj) => {
     const messageContent = messageObj.message;
     const userName = sb.currentUser.userId;
     const senderName = messageObj._sender.userId;
@@ -64,7 +57,7 @@ const Chat = () => {
     let initialParticipants = await channel.members;
     let prevMessages = await getMessages(channel);
     prevMessages = prevMessages.map((message) => {
-      return transformMessage(sb, message);
+      return transformMessage(message);
     });
     // window.addEventListener('beforeunload', onUnload);
     await setConversation({
@@ -74,11 +67,17 @@ const Chat = () => {
       participants: initialParticipants,
       loading: false,
     });
-    // addChannelHandler(sb, channel, this.updateParticipants, this.addNewMessage);
-    console.log('channel', channel);
-    console.log('participants', initialParticipants);
+    addChannelHandler(sb, channel, addNewMessage);
   };
   console.log('conversation', conversation);
+
+  const addNewMessage = (newMessage) => {
+    let transformedMessage = transformMessage(newMessage);
+    setConversation({
+      ...conversation,
+      messages: [...conversation.messages, transformedMessage],
+    });
+  };
 
   if (!user) {
     return <p>Loading...</p>;
@@ -97,7 +96,12 @@ const Chat = () => {
           Create GroupChannel
         </button>
       )}
-      <ChatLayout sb={sb} user={user} conversation={conversation} />
+      <ChatLayout
+        sb={sb}
+        user={user}
+        conversation={conversation}
+        addNewMessage={addNewMessage}
+      />
     </div>
   );
 };
