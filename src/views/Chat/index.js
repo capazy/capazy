@@ -14,9 +14,11 @@ import {
 import { ChatLayout } from '../../components';
 import { getChannel, getMessages, exitChannel } from '../../chat/utils/helpers';
 import { addChannelHandler } from '../../chat/utils/channelHandler';
+import { ChatContext } from '../../context/ChatContext';
 
 const Chat = () => {
   const { user } = useContext(UserContext);
+  const { state, update } = useContext(ChatContext);
   const [sb, setSB] = useState();
   const [channels, setChannels] = useState();
 
@@ -28,6 +30,8 @@ const Chat = () => {
     channelName: '',
     participants: [],
   });
+
+  const { channel } = conversation;
 
   console.log('SendBird', sb);
   useEffect(() => {
@@ -49,7 +53,7 @@ const Chat = () => {
     }
     return { sender: senderName, message: messageContent };
   };
-
+  console.log('state', state);
   const messages = async (sb) => {
     const channelURL =
       'sendbird_group_channel_103282792_b092a9839bbe959cab3b2d279496bf149cd024be';
@@ -59,7 +63,7 @@ const Chat = () => {
     prevMessages = prevMessages.map((message) => {
       return transformMessage(message);
     });
-    // window.addEventListener('beforeunload', onUnload);
+    window.addEventListener('beforeunload', onUnload);
     await setConversation({
       channel: channel,
       channelName: channel.name,
@@ -67,7 +71,9 @@ const Chat = () => {
       participants: initialParticipants,
       loading: false,
     });
+    update(conversation);
     addChannelHandler(sb, channel, addNewMessage);
+    window.removeEventListener('beforeunload', onUnload);
   };
   console.log('conversation', conversation);
 
@@ -77,6 +83,13 @@ const Chat = () => {
       ...conversation,
       messages: [...conversation.messages, transformedMessage],
     });
+  };
+
+  const onUnload = (event) => {
+    event.preventDefault();
+    exitChannel(sb, channel); // this might need to be logout
+    // Chrome requires returnValue to be set
+    event.returnValue = '';
   };
 
   if (!user) {

@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { UserProvider } from './UserContext';
 import { ProjectProvider } from './ProjectContext';
+import { ChatProvider } from './ChatContext';
 
 const GlobalContext = createContext();
 
@@ -8,7 +9,9 @@ const GlobalProvider = (props) => {
   return (
     <GlobalContext.Provider>
       <ProjectProvider>
-        <UserProvider>{props.children}</UserProvider>
+        <ChatProvider>
+          <UserProvider>{props.children}</UserProvider>
+        </ChatProvider>
       </ProjectProvider>
     </GlobalContext.Provider>
   );
