@@ -1,7 +1,6 @@
 import * as SendBird from 'sendbird';
 
-export const connectSB = (userId, setSendbird) => async () => {
-  if (!userId) return;
+export const connectSB = async (userId, setSendbird) => {
   const sb = new SendBird({ appId: process.env.REACT_APP_SENDBIRD_APP_ID });
   return new Promise((resolve) => {
     sb.connect(userId, (user, error) => {
@@ -24,7 +23,6 @@ export const createGroupChannelList = (sb, setChannels) => {
         return;
       }
       setChannels({ channels: channelList });
-      console.log('GroupChannelList', channelList);
     });
   }
 };

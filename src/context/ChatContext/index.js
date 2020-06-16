@@ -1,9 +1,14 @@
-import React, { createContext, useState, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 
 import { chatReducer } from '../../reducers/chatReducer';
+import { connectSB } from '../../chat';
 
 const ChatContext = createContext({
-  ChatId: null,
+  loading: true,
+  channel: '',
+  messages: [],
+  channelName: '',
+  participants: [],
 });
 
 const ChatProvider = (props) => {
@@ -17,12 +22,15 @@ const ChatProvider = (props) => {
 
   const update = async (values) => {
     try {
-      console.log('values', values);
+      console.log('CTX_VALUES', values);
+
       dispatch({ type: 'UPDATE', payload: values });
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log('CTX', state);
 
   return (
     <ChatContext.Provider value={{ state, update }}>

@@ -2,7 +2,12 @@ export const chatReducer = (state, { type, payload }) => {
   switch (type) {
     case 'UPDATE':
       return {
-        payload,
+        ...state,
+        loading: payload.loading,
+        channel: payload.channel,
+        messages: payload.messages,
+        channelName: payload.channelName,
+        participants: payload.participants,
       };
 
     default:

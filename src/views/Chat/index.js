@@ -21,6 +21,7 @@ const Chat = () => {
   const { state, update } = useContext(ChatContext);
   const [sb, setSB] = useState();
   const [channels, setChannels] = useState();
+  const [context, setContext] = useState();
 
   //conversationState
   const [conversation, setConversation] = useState({
@@ -30,10 +31,10 @@ const Chat = () => {
     channelName: '',
     participants: [],
   });
+  console.log('CONTEXT', context);
 
   const { channel } = conversation;
 
-  console.log('SendBird', sb);
   useEffect(() => {
     if (sb) {
       createGroupChannelList(sb, setChannels);
@@ -42,18 +43,29 @@ const Chat = () => {
     }
   }, [sb, user]);
 
+  useEffect(() => {
+    setContext(state);
+    const fetchData = async (userId) => {
+      await connectSB(userId, setSB);
+    };
+    if (user) {
+      fetchData(user._id);
+    }
+
+    // setConversation(conversation);
+    // update(conversation);
+  }, [user, conversation, state]);
+
   const transformMessage = (messageObj) => {
     const messageContent = messageObj.message;
     const userName = sb.currentUser.userId;
     const senderName = messageObj._sender.userId;
-    // This check is needed when loading previous messages,
-    // as they won't be tagged with "You" for the senderName.
     if (senderName === userName) {
       return { sender: 'You', message: messageContent };
     }
     return { sender: senderName, message: messageContent };
   };
-  console.log('state', state);
+
   const messages = async (sb) => {
     const channelURL =
       'sendbird_group_channel_103282792_b092a9839bbe959cab3b2d279496bf149cd024be';
@@ -63,7 +75,9 @@ const Chat = () => {
     prevMessages = prevMessages.map((message) => {
       return transformMessage(message);
     });
+
     window.addEventListener('beforeunload', onUnload);
+
     await setConversation({
       channel: channel,
       channelName: channel.name,
@@ -71,16 +85,19 @@ const Chat = () => {
       participants: initialParticipants,
       loading: false,
     });
-    update(conversation);
+
     addChannelHandler(sb, channel, addNewMessage);
     window.removeEventListener('beforeunload', onUnload);
   };
-  console.log('conversation', conversation);
+  console.log('STATE_OUT', state);
+  console.log('conversation_2', conversation);
 
-  const addNewMessage = (newMessage) => {
+  const addNewMessage = async (newMessage) => {
     let transformedMessage = transformMessage(newMessage);
-    setConversation({
-      ...conversation,
+    console.log('conversation', conversation);
+    await console.log('STATE', state);
+    await setConversation({
+      ...state,
       messages: [...conversation.messages, transformedMessage],
     });
   };
@@ -98,17 +115,17 @@ const Chat = () => {
 
   return (
     <div className="App mt-6">
-      <button className="btn bg-teal-600" onClick={connectSB(user._id, setSB)}>
+      {/* <button className="btn bg-teal-600" onClick={connectSB(user._id, setSB)}>
         Connect
-      </button>
-      {sb && (
+      </button> */}
+      {/* {sb && (
         <button
           className="btn bg-teal-200"
           onClick={() => createGroupChannel(sb, '5ebdeb3ef9e3190008c40907')}
         >
           Create GroupChannel
         </button>
-      )}
+      )} */}
       <ChatLayout
         sb={sb}
         user={user}

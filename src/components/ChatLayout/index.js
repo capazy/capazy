@@ -100,10 +100,10 @@ const Chat = ({
       if (error) {
         return;
       }
-      console.log('message', message);
     });
     let newMessage = { _sender: { userId: 'You' }, message: message };
     addNewMessage(newMessage);
+    setMessage('');
   };
 
   return (
@@ -114,7 +114,6 @@ const Chat = ({
           <div className="bg-yellow-500 w-3 h-3 rounded-full mr-2"></div>
           <div className="bg-green-500 w-3 h-3 rounded-full mr-2"></div>
         </div>
-        <button onClick={() => sendMessage(message)}>Send Message</button>
         <main className="flex-grow flex flex-row min-h-0">
           {/* <LeftBar /> */}
           <section className="flex flex-col flex-auto border-l border-gray-800">
@@ -241,6 +240,10 @@ const Chat = ({
                       value={message}
                       placeholder="Aa"
                     />
+                    <button onClick={() => sendMessage(message)}>
+                      Send Message
+                    </button>
+
                     <button
                       type="button"
                       className="absolute top-0 right-0 mt-2 mr-3 flex flex-shrink-0 focus:outline-none block text-blue-600 hover:text-blue-700 w-6 h-6"
