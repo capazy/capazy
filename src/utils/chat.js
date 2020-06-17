@@ -11,7 +11,7 @@ export const connectSB = async (userId, setSendbird) => {
   });
 };
 
-export const createGroupChannelList = (sb, setChannels) => {
+export const createGroupChannelList = (sb, setChannelList) => {
   var channelListQuery = sb.GroupChannel.createMyGroupChannelListQuery();
   channelListQuery.includeEmpty = true;
   channelListQuery.order = 'latest_last_message';
@@ -22,24 +22,26 @@ export const createGroupChannelList = (sb, setChannels) => {
       if (error) {
         return;
       }
-      setChannels({ channels: channelList });
+      setChannelList(channelList);
     });
   }
 };
 
-export const createGroupChannel = (sb, invited) => {
-  var userIds = [sb.currentUser.userId, invited];
+export const createGroupChannel = (sb, invited, history) => {
+  const { _id, lastName, firstName, profilePictureUrl } = invited;
+  console.log(invited);
+  var userIds = [sb.currentUser.userId, _id];
   sb.GroupChannel.createChannelWithUserIds(
     userIds,
     true,
-    'NEW_CHANNEL',
-    null,
+    `${firstName} ${lastName}`,
+    profilePictureUrl,
     null,
     function (groupChannel, error) {
       if (error) {
         return;
       }
-      console.log(groupChannel);
+      history.push(`/chat/${groupChannel.url}`);
     }
   );
 };
@@ -96,9 +98,7 @@ export const addChannelHandler = (sb, channel, addNewMessage) => {
   sb.addChannelHandler(channelHandlerID, ChannelHandler);
 };
 
-export const fetchMessages = async (sb, setConversation) => {
-  const channelURL =
-    'sendbird_group_channel_104764077_e7507851c0ea2f990bd0c4cdaff3c93c677bb109';
+export const fetchMessages = async (sb, setConversation, channelURL) => {
   const channel = await getChannel(sb, channelURL);
   const initialParticipants = await channel.members;
   let prevMessages = await getMessages(channel);

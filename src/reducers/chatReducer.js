@@ -1,13 +1,9 @@
 export const chatReducer = (state, { type, payload }) => {
+  console.log(payload);
   switch (type) {
-    case 'UPDATE':
+    case 'CONNECT_SB_USER':
       return {
-        ...state,
-        loading: payload.loading,
-        channel: payload.channel,
-        messages: payload.messages,
-        channelName: payload.channelName,
-        participants: payload.participants,
+        sendBirdUserObject: payload,
       };
 
     default:

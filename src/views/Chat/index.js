@@ -8,18 +8,20 @@ import { UserContext } from '../../context/UserContext';
 
 // components
 import { ChatLayout } from '../../components';
+import { ChatContext } from '../../context/ChatContext';
 
 // utils
 import {
-  connectSB,
   transformMessage,
   addChannelHandler,
   fetchMessages,
 } from '../../utils/chat';
 
-const Chat = () => {
+const Chat = ({ match }) => {
   const { user } = useContext(UserContext);
-  const [sb, setSb] = useState();
+  const { sb } = useContext(ChatContext);
+
+  const channelURL = match.params.channelURL;
   const [conversation, setConversation] = useState({
     loading: true,
     channel: '',
@@ -30,13 +32,10 @@ const Chat = () => {
   const { channel } = conversation;
 
   useEffect(() => {
-    if (user) {
-      connectSB(user._id, setSb);
-    }
     if (sb) {
-      fetchMessages(sb, setConversation);
+      fetchMessages(sb, setConversation, channelURL);
     }
-  }, [user, sb]);
+  }, [user, sb, channelURL]);
 
   const addNewMessage = async (newMessage) => {
     let transformedMessage = await transformMessage(sb, newMessage);
@@ -57,20 +56,6 @@ const Chat = () => {
 
   return (
     <div className="App mt-6">
-      {/* <button
-        className="btn bg-teal-600"
-        onClick={() => connectSB(user._id, setSb)}
-      >
-        Connect
-      </button>
-      {sb && (
-        <button
-          className="btn bg-teal-200"
-          onClick={() => createGroupChannel(sb, '5ebc90ccadaf410008df6853')}
-        >
-          Create GroupChannel
-        </button>
-      )} */}
       <ChatLayout
         sb={sb}
         user={user}

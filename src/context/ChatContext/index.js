@@ -1,34 +1,36 @@
 import React, { createContext, useReducer } from 'react';
+import * as SendBird from 'sendbird';
 
 import { chatReducer } from '../../reducers/chatReducer';
 
 const ChatContext = createContext({
-  loading: true,
-  channel: '',
-  messages: [],
-  channelName: '',
-  participants: [],
+  sendBirdUserObject: {},
 });
 
 const ChatProvider = (props) => {
   const [state, dispatch] = useReducer(chatReducer, {
-    loading: true,
-    channel: '',
-    messages: [],
-    channelName: '',
-    participants: [],
+    sendBirdUserObject: '',
   });
 
-  const update = async (values) => {
+  const connectSendBird = async (userId) => {
     try {
-      dispatch({ type: 'UPDATE', payload: values });
+      const sb = new SendBird({ appId: process.env.REACT_APP_SENDBIRD_APP_ID });
+      return new Promise((resolve) => {
+        sb.connect(userId, (user, error) => {
+          if (error) return alert(error);
+          resolve(sb);
+          dispatch({ type: 'CONNECT_SB_USER', payload: sb });
+        });
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <ChatContext.Provider value={{ state, update }}>
+    <ChatContext.Provider
+      value={{ sb: state.sendBirdUserObject, connectSendBird }}
+    >
       {props.children}
     </ChatContext.Provider>
   );

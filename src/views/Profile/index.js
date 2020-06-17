@@ -2,16 +2,19 @@ import React, { useContext } from 'react';
 
 // context
 import { UserContext } from '../../context/UserContext';
+import { ChatContext } from '../../context/ChatContext';
 
 // apollo
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER_BY_ID } from '../../graphql/user';
 import { Link } from 'react-router-dom';
+import { createGroupChannel } from '../../utils/chat';
 
 // components
 
-const Profile = ({ match }) => {
+const Profile = ({ match, history }) => {
   const { user } = useContext(UserContext);
+  const { sb } = useContext(ChatContext);
   const { loading, data, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.id },
   });
@@ -81,11 +84,14 @@ const Profile = ({ match }) => {
               </div>
               <div className="mt-3 md:my-auto">
                 {!isOwner ? (
-                  <Link to="/chat">
-                    <button className="rounded-full bg-blue text-white antialiased font-bold bg-green-600 px-6 py-2 mr-2 w-full">
-                      Contact
-                    </button>
-                  </Link>
+                  <button
+                    className="rounded-full bg-blue text-white antialiased font-bold bg-green-600 px-6 py-2 mr-2 w-full"
+                    onClick={() =>
+                      createGroupChannel(sb, data.userById, history)
+                    }
+                  >
+                    Contact
+                  </button>
                 ) : (
                   <Link to={`/user/edit/${_id}`}>
                     <button className="w-full rounded-full bg-blue text-white antialiased font-bold bg-gray-500 px-6 py-2 mr-2 ">
