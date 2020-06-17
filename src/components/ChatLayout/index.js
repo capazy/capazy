@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LeftBar from './components/LeftBar';
+// import ChatLeftBar from '../../components';
 
 const Invited = ({ msg }) => (
   <div className="flex flex-row justify-start">
@@ -89,10 +89,6 @@ const Chat = ({
 }) => {
   const [message, setMessage] = useState('');
 
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
-
   const sendMessage = async (message) => {
     const params = await new sb.UserMessageParams();
     params.message = message;
@@ -104,6 +100,15 @@ const Chat = ({
     let newMessage = { _sender: { userId: 'You' }, message: message };
     addNewMessage(newMessage);
     setMessage('');
+  };
+
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage(message);
   };
 
   return (
@@ -134,7 +139,7 @@ const Chat = ({
 
               <div className="flex">
                 <a
-                  href="#"
+                  href="/#"
                   className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2"
                 >
                   <svg
@@ -145,7 +150,7 @@ const Chat = ({
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="/#"
                   className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2 ml-4"
                 >
                   <svg
@@ -156,7 +161,7 @@ const Chat = ({
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="/#"
                   className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2 ml-4"
                 >
                   <svg
@@ -231,32 +236,30 @@ const Chat = ({
                   </svg>
                 </button>
                 <div className="relative flex-grow">
-                  {/* <form action="submit"> */}
-                  <label>
-                    <input
-                      className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
-                      type="text"
-                      onChange={(e) => handleChange(e)}
-                      value={message}
-                      placeholder="Aa"
-                    />
-                    <button onClick={() => sendMessage(message)}>
-                      Send Message
-                    </button>
+                  <form onSubmit={handleSubmit}>
+                    <label>
+                      <input
+                        className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
+                        type="text"
+                        onChange={(e) => handleChange(e)}
+                        value={message}
+                        placeholder="Write a message..."
+                      />
+                      {/* <button type="submit">Send Message</button> */}
 
-                    <button
-                      type="button"
-                      className="absolute top-0 right-0 mt-2 mr-3 flex flex-shrink-0 focus:outline-none block text-blue-600 hover:text-blue-700 w-6 h-6"
-                    >
-                      <svg
-                        viewBox="0 0 20 20"
-                        className="w-full h-full fill-current"
+                      <button
+                        type="button"
+                        className="absolute top-0 right-0 mt-2 mr-3 flex flex-shrink-0 focus:outline-none block text-blue-600 hover:text-blue-700 w-6 h-6"
                       >
-                        <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 3a6 6 0 0 1-11.32 0h11.32z" />
-                      </svg>
-                    </button>
-                  </label>
-                  {/* </form> */}
+                        <svg
+                          viewBox="0 0 20 20"
+                          className="w-full h-full fill-current"
+                        >
+                          <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 3a6 6 0 0 1-11.32 0h11.32z" />
+                        </svg>
+                      </button>
+                    </label>
+                  </form>
                 </div>
                 <button
                   type="button"

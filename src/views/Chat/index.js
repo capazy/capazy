@@ -6,24 +6,20 @@ import './index.css';
 // context
 import { UserContext } from '../../context/UserContext';
 
+// components
+import { ChatLayout } from '../../components';
+
+// utils
 import {
   connectSB,
-  createGroupChannel,
-  createGroupChannelList,
-} from '../../chat';
-import { ChatLayout } from '../../components';
-import { getChannel, getMessages, exitChannel } from '../../chat/utils/helpers';
-import { addChannelHandler } from '../../chat/utils/channelHandler';
-import { ChatContext } from '../../context/ChatContext';
+  transformMessage,
+  addChannelHandler,
+  fetchMessages,
+} from '../../utils/chat';
 
 const Chat = () => {
   const { user } = useContext(UserContext);
-  const { state, update } = useContext(ChatContext);
-  const [sb, setSB] = useState();
-  const [channels, setChannels] = useState();
-  const [context, setContext] = useState();
-
-  //conversationState
+  const [sb, setSb] = useState();
   const [conversation, setConversation] = useState({
     loading: true,
     channel: '',
@@ -31,83 +27,29 @@ const Chat = () => {
     channelName: '',
     participants: [],
   });
-  console.log('CONTEXT', context);
-
   const { channel } = conversation;
 
   useEffect(() => {
-    if (sb) {
-      createGroupChannelList(sb, setChannels);
-      //messages
-      messages(sb);
-    }
-  }, [sb, user]);
-
-  useEffect(() => {
-    setContext(state);
-    const fetchData = async (userId) => {
-      await connectSB(userId, setSB);
-    };
     if (user) {
-      fetchData(user._id);
+      connectSB(user._id, setSb);
     }
-
-    // setConversation(conversation);
-    // update(conversation);
-  }, [user, conversation, state]);
-
-  const transformMessage = (messageObj) => {
-    const messageContent = messageObj.message;
-    const userName = sb.currentUser.userId;
-    const senderName = messageObj._sender.userId;
-    if (senderName === userName) {
-      return { sender: 'You', message: messageContent };
+    if (sb) {
+      fetchMessages(sb, setConversation);
     }
-    return { sender: senderName, message: messageContent };
-  };
-
-  const messages = async (sb) => {
-    const channelURL =
-      'sendbird_group_channel_103282792_b092a9839bbe959cab3b2d279496bf149cd024be';
-    const channel = await getChannel(sb, channelURL);
-    let initialParticipants = await channel.members;
-    let prevMessages = await getMessages(channel);
-    prevMessages = prevMessages.map((message) => {
-      return transformMessage(message);
-    });
-
-    window.addEventListener('beforeunload', onUnload);
-
-    await setConversation({
-      channel: channel,
-      channelName: channel.name,
-      messages: prevMessages,
-      participants: initialParticipants,
-      loading: false,
-    });
-
-    addChannelHandler(sb, channel, addNewMessage);
-    window.removeEventListener('beforeunload', onUnload);
-  };
-  console.log('STATE_OUT', state);
-  console.log('conversation_2', conversation);
+  }, [user, sb]);
 
   const addNewMessage = async (newMessage) => {
-    let transformedMessage = transformMessage(newMessage);
-    console.log('conversation', conversation);
-    await console.log('STATE', state);
+    let transformedMessage = await transformMessage(sb, newMessage);
     await setConversation({
-      ...state,
+      ...conversation,
       messages: [...conversation.messages, transformedMessage],
     });
   };
 
-  const onUnload = (event) => {
-    event.preventDefault();
-    exitChannel(sb, channel); // this might need to be logout
-    // Chrome requires returnValue to be set
-    event.returnValue = '';
-  };
+  // channel handler to listen when recieving messages
+  if (sb && channel) {
+    addChannelHandler(sb, channel, addNewMessage);
+  }
 
   if (!user) {
     return <p>Loading...</p>;
@@ -115,13 +57,16 @@ const Chat = () => {
 
   return (
     <div className="App mt-6">
-      {/* <button className="btn bg-teal-600" onClick={connectSB(user._id, setSB)}>
+      {/* <button
+        className="btn bg-teal-600"
+        onClick={() => connectSB(user._id, setSb)}
+      >
         Connect
-      </button> */}
-      {/* {sb && (
+      </button>
+      {sb && (
         <button
           className="btn bg-teal-200"
-          onClick={() => createGroupChannel(sb, '5ebdeb3ef9e3190008c40907')}
+          onClick={() => createGroupChannel(sb, '5ebc90ccadaf410008df6853')}
         >
           Create GroupChannel
         </button>
