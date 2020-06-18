@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ChatContext } from '../../context/ChatContext';
-import { createGroupChannelList } from '../../utils/chat';
+import { createGroupChannelList, invitedValue } from '../../utils/chat';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 const LeftBar = () => {
   const { sb } = useContext(ChatContext);
+  const { user } = useContext(UserContext);
   const [channelList, setChannelList] = useState();
   useEffect(() => {
     if (sb) {
@@ -13,6 +15,8 @@ const LeftBar = () => {
   }, [sb]);
   if (!sb) return 'Loading.....';
   if (!channelList) return 'Loading.....';
+  if (!user) return 'Loading.....';
+
   return (
     <section className="flex flex-col flex-none overflow-auto w-24 hover:w-64 group lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
       <div className="header p-4 flex flex-row justify-center items-center flex-none">
@@ -45,30 +49,33 @@ const LeftBar = () => {
       </div>
 
       <div className="contacts p-2 flex-1 overflow-y-scroll">
-        {console.log(channelList)}
-
         {channelList.map((channel) => (
-          <Link to={`/chat/${channel.url}`}>
-            <div className="flex justify-between items-center p-3 hover:bg-gray-800 rounded-lg relative">
-              <div className="w-16 h-16 relative flex flex-shrink-0">
-                <img
-                  className="shadow-md rounded-full w-full h-full object-cover"
-                  src={channel.coverUrl}
-                  alt=""
-                />
-              </div>
-              <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
-                <p>{channel.name}</p>
-                <div className="flex items-center text-sm text-gray-600">
-                  <div className="min-w-0">
-                    <p className="truncate">{channel.lastMessage.message}</p>
-                    {console.log('MESS', channel.lastMessage)}
+          <div key={channel.url}>
+            <Link to={`/chat/${channel.url}`}>
+              <div className="flex justify-between items-center p-3 hover:bg-gray-800 rounded-lg relative">
+                <div className="w-16 h-16 relative flex flex-shrink-0">
+                  <img
+                    className="shadow-md rounded-full w-full h-full object-cover"
+                    src={invitedValue(channel, sb).profileUrl}
+                    alt=""
+                  />
+                </div>
+                <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
+                  <p>{invitedValue(channel, sb).nickname}</p>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <div className="min-w-0">
+                      <p className="truncate">
+                        {channel.lastMessage
+                          ? channel.lastMessage.message
+                          : null}
+                      </p>
+                    </div>
+                    {/* <p className="ml-2 whitespace-no-wrap">Just now</p> */}
                   </div>
-                  {/* <p className="ml-2 whitespace-no-wrap">Just now</p> */}
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
     </section>

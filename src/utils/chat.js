@@ -11,6 +11,16 @@ export const connectSB = async (userId, setSendbird) => {
   });
 };
 
+export const updateSbProfile = async (sb, profileUrl) => {
+  return new Promise((resolve) => {
+    sb.updateCurrentUserInfo(null, profileUrl, function (response, error) {
+      if (error) {
+        return;
+      }
+    });
+  });
+};
+
 export const createGroupChannelList = (sb, setChannelList) => {
   var channelListQuery = sb.GroupChannel.createMyGroupChannelListQuery();
   channelListQuery.includeEmpty = true;
@@ -28,14 +38,14 @@ export const createGroupChannelList = (sb, setChannelList) => {
 };
 
 export const createGroupChannel = (sb, invited, history) => {
-  const { _id, lastName, firstName, profilePictureUrl } = invited;
+  const { _id, lastName, firstName } = invited;
   console.log(invited);
   var userIds = [sb.currentUser.userId, _id];
   sb.GroupChannel.createChannelWithUserIds(
     userIds,
     true,
     `${firstName} ${lastName}`,
-    profilePictureUrl,
+    null,
     null,
     function (groupChannel, error) {
       if (error) {
@@ -112,4 +122,10 @@ export const fetchMessages = async (sb, setConversation, channelURL) => {
     participants: initialParticipants,
     loading: false,
   });
+};
+
+export const invitedValue = (channel, sb) => {
+  return channel.members.find(
+    (member) => member.userId !== sb.currentUser.userId
+  );
 };

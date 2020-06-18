@@ -1,10 +1,14 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { firebaseApp } from '../../firebase';
 
 // components
 import { ProgressBar } from '../index';
+import { updateSbProfile } from '../../utils/chat';
+import { ChatContext } from '../../context/ChatContext';
 
 const PictureUploader = ({ id, projectId, action, field }) => {
+  const { sb } = useContext(ChatContext);
+
   // const fileExists = async (fileName) => {
   //   const storageRef = firebaseApp.storage().ref();
   //   const files = await (await storageRef.listAll()).items;
@@ -35,6 +39,7 @@ const PictureUploader = ({ id, projectId, action, field }) => {
           values.method = '$set';
           action(values);
         }
+        updateSbProfile(sb, values[field.fileUrl]);
         action(values);
       }
     );

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, createRef } from 'react';
 import { ChatLeftBar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { invitedValue } from '../../utils/chat';
 
 const Invited = ({ msg }) => (
   <div className="flex flex-row justify-start">
@@ -91,6 +92,12 @@ const Chat = ({
 }) => {
   const [message, setMessage] = useState('');
 
+  const scrollBottom = useRef(null);
+
+  // useEffect(() => {
+  //   if (messages) window.document.scrollIntoView();
+  // }, []);
+
   const sendMessage = async (message) => {
     const params = await new sb.UserMessageParams();
     params.message = message;
@@ -113,6 +120,8 @@ const Chat = ({
     sendMessage(message);
   };
 
+  if (!channel) return 'Loading....';
+
   return (
     <div className="h-full w-full flex antialiased text-gray-200 bg-gray-900 overflow-hidden">
       <div className="flex-1 flex flex-col">
@@ -125,7 +134,7 @@ const Chat = ({
                 <div className="w-12 h-12 mr-4 relative flex flex-shrink-0">
                   <img
                     className="shadow-md rounded-full w-full h-full object-cover"
-                    src={channel.coverUrl}
+                    src={invitedValue(channel, sb).profileUrl}
                     alt=""
                   />
                 </div>
@@ -142,13 +151,13 @@ const Chat = ({
               </p>
 
               {messages.map((msg, i) => (
-                <span key={i}>
+                <div key={i} ref={scrollBottom}>
                   {msg.sender === 'You' ? (
                     <You msg={msg.message} />
                   ) : (
                     <Invited msg={msg.message} />
                   )}
-                </span>
+                </div>
               ))}
             </div>
             <div className="chat-footer flex-none">
