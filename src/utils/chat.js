@@ -44,7 +44,7 @@ export const createGroupChannel = (sb, invited, history) => {
   sb.GroupChannel.createChannelWithUserIds(
     userIds,
     true,
-    `${firstName} ${lastName}`,
+    null,
     null,
     null,
     function (groupChannel, error) {

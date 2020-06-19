@@ -99,4 +99,8 @@
   }
 }
 
+.text-color-chat {
+  @apply text-black;
+}
+
 @tailwind utilities;

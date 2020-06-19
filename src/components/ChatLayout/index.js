@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, createRef } from 'react';
+import React, { useState, useRef, useEffect, createRef, Fragment } from 'react';
 import { ChatLeftBar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faChessBishop } from '@fortawesome/free-solid-svg-icons';
 import { invitedValue } from '../../utils/chat';
 
 const Invited = ({ msg }) => (
@@ -120,84 +120,95 @@ const Chat = ({
     sendMessage(message);
   };
 
-  if (!channel) return 'Loading....';
+  console.log(channel);
+  // if (!channel || channel === '') return 'Loading....';
 
   return (
-    <div className="h-full w-full flex antialiased text-gray-200 bg-gray-900 overflow-hidden">
+    <div className="h-full w-full flex antialiased text-gray-200 bg-gray-100 overflow-hidden">
       <div className="flex-1 flex flex-col">
         <main className="flex-grow flex flex-row min-h-0">
           <ChatLeftBar />
-
           <section className="flex flex-col flex-auto border-l border-gray-800">
-            <div className="chat-header px-6 py-4 flex flex-row flex-none justify-between items-center shadow">
-              <div className="flex">
-                <div className="w-12 h-12 mr-4 relative flex flex-shrink-0">
-                  <img
-                    className="shadow-md rounded-full w-full h-full object-cover"
-                    src={invitedValue(channel, sb).profileUrl}
-                    alt=""
-                  />
-                </div>
-                <div className="text-sm">
-                  <p className="font-bold">{channel.name}</p>
-                  <p>Active 1h ago</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="chat-body p-4 flex-1 overflow-y-scroll">
-              <p className="p-4 text-center text-sm text-gray-500">
-                FRI 3:04 PM
-              </p>
-
-              {messages.map((msg, i) => (
-                <div key={i} ref={scrollBottom}>
-                  {msg.sender === 'You' ? (
-                    <You msg={msg.message} />
-                  ) : (
-                    <Invited msg={msg.message} />
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="chat-footer flex-none">
-              <div className="flex flex-row items-center p-4">
-                <button
-                  type="button"
-                  className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
-                >
-                  <svg
-                    viewBox="0 0 20 20"
-                    className="w-full h-full fill-current"
-                  >
-                    <path d="M10,1.6c-4.639,0-8.4,3.761-8.4,8.4s3.761,8.4,8.4,8.4s8.4-3.761,8.4-8.4S14.639,1.6,10,1.6z M15,11h-4v4H9  v-4H5V9h4V5h2v4h4V11z" />
-                  </svg>
-                </button>
-
-                <div className="relative flex-grow">
-                  <form onSubmit={handleSubmit}>
-                    <label>
-                      <input
-                        className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
-                        type="text"
-                        onChange={(e) => handleChange(e)}
-                        value={message}
-                        placeholder="Write a message..."
+            {!channel ? (
+              'Select a conversation'
+            ) : (
+              <Fragment>
+                <div className="chat-header px-6 py-4 flex flex-row flex-none justify-between items-center shadow">
+                  <div className="flex">
+                    <div className="w-12 h-12 mr-4 relative flex flex-shrink-0">
+                      <img
+                        className="shadow-md rounded-full w-full h-full object-cover"
+                        src={
+                          invitedValue(channel, sb).profileUrl ||
+                          'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png'
+                        }
+                        alt=""
                       />
-                      {/* <button type="submit">Send Message</button> */}
-                    </label>
-                  </form>
-                </div>
-                <button
-                  type="button"
-                  className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
-                >
-                  <div className="text-red-600">
-                    <FontAwesomeIcon icon={faPaperPlane} />
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-bold text-color-chat">
+                        {invitedValue(channel, sb).nickname}
+                      </p>
+                      <p className="text-color-chat text-left">Active 1h ago</p>
+                    </div>
                   </div>
-                </button>
-              </div>
-            </div>
+                </div>
+
+                <div className="chat-body p-4 flex-1 overflow-y-scroll">
+                  <p className="p-4 text-center text-sm text-gray-500">
+                    FRI 3:04 PM
+                  </p>
+
+                  {messages.map((msg, i) => (
+                    <div key={i} ref={scrollBottom}>
+                      {msg.sender === 'You' ? (
+                        <You msg={msg.message} />
+                      ) : (
+                        <Invited msg={msg.message} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className="chat-footer flex-none">
+                  <div className="flex flex-row items-center p-4">
+                    {/* <button
+                      type="button"
+                      className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
+                    >
+                      <svg
+                        viewBox="0 0 20 20"
+                        className="w-full h-full fill-current"
+                      >
+                        <path d="M10,1.6c-4.639,0-8.4,3.761-8.4,8.4s3.761,8.4,8.4,8.4s8.4-3.761,8.4-8.4S14.639,1.6,10,1.6z M15,11h-4v4H9  v-4H5V9h4V5h2v4h4V11z" />
+                      </svg>
+                    </button> */}
+
+                    <div className="relative flex-grow">
+                      <form onSubmit={handleSubmit}>
+                        <label>
+                          <input
+                            className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-400 focus:border-gray-700 bg-white focus:bg-gray-100 focus:outline-none  focus:shadow-md transition duration-300 ease-in text-color-chat"
+                            type="text"
+                            onChange={(e) => handleChange(e)}
+                            value={message}
+                            placeholder="Write a message..."
+                          />
+                          {/* <button type="submit">Send Message</button> */}
+                        </label>
+                      </form>
+                    </div>
+                    <button
+                      type="button"
+                      className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
+                    >
+                      <div className="text-red-600">
+                        <FontAwesomeIcon icon={faPaperPlane} />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </Fragment>
+            )}
           </section>
         </main>
       </div>

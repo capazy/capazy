@@ -20,7 +20,7 @@ const LeftBar = () => {
   return (
     <section className="flex flex-col flex-none overflow-auto w-24 hover:w-64 group lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
       <div className="header p-4 flex flex-row justify-center items-center flex-none">
-        <p className="text-md font-bold hidden md:block group-hover:block">
+        <p className="text-md font-bold hidden md:block group-hover:block text-color-chat">
           Messenger
         </p>
       </div>
@@ -30,7 +30,7 @@ const LeftBar = () => {
           <div className="relative">
             <label>
               <input
-                className="rounded-full py-2 pr-6 pl-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
+                className="rounded-full py-2 pr-6 pl-10 w-full border border-gray-800 focus:border-gray-700 bg-white focus:bg-gray-100 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in text-color-chat"
                 type="text"
                 // value=""
                 placeholder="Search Messenger"
@@ -47,37 +47,45 @@ const LeftBar = () => {
           </div>
         </form>
       </div>
-
-      <div className="contacts p-2 flex-1 overflow-y-scroll">
-        {channelList.map((channel) => (
-          <div key={channel.url}>
-            <Link to={`/chat/${channel.url}`}>
-              <div className="flex justify-between items-center p-3 hover:bg-gray-800 rounded-lg relative">
-                <div className="w-16 h-16 relative flex flex-shrink-0">
-                  <img
-                    className="shadow-md rounded-full w-full h-full object-cover"
-                    src={invitedValue(channel, sb).profileUrl}
-                    alt=""
-                  />
-                </div>
-                <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
-                  <p>{invitedValue(channel, sb).nickname}</p>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <div className="min-w-0">
-                      <p className="truncate">
-                        {channel.lastMessage
-                          ? channel.lastMessage.message
-                          : null}
-                      </p>
+      {channelList.length === 0 ? (
+        "You don't have conversation yet"
+      ) : (
+        <div className="contacts p-2 flex-1 overflow-y-scroll">
+          {channelList.map((channel) => (
+            <div key={channel.url}>
+              <Link to={`/chat/${channel.url}`}>
+                <div className="flex justify-between items-center p-3 hover:bg-gray-300 rounded-lg relative">
+                  <div className="w-16 h-16 relative flex flex-shrink-0">
+                    <img
+                      className="shadow-md rounded-full w-full h-full object-cover"
+                      src={
+                        invitedValue(channel, sb).profileUrl ||
+                        'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png'
+                      }
+                      alt=""
+                    />
+                  </div>
+                  <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
+                    <p className="text-left text-color-chat">
+                      {invitedValue(channel, sb).nickname}
+                    </p>
+                    <div className="flex items-center text-sm text-gray-600">
+                      <div className="min-w-0">
+                        <p className="truncate text-color-chat">
+                          {channel.lastMessage
+                            ? channel.lastMessage.message
+                            : null}
+                        </p>
+                      </div>
+                      {/* <p className="ml-2 whitespace-no-wrap">Just now</p> */}
                     </div>
-                    {/* <p className="ml-2 whitespace-no-wrap">Just now</p> */}
                   </div>
                 </div>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
