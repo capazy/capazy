@@ -16,9 +16,11 @@ import languagesData from '../../data/languagesData.json';
 import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
 import { originalArray } from '../../utils/originalArray';
+import { ChatContext } from '../../context/ChatContext';
 
 const UserForm = ({ match }) => {
   const { update, user: userData, userLoading } = useContext(UserContext);
+  const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
   const { id } = match.params;
@@ -56,6 +58,14 @@ const UserForm = ({ match }) => {
       resetForm();
     },
   });
+
+  if (sbUser && !sbUser.nickname) {
+    updateSbProfile(
+      sb,
+      `${userData.firstName} ${userData.lastName}`,
+      userData.profilePictureUrl
+    );
+  }
 
   useEffect(() => {
     if (!isCreateMode && userData !== null) {

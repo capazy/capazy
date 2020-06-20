@@ -27,9 +27,27 @@ const ChatProvider = (props) => {
     }
   };
 
+  const updateSbProfile = async (sb, nickname, profileUrl) => {
+    return new Promise((resolve) => {
+      sb.updateCurrentUserInfo(nickname, profileUrl, function (
+        response,
+        error
+      ) {
+        if (error) {
+          return;
+        }
+      });
+    });
+  };
+
   return (
     <ChatContext.Provider
-      value={{ sb: state.sendBirdUserObject, connectSendBird }}
+      value={{
+        sb: state.sendBirdUserObject,
+        connectSendBird,
+        updateSbProfile,
+        sbUser: state.sendBirdUserObject.currentUser,
+      }}
     >
       {props.children}
     </ChatContext.Provider>

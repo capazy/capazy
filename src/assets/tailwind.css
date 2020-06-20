@@ -3,6 +3,11 @@
 @tailwind components;
 
 /* BUTTONS */
+/* html,
+body {
+  height: 100%;
+} */
+
 .btn {
   @apply inline-block px-4 py-2 rounded-lg uppercase tracking-wider font-semibold  text-sm;
 }

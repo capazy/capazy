@@ -20,6 +20,7 @@ import {
   ProjectWizard,
 } from './views';
 import Layout from './layout';
+import SimpleLayout from './layout/SimpleLayout';
 
 const Routes = () => {
   return (
@@ -27,11 +28,11 @@ const Routes = () => {
       <Route exact path="/" layout={Layout} component={Home} />
       <Route exact path="/signup" layout={Layout} component={Signup} />
       <Route exact path="/login" layout={Layout} component={Login} />
-      <PrivateRoute exact path="/chat" layout={Layout} component={Chat} />
+      <PrivateRoute exact path="/chat" layout={SimpleLayout} component={Chat} />
       <PrivateRoute
         exact
         path="/chat/:channelURL"
-        layout={Layout}
+        layout={SimpleLayout}
         component={Chat}
       />
       <PrivateRoute

@@ -20,7 +20,7 @@ import {
 const Chat = ({ match }) => {
   const { user } = useContext(UserContext);
   const { sb } = useContext(ChatContext);
-
+  console.log('CUSTOM_SB', sb);
   const channelURL = match.params.channelURL;
   const [conversation, setConversation] = useState({
     loading: true,
@@ -55,7 +55,7 @@ const Chat = ({ match }) => {
   }
 
   return (
-    <div className="App mt-6">
+    <div className="App mt-6 h-auto">
       <ChatLayout
         sb={sb}
         user={user}

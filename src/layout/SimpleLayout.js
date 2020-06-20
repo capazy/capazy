@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import NavbarLoggedIn from './components/NavbarLoggedIn';
 
@@ -10,8 +9,7 @@ import NavbarLoggedIn from './components/NavbarLoggedIn';
 import { UserContext } from '../context/UserContext';
 
 const Main = (props) => {
-  const { children, location } = props;
-  console.log(location);
+  const { children } = props;
   const { user } = useContext(UserContext);
 
   return (
@@ -25,7 +23,6 @@ const Main = (props) => {
           >
             {children}
           </div>
-          <Footer />
         </main>
       </div>
     </div>

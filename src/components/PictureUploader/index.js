@@ -3,11 +3,10 @@ import { firebaseApp } from '../../firebase';
 
 // components
 import { ProgressBar } from '../index';
-import { updateSbProfile } from '../../utils/chat';
 import { ChatContext } from '../../context/ChatContext';
 
 const PictureUploader = ({ id, projectId, action, field }) => {
-  const { sb } = useContext(ChatContext);
+  const { sb, updateSbProfile } = useContext(ChatContext);
 
   // const fileExists = async (fileName) => {
   //   const storageRef = firebaseApp.storage().ref();
@@ -39,7 +38,7 @@ const PictureUploader = ({ id, projectId, action, field }) => {
           values.method = '$set';
           action(values);
         }
-        updateSbProfile(sb, values[field.fileUrl]);
+        updateSbProfile(sb, null, values[field.fileUrl]);
         action(values);
       }
     );

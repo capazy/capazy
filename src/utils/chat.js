@@ -1,26 +1,3 @@
-import * as SendBird from 'sendbird';
-
-export const connectSB = async (userId, setSendbird) => {
-  const sb = new SendBird({ appId: process.env.REACT_APP_SENDBIRD_APP_ID });
-  return new Promise((resolve) => {
-    sb.connect(userId, (user, error) => {
-      if (error) return alert(error);
-      resolve(sb);
-      setSendbird(sb);
-    });
-  });
-};
-
-export const updateSbProfile = async (sb, profileUrl) => {
-  return new Promise((resolve) => {
-    sb.updateCurrentUserInfo(null, profileUrl, function (response, error) {
-      if (error) {
-        return;
-      }
-    });
-  });
-};
-
 export const createGroupChannelList = (sb, setChannelList) => {
   var channelListQuery = sb.GroupChannel.createMyGroupChannelListQuery();
   channelListQuery.includeEmpty = true;
@@ -38,8 +15,7 @@ export const createGroupChannelList = (sb, setChannelList) => {
 };
 
 export const createGroupChannel = (sb, invited, history) => {
-  const { _id, lastName, firstName } = invited;
-  console.log(invited);
+  const { _id } = invited;
   var userIds = [sb.currentUser.userId, _id];
   sb.GroupChannel.createChannelWithUserIds(
     userIds,

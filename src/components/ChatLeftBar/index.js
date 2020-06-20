@@ -18,14 +18,14 @@ const LeftBar = () => {
   if (!user) return 'Loading.....';
 
   return (
-    <section className="flex flex-col flex-none overflow-auto w-24 hover:w-64 group lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
-      <div className="header p-4 flex flex-row justify-center items-center flex-none">
+    <section className="flex flex-col flex-none overflow-auto w-24 hover:w-64 group lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out hidden md:block">
+      {/* <div className="header p-4 flex flex-row justify-center items-center flex-none">
         <p className="text-md font-bold hidden md:block group-hover:block text-color-chat">
           Messenger
         </p>
-      </div>
+      </div> */}
 
-      <div className="search-box p-4 flex-none">
+      {/* <div className="search-box p-4 flex-none">
         <form>
           <div className="relative">
             <label>
@@ -46,9 +46,9 @@ const LeftBar = () => {
             </label>
           </div>
         </form>
-      </div>
+      </div> */}
       {channelList.length === 0 ? (
-        "You don't have conversation yet"
+        <p className="text-color-chat">You don't have conversation yet</p>
       ) : (
         <div className="contacts p-2 flex-1 overflow-y-scroll">
           {channelList.map((channel) => (

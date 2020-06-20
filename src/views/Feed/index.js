@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { App as SendBirdApp } from 'sendbird-uikit';
 
 // apollo
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -43,13 +42,6 @@ const Feed = () => {
   if (!user) return <LoadingCard />;
   return (
     <Fragment>
-      <div className="App hidden">
-        <SendBirdApp
-          appId={process.env.REACT_APP_SENDBIRD_APP_ID}
-          userId={user._id}
-          nickname={`${user.firstName} ${user.lastName}`}
-        />
-      </div>
       <div className="container max-w-3xl  my-8 mx-auto md:px-4 md:px-12">
         <div className=" mx-auto mt-4 justify-between">
           {data.projects.map((project) => (

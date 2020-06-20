@@ -608,6 +608,11 @@ video {
 
 /* BUTTONS */
 
+/* html,
+body {
+  height: 100%;
+} */
+
 .btn {
   display: inline-block;
   padding-left: 1rem;
