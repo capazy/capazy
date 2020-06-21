@@ -169,7 +169,7 @@ const Chat = ({
                     </div>
                   ))}
                 </div>
-                <div className="chat-footer flex-none">
+                <div className="chat-footer flex-none border-t-2">
                   <div className="flex flex-row items-center p-4">
                     {/* <button
                       type="button"
@@ -188,7 +188,7 @@ const Chat = ({
                         <div className="w-full">
                           <label>
                             <input
-                              className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-400 focus:border-gray-700 bg-white focus:bg-gray-100 focus:outline-none  focus:shadow-md transition duration-300 ease-in text-color-chat"
+                              className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-400 focus:border-gray-700 bg-white focus:bg-gray-100 focus:outline-none  focus:shadow-md transition duration-300 ease-in text-color-chat "
                               type="text"
                               onChange={(e) => handleChange(e)}
                               value={message}

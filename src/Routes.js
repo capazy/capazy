@@ -21,6 +21,9 @@ import {
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
+import MobileChat from './views/MobileChat';
+
+console.log(window.screen.width);
 
 const Routes = () => {
   return (
@@ -28,7 +31,12 @@ const Routes = () => {
       <Route exact path="/" layout={Layout} component={Home} />
       <Route exact path="/signup" layout={Layout} component={Signup} />
       <Route exact path="/login" layout={Layout} component={Login} />
-      <PrivateRoute exact path="/chat" layout={SimpleLayout} component={Chat} />
+      <PrivateRoute
+        exact
+        path="/chat"
+        layout={SimpleLayout}
+        component={window.screen.width < '430' ? MobileChat : Chat}
+      />
       <PrivateRoute
         exact
         path="/chat/:channelURL"
