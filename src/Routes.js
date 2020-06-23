@@ -23,8 +23,6 @@ import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
 import MobileChat from './views/MobileChat';
 
-console.log(window.screen.width);
-
 const Routes = () => {
   return (
     <Switch>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, Fragment } from 'react';
+import React, { useState, useRef, Fragment, useEffect } from 'react';
 import { ChatLeftBar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -94,9 +94,12 @@ const Chat = ({
 
   const scrollBottom = useRef(null);
 
-  // useEffect(() => {
-  //   if (messages) window.document.scrollIntoView();
-  // }, []);
+  const scrollToBottom = () => {
+    if (scrollBottom.current)
+      scrollBottom.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(scrollToBottom);
 
   const sendMessage = async (message) => {
     const params = await new sb.UserMessageParams();
@@ -121,6 +124,8 @@ const Chat = ({
   };
 
   // if (!channel || channel === '') return 'Loading....';
+
+  console.log('SCROLL', scrollBottom);
 
   return (
     <div className="h-full w-full flex antialiased text-gray-200 bg-gray-100 overflow-hidden ">
@@ -169,6 +174,7 @@ const Chat = ({
                     </div>
                   ))}
                 </div>
+
                 <div className="chat-footer flex-none border-t-2">
                   <div className="flex flex-row items-center p-4">
                     {/* <button
@@ -211,6 +217,7 @@ const Chat = ({
                 </div>
               </Fragment>
             )}
+            <div ref={scrollBottom} />
           </section>
         </main>
       </div>
