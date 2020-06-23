@@ -125,8 +125,6 @@ const Chat = ({
 
   // if (!channel || channel === '') return 'Loading....';
 
-  console.log('SCROLL', scrollBottom);
-
   return (
     <div className="h-full w-full flex antialiased text-gray-200 bg-gray-100 overflow-hidden ">
       <div className="flex-1 flex flex-col">
