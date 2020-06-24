@@ -29,7 +29,7 @@ const Chat = ({ match }) => {
     channelName: '',
     participants: [],
   });
-  const { channel, participants } = conversation;
+  const { channel } = conversation;
 
   useEffect(() => {
     if (sb) {

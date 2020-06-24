@@ -3,23 +3,23 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 import Routes from './Routes';
+
+// context
 import { UserContext } from './context/UserContext';
 import { ChatContext } from './context/ChatContext';
 
+// .env
 require('dotenv-flow').config();
 
-///Google Analytics Events
+// google analytics
 const trackingId = process.env.REACT_APP_GOOGLE_ANALYTICS;
-
 ReactGA.initialize(trackingId);
 const history = createBrowserHistory();
-
+ReactGA.pageview(window.location.pathname + window.location.search);
 // history.listen(location => {
 //   ReactGA.set({ page: location.pathname });
 //   ReactGA.pageview(location.pathname);
 // });
-
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
   const { getCurrentUser, user } = useContext(UserContext);
@@ -30,7 +30,7 @@ const App = () => {
     if (user) {
       connectSendBird(user._id);
     }
-  }, [getCurrentUser, user]);
+  }, [getCurrentUser, connectSendBird, user]);
 
   return (
     <Router history={history}>
