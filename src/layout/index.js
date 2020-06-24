@@ -10,8 +10,7 @@ import NavbarLoggedIn from './components/NavbarLoggedIn';
 import { UserContext } from '../context/UserContext';
 
 const Main = (props) => {
-  const { children, location } = props;
-  console.log(location);
+  const { children } = props;
   const { user } = useContext(UserContext);
 
   return (
