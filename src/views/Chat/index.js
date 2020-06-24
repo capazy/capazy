@@ -29,7 +29,7 @@ const Chat = ({ match }) => {
     channelName: '',
     participants: [],
   });
-  const { channel } = conversation;
+  const { channel, participants } = conversation;
 
   useEffect(() => {
     if (sb) {
@@ -37,17 +37,20 @@ const Chat = ({ match }) => {
     }
   }, [user, sb, channelURL]);
 
-  const addNewMessage = async (newMessage) => {
+  const addNewMessage = async (newMessage, channel) => {
     let transformedMessage = await transformMessage(sb, newMessage);
-    await setConversation({
-      ...conversation,
-      messages: [...conversation.messages, transformedMessage],
-    });
+    if (channelURL === channel.url) {
+      await setConversation({
+        ...conversation,
+        channel: channel,
+        messages: [...conversation.messages, transformedMessage],
+      });
+    }
   };
 
   // channel handler to listen when recieving messages
   if (sb && channel) {
-    addChannelHandler(sb, channel, addNewMessage);
+    addChannelHandler(sb, addNewMessage);
   }
 
   if (!user) {

@@ -72,14 +72,18 @@ export const getMessages = (channel) => {
   });
 };
 
-export const addChannelHandler = (sb, channel, addNewMessage) => {
+export const addChannelHandler = (sb, addNewMessage) => {
   const ChannelHandler = new sb.ChannelHandler();
-  const channelHandlerID = channel.url;
+  let channelHandlerID;
   ChannelHandler.onMessageReceived = (channel, message) => {
-    addNewMessage({
-      _sender: message._sender,
-      message: message.message,
-    });
+    channelHandlerID = message.channelUrl;
+    addNewMessage(
+      {
+        _sender: message._sender,
+        message: message.message,
+      },
+      channel
+    );
   };
   sb.addChannelHandler(channelHandlerID, ChannelHandler);
 };
@@ -91,6 +95,7 @@ export const fetchMessages = async (sb, setConversation, channelURL) => {
   prevMessages = prevMessages.map((message) => {
     return transformMessage(sb, message);
   });
+
   await setConversation({
     channel: channel,
     channelName: channel.name,
