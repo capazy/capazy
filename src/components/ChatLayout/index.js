@@ -110,7 +110,7 @@ const Chat = ({
       }
     });
     let newMessage = { _sender: { userId: 'You' }, message: message };
-    addNewMessage(newMessage);
+    addNewMessage(newMessage, channel);
     setMessage('');
   };
 
