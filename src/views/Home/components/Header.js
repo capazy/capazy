@@ -9,7 +9,7 @@ const Header = () => {
             Changing how companies source talent
           </h1>
           <p className="leading-normal text-2xl mb-8">
-            Bring visibility of all projects to the entire organization
+            Bring visibility of all projects to the entire organization + other
           </p>
           <Link to="/signup">
             <button className="btn-rounded bg-brand-blue text-white my-6 py-4 px-8 z-0 ">
