@@ -30,7 +30,7 @@ const App = () => {
     if (user) {
       connectSendBird(user._id);
     }
-  }, [getCurrentUser, connectSendBird, user]);
+  }, [getCurrentUser, user]);
 
   return (
     <Router history={history}>
