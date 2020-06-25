@@ -18,6 +18,7 @@ import {
   CreatedProjects,
   Chat,
   ProjectWizard,
+  Job,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
@@ -59,7 +60,7 @@ const Routes = () => {
         layout={Layout}
         component={ProjectWizard}
       />
-
+      <PrivateRoute exact path="/job/create" layout={Layout} component={Job} />
       <PrivateRoute
         exact
         path="/user/create"
