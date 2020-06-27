@@ -32,7 +32,7 @@ export const LOGIN = gql`
 
 export const PASSPORT = gql`
   mutation passportSign($token: String!) {
-    login(loginInput: { token: $token }) {
+    passportSign(token: $token) {
       token
     }
   }

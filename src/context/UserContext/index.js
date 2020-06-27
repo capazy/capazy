@@ -84,7 +84,7 @@ const UserProvider = (props) => {
   // login with passport
   const passport = async (data) => {
     try {
-      await passportSign({ variables: data });
+      await passportSign({ variables: { token: data } });
       // await getCurrentUser();
       // toggleAlert('Welcome back!', 'success');
     } catch (error) {
