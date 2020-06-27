@@ -18,15 +18,13 @@ const SelectMultiComponent = ({
   };
 
   return (
-    <div className="my-2">
-      <Select
-        options={options}
-        isMulti={isMulti}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-      />
-    </div>
+    <Select
+      options={options}
+      isMulti={isMulti}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      value={value}
+    />
   );
 };
 

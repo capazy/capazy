@@ -111,9 +111,11 @@ const UserForm = ({ match }) => {
     );
     setSkillData(skills);
   };
+
   const image =
     (userData && userData.profilePictureUrl) ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
+
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
