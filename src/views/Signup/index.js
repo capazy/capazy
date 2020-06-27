@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
+import GoogleLogin from 'react-google-login';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -9,7 +10,7 @@ import { UserContext } from '../../context/UserContext';
 import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
-  const { signup, user } = useContext(UserContext);
+  const { signup, user, passport } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -23,6 +24,10 @@ const SignUp = () => {
       signup(values);
     },
   });
+
+  const responseGoogle = (response) => {
+    passport(response.tokenId);
+  };
 
   if (user) {
     return <Redirect push to="/user/create" />;
@@ -96,6 +101,23 @@ const SignUp = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign up
           </button>
+          <GoogleLogin
+            clientId="109337351805-u9lmtvt87vvoikp2182a9tat8o0l2atr.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <button
+                className="btn bg-red-500 text-white mb-0"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                Google
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
+
           {/* <a
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             href="/#"

@@ -30,6 +30,14 @@ export const LOGIN = gql`
   }
 `;
 
+export const PASSPORT = gql`
+  mutation passportSign($token: String!) {
+    login(loginInput: { token: $token }) {
+      token
+    }
+  }
+`;
+
 export const UPDATE_USER = gql`
   mutation updateUser(
     $firstName: String
