@@ -15,12 +15,10 @@ const How = () => {
           <div className="flex flex-wrap">
             <div className="w-5/6 sm:w-1/2 p-6">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                Holistic view of the entire organization
+                Exposure to companies hiring global talent
               </h3>
               <p className="text-gray-600 mb-8">
-                Capacity eliminates hierarchy that impairs execution by allowing
-                all talent within the organization to freely chose to colaborate
-                on a compelling project
+                Capacity eliminates the geographical barriers that impairs skilled-bilingual professionals to freely apply for jobs beyond their country of residence
               </p>
             </div>
             <div className="w-full sm:w-1/2 p-6">
@@ -193,13 +191,10 @@ const How = () => {
             <div className="w-full sm:w-1/2 p-6 mt-6">
               <div className="align-middle">
                 <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  Collabrate globally with your peers
+                  Wholistic view of the job market
                 </h3>
                 <p className="text-gray-600 mb-8">
-                  Get exposure within your organization by providing meaningful
-                  support when capacity is a major constrain; develop
-                  relationships and strong ties within the company by mutual
-                  colaboration
+                  The future of work is flexible and dinamic. Capazy allows skilled-bilingual professionals to search for opportunities in a global job market. Are you looking for your new challenge? Are you finding difficult to find a job locally? Are you a bilingual professional? Capazy can assist you finding your perfect dream job
                 </p>
               </div>
             </div>
