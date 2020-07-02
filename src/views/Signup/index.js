@@ -8,6 +8,7 @@ import { UserContext } from '../../context/UserContext';
 
 // utils
 import { signupFormSchema } from '../../utils/formikSchemas';
+import { server } from '../../utils/axios';
 
 const SignUp = () => {
   const { signup, user, passport } = useContext(UserContext);
@@ -25,8 +26,18 @@ const SignUp = () => {
     },
   });
 
-  const responseGoogle = (response) => {
-    passport(response.tokenId);
+  const responseGoogle = async (response) => {
+    try {
+      const res = await server.get('/auth/google', {
+        headers: {
+          Authorization: 'basic ' + response.accessToken,
+        },
+      });
+      console.log('RES', res.data);
+    } catch (error) {
+      console.log(error);
+    }
+    // passport(response.tokenId);
   };
 
   if (user) {
