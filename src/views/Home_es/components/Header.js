@@ -5,7 +5,7 @@ const Header = () => {
     <div className="pt-5">
       <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-          <h1 className="my-4 text-5xl font-bold leading-tight">ESPAÑOL</h1>
+          <h1 className="my-4 text-5xl font-bold leading-tight">Cambiando como las Companias adquieren talento</h1>
           <p className="leading-normal text-2xl mb-8">
             Hiring remote employess is becoming mainstream. Geography is no
             longer a barrier
