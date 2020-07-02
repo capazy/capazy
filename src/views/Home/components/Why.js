@@ -16,11 +16,10 @@ const Why = () => {
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
               <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Team Work
+                  Perfect Candidate for the Position
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Good teamwork helps to build morale in the workplace, which
-                  makes workers more productive and ultimately improves profits
+                  Access candidates for the position worldwide. Ensure finding the perfect skill set for the position 
                 </p>
               </span>
             </div>
@@ -37,12 +36,10 @@ const Why = () => {
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
               <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Problem Solving
+                  Access the Best Talent Worlwide
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Problem-solving is easier – since people with different skills
-                  and knowledge will work together to produce a creative
-                  solution
+                  Allow your organzation to become a global enterprise by recruting humman capital worldwide 
                 </p>
               </span>
             </div>
@@ -65,9 +62,7 @@ const Why = () => {
                   Cost Reduction
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Reduce the cost allocated to temporary hires due to lack of
-                  resources within your team. There is Capacity available
-                  within!!
+                  Save all the extra costs associated with a local employee, including but not limited to office space and benefits 
                 </p>
               </a>
             </div>
