@@ -1,9 +1,10 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-
 import PrivateRoute from './router/PrivateRoute';
 import Route from './router/Route';
+
+// context
+import { UserContext } from './context/UserContext';
 
 // Views
 import {
@@ -11,6 +12,7 @@ import {
   Search,
   Feed,
   Home,
+  Home_es,
   Signup,
   Login,
   Profile,
@@ -24,9 +26,16 @@ import SimpleLayout from './layout/SimpleLayout';
 import MobileChat from './views/MobileChat';
 
 const Routes = () => {
+  const { language } = useContext(UserContext);
+
   return (
     <Switch>
-      <Route exact path="/" layout={Layout} component={Home} />
+      <Route
+        exact
+        path="/"
+        layout={Layout}
+        component={language === 'en' ? Home : Home_es}
+      />
       <Route exact path="/signup" layout={Layout} component={Signup} />
       <Route exact path="/login" layout={Layout} component={Login} />
       <PrivateRoute

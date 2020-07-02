@@ -1,6 +1,7 @@
 export { default as Search } from './Search';
 export { default as Feed } from './Feed';
 export { default as Home } from './Home';
+export { default as Home_es } from './Home_es';
 export { default as Signup } from './Signup';
 export { default as Login } from './Login';
 export { default as UserForm } from './UserForm';
