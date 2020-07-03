@@ -9,6 +9,7 @@ import { UserContext } from '../../context/UserContext';
 // utils
 import { signupFormSchema } from '../../utils/formikSchemas';
 import { server } from '../../utils/axios';
+import toggleAlert from '../../utils/toggleAlert';
 
 const SignUp = () => {
   const { signup, user, passport } = useContext(UserContext);
@@ -28,16 +29,18 @@ const SignUp = () => {
 
   const responseGoogle = async (response) => {
     try {
-      const res = await server.get('/auth/google', {
-        headers: {
-          Authorization: 'basic ' + response.accessToken,
-        },
-      });
-      console.log('RES', res.data);
+      const config = {
+        headers: { 'Content-Type': 'application/json' },
+      };
+      const body = JSON.stringify({ access_token: response.accessToken });
+      const res = await server.post('/auth/google', body, config);
+      await passport(res.data);
     } catch (error) {
-      console.log(error);
+      const errors = error.response.data.message;
+      if (errors) {
+        toggleAlert(errors, 'error');
+      }
     }
-    // passport(response.tokenId);
   };
 
   if (user) {
@@ -113,7 +116,7 @@ const SignUp = () => {
             Sign up
           </button>
           <GoogleLogin
-            clientId="109337351805-u9lmtvt87vvoikp2182a9tat8o0l2atr.apps.googleusercontent.com"
+            clientId="259457812212-sj1ga4eqacoqubksrl53e6pjgan5pp9o.apps.googleusercontent.com" // vantty ID
             render={(renderProps) => (
               <button
                 className="btn bg-red-500 text-white mb-0"

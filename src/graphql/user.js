@@ -30,14 +30,6 @@ export const LOGIN = gql`
   }
 `;
 
-export const PASSPORT = gql`
-  mutation passportSign($token: String!) {
-    passportSign(token: $token) {
-      token
-    }
-  }
-`;
-
 export const UPDATE_USER = gql`
   mutation updateUser(
     $firstName: String

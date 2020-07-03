@@ -1,12 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import {
-  CREATE_USER,
-  LOGIN,
-  GET_USER,
-  UPDATE_USER,
-  PASSPORT,
-} from '../../graphql/user';
+import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
 import toggleAlert from '../../utils/toggleAlert';
@@ -38,14 +32,6 @@ const UserProvider = (props) => {
   const [loginUser] = useMutation(LOGIN, {
     update(_, { data: { login: loginData } }) {
       dispatch({ type: 'LOGIN', payload: loginData });
-    },
-  });
-
-  // apollo-login-passport
-  const [passportSign] = useMutation(PASSPORT, {
-    update(_, { data }) {
-      console.log('APOLLO_RES', data);
-      // dispatch({ type: 'LOGIN', payload: loginData });
     },
   });
 
@@ -84,9 +70,8 @@ const UserProvider = (props) => {
   // login with passport
   const passport = async (data) => {
     try {
-      await passportSign({ variables: { token: data } });
-      // await getCurrentUser();
-      // toggleAlert('Welcome back!', 'success');
+      await dispatch({ type: 'LOGIN', payload: data });
+      await getCurrentUser();
     } catch (error) {
       console.log(error);
     }
