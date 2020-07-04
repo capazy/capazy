@@ -10,9 +10,11 @@ import { UserContext } from '../../context/UserContext';
 import { signupFormSchema } from '../../utils/formikSchemas';
 import { server } from '../../utils/axios';
 import toggleAlert from '../../utils/toggleAlert';
+import { useState } from 'react';
 
 const SignUp = () => {
   const { signup, user, passport } = useContext(UserContext);
+  const [redirect, setRedirect] = useState(false);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -21,7 +23,7 @@ const SignUp = () => {
       email: '',
       password: '',
     },
-    validationSchema: signupFormSchema,
+    // validationSchema: signupFormSchema,
     onSubmit: (values) => {
       signup(values);
     },
@@ -42,6 +44,10 @@ const SignUp = () => {
       }
     }
   };
+
+  if (redirect) {
+    return <Redirect push to="/auth/test" />;
+  }
 
   if (user) {
     return <Redirect push to="/user/create" />;
@@ -115,29 +121,19 @@ const SignUp = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign up
           </button>
-          <GoogleLogin
-            clientId="259457812212-sj1ga4eqacoqubksrl53e6pjgan5pp9o.apps.googleusercontent.com" // vantty ID
-            render={(renderProps) => (
-              <button
-                className="btn bg-red-500 text-white mb-0"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                Google
-              </button>
-            )}
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
+          <button
+            className="btn bg-red-500 text-white mb-0"
+            onClick={() => setRedirect(true)}
+          >
+            Google
+          </button>
 
-          {/* <a
+          <a
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="/#"
+            href="/auth/google"
           >
             Forgot Password?
-          </a> */}
+          </a>
         </div>
       </form>
     </div>

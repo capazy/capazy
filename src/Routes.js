@@ -88,12 +88,12 @@ const Routes = () => {
       />
       <PrivateRoute exact path="/feed" layout={Layout} component={Feed} />
       <PrivateRoute exact path="/search" layout={Layout} component={Search} />
-
+      {/* 
       <Redirect
         to={{
           pathname: '/',
         }}
-      />
+      /> */}
     </Switch>
   );
 };
