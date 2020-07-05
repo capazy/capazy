@@ -1,18 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-// import GoogleLogin from 'react-google-login';
 
 // context
 import { UserContext } from '../../context/UserContext';
 
 // utils
-import { server } from '../../utils/axios';
-import toggleAlert from '../../utils/toggleAlert';
 // import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
-  const { signup, user, passport } = useContext(UserContext);
+  const { signup, user } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -99,11 +96,11 @@ const SignUp = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign up
           </button>
-          <a href="/auth/google">
+          {/* <a href="/auth/google">
             <button type="button" className="btn bg-red-500 text-white mb-0">
               Button
             </button>
-          </a>
+          </a> */}
         </div>
       </form>
     </div>

@@ -11,3 +11,4 @@ export { default as Chat } from './Chat';
 export { default as Project } from './Project';
 export { default as ProjectWizard } from './ProjectWizard';
 export { default as Job } from './Job';
+export { default as Loading } from './Loading';

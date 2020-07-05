@@ -17,15 +17,18 @@ import {
   Chat,
   ProjectWizard,
   Job,
+  Loading,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
+import NoLayout from './layout/NoLayout';
 import MobileChat from './views/MobileChat';
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" layout={Layout} component={Home} />
+      <Route exact path="/loading" layout={NoLayout} component={Loading} />
       <Route exact path="/signup" layout={Layout} component={Signup} />
       <Route exact path="/login" layout={Layout} component={Login} />
       <PrivateRoute

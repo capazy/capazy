@@ -1,8 +1,10 @@
 import React, { createContext, useReducer } from 'react';
+import axios from 'axios';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
+// utils
 import toggleAlert from '../../utils/toggleAlert';
 
 const UserContext = createContext({
@@ -88,7 +90,8 @@ const UserProvider = (props) => {
   };
 
   // logout
-  const logout = () => {
+  const logout = async () => {
+    await axios.get('/api/logout');
     dispatch({ type: 'LOGOUT' });
     window.location.href = '/';
   };
