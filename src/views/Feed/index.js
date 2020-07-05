@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 
 // apollo
@@ -11,7 +11,6 @@ import { FeedCard, LoadingCard } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
-import { server } from '../../utils/axios';
 
 const Feed = () => {
   const { user } = useContext(UserContext);
@@ -21,11 +20,6 @@ const Feed = () => {
       console.log('Vacancy', data);
     },
   });
-
-  useEffect(() => {
-    const res = server.get('/user');
-    console.log('res', res);
-  }, []);
 
   const { loading, data, refetch } = useQuery(GET_PROJECTS, {
     variables: { skill: '' },

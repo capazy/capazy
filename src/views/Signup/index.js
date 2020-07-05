@@ -1,20 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-import GoogleLogin from 'react-google-login';
+// import GoogleLogin from 'react-google-login';
 
 // context
 import { UserContext } from '../../context/UserContext';
 
 // utils
-import { signupFormSchema } from '../../utils/formikSchemas';
 import { server } from '../../utils/axios';
 import toggleAlert from '../../utils/toggleAlert';
-import { useState } from 'react';
+// import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
   const { signup, user, passport } = useContext(UserContext);
-  const [redirect, setRedirect] = useState(false);
 
   const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
@@ -28,26 +26,6 @@ const SignUp = () => {
       signup(values);
     },
   });
-
-  const responseGoogle = async (response) => {
-    try {
-      const config = {
-        headers: { 'Content-Type': 'application/json' },
-      };
-      const body = JSON.stringify({ access_token: response.accessToken });
-      const res = await server.post('/auth/google', body, config);
-      await passport(res.data);
-    } catch (error) {
-      const errors = error.response.data.message;
-      if (errors) {
-        toggleAlert(errors, 'error');
-      }
-    }
-  };
-
-  if (redirect) {
-    return <Redirect push to="/auth/test" />;
-  }
 
   if (user) {
     return <Redirect push to="/user/create" />;
@@ -121,18 +99,10 @@ const SignUp = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign up
           </button>
-          <button
-            className="btn bg-red-500 text-white mb-0"
-            onClick={() => setRedirect(true)}
-          >
-            Google
-          </button>
-
-          <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="/auth/google"
-          >
-            Forgot Password?
+          <a href="/auth/google">
+            <button type="button" className="btn bg-red-500 text-white mb-0">
+              Button
+            </button>
           </a>
         </div>
       </form>
