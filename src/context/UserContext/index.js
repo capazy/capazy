@@ -70,6 +70,7 @@ const UserProvider = (props) => {
 
   const update = async (data) => {
     try {
+      console.log(data);
       await updateUser({ variables: data });
       toggleAlert('Profile updated', 'success');
     } catch (error) {

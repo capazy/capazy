@@ -69,3 +69,19 @@ export const vacancyFormSchema = Yup.object({
   timeCommitment: Yup.number().positive().required(),
   timeCommitmentUnits: Yup.string().required(),
 });
+
+export const experienceFormSchema = Yup.object({
+  title: Yup.string().required(),
+  yearsOfExperience: Yup.string().required(),
+  companyName: Yup.string().required(),
+  description: Yup.string().required(),
+
+  skills: Yup.array()
+    .min(1, 'Pick at least 1 skill')
+    .of(
+      Yup.object().shape({
+        label: Yup.string().required(),
+        value: Yup.string().required(),
+      })
+    ),
+});

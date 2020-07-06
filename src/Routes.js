@@ -16,10 +16,7 @@ import {
   Signup,
   Login,
   Profile,
-  JoinedProjects,
-  CreatedProjects,
   Chat,
-  ProjectWizard,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
@@ -49,24 +46,6 @@ const Routes = () => {
         path="/chat/:channelURL"
         layout={SimpleLayout}
         component={Chat}
-      />
-      <PrivateRoute
-        exact
-        path="/joined-projects"
-        layout={Layout}
-        component={JoinedProjects}
-      />
-      <PrivateRoute
-        exact
-        path="/created-projects"
-        layout={Layout}
-        component={CreatedProjects}
-      />
-      <PrivateRoute
-        exact
-        path="/project/create"
-        layout={Layout}
-        component={ProjectWizard}
       />
 
       <PrivateRoute

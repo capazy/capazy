@@ -17,6 +17,7 @@ import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
 import { originalArray } from '../../utils/originalArray';
 import { ChatContext } from '../../context/ChatContext';
+import Exprience from './Exprience';
 
 const UserForm = ({ match }) => {
   const { update, user: userData, userLoading } = useContext(UserContext);
@@ -36,16 +37,14 @@ const UserForm = ({ match }) => {
     handleChange,
   } = useFormik({
     initialValues: {
-      expertise: '',
-      companyName: '',
-      companyDepartment: '',
       skills: [],
       description: '',
       languages: [],
       country: '',
       additionalSkills: [],
+      workExperience: [],
     },
-    validationSchema: userFormSchema,
+    // validationSchema: userFormSchema,
     onSubmit: async (values, { resetForm }) => {
       values.skills = await transformArray(values, 'skills');
       values.languages = await transformArray(values, 'languages');
@@ -58,6 +57,12 @@ const UserForm = ({ match }) => {
       resetForm();
     },
   });
+
+  const { workExperience } = values;
+
+  const createExperience = (data) => {
+    workExperience.push(data);
+  };
 
   if (sbUser && !sbUser.nickname) {
     updateSbProfile(
@@ -90,20 +95,12 @@ const UserForm = ({ match }) => {
   }, [userData, isCreateMode, setFieldValue]);
 
   if (userLoading) return <p>Loading....</p>;
+  if (!userData) return <p>Loading....</p>;
 
-  if (updateSuccess) {
-    return <Redirect push to="/feed" />;
-  }
-  const {
-    skills,
-    description,
-    languages,
-    companyName,
-    companyDepartment,
-    additionalSkills,
-    expertise,
-    country,
-  } = values;
+  // if (updateSuccess) {
+  //   return <Redirect push to="/feed" />;
+  // }
+  const { description, languages, additionalSkills, country } = values;
 
   const handleSkills = (e) => {
     const { skills } = skillsData.find(
@@ -114,6 +111,7 @@ const UserForm = ({ match }) => {
   const image =
     (userData && userData.profilePictureUrl) ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
+
   return (
     <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
@@ -148,45 +146,6 @@ const UserForm = ({ match }) => {
             </div>
           </div>
           {/* COMPANY */}
-          <h1 className="text-gray-900 text-xl mb-1">Company</h1>
-          <div className="mb-4">
-            <label className="form-label">Name</label>
-            <input
-              id="companyName"
-              rows="4"
-              cols="10"
-              placeholder="Company"
-              onChange={handleChange}
-              value={companyName}
-              className="form-input"
-              invalid={
-                touched.companyName && errors.companyName ? true : undefined
-              }
-            />
-
-            <p className="form-error">{errors.companyName}</p>
-          </div>
-          <div className="mb-4">
-            <label className="form-label" htmlFor="Email">
-              Department
-            </label>
-            <input
-              id="companyDepartment"
-              rows="4"
-              cols="10"
-              placeholder="Department"
-              onChange={handleChange}
-              value={companyDepartment}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
-              invalid={
-                touched.companyDepartment && errors.companyDepartment
-                  ? true
-                  : undefined
-              }
-            />
-
-            <p className="form-error">{errors.companyName}</p>
-          </div>
         </div>
 
         {/* PERSONAL */}
@@ -275,63 +234,6 @@ const UserForm = ({ match }) => {
         <div className="mb-2">
           <h1 className="text-gray-900 text-xl mb-1">Skills</h1>
           <div className="mb-4 ">
-            <label className="form-label">Expertise</label>
-            <div className="inline-block relative w-full">
-              <select
-                id="expertise"
-                className="form-input bg-white"
-                name="expertise"
-                onChange={(e) => {
-                  handleChange(e);
-                  handleSkills(e);
-                }}
-                defaultValue="Expertise"
-              >
-                <option
-                  value="Expertise"
-                  disabled
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                >
-                  {expertise}
-                </option>
-                {skillsData.map((item) => (
-                  <option
-                    key={item.expertise.label}
-                    value={item.expertise.value}
-                  >
-                    {item.expertise.label}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                <svg
-                  className="fill-current h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-            <p className="form-error">{errors.expertise}</p>
-            <div className="w-full">
-              <label className="form-label" htmlFor="Email">
-                Skills
-              </label>
-              <div className="w-full ">
-                <SelectMulti
-                  options={skillData}
-                  value={skills}
-                  field={'skills'}
-                  isMulti={true}
-                  onChange={setFieldValue}
-                  onBlur={setFieldTouched}
-                  error={errors.skills}
-                  touched={touched.skills}
-                />
-              </div>
-              <p className="form-error">{errors.skills}</p>
-            </div>
             <div className="w-full">
               <label className="form-label" htmlFor="Email">
                 Additional Expertise
@@ -352,7 +254,10 @@ const UserForm = ({ match }) => {
             </div>
           </div>
         </div>
-
+        <Exprience
+          createExperience={createExperience}
+          workExperience={workExperience}
+        />
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Save
