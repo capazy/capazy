@@ -70,10 +70,10 @@ const UserProvider = (props) => {
   };
 
   // login with passport
-  const passport = async (data) => {
+  const passport = async (auth, user) => {
     try {
-      await dispatch({ type: 'LOGIN', payload: data });
-      await getCurrentUser();
+      await dispatch({ type: 'LOGIN', payload: auth });
+      await dispatch({ type: 'LOAD_USER', payload: user });
     } catch (error) {
       console.log(error);
     }

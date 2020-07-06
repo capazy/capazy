@@ -5,6 +5,11 @@ module.exports = function (app) {
     createProxyMiddleware('/auth/google', { target: 'http://localhost:5000/' })
   );
   app.use(
+    createProxyMiddleware('/auth/linkedin', {
+      target: 'http://localhost:5000/',
+    })
+  );
+  app.use(
     createProxyMiddleware('/api/*', { target: 'http://localhost:5000/' })
   );
 };

@@ -11,18 +11,11 @@ import { UserContext } from '../../context/UserContext';
 const Loading = () => {
   const { user, passport } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const res = await axios.get('/api/user');
-  //       await passport(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, [passport]);
+  useEffect(() => {
+    axios.get('/api/user').then((res) => {
+      passport(res.data.auth, res.data.user);
+    });
+  }, [passport]);
 
   if (user) {
     return <Redirect push to="/feed" />;

@@ -96,11 +96,16 @@ const SignUp = () => {
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Sign up
           </button>
-          {/* <a href="/auth/google">
+          <a href="/auth/google">
             <button type="button" className="btn bg-red-500 text-white mb-0">
-              Button
+              Google
             </button>
-          </a> */}
+          </a>
+          <a href="/auth/linkedin">
+            <button type="button" className="btn bg-blue-500 text-white mb-0">
+              Linkedin
+            </button>
+          </a>
         </div>
       </form>
     </div>
