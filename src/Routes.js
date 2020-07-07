@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
 import Route from './router/Route';
 
@@ -19,7 +19,7 @@ import {
   JoinedProjects,
   CreatedProjects,
   Chat,
-  ProjectWizard,
+  Project,
   Job,
   Loading,
 } from './views';
@@ -70,7 +70,7 @@ const Routes = () => {
         exact
         path="/project/create"
         layout={Layout}
-        component={ProjectWizard}
+        component={Project}
       />
       <PrivateRoute exact path="/job/create" layout={Layout} component={Job} />
       <PrivateRoute
