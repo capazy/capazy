@@ -18,7 +18,8 @@ const ExperienceTable = ({ setAction, workExperience }) => {
                 <th className="mx-auto p-1 px-2 text-gray-400">Action</th>
                 <th></th>
               </tr>
-              {workExperience !== [] &&
+              {workExperience &&
+                workExperience !== [] &&
                 workExperience.map((exp) => (
                   <tr
                     key={exp._id}
@@ -57,7 +58,7 @@ const ExperienceTable = ({ setAction, workExperience }) => {
                 ))}
             </tbody>
           </table>
-          {workExperience.length === 0 && (
+          {workExperience && workExperience.length === 0 && (
             <NoData text={'You have not added experience yet'} />
           )}
           <div className="text-right">

@@ -1,6 +1,12 @@
 import React, { createContext, useReducer } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
+import {
+  CREATE_USER,
+  LOGIN,
+  GET_USER,
+  UPDATE_USER,
+  CREATE_EXPERIENCE,
+} from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
 import toggleAlert from '../../utils/toggleAlert';
@@ -51,6 +57,13 @@ const UserProvider = (props) => {
     },
   });
 
+  // create experience
+  const [createExperience] = useMutation(CREATE_EXPERIENCE, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_PROJECT', payload: data.createExperience });
+    },
+  });
+
   // signup
   const signup = async (data) => {
     await createUser({ variables: data });
@@ -89,6 +102,15 @@ const UserProvider = (props) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang });
   };
 
+  const createExp = async (data) => {
+    try {
+      createExperience({ variables: data });
+      toggleAlert('Experience updated', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -102,6 +124,7 @@ const UserProvider = (props) => {
         getCurrentUser,
         language: state.language,
         setLanguage,
+        createExp,
       }}
     >
       {props.children}

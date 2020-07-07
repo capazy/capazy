@@ -12,52 +12,44 @@ const EducationTable = ({ setAction, education }) => {
           <table className="w-full text-md bg-white shadow-md rounded mb-4">
             <tbody>
               <tr className="border-b">
-                <th className="text-left p-1 px-2">Role</th>
-                <th className="text-left p-1 px-2">Experience</th>
-                <th className="text-left p-1 px-2">Skills</th>
+                <th className="text-left p-1 px-2">Degree</th>
+                <th className="text-left p-1 px-2">Field</th>
+                <th className="text-left p-1 px-2">Year</th>
                 <th className="mx-auto p-1 px-2 text-gray-400">Action</th>
                 <th></th>
               </tr>
-              {/* {education !== [] &&
-                education.map((exp) => (
+              {education &&
+                education !== [] &&
+                education.map((edu) => (
                   <tr
-                    key={exp._id}
+                    key={edu._id}
                     className="border-b hover:bg-orange-100 bg-gray-100 "
                   >
                     <td className="p-1 px-2">
-                      <p className="bg-transparent">{exp.title}</p>
+                      <p className="bg-transparent">{edu.degree}</p>
                     </td>
                     <td className="p-1 px-2">
-                      <p className="bg-transparent">{exp.experience}</p>
+                      <p className="bg-transparent">{edu.fieldOfStudy}</p>
                     </td>
                     <td className="p-1 px-2">
-                      {exp.skills.map((skill, i) => (
-                        <span key={skill}>
-                          <p
-                            key={skill[i]}
-                            className="block table-cell text-xs text-gray-500 font-medium"
-                          >
-                            {skill}
-                          </p>
-                        </span>
-                      ))}
+                      <p className="bg-transparent">{edu.year}</p>
                     </td>
                     <td className="p-2 px-5 flex justify-end">
                       <button
                         type="button"
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                         // onClick={() =>
-                        //   deleteVacancy({ vacancyId: exp._id })
+                        //   deleteVacancy({ vacancyId: edu._id })
                         // }
                       >
                         Delete
                       </button>
                     </td>
                   </tr>
-                ))} */}
+                ))}
             </tbody>
           </table>
-          {education.length === 0 && (
+          {education && education.length === 0 && (
             <NoData text={'You have not added an education yet'} />
           )}
           <div className="text-right">

@@ -21,7 +21,9 @@ import Exprience from './Exprience';
 import Education from './Education';
 
 const UserForm = ({ match }) => {
-  const { update, user: userData, userLoading } = useContext(UserContext);
+  const { update, user: userData, userLoading, createExp } = useContext(
+    UserContext
+  );
   const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
@@ -55,6 +57,7 @@ const UserForm = ({ match }) => {
         'additionalSkills'
       );
       await update(values);
+      console.log('VALUES,', values);
       setUpdateSuccess(true);
       resetForm();
     },
@@ -62,7 +65,8 @@ const UserForm = ({ match }) => {
 
   const { workExperience, education } = values;
 
-  const createExperience = (data) => {
+  const createExperience = async (data) => {
+    await createExp(data);
     workExperience.push(data);
   };
 
@@ -85,6 +89,8 @@ const UserForm = ({ match }) => {
         'companyName',
         'companyDepartment',
         'description',
+        'education',
+        'workExperience',
       ];
       fields.forEach((field) => {
         setFieldValue(field, userData[field], false);
@@ -103,9 +109,9 @@ const UserForm = ({ match }) => {
   if (userLoading) return <p>Loading....</p>;
   if (!userData) return <p>Loading....</p>;
 
-  // if (updateSuccess) {
-  //   return <Redirect push to="/feed" />;
-  // }
+  if (updateSuccess) {
+    return <Redirect push to={`/profile/${id}`} />;
+  }
   const { description, languages, additionalSkills, country } = values;
 
   const handleSkills = (e) => {

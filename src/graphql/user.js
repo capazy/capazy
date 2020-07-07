@@ -76,6 +76,19 @@ export const UPDATE_USER = gql`
       companyDepartment
       country
       profilePictureUrl
+      education {
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
     }
   }
 `;
@@ -95,6 +108,19 @@ export const GET_USER = gql`
       country
       additionalSkills
       profilePictureUrl
+      education {
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
     }
   }
 `;
@@ -232,6 +258,52 @@ export const GET_USER_JOINED_PROJECTS = gql`
             }
           }
         }
+      }
+    }
+  }
+`;
+
+export const CREATE_EXPERIENCE = gql`
+  mutation createExperience(
+    $title: String!
+    $companyName: String!
+    $yearsOfExperience: String!
+    $description: String!
+    $skills: [String!]
+  ) {
+    createExperience(
+      experienceInput: {
+        title: $title
+        companyName: $companyName
+        yearsOfExperience: $yearsOfExperience
+        description: $description
+        skills: $skills
+      }
+    ) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
       }
     }
   }
