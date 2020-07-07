@@ -22,6 +22,7 @@ import {
   Project,
   Job,
   Loading,
+  Help,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
@@ -33,6 +34,7 @@ const Routes = () => {
 
   return (
     <Switch>
+      <Route exact path="/help" layout={Layout} component={Help} />
       <Route exact path="/loading" layout={NoLayout} component={Loading} />
       <Route
         exact

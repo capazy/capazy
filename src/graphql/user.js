@@ -82,6 +82,7 @@ export const GET_USER = gql`
       _id
       firstName
       lastName
+      email
       description
       skills
       languages
