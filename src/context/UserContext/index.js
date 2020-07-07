@@ -1,7 +1,13 @@
 import React, { createContext, useReducer } from 'react';
 import axios from 'axios';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
+import {
+  CREATE_USER,
+  LOGIN,
+  GET_USER,
+  UPDATE_USER,
+  SEND_HELP_EMAIL,
+} from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
 // utils
@@ -36,6 +42,17 @@ const UserProvider = (props) => {
   const [loginUser] = useMutation(LOGIN, {
     update(_, { data: { login: loginData } }) {
       dispatch({ type: 'LOGIN', payload: loginData });
+    },
+  });
+
+  // apollo-sendEmail
+  const [sendEmail] = useMutation(SEND_HELP_EMAIL, {
+    update(_, { data: { sendEmail: status } }) {
+      if (status === '202') {
+        toggleAlert('Message successfully sent!', 'success');
+      } else {
+        toggleAlert('Something went wrong. Please try again later!', 'error');
+      }
     },
   });
 
@@ -112,6 +129,15 @@ const UserProvider = (props) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang });
   };
 
+  // send email
+  const sendHelpEmail = async (data) => {
+    try {
+      await sendEmail({ variables: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -126,6 +152,7 @@ const UserProvider = (props) => {
         passport,
         language: state.language,
         setLanguage,
+        sendHelpEmail,
       }}
     >
       {props.children}

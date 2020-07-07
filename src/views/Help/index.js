@@ -9,7 +9,7 @@ import { UserContext } from '../../context/UserContext';
 import { helpFormSchema } from '../../utils/formikSchemas';
 
 const Help = () => {
-  const { user } = useContext(UserContext);
+  const { user, sendHelpEmail } = useContext(UserContext);
   const [msgSent, setMsgSent] = useState(false);
 
   const {
@@ -26,8 +26,7 @@ const Help = () => {
     },
     validationSchema: helpFormSchema,
     onSubmit: async (values) => {
-      console.log('EMAIL', values);
-      //   await login(values);
+      await sendHelpEmail(values);
       setMsgSent(true);
     },
   });
