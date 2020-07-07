@@ -92,15 +92,19 @@ const UserProvider = (props) => {
       await updateUser({ variables: data });
       toggleAlert('Profile updated', 'success');
     } catch (error) {
-      toggleAlert('error', 'error');
+      console.log(error);
     }
   };
 
   // logout
   const logout = async () => {
-    await axios.get('/api/logout');
-    dispatch({ type: 'LOGOUT' });
-    window.location.href = '/';
+    try {
+      await axios.get('/api/logout');
+      dispatch({ type: 'LOGOUT' });
+      window.location.href = '/';
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // set language
