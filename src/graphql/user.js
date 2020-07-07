@@ -44,6 +44,7 @@ export const UPDATE_USER = gql`
     $country: String
     $profilePictureUrl: String
     $workExperience: [ExperienceInput]
+    $education: [EducationInput]
   ) {
     updateUser(
       userInput: {
@@ -59,6 +60,7 @@ export const UPDATE_USER = gql`
         country: $country
         profilePictureUrl: $profilePictureUrl
         workExperience: $workExperience
+        education: $education
       }
     ) {
       _id

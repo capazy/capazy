@@ -18,6 +18,7 @@ import { transformArray } from '../../utils/transformArray';
 import { originalArray } from '../../utils/originalArray';
 import { ChatContext } from '../../context/ChatContext';
 import Exprience from './Exprience';
+import Education from './Education';
 
 const UserForm = ({ match }) => {
   const { update, user: userData, userLoading } = useContext(UserContext);
@@ -43,6 +44,7 @@ const UserForm = ({ match }) => {
       country: '',
       additionalSkills: [],
       workExperience: [],
+      education: [],
     },
     // validationSchema: userFormSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -58,10 +60,14 @@ const UserForm = ({ match }) => {
     },
   });
 
-  const { workExperience } = values;
+  const { workExperience, education } = values;
 
   const createExperience = (data) => {
     workExperience.push(data);
+  };
+
+  const createEducation = (data) => {
+    education.push(data);
   };
 
   if (sbUser && !sbUser.nickname) {
@@ -258,6 +264,7 @@ const UserForm = ({ match }) => {
           createExperience={createExperience}
           workExperience={workExperience}
         />
+        <Education createEducation={createEducation} education={education} />
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Save
