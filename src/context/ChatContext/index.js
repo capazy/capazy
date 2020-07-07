@@ -5,11 +5,13 @@ import { chatReducer } from '../../reducers/chatReducer';
 
 const ChatContext = createContext({
   sendBirdUserObject: {},
+  isConnected: false,
 });
 
 const ChatProvider = (props) => {
   const [state, dispatch] = useReducer(chatReducer, {
     sendBirdUserObject: '',
+    isConnected: false,
   });
 
   const connectSendBird = async (userId) => {
@@ -47,6 +49,7 @@ const ChatProvider = (props) => {
         connectSendBird,
         updateSbProfile,
         sbUser: state.sendBirdUserObject.currentUser,
+        isConnected: state.isConnected,
       }}
     >
       {props.children}

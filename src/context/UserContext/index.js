@@ -54,8 +54,13 @@ const UserProvider = (props) => {
 
   // signup
   const signup = async (data) => {
-    await createUser({ variables: data });
-    await getCurrentUser();
+    try {
+      await createUser({ variables: data });
+      await getCurrentUser();
+      toggleAlert('Welcome to Capazy!', 'success');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // login

@@ -84,26 +84,44 @@ const Navbar = () => {
         <div className="flex-1 md:hidden">
           {isOpen && (
             <div className="px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
-              <Link
-                to="/signup"
-                className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="block sm:inline-block px-2 py-1 mx-3"
               >
-                Signup
-              </Link>
-              <Link
-                to="/login"
-                className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                <Link
+                  to="/signup"
+                  className="text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                >
+                  Signup
+                </Link>
+              </button>
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="block sm:inline-block px-2 py-1 mx-3"
               >
-                Login
-              </Link>
-              <Link
-                to="/search"
-                className="block sm:inline-block px-2 py-1 mx-3 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                <Link
+                  to="/login"
+                  className="text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                >
+                  Login
+                </Link>
+              </button>
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="block sm:inline-block px-2 py-1 mx-3"
               >
-                Projects
-              </Link>
+                <Link
+                  to="/search"
+                  className="text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+                >
+                  Projects
+                </Link>
+              </button>
               <Link to="/signup">
-                <button className="btn-square bg-brand-blue text-white mx-2">
+                <button
+                  className="btn-square bg-brand-blue text-white mx-2"
+                  onClick={() => setOpen(!isOpen)}
+                >
                   Post a Project
                 </button>
               </Link>

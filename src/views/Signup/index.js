@@ -2,11 +2,14 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
 
+// components
+import { RegisterHeader } from '../../components';
+
 // context
 import { UserContext } from '../../context/UserContext';
 
 // utils
-// import { signupFormSchema } from '../../utils/formikSchemas';
+import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
   const { signup, user } = useContext(UserContext);
@@ -18,7 +21,7 @@ const SignUp = () => {
       email: '',
       password: '',
     },
-    // validationSchema: signupFormSchema,
+    validationSchema: signupFormSchema,
     onSubmit: (values) => {
       signup(values);
     },
@@ -34,6 +37,7 @@ const SignUp = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
+        <RegisterHeader title={'Signup'} />
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
             <label className="form-label">First Name</label>
@@ -63,7 +67,6 @@ const SignUp = () => {
             <p className="form-error">{errors.lastName}</p>
           </div>
         </div>
-
         <div className="mb-4">
           <label className="form-label">Email</label>
           <input
@@ -77,8 +80,7 @@ const SignUp = () => {
           />
           <p className="form-error">{errors.email}</p>
         </div>
-
-        <div className="mb-3">
+        <div className="mb-4">
           <label className="form-label">Password</label>
           <input
             className="form-input"
@@ -91,21 +93,10 @@ const SignUp = () => {
           />
           <p className="form-error">{errors.password}</p>
         </div>
-
-        <div className="flex items-center justify-between">
-          <button className="btn bg-brand-blue text-white mb-0" type="submit">
+        <div className="w-full mt-6">
+          <button className="btn bg-brand-blue text-white" type="submit">
             Sign up
           </button>
-          <a href="/auth/google">
-            <button type="button" className="btn bg-red-500 text-white mb-0">
-              Google
-            </button>
-          </a>
-          <a href="/auth/linkedin">
-            <button type="button" className="btn bg-blue-500 text-white mb-0">
-              Linkedin
-            </button>
-          </a>
         </div>
       </form>
     </div>
