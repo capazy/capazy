@@ -23,6 +23,11 @@ export const userReducer = (state, { type, payload }) => {
         user: null,
         loading: false,
       };
+    case 'SET_LANGUAGE':
+      return {
+        ...state,
+        language: payload,
+      };
     default:
       return state;
   }

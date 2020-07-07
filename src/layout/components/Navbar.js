@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Alert } from '../../components';
 
-const links = () => (
+// context
+import { UserContext } from '../../context/UserContext';
+
+const Links = ({ languageSelected, setLanguage }) => (
   <div className="hidden flex md:block px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
+    <button
+      onClick={() => setLanguage('es')}
+      style={{ color: languageSelected === 'es' && 'red' }}
+      className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+    >
+      es
+    </button>
+    <button
+      onClick={() => setLanguage('en')}
+      style={{ color: languageSelected === 'en' && 'red' }}
+      className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
+    >
+      en
+    </button>
     <Link
       to="/signup"
       className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
@@ -27,6 +44,8 @@ const links = () => (
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+  const { language, setLanguage } = useContext(UserContext);
+
   return (
     <nav className=" w-full z-10 top-0 bg-white border-b-2 top-0 fixed ">
       <div className="container mx-auto sm:flex sm:justify-between sm:items-center max-w-screen-lg mx-auto">
@@ -42,27 +61,7 @@ const Navbar = () => {
           </div>
           {/* SEARCH */}
 
-          <div className="hidden md:block flex-1 w-full mx-auto max-w-sm content-center py-4 ">
-            {/* <div className="relative pull-right pl-4 pr-4 md:pr-0">
-              <input
-                type="search"
-                placeholder="Search"
-                className="w-64 bg-gray-100 text-sm text-gray-800 transition border focus:outline-none focus:border-brand-blue py-1 px-2 pl-10 appearance-none leading-normal"
-              />
-              <div
-                className="absolute search-icon"
-                style={{ top: '0.375rem', left: '1.75rem' }}
-              >
-                <svg
-                  className="fill-current pointer-events-none text-gray-800 w-4 h-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                </svg>
-              </div>
-            </div> */}
-          </div>
+          <div className="hidden md:block flex-1 w-full mx-auto max-w-sm content-center py-4 "></div>
           {/* FINISH SEARCH */}
           <div className="sm:hidden">
             <button
@@ -128,7 +127,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        {links()}
+        <Links languageSelected={language} setLanguage={setLanguage} />
       </div>
       <Alert />
     </nav>

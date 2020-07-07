@@ -11,6 +11,7 @@ const UserContext = createContext({
   tokenExp: null,
   user: null,
   loading: false,
+  language: 'en',
   login: (data) => {},
   logout: () => {},
   signup: (data) => {},
@@ -21,6 +22,7 @@ const UserProvider = (props) => {
   const [state, dispatch] = useReducer(userReducer, {
     user: null,
     tokenExp: null,
+    language: 'en',
   });
 
   // apollo-signup
@@ -101,6 +103,11 @@ const UserProvider = (props) => {
     window.location.href = '/';
   };
 
+  // set language
+  const setLanguage = (lang) => {
+    dispatch({ type: 'SET_LANGUAGE', payload: lang });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -113,6 +120,8 @@ const UserProvider = (props) => {
         logout,
         getCurrentUser,
         passport,
+        language: state.language,
+        setLanguage,
       }}
     >
       {props.children}
