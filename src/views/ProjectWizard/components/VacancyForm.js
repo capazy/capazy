@@ -168,7 +168,6 @@ const VacancyForm = (props) => {
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Time Commitment in hours
               </label>
-
               <div className="flex flex-wrap">
                 <div className="mb-4 w-full sm:w-1/2 pr-2">
                   <input

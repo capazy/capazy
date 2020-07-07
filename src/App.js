@@ -23,14 +23,15 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
   const { getCurrentUser, user } = useContext(UserContext);
-  const { connectSendBird } = useContext(ChatContext);
+  const { connectSendBird, isConnected } = useContext(ChatContext);
 
   useEffect(() => {
     getCurrentUser();
-    if (user) {
-      connectSendBird(user._id);
-    }
-  }, [getCurrentUser, user]);
+  }, [getCurrentUser]);
+
+  if (user && !isConnected) {
+    connectSendBird(user._id);
+  }
 
   return (
     <Router history={history}>

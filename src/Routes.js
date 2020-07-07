@@ -20,9 +20,12 @@ import {
   CreatedProjects,
   Chat,
   ProjectWizard,
+  Job,
+  Loading,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
+import NoLayout from './layout/NoLayout';
 import MobileChat from './views/MobileChat';
 
 const Routes = () => {
@@ -30,6 +33,7 @@ const Routes = () => {
 
   return (
     <Switch>
+      <Route exact path="/loading" layout={NoLayout} component={Loading} />
       <Route
         exact
         path="/"
@@ -68,7 +72,7 @@ const Routes = () => {
         layout={Layout}
         component={ProjectWizard}
       />
-
+      <PrivateRoute exact path="/job/create" layout={Layout} component={Job} />
       <PrivateRoute
         exact
         path="/user/create"
@@ -96,12 +100,12 @@ const Routes = () => {
       />
       <PrivateRoute exact path="/feed" layout={Layout} component={Feed} />
       <PrivateRoute exact path="/search" layout={Layout} component={Search} />
-
+      {/* 
       <Redirect
         to={{
           pathname: '/',
         }}
-      />
+      /> */}
     </Switch>
   );
 };

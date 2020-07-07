@@ -1,8 +1,10 @@
 import React, { createContext, useReducer } from 'react';
+import axios from 'axios';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CREATE_USER, LOGIN, GET_USER, UPDATE_USER } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
+// utils
 import toggleAlert from '../../utils/toggleAlert';
 
 const UserContext = createContext({
@@ -13,6 +15,7 @@ const UserContext = createContext({
   login: (data) => {},
   logout: () => {},
   signup: (data) => {},
+  passport: (data) => {},
 });
 
 const UserProvider = (props) => {
@@ -53,8 +56,13 @@ const UserProvider = (props) => {
 
   // signup
   const signup = async (data) => {
-    await createUser({ variables: data });
-    await getCurrentUser();
+    try {
+      await createUser({ variables: data });
+      await getCurrentUser();
+      toggleAlert('Welcome to Capazy!', 'success');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // login
@@ -68,6 +76,17 @@ const UserProvider = (props) => {
     }
   };
 
+  // login with passport
+  const passport = async (auth, user) => {
+    try {
+      await dispatch({ type: 'LOGIN', payload: auth });
+      await dispatch({ type: 'LOAD_USER', payload: user });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // update
   const update = async (data) => {
     try {
       await updateUser({ variables: data });
@@ -78,7 +97,8 @@ const UserProvider = (props) => {
   };
 
   // logout
-  const logout = () => {
+  const logout = async () => {
+    await axios.get('/api/logout');
     dispatch({ type: 'LOGOUT' });
     window.location.href = '/';
   };
@@ -99,6 +119,7 @@ const UserProvider = (props) => {
         update,
         logout,
         getCurrentUser,
+        passport,
         language: state.language,
         setLanguage,
       }}
