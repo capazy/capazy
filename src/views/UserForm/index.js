@@ -72,11 +72,14 @@ const UserForm = ({ match }) => {
 
   const createExperience = async (data) => {
     await createExp(data);
+
     workExperience.push(data);
   };
 
   const deleteExperience = async (experienceId, index) => {
-    await deleteExp(experienceId);
+    if (!isCreateMode) {
+      await deleteExp(experienceId);
+    }
     await workExperience.splice(index, 1);
   };
 
