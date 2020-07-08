@@ -14,7 +14,7 @@ const Main = (props) => {
 
   return (
     <div className="">
-      <div className="mx-auto ">
+      <div className="mx-auto">
         <main className="">
           {user ? <NavbarLoggedIn /> : <Navbar />}
           <div

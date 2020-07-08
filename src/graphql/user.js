@@ -99,6 +99,7 @@ export const GET_USER = gql`
       _id
       firstName
       lastName
+      email
       description
       skills
       languages
@@ -423,6 +424,14 @@ export const DELETE_EDUCATION = gql`
         description
         skills
       }
+    }
+  }
+`;
+
+export const SEND_HELP_EMAIL = gql`
+  mutation sendEmail($email: String!, $message: String!) {
+    sendEmail(email: $email, message: $message) {
+      status
     }
   }
 `;

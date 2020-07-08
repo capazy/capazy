@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
 
+// components
+import { RegisterHeader } from '../../components';
+
 // context
 import { UserContext } from '../../context/UserContext';
 
@@ -27,11 +30,12 @@ const Login = () => {
   }
 
   return (
-    <div className="pt-5 w-full max-w-xs mx-auto my-auto">
+    <div className="pt-5 w-full max-w-md mx-auto my-auto">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
+        <RegisterHeader title={'Login'} />
         <div className="mb-4">
           <label className="form-label" htmlFor="Email">
             Email
@@ -47,7 +51,7 @@ const Login = () => {
           />
           <p className="form-error">{errors.email}</p>
         </div>
-        <div className="mb-6">
+        <div className="mb-4">
           <label className="form-label" htmlFor="password">
             Password
           </label>
@@ -62,7 +66,7 @@ const Login = () => {
           />
           <p className="form-error">{errors.password}</p>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-6">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Login
           </button>

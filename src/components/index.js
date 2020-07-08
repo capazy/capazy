@@ -18,3 +18,4 @@ export { default as ChatLayout } from './ChatLayout';
 export { default as ChatLeftBar } from './ChatLeftBar';
 export { default as ExperienceTable } from './ExperienceTable';
 export { default as EducationTable } from './EducationTable';
+export { default as RegisterHeader } from './RegisterHeader';

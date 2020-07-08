@@ -9,7 +9,7 @@ body {
 } */
 
 .btn {
-  @apply inline-block px-4 py-2 rounded-lg uppercase tracking-wider font-semibold  text-sm;
+  @apply inline-block px-4 py-2 rounded-lg normal-case tracking-wider font-semibold  text-sm;
 }
 
 .btn:focus {

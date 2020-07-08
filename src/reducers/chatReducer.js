@@ -3,6 +3,7 @@ export const chatReducer = (state, { type, payload }) => {
     case 'CONNECT_SB_USER':
       return {
         sendBirdUserObject: payload,
+        isConnected: true,
       };
 
     default:

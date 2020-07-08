@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import axios from 'axios';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import {
   CREATE_USER,
@@ -9,9 +10,11 @@ import {
   DELETE_EXPERIENCE,
   CREATE_EDUCATION,
   DELETE_EDUCATION,
+  SEND_HELP_EMAIL,
 } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
+// utils
 import toggleAlert from '../../utils/toggleAlert';
 
 const UserContext = createContext({
@@ -22,6 +25,7 @@ const UserContext = createContext({
   login: (data) => {},
   logout: () => {},
   signup: (data) => {},
+  passport: (data) => {},
 });
 
 const UserProvider = (props) => {
@@ -42,6 +46,24 @@ const UserProvider = (props) => {
   const [loginUser] = useMutation(LOGIN, {
     update(_, { data: { login: loginData } }) {
       dispatch({ type: 'LOGIN', payload: loginData });
+    },
+  });
+
+  // apollo-sendEmail
+  const [sendEmail] = useMutation(SEND_HELP_EMAIL, {
+    update(
+      _,
+      {
+        data: {
+          sendEmail: { status },
+        },
+      }
+    ) {
+      if (status === '202') {
+        toggleAlert('Message successfully sent!', 'success');
+      } else {
+        toggleAlert('Something went wrong. Please try again later!', 'error');
+      }
     },
   });
 
@@ -90,8 +112,13 @@ const UserProvider = (props) => {
 
   // signup
   const signup = async (data) => {
-    await createUser({ variables: data });
-    await getCurrentUser();
+    try {
+      await createUser({ variables: data });
+      await getCurrentUser();
+      toggleAlert('Welcome to Capazy!', 'success');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // login
@@ -105,26 +132,43 @@ const UserProvider = (props) => {
     }
   };
 
+  // login with passport
+  const passport = async (auth, user) => {
+    try {
+      await dispatch({ type: 'LOGIN', payload: auth });
+      await dispatch({ type: 'LOAD_USER', payload: user });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // update
   const update = async (data) => {
     try {
       console.log(data);
       await updateUser({ variables: data });
       toggleAlert('Profile updated', 'success');
     } catch (error) {
-      toggleAlert('error', 'error');
+      console.log(error);
     }
   };
 
   // logout
-  const logout = () => {
-    dispatch({ type: 'LOGOUT' });
-    window.location.href = '/';
+  const logout = async () => {
+    try {
+      await axios.get('/api/logout');
+      dispatch({ type: 'LOGOUT' });
+      window.location.href = '/';
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // set language
   const setLanguage = (lang) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang });
   };
+
 
   const createExp = async (data) => {
     try {
@@ -161,6 +205,15 @@ const UserProvider = (props) => {
       toggleAlert('error', 'error');
     }
   };
+      
+  // send email
+  const sendHelpEmail = async (data) => {
+    try {
+      await sendEmail({ variables: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <UserContext.Provider
@@ -173,12 +226,14 @@ const UserProvider = (props) => {
         update,
         logout,
         getCurrentUser,
+        passport,
         language: state.language,
         setLanguage,
         createExp,
         deleteExp,
         createEdu,
         deleteEdu,
+        sendHelpEmail,
       }}
     >
       {props.children}

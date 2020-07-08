@@ -27,9 +27,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
       );
-      if (message.includes('Unauthenticated')) {
-        console.log('redirect to /login');
-      } else {
+      if (!message.includes('Unauthenticated')) {
         toggleAlert(message, 'error');
       }
       return null;

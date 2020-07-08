@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
 import Route from './router/Route';
 
@@ -17,9 +17,14 @@ import {
   Login,
   Profile,
   Chat,
+  Project,
+  Job,
+  Loading,
+  Help,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
+import NoLayout from './layout/NoLayout';
 import MobileChat from './views/MobileChat';
 
 const Routes = () => {
@@ -27,6 +32,8 @@ const Routes = () => {
 
   return (
     <Switch>
+      <Route exact path="/help" layout={Layout} component={Help} />
+      <Route exact path="/loading" layout={NoLayout} component={Loading} />
       <Route
         exact
         path="/"
@@ -47,7 +54,25 @@ const Routes = () => {
         layout={SimpleLayout}
         component={Chat}
       />
-
+      <PrivateRoute
+        exact
+        path="/joined-projects"
+        layout={Layout}
+        component={JoinedProjects}
+      />
+      <PrivateRoute
+        exact
+        path="/created-projects"
+        layout={Layout}
+        component={CreatedProjects}
+      />
+      <PrivateRoute
+        exact
+        path="/project/create"
+        layout={Layout}
+        component={Project}
+      />
+      <PrivateRoute exact path="/job/create" layout={Layout} component={Job} />
       <PrivateRoute
         exact
         path="/user/create"
@@ -75,12 +100,12 @@ const Routes = () => {
       />
       <PrivateRoute exact path="/feed" layout={Layout} component={Feed} />
       <PrivateRoute exact path="/search" layout={Layout} component={Search} />
-
+      {/* 
       <Redirect
         to={{
           pathname: '/',
         }}
-      />
+      /> */}
     </Switch>
   );
 };
