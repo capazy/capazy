@@ -21,9 +21,13 @@ import Exprience from './Exprience';
 import Education from './Education';
 
 const UserForm = ({ match }) => {
-  const { update, user: userData, userLoading, createExp } = useContext(
-    UserContext
-  );
+  const {
+    update,
+    user: userData,
+    userLoading,
+    createExp,
+    deleteExp,
+  } = useContext(UserContext);
   const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [skillData, setSkillData] = useState();
@@ -62,12 +66,20 @@ const UserForm = ({ match }) => {
       resetForm();
     },
   });
-
   const { workExperience, education } = values;
+
+  // useEffect(() => {
+  //   values.workExperience = workExperience;
+  // }, [workExperience]);
 
   const createExperience = async (data) => {
     await createExp(data);
     workExperience.push(data);
+  };
+
+  const deleteExperience = async (experienceId, index) => {
+    await deleteExp(experienceId);
+    await workExperience.splice(index, 1);
   };
 
   const createEducation = (data) => {
@@ -110,7 +122,7 @@ const UserForm = ({ match }) => {
   if (!userData) return <p>Loading....</p>;
 
   if (updateSuccess) {
-    return <Redirect push to={`/profile/${id}`} />;
+    return <Redirect push to={`/profile/${userData._id}`} />;
   }
   const { description, languages, additionalSkills, country } = values;
 
@@ -267,8 +279,9 @@ const UserForm = ({ match }) => {
           </div>
         </div>
         <Exprience
-          createExperience={createExperience}
           workExperience={workExperience}
+          createExperience={createExperience}
+          deleteExperience={deleteExperience}
         />
         <Education createEducation={createEducation} education={education} />
         <div className="flex items-center justify-between">

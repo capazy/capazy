@@ -25,7 +25,7 @@ const SignUp = () => {
   });
 
   if (user) {
-    return <Redirect push to="/user/create" />;
+    return <Redirect push to={`/user/edit/${user.id}`} />;
   }
 
   return (

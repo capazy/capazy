@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 // components
 import { NoData } from '../index';
 
-const ExperienceTable = ({ setAction, workExperience }) => {
+const ExperienceTable = ({ setAction, workExperience, deleteExperience }) => {
   return (
     <Fragment>
       <div className="max-w-xl border-b-2">
@@ -20,7 +20,7 @@ const ExperienceTable = ({ setAction, workExperience }) => {
               </tr>
               {workExperience &&
                 workExperience !== [] &&
-                workExperience.map((exp) => (
+                workExperience.map((exp, i) => (
                   <tr
                     key={exp._id}
                     className="border-b hover:bg-orange-100 bg-gray-100 "
@@ -47,9 +47,9 @@ const ExperienceTable = ({ setAction, workExperience }) => {
                       <button
                         type="button"
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                        // onClick={() =>
-                        //   deleteVacancy({ vacancyId: exp._id })
-                        // }
+                        onClick={() =>
+                          deleteExperience({ experienceId: exp._id }, i)
+                        }
                       >
                         Delete
                       </button>

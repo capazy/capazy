@@ -6,6 +6,7 @@ import {
   GET_USER,
   UPDATE_USER,
   CREATE_EXPERIENCE,
+  DELETE_EXPERIENCE,
 } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
@@ -60,7 +61,14 @@ const UserProvider = (props) => {
   // create experience
   const [createExperience] = useMutation(CREATE_EXPERIENCE, {
     update(_, { data }) {
-      dispatch({ type: 'UPDATE_PROJECT', payload: data.createExperience });
+      dispatch({ type: 'UPDATE_USER', payload: data.createExperience });
+    },
+  });
+
+  // delete vacancy
+  const [deleteExperience] = useMutation(DELETE_EXPERIENCE, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_PROJECT', payload: data.cancelVacancy });
     },
   });
 
@@ -111,6 +119,15 @@ const UserProvider = (props) => {
     }
   };
 
+  const deleteExp = async (data) => {
+    try {
+      deleteExperience({ variables: data });
+      toggleAlert('Experience deleted', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -125,6 +142,7 @@ const UserProvider = (props) => {
         language: state.language,
         setLanguage,
         createExp,
+        deleteExp,
       }}
     >
       {props.children}

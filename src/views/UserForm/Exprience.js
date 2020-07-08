@@ -13,7 +13,7 @@ const experienceOptions = [
   { value: '+5', label: '+5' },
 ];
 
-const Exprience = ({ createExperience, workExperience }) => {
+const Exprience = ({ createExperience, workExperience, deleteExperience }) => {
   const [action, setAction] = useState(false);
   const {
     handleSubmit,
@@ -47,6 +47,7 @@ const Exprience = ({ createExperience, workExperience }) => {
         action={action}
         setAction={setAction}
         workExperience={workExperience}
+        deleteExperience={deleteExperience}
       />
       <Modal action={action}>
         <form className="w-full pt-2  mb-4 m-12" onSubmit={handleSubmit}>
