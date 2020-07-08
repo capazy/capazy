@@ -47,7 +47,14 @@ const UserProvider = (props) => {
 
   // apollo-sendEmail
   const [sendEmail] = useMutation(SEND_HELP_EMAIL, {
-    update(_, { data: { sendEmail: status } }) {
+    update(
+      _,
+      {
+        data: {
+          sendEmail: { status },
+        },
+      }
+    ) {
       if (status === '202') {
         toggleAlert('Message successfully sent!', 'success');
       } else {
