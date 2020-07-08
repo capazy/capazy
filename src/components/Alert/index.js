@@ -8,9 +8,8 @@ const Alert = () => {
   if (!message) return null;
 
   return (
-    <div className="alert-banner  ">
+    <div className="alert-banner">
       <input type="checkbox" className="hidden" id="banneralert" />
-
       <label
         className={`banner ${alertType}`}
         title="close"

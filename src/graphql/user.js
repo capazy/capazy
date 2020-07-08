@@ -82,6 +82,7 @@ export const GET_USER = gql`
       _id
       firstName
       lastName
+      email
       description
       skills
       languages
@@ -229,6 +230,14 @@ export const GET_USER_JOINED_PROJECTS = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const SEND_HELP_EMAIL = gql`
+  mutation sendEmail($email: String!, $message: String!) {
+    sendEmail(email: $email, message: $message) {
+      status
     }
   }
 `;
