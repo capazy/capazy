@@ -56,18 +56,6 @@ const Routes = () => {
       />
       <PrivateRoute
         exact
-        path="/joined-projects"
-        layout={Layout}
-        component={JoinedProjects}
-      />
-      <PrivateRoute
-        exact
-        path="/created-projects"
-        layout={Layout}
-        component={CreatedProjects}
-      />
-      <PrivateRoute
-        exact
         path="/project/create"
         layout={Layout}
         component={Project}

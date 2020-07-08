@@ -7,16 +7,18 @@ import { SelectMulti, PictureUploader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
+import { ChatContext } from '../../context/ChatContext';
 
 // utils
-import skillsData from '../../data/skillsData.json';
+// import skillsData from '../../data/skillsData.json';
 import allSkillsData from '../../data/allSkillsData.json';
 import countriesData from '../../data/countriesData.json';
 import languagesData from '../../data/languagesData.json';
-import { userFormSchema } from '../../utils/formikSchemas';
 import { transformArray } from '../../utils/transformArray';
 import { originalArray } from '../../utils/originalArray';
-import { ChatContext } from '../../context/ChatContext';
+// import { userFormSchema } from '../../utils/formikSchemas';
+
+// components
 import Exprience from './Exprience';
 import Education from './Education';
 
@@ -28,11 +30,11 @@ const UserForm = ({ match }) => {
     createExp,
     deleteExp,
     createEdu,
-    deleteEdu,
+    // deleteEdu,
   } = useContext(UserContext);
   const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const [skillData, setSkillData] = useState();
+  // const [skillData, setSkillData] = useState();
   const { id } = match.params;
   const isCreateMode = !id;
 
@@ -72,7 +74,6 @@ const UserForm = ({ match }) => {
 
   const createExperience = async (data) => {
     await createExp(data);
-
     workExperience.push(data);
   };
 
@@ -88,10 +89,10 @@ const UserForm = ({ match }) => {
     await education.push(data);
   };
 
-  const deleteEducation = async (experienceId, index) => {
-    await deleteEdu(experienceId);
-    await workExperience.splice(index, 1);
-  };
+  // const deleteEducation = async (experienceId, index) => {
+  //   await deleteEdu(experienceId);
+  //   await workExperience.splice(index, 1);
+  // };
 
   if (sbUser && !sbUser.nickname) {
     updateSbProfile(
@@ -133,12 +134,12 @@ const UserForm = ({ match }) => {
   }
   const { description, languages, additionalSkills, country } = values;
 
-  const handleSkills = (e) => {
-    const { skills } = skillsData.find(
-      (item) => item.expertise.value === e.target.value
-    );
-    setSkillData(skills);
-  };
+  // const handleSkills = (e) => {
+  //   const { skills } = skillsData.find(
+  //     (item) => item.expertise.value === e.target.value
+  //   );
+  //   setSkillData(skills);
+  // };
 
   const image =
     (userData && userData.profilePictureUrl) ||

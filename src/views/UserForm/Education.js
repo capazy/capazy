@@ -1,16 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { experienceFormSchema } from '../../utils/formikSchemas';
-import {
-  ExperienceTable,
-  Modal,
-  SelectMulti,
-  EducationTable,
-} from '../../components';
-import { transformArray } from '../../utils/transformArray';
+
+// utils
+// import { experienceFormSchema } from '../../utils/formikSchemas';
+// import { transformArray } from '../../utils/transformArray';
+// import allSkillsData from '../../data/allSkillsData.json';
 import toggleAlert from '../../utils/toggleAlert';
-import allSkillsData from '../../data/allSkillsData.json';
-import { UserContext } from '../../context/UserContext';
+
+// components
+import {
+  Modal,
+  EducationTable,
+  // ExperienceTable,
+  // SelectMulti,
+} from '../../components';
+
+// context
+// import { UserContext } from '../../context/UserContext';
 
 const experienceOptions = [
   { value: '1-3', label: '1-3' },
@@ -26,8 +32,8 @@ const Education = ({ createEducation, education }) => {
     errors,
     touched,
     handleChange,
-    setFieldValue,
-    setFieldTouched,
+    // setFieldValue,
+    // setFieldTouched,
   } = useFormik({
     initialValues: {
       degree: '',
@@ -44,7 +50,7 @@ const Education = ({ createEducation, education }) => {
       resetForm();
     },
   });
-  const { degree, fieldOfStudy, school, skills } = values;
+  const { degree, fieldOfStudy, school } = values;
   return (
     <div>
       <EducationTable

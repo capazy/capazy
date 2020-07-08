@@ -1,11 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { experienceFormSchema } from '../../utils/formikSchemas';
-import { ExperienceTable, Modal, SelectMulti } from '../../components';
+
+// utils
 import { transformArray } from '../../utils/transformArray';
 import toggleAlert from '../../utils/toggleAlert';
 import allSkillsData from '../../data/allSkillsData.json';
-import { UserContext } from '../../context/UserContext';
+// import { experienceFormSchema } from '../../utils/formikSchemas';
+
+// components
+import { ExperienceTable, Modal, SelectMulti } from '../../components';
+
+// context
+// import { UserContext } from '../../context/UserContext';
 
 const experienceOptions = [
   { value: '1-3', label: '1-3' },
