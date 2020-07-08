@@ -43,6 +43,8 @@ export const UPDATE_USER = gql`
     $companyDepartment: String
     $country: String
     $profilePictureUrl: String
+    $workExperience: [ExperienceInput]
+    $education: [EducationInput]
   ) {
     updateUser(
       userInput: {
@@ -57,6 +59,8 @@ export const UPDATE_USER = gql`
         companyDepartment: $companyDepartment
         country: $country
         profilePictureUrl: $profilePictureUrl
+        workExperience: $workExperience
+        education: $education
       }
     ) {
       _id
@@ -72,6 +76,19 @@ export const UPDATE_USER = gql`
       companyDepartment
       country
       profilePictureUrl
+      education {
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
     }
   }
 `;
@@ -92,6 +109,21 @@ export const GET_USER = gql`
       country
       additionalSkills
       profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
     }
   }
 `;
@@ -229,6 +261,168 @@ export const GET_USER_JOINED_PROJECTS = gql`
             }
           }
         }
+      }
+    }
+  }
+`;
+
+export const CREATE_EXPERIENCE = gql`
+  mutation createExperience(
+    $title: String!
+    $companyName: String!
+    $yearsOfExperience: String!
+    $description: String!
+    $skills: [String!]
+  ) {
+    createExperience(
+      experienceInput: {
+        title: $title
+        companyName: $companyName
+        yearsOfExperience: $yearsOfExperience
+        description: $description
+        skills: $skills
+      }
+    ) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+    }
+  }
+`;
+
+export const DELETE_EXPERIENCE = gql`
+  mutation deleteExperience($experienceId: ID!) {
+    deleteExperience(experienceId: $experienceId) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+    }
+  }
+`;
+
+export const CREATE_EDUCATION = gql`
+  mutation createEducation(
+    $degree: String!
+    $school: String!
+    $year: String!
+    $fieldOfStudy: String!
+  ) {
+    createEducation(
+      educationInput: {
+        degree: $degree
+        school: $school
+        year: $year
+        fieldOfStudy: $fieldOfStudy
+      }
+    ) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+    }
+  }
+`;
+
+export const DELETE_EDUCATION = gql`
+  mutation deleteExperience($educationId: ID!) {
+    deleteEducation(educationId: $educationId) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
       }
     }
   }

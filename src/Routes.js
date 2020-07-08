@@ -16,8 +16,6 @@ import {
   Signup,
   Login,
   Profile,
-  JoinedProjects,
-  CreatedProjects,
   Chat,
   Project,
   Job,

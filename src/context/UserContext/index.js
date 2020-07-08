@@ -6,6 +6,10 @@ import {
   LOGIN,
   GET_USER,
   UPDATE_USER,
+  CREATE_EXPERIENCE,
+  DELETE_EXPERIENCE,
+  CREATE_EDUCATION,
+  DELETE_EDUCATION,
   SEND_HELP_EMAIL,
 } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
@@ -78,6 +82,34 @@ const UserProvider = (props) => {
     },
   });
 
+  // create experience
+  const [createExperience] = useMutation(CREATE_EXPERIENCE, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_USER', payload: data.createExperience });
+    },
+  });
+
+  // delete experience
+  const [deleteExperience] = useMutation(DELETE_EXPERIENCE, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_USER', payload: data.deleteExperience });
+    },
+  });
+
+  // create Education
+  const [createEducation] = useMutation(CREATE_EDUCATION, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_USER', payload: data.createEducation });
+    },
+  });
+
+  // delete education
+  const [deleteEducation] = useMutation(DELETE_EDUCATION, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_USER', payload: data.deleteEducation });
+    },
+  });
+
   // signup
   const signup = async (data) => {
     try {
@@ -113,6 +145,7 @@ const UserProvider = (props) => {
   // update
   const update = async (data) => {
     try {
+      console.log(data);
       await updateUser({ variables: data });
       toggleAlert('Profile updated', 'success');
     } catch (error) {
@@ -136,6 +169,43 @@ const UserProvider = (props) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang });
   };
 
+
+  const createExp = async (data) => {
+    try {
+      createExperience({ variables: data });
+      toggleAlert('Experience updated', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
+  const deleteExp = async (data) => {
+    try {
+      deleteExperience({ variables: data });
+      toggleAlert('Experience deleted', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
+  const createEdu = async (data) => {
+    try {
+      createEducation({ variables: data });
+      toggleAlert('Education updated', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
+  const deleteEdu = async (data) => {
+    try {
+      deleteEducation({ variables: data });
+      toggleAlert('Education deleted', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+      
   // send email
   const sendHelpEmail = async (data) => {
     try {
@@ -159,6 +229,10 @@ const UserProvider = (props) => {
         passport,
         language: state.language,
         setLanguage,
+        createExp,
+        deleteExp,
+        createEdu,
+        deleteEdu,
         sendHelpEmail,
       }}
     >
