@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 // components
 import { NoData } from '../index';
+import { UserContext } from '../../context/UserContext';
 
-const EducationTable = ({ setAction, education }) => {
+const EducationTable = ({ setAction, education, deleteEducation }) => {
+  const { deleteEdu } = useContext(UserContext);
   return (
     <Fragment>
       <div className="max-w-xl border-b-2">
@@ -38,9 +40,7 @@ const EducationTable = ({ setAction, education }) => {
                       <button
                         type="button"
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                        // onClick={() =>
-                        //   deleteVacancy({ vacancyId: edu._id })
-                        // }
+                        onClick={() => deleteEdu({ educationId: edu._id })}
                       >
                         Delete
                       </button>

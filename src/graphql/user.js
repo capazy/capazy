@@ -346,3 +346,83 @@ export const DELETE_EXPERIENCE = gql`
     }
   }
 `;
+
+export const CREATE_EDUCATION = gql`
+  mutation createEducation(
+    $degree: String!
+    $school: String!
+    $year: String!
+    $fieldOfStudy: String!
+  ) {
+    createEducation(
+      educationInput: {
+        degree: $degree
+        school: $school
+        year: $year
+        fieldOfStudy: $fieldOfStudy
+      }
+    ) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+    }
+  }
+`;
+
+export const DELETE_EDUCATION = gql`
+  mutation deleteExperience($educationId: ID!) {
+    deleteEducation(educationId: $educationId) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      languages
+      expertise
+      companyName
+      companyDepartment
+      country
+      additionalSkills
+      profilePictureUrl
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+    }
+  }
+`;

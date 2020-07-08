@@ -27,6 +27,8 @@ const UserForm = ({ match }) => {
     userLoading,
     createExp,
     deleteExp,
+    createEdu,
+    deleteEdu,
   } = useContext(UserContext);
   const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
@@ -68,10 +70,6 @@ const UserForm = ({ match }) => {
   });
   const { workExperience, education } = values;
 
-  // useEffect(() => {
-  //   values.workExperience = workExperience;
-  // }, [workExperience]);
-
   const createExperience = async (data) => {
     await createExp(data);
     workExperience.push(data);
@@ -82,8 +80,14 @@ const UserForm = ({ match }) => {
     await workExperience.splice(index, 1);
   };
 
-  const createEducation = (data) => {
-    education.push(data);
+  const createEducation = async (data) => {
+    await createEdu(data);
+    await education.push(data);
+  };
+
+  const deleteEducation = async (experienceId, index) => {
+    await deleteEdu(experienceId);
+    await workExperience.splice(index, 1);
   };
 
   if (sbUser && !sbUser.nickname) {

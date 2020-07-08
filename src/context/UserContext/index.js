@@ -7,6 +7,8 @@ import {
   UPDATE_USER,
   CREATE_EXPERIENCE,
   DELETE_EXPERIENCE,
+  CREATE_EDUCATION,
+  DELETE_EDUCATION,
 } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
@@ -65,10 +67,24 @@ const UserProvider = (props) => {
     },
   });
 
-  // delete vacancy
+  // delete experience
   const [deleteExperience] = useMutation(DELETE_EXPERIENCE, {
     update(_, { data }) {
-      dispatch({ type: 'UPDATE_PROJECT', payload: data.cancelVacancy });
+      dispatch({ type: 'UPDATE_USER', payload: data.deleteExperience });
+    },
+  });
+
+  // create Education
+  const [createEducation] = useMutation(CREATE_EDUCATION, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_USER', payload: data.createEducation });
+    },
+  });
+
+  // delete education
+  const [deleteEducation] = useMutation(DELETE_EDUCATION, {
+    update(_, { data }) {
+      dispatch({ type: 'UPDATE_USER', payload: data.deleteEducation });
     },
   });
 
@@ -128,6 +144,24 @@ const UserProvider = (props) => {
     }
   };
 
+  const createEdu = async (data) => {
+    try {
+      createEducation({ variables: data });
+      toggleAlert('Education updated', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
+  const deleteEdu = async (data) => {
+    try {
+      deleteEducation({ variables: data });
+      toggleAlert('Education deleted', 'success');
+    } catch (error) {
+      toggleAlert('error', 'error');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -143,6 +177,8 @@ const UserProvider = (props) => {
         setLanguage,
         createExp,
         deleteExp,
+        createEdu,
+        deleteEdu,
       }}
     >
       {props.children}
