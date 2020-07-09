@@ -145,7 +145,6 @@ const UserProvider = (props) => {
   // update
   const update = async (data) => {
     try {
-      console.log(data);
       await updateUser({ variables: data });
       toggleAlert('Profile updated', 'success');
     } catch (error) {
@@ -168,7 +167,6 @@ const UserProvider = (props) => {
   const setLanguage = (lang) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang });
   };
-
 
   const createExp = async (data) => {
     try {
@@ -205,7 +203,7 @@ const UserProvider = (props) => {
       toggleAlert('error', 'error');
     }
   };
-      
+
   // send email
   const sendHelpEmail = async (data) => {
     try {

@@ -34,11 +34,11 @@ const Links = ({ languageSelected, setLanguage }) => (
       Login
     </Link>
 
-    <Link to="/signup">
+    {/* <Link to="/signup">
       <button className="btn-square bg-brand-blue text-white mx-2">
         Post a Project
       </button>
-    </Link>
+    </Link> */}
   </div>
 );
 

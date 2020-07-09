@@ -46,8 +46,6 @@ export const userFormSchema = Yup.object({
     ),
   description: Yup.string().required(),
   country: Yup.string().required(),
-  education: Yup.string().required(),
-  workExperience: Yup.string().required(),
 });
 
 export const projectFormSchema = Yup.object({

@@ -77,12 +77,14 @@ export const UPDATE_USER = gql`
       country
       profilePictureUrl
       education {
+        _id
         degree
         school
         year
         fieldOfStudy
       }
       workExperience {
+        _id
         title
         companyName
         yearsOfExperience
@@ -141,6 +143,21 @@ export const GET_USERS = gql`
       companyName
       companyDepartment
       country
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
     }
   }
 `;

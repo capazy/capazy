@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 // components
 import { NoData } from '../index';
+import { UserContext } from '../../context/UserContext';
 
-const ExperienceTable = ({ setAction, workExperience, deleteExperience }) => {
+const ExperienceTable = ({ setAction, user: { workExperience } }) => {
+  const { deleteExp } = useContext(UserContext);
   return (
     <Fragment>
       <div className="max-w-xl border-b-2">
@@ -47,9 +49,7 @@ const ExperienceTable = ({ setAction, workExperience, deleteExperience }) => {
                       <button
                         type="button"
                         className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                        onClick={() =>
-                          deleteExperience({ experienceId: exp._id }, i)
-                        }
+                        onClick={() => deleteExp({ experienceId: exp._id }, i)}
                       >
                         Delete
                       </button>

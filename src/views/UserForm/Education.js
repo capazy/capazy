@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 
 // utils
@@ -14,6 +14,7 @@ import {
   // ExperienceTable,
   // SelectMulti,
 } from '../../components';
+import { UserContext } from '../../context/UserContext';
 
 // context
 // import { UserContext } from '../../context/UserContext';
@@ -24,7 +25,8 @@ const experienceOptions = [
   { value: '+5', label: '+5' },
 ];
 
-const Education = ({ createEducation, education }) => {
+const Education = () => {
+  const { createEdu, user } = useContext(UserContext);
   const [action, setAction] = useState(false);
   const {
     handleSubmit,
@@ -44,7 +46,7 @@ const Education = ({ createEducation, education }) => {
     // validationSchema: experienceFormSchema,
     onSubmit: async (values, { resetForm }) => {
       //   values.skills = await transformArray(values, 'skills');
-      await createEducation(values);
+      await createEdu(values);
       setAction(false);
       toggleAlert('Education created', 'success');
       resetForm();
@@ -53,11 +55,7 @@ const Education = ({ createEducation, education }) => {
   const { degree, fieldOfStudy, school } = values;
   return (
     <div>
-      <EducationTable
-        action={action}
-        setAction={setAction}
-        education={education}
-      />
+      <EducationTable action={action} setAction={setAction} user={user} />
       <Modal action={action}>
         <form className="w-full pt-2  mb-4 m-12" onSubmit={handleSubmit}>
           <label className="block text-gray-900 text-xl font-bold mb-2 mx-auto text-center">

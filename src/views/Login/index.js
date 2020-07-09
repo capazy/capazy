@@ -26,7 +26,7 @@ const Login = () => {
   });
 
   if (user) {
-    return <Redirect push to="/feed" />;
+    return <Redirect push to={`/profile/${user._id}`} />;
   }
 
   return (
