@@ -23,17 +23,10 @@ import Exprience from './Exprience';
 import Education from './Education';
 
 const UserForm = ({ match }) => {
-  const {
-    update,
-    user: userData,
-    userLoading,
-    createExp,
-    deleteExp,
-    createEdu,
-    // deleteEdu,
-  } = useContext(UserContext);
+  const { update, user: userData, userLoading } = useContext(UserContext);
   const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
+
   // const [skillData, setSkillData] = useState();
   const { id } = match.params;
   const isCreateMode = !id;
@@ -48,51 +41,23 @@ const UserForm = ({ match }) => {
     handleChange,
   } = useFormik({
     initialValues: {
-      skills: [],
       description: '',
       languages: [],
       country: '',
       additionalSkills: [],
-      workExperience: [],
-      education: [],
     },
     // validationSchema: userFormSchema,
     onSubmit: async (values, { resetForm }) => {
-      values.skills = await transformArray(values, 'skills');
       values.languages = await transformArray(values, 'languages');
       values.additionalSkills = await transformArray(
         values,
         'additionalSkills'
       );
       await update(values);
-      console.log('VALUES,', values);
       setUpdateSuccess(true);
       resetForm();
     },
   });
-  const { workExperience, education } = values;
-
-  const createExperience = async (data) => {
-    await createExp(data);
-    workExperience.push(data);
-  };
-
-  const deleteExperience = async (experienceId, index) => {
-    if (!isCreateMode) {
-      await deleteExp(experienceId);
-    }
-    await workExperience.splice(index, 1);
-  };
-
-  const createEducation = async (data) => {
-    await createEdu(data);
-    await education.push(data);
-  };
-
-  // const deleteEducation = async (experienceId, index) => {
-  //   await deleteEdu(experienceId);
-  //   await workExperience.splice(index, 1);
-  // };
 
   if (sbUser && !sbUser.nickname) {
     updateSbProfile(
@@ -109,13 +74,10 @@ const UserForm = ({ match }) => {
         'companyName',
         'companyDepartment',
         'description',
-        'education',
-        'workExperience',
       ];
       fields.forEach((field) => {
         setFieldValue(field, userData[field], false);
         setFieldValue('country', userData['country'], false);
-        setFieldValue('skills', originalArray(userData['skills']), false);
         setFieldValue('languages', originalArray(userData['languages']), false);
         setFieldValue(
           'additionalSkills',
@@ -287,12 +249,8 @@ const UserForm = ({ match }) => {
             </div>
           </div>
         </div>
-        <Exprience
-          workExperience={workExperience}
-          createExperience={createExperience}
-          deleteExperience={deleteExperience}
-        />
-        <Education createEducation={createEducation} education={education} />
+        <Exprience />
+        <Education />
         <div className="flex items-center justify-between">
           <button className="btn bg-brand-blue text-white mb-0" type="submit">
             Save

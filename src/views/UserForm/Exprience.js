@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 
 // utils
@@ -9,6 +9,7 @@ import allSkillsData from '../../data/allSkillsData.json';
 
 // components
 import { ExperienceTable, Modal, SelectMulti } from '../../components';
+import { UserContext } from '../../context/UserContext';
 
 // context
 // import { UserContext } from '../../context/UserContext';
@@ -19,7 +20,8 @@ const experienceOptions = [
   { value: '+5', label: '+5' },
 ];
 
-const Exprience = ({ createExperience, workExperience, deleteExperience }) => {
+const Exprience = ({ workExperience, deleteExperience }) => {
+  const { createExp, user } = useContext(UserContext);
   const [action, setAction] = useState(false);
   const {
     handleSubmit,
@@ -40,7 +42,8 @@ const Exprience = ({ createExperience, workExperience, deleteExperience }) => {
     // validationSchema: experienceFormSchema,
     onSubmit: async (values, { resetForm }) => {
       values.skills = await transformArray(values, 'skills');
-      await createExperience(values);
+
+      await createExp(values);
       setAction(false);
       toggleAlert('Vacancy created', 'success');
       resetForm();
@@ -52,7 +55,7 @@ const Exprience = ({ createExperience, workExperience, deleteExperience }) => {
       <ExperienceTable
         action={action}
         setAction={setAction}
-        workExperience={workExperience}
+        user={user}
         deleteExperience={deleteExperience}
       />
       <Modal action={action}>
