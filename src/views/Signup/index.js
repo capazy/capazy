@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // components
-import { RegisterHeader } from '../../components';
+// import { RegisterHeader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -14,15 +15,24 @@ import { signupFormSchema } from '../../utils/formikSchemas';
 const SignUp = () => {
   const { signup, user } = useContext(UserContext);
 
-  const { handleSubmit, handleChange, values, errors, touched } = useFormik({
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    touched,
+    setFieldValue,
+  } = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
+      reCaptcha: '',
     },
     validationSchema: signupFormSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      await delete values['reCaptcha'];
       signup(values);
     },
   });
@@ -37,7 +47,10 @@ const SignUp = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        <RegisterHeader title={'Signup'} />
+        {/* <RegisterHeader title={'Signup'} /> */}
+        <div className="mb-4">
+          <h1 className="text-2xl font-semibold">Signup</h1>
+        </div>
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
             <label className="form-label">First Name</label>
@@ -48,7 +61,9 @@ const SignUp = () => {
               placeholder="First Name"
               onChange={handleChange}
               value={values.firstName}
-              invalid={touched.firstName && errors.firstName ? true : undefined}
+              invalid={
+                touched.firstName && errors.firstName ? 'true' : undefined
+              }
             />
             <p className="form-error">{errors.firstName}</p>
           </div>
@@ -62,7 +77,7 @@ const SignUp = () => {
               placeholder="Last Name"
               onChange={handleChange}
               value={values.lastName}
-              invalid={touched.lastName && errors.lastName ? true : undefined}
+              invalid={touched.lastName && errors.lastName ? 'true' : undefined}
             />
             <p className="form-error">{errors.lastName}</p>
           </div>
@@ -76,7 +91,7 @@ const SignUp = () => {
             placeholder="Email"
             onChange={handleChange}
             value={values.email}
-            invalid={touched.email && errors.email ? true : undefined}
+            invalid={touched.email && errors.email ? 'true' : undefined}
           />
           <p className="form-error">{errors.email}</p>
         </div>
@@ -89,10 +104,14 @@ const SignUp = () => {
             placeholder="Password"
             onChange={handleChange}
             value={values.password}
-            invalid={touched.password && errors.password ? true : undefined}
+            invalid={touched.password && errors.password ? 'true' : undefined}
           />
           <p className="form-error">{errors.password}</p>
         </div>
+        <ReCAPTCHA
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+          onChange={(value) => setFieldValue('reCaptcha', value, false)}
+        />
         <div className="w-full mt-6">
           <button className="btn bg-brand-blue text-white" type="submit">
             Signup
