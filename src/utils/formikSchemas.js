@@ -19,6 +19,7 @@ export const signupFormSchema = Yup.object({
   password: Yup.string()
     .max(20, 'Must be 20 characters or less')
     .required('Required'),
+  reCaptcha: Yup.string().required('Required'),
 });
 
 export const userFormSchema = Yup.object({
