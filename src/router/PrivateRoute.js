@@ -10,7 +10,7 @@ const RouteWithLayout = (props) => {
       {...rest}
       render={(matchProps) =>
         !token ? (
-          <Redirect to="/login" />
+          <Redirect to="/signup" />
         ) : (
           <Layout>
             <Component {...matchProps} />

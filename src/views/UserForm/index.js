@@ -58,6 +58,7 @@ const UserForm = ({ match }) => {
       resetForm();
     },
   });
+  const { description, languages, additionalSkills, country } = values;
 
   if (sbUser && !sbUser.nickname) {
     updateSbProfile(
@@ -88,24 +89,20 @@ const UserForm = ({ match }) => {
     }
   }, [userData, isCreateMode, setFieldValue]);
 
-  if (userLoading) return <p>Loading....</p>;
-  if (!userData) return <p>Loading....</p>;
-
-  if (updateSuccess) {
-    return <Redirect push to={`/profile/${userData._id}`} />;
-  }
-  const { description, languages, additionalSkills, country } = values;
-
-  // const handleSkills = (e) => {
-  //   const { skills } = skillsData.find(
-  //     (item) => item.expertise.value === e.target.value
-  //   );
-  //   setSkillData(skills);
-  // };
-
   const image =
     (userData && userData.profilePictureUrl) ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
+
+  if (userLoading) return <p>Loading....</p>;
+  if (!userData) return <p>Loading....</p>;
+
+  // if (updateSuccess) {
+  //   return <Redirect push to={`/profile/${userData._id}`} />;
+  // }
+
+  if (updateSuccess) {
+    return <Redirect push to="/search" />;
+  }
 
   return (
     <div className="pt-5 w-full max-w-lg mx-auto my-auto">

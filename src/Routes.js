@@ -34,6 +34,8 @@ const Routes = () => {
 
   return (
     <Switch>
+      <Route exact path="/jobs" layout={Layout} component={Feed} />
+      <Route exact path="/search" layout={Layout} component={Search} />
       <Route exact path="/help" layout={Layout} component={Help} />
       <Route exact path="/loading" layout={NoLayout} component={Loading} />
       <Route
@@ -100,8 +102,6 @@ const Routes = () => {
         layout={Layout}
         component={Profile}
       />
-      <PrivateRoute exact path="/feed" layout={Layout} component={Feed} />
-      <PrivateRoute exact path="/search" layout={Layout} component={Search} />
       {/* 
       <Redirect
         to={{

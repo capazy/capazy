@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 // apollo
@@ -7,13 +7,11 @@ import { GET_PROJECTS } from '../../graphql/project';
 import { JOIN_VACANCY } from '../../graphql/vacancy';
 
 // components
-import { FeedCard, LoadingCard } from '../../components';
+import { FeedCard } from '../../components';
 
 // context
-import { UserContext } from '../../context/UserContext';
 
 const Feed = () => {
-  const { user } = useContext(UserContext);
   const [joinSuccess, setJoinSuccess] = useState(false);
   const [joinVacancy] = useMutation(JOIN_VACANCY, {
     update(_, { data }) {
@@ -39,7 +37,7 @@ const Feed = () => {
   if (joinSuccess) {
     return <Redirect push to="/joined-projects" />;
   }
-  if (!user) return <LoadingCard />;
+
   return (
     <Fragment>
       <div className="container max-w-3xl  my-8 mx-auto md:px-4 md:px-12">

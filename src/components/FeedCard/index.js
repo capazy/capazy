@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { ProjectContext } from '../../context/ProjectContext';
+import { UserContext } from '../../context/UserContext';
 
 // components
 import { Modal, ProjectCard } from '../../components';
 
 const FeedCard = ({ project, handleJoin }) => {
   const { update } = useContext(ProjectContext);
+  const { user } = useContext(UserContext);
   const [readMore, setReadMore] = useState(false);
+  const [openModal, setOpenModal] = useState();
+  const [redirect, setRedirect] = useState(false);
 
   const {
     description,
@@ -22,12 +26,14 @@ const FeedCard = ({ project, handleJoin }) => {
     creator: { _id, profilePictureUrl, firstName, lastName, companyName },
   } = project;
 
+  const image =
+    profilePictureUrl ||
+    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
+
   const date = new Date(updatedAt).toLocaleDateString('en', {
     month: 'long',
     day: 'numeric',
   });
-  // console.log('date', date);
-  // console.log('updated', updatedAt);
 
   const sumOfPostulated = (vacancies) => {
     let arr = [];
@@ -38,10 +44,23 @@ const FeedCard = ({ project, handleJoin }) => {
     return sum;
   };
 
-  const image =
-    profilePictureUrl ||
-    'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
-  const [openModal, setOpenModal] = useState();
+  const handleViewMore = () => {
+    if (user) {
+      setOpenModal(!openModal);
+      update({
+        projectId,
+        views: views + 1,
+        method: '$set',
+      });
+    } else {
+      setRedirect(true);
+    }
+  };
+
+  if (redirect) {
+    return <Redirect push to="/signup" />;
+  }
+
   return (
     <div className="inline-block mb-2 w-full box-border border border-gray-200">
       <div className="flex flex-shrink-0 p-4 pb-0 ">
@@ -135,14 +154,7 @@ const FeedCard = ({ project, handleJoin }) => {
                   <div>
                     <button
                       className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
-                      onClick={() => {
-                        setOpenModal(!openModal);
-                        update({
-                          projectId,
-                          views: views + 1,
-                          method: '$set',
-                        });
-                      }}
+                      onClick={handleViewMore}
                     >
                       view more
                     </button>
