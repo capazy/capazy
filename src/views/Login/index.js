@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 // components
-// import { RegisterHeader } from '../../components';
+import { RegisterHeader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -35,10 +35,10 @@ const Login = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        {/* <RegisterHeader title={'Login'} /> */}
-        <div className="mb-4">
+        <RegisterHeader title={'Login'} />
+        {/* <div className="mb-4">
           <h1 className="text-2xl font-semibold">Login</h1>
-        </div>
+        </div> */}
         <div className="mb-4">
           <label className="form-label" htmlFor="Email">
             Email

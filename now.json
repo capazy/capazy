@@ -3,7 +3,8 @@
     "env": {
       "REACT_APP_APOLLO_API_URI": "@apollo-api-uri",
       "REACT_APP_SENDBIRD_APP_ID": "@sendbird-app-id",
-      "REACT_APP_RECAPTCHA_SITE_KEY": "@recaptcha-site-key"
+      "REACT_APP_RECAPTCHA_SITE_KEY": "@recaptcha-site-key",
+      "REACT_APP_GOOGLE_CLIENT_ID": "@google-client-id"
     }
   }
 }

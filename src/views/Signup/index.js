@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
+// import axios from 'axios';
 
 // components
-// import { RegisterHeader } from '../../components';
+import { RegisterHeader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -21,18 +22,17 @@ const SignUp = () => {
     values,
     errors,
     touched,
-    setFieldValue,
+    // setFieldValue,
   } = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      reCaptcha: '',
+      // reCaptcha: '',
     },
     validationSchema: signupFormSchema,
-    onSubmit: async (values) => {
-      await delete values['reCaptcha'];
+    onSubmit: (values) => {
       signup(values);
     },
   });
@@ -47,10 +47,10 @@ const SignUp = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        {/* <RegisterHeader title={'Signup'} /> */}
-        <div className="mb-4">
+        <RegisterHeader title={'Signup'} />
+        {/* <div className="mb-4">
           <h1 className="text-2xl font-semibold">Signup</h1>
-        </div>
+        </div> */}
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
             <label className="form-label">First Name</label>
@@ -108,10 +108,10 @@ const SignUp = () => {
           />
           <p className="form-error">{errors.password}</p>
         </div>
-        <ReCAPTCHA
+        {/* <ReCAPTCHA
           sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
           onChange={(value) => setFieldValue('reCaptcha', value, false)}
-        />
+        /> */}
         <div className="w-full mt-6">
           <button className="btn bg-brand-blue text-white" type="submit">
             Signup

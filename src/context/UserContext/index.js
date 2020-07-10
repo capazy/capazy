@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import {
   CREATE_USER,
@@ -155,7 +155,7 @@ const UserProvider = (props) => {
   // logout
   const logout = async () => {
     try {
-      await axios.get('/api/logout');
+      // await axios.get('/api/logout');
       dispatch({ type: 'LOGOUT' });
       window.location.href = '/';
     } catch (error) {
