@@ -51,7 +51,7 @@ export const userFormSchema = Yup.object({
 
 export const projectFormSchema = Yup.object({
   title: Yup.string().required(),
-  description: Yup.string().required(),
+  // description: Yup.string().required(),
   type: Yup.string().required(),
   startDate: Yup.string().required(),
   endDate: Yup.string().required(),

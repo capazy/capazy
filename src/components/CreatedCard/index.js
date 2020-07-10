@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 const CreatedCard = ({
   project: {
@@ -70,7 +71,7 @@ const CreatedCard = ({
                 </div>
               </div>
               <div>
-                <p className="text-gray-700 text-base">{description}</p>
+                <p className="text-gray-700 text-base">{parse(description)}</p>
               </div>
             </div>
           </div>

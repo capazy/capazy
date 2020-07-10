@@ -45,6 +45,7 @@ export const UPDATE_USER = gql`
     $profilePictureUrl: String
     $workExperience: [ExperienceInput]
     $education: [EducationInput]
+    $role: String
   ) {
     updateUser(
       userInput: {
@@ -61,6 +62,7 @@ export const UPDATE_USER = gql`
         profilePictureUrl: $profilePictureUrl
         workExperience: $workExperience
         education: $education
+        role: $role
       }
     ) {
       _id
@@ -76,6 +78,7 @@ export const UPDATE_USER = gql`
       companyDepartment
       country
       profilePictureUrl
+      role
       education {
         _id
         degree
@@ -111,6 +114,7 @@ export const GET_USER = gql`
       country
       additionalSkills
       profilePictureUrl
+      role
       education {
         _id
         degree
@@ -143,6 +147,7 @@ export const GET_USERS = gql`
       companyName
       companyDepartment
       country
+      role
       education {
         _id
         degree
@@ -176,6 +181,22 @@ export const GET_USER_BY_ID = gql`
       companyDepartment
       country
       profilePictureUrl
+      role
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
     }
   }
 `;

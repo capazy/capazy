@@ -21,6 +21,8 @@ import {
   Job,
   Loading,
   Help,
+  CreatedProjects,
+  JoinedProjects,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
@@ -59,6 +61,18 @@ const Routes = () => {
         path="/project/create"
         layout={Layout}
         component={Project}
+      />
+      <PrivateRoute
+        exact
+        path="/joined-projects"
+        layout={Layout}
+        component={JoinedProjects}
+      />
+      <PrivateRoute
+        exact
+        path="/created-projects"
+        layout={Layout}
+        component={CreatedProjects}
       />
       <PrivateRoute exact path="/job/create" layout={Layout} component={Job} />
       <PrivateRoute

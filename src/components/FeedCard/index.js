@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-
+import parse from 'html-react-parser';
 import { ProjectContext } from '../../context/ProjectContext';
 
 // components
@@ -70,7 +70,7 @@ const FeedCard = ({ project, handleJoin }) => {
         <h1 className="font-semibold text-xl">{title}</h1>
         {description.length > 200 && !readMore ? (
           <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
-            {description.substr(0, 200)}...{' '}
+            {parse(description.substr(0, 200))}...{' '}
             <span>
               <button
                 className="text-brand-blue"
@@ -82,7 +82,7 @@ const FeedCard = ({ project, handleJoin }) => {
           </p>
         ) : (
           <p className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
-            {description}{' '}
+            {parse(description)}{' '}
             <span>
               {description.length > 200 && (
                 <button
