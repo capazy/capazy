@@ -13,13 +13,15 @@ require('dotenv-flow').config();
 
 // google analytics
 const trackingId = process.env.REACT_APP_GOOGLE_ANALYTICS;
+
 ReactGA.initialize(trackingId);
 const history = createBrowserHistory();
+
 ReactGA.pageview(window.location.pathname + window.location.search);
-// history.listen(location => {
-//   ReactGA.set({ page: location.pathname });
-//   ReactGA.pageview(location.pathname);
-// });
+history.listen((location) => {
+  ReactGA.set({ page: location.pathname });
+  ReactGA.pageview(location.pathname);
+});
 
 const App = () => {
   const { getCurrentUser, user } = useContext(UserContext);

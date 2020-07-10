@@ -63,7 +63,7 @@ const Project = (props) => {
 
   return (
     <Fragment>
-      <div className="max-w-lg mx-auto px-2 mt-6">
+      <div className="max-w-2xl mx-auto px-2 mt-6">
         <StepWizard transitions={'none'}>
           <ProjectForm
             setProjectId={setProjectId}

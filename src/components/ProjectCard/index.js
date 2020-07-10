@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import parse from 'html-react-parser';
 
 const ProjectCard = ({
   project: {
@@ -45,7 +46,9 @@ const ProjectCard = ({
 
       <div className="py-4 px-4">
         <h1 className="text-md font-semibold text-gray-800">{type}</h1>
-        <p className="py-2 text-sm text-gray-700 border-b">{description}</p>
+        <p className="py-2 text-sm text-gray-700 border-b">
+          {parse(description)}
+        </p>
         <div className="flex justify-around my-2 border-b">
           <div className="">
             <h2 className="text-sm font-semibold text-gray-800 leading-none">
@@ -92,31 +95,62 @@ const ProjectCard = ({
         {/* TABLE */}
         <div className=" mx-auto">
           <div className="bg-white rounded my-2 w-full">
-            <h1 className="text-md font-semibold text-gray-800">Vacancies</h1>
+            <h1 className="text-md font-semibold text-gray-800">Jobs</h1>
             <table className="text-left border-collapse table-fixed w-full ">
               <tbody className="w-full">
                 {/* <div className="w-full"> */}
                 {vacancies.map((vacancy) => (
                   <tr key={vacancy._id} className=" ">
                     <td className="border-b border-grey-light w-1/2 px-1 py-2 ">
-                      <span className="w-full py-3  ">
-                        <p className="text-gray-800 text-sm">
-                          <strong>{vacancy.title}</strong>
-                        </p>
+                      <p className="text-gray-800 text-sm">
+                        <strong>{vacancy.title}</strong>
+                      </p>
+                      <span className="flex py-1">
                         {vacancy.skills.map((skill, i) => (
-                          <p
-                            key={skill[i]}
-                            className="text-xs text-gray-500 font-medium"
-                          >
-                            {skill},
-                          </p>
+                          <span className="">
+                            <p
+                              key={skill[i]}
+                              className="text-xs text-gray-500 font-medium "
+                            >
+                              {skill},
+                            </p>
+                          </span>
                         ))}
                       </span>
+                      <div className="flex">
+                        <span className="w-1/2 py-1 px-0 border-b border-grey-light my-auto mx-auto">
+                          {!vacancy.selectedUser._id ? (
+                            <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                              open
+                            </span>
+                          ) : (
+                            <span className="inline-block bg-yellow-400 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                              closed
+                            </span>
+                          )}
+                        </span>
+                        <span className="w-1/2 py-1  border-b border-grey-light">
+                          {userAlreadyApplied(vacancy) ? (
+                            <div className="flex flex-shrink-0 text-xs items-center pr-2">
+                              <div className="bg-green-200 text-green-700 px-2 py-1 rounded-r">
+                                Already applied
+                              </div>
+                            </div>
+                          ) : vacancy.selectedUser._id ? null : (
+                            <button
+                              onClick={() => handleJoin(vacancy._id)}
+                              className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
+                            >
+                              Apply
+                            </button>
+                          )}
+                        </span>
+                      </div>
                       <p className="text-gray-800 text-sm">
-                        {vacancy.description}
+                        {parse(vacancy.description)}
                       </p>
                     </td>
-                    <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
+                    {/* <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
                       {!vacancy.selectedUser._id ? (
                         <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
                           open
@@ -142,7 +176,7 @@ const ProjectCard = ({
                           Apply
                         </button>
                       )}
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

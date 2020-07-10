@@ -108,7 +108,7 @@ const UserForm = ({ match }) => {
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
 
   return (
-    <div className="pt-5 w-full max-w-md mx-auto my-auto">
+    <div className="pt-5 w-full max-w-lg mx-auto my-auto">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}

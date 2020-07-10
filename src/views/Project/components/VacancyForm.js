@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { useFormik } from 'formik';
 
 // components
-import { SelectMulti, TeamTable, Modal } from '../../../components';
+import { SelectMulti, TeamTable, Modal, TextEditor } from '../../../components';
 
 // utils
 import { transformArray } from '../../../utils/transformArray';
@@ -102,7 +102,7 @@ const VacancyForm = (props) => {
 
               <div className="mb-4 ">
                 <label className="form-label">Description</label>
-                <textarea
+                {/* <textarea
                   id="description"
                   rows="3"
                   cols="2"
@@ -114,7 +114,11 @@ const VacancyForm = (props) => {
                     touched.description && errors.description ? true : undefined
                   }
                 ></textarea>
-                <p className="form-error">{errors.description}</p>
+                <p className="form-error">{errors.description}</p> */}
+                <TextEditor
+                  setFieldValue={setFieldValue}
+                  description={description}
+                />
               </div>
 
               <div className="mb-4">

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
-
 // components
 
 // utils
 import { projectFormSchema } from '../../../utils/formikSchemas';
+import { TextEditor } from '../../../components';
 
 const projectTypes = ['One-Time', 'Ongoing', 'Complex'];
 
@@ -32,6 +32,7 @@ const ProjectForm = (props) => {
       if (!projectId) {
         await create(values);
       } else {
+        // values.description = content;
         values.projectId = projectId;
         values.method = '$set';
         await update(values);
@@ -52,21 +53,22 @@ const ProjectForm = (props) => {
   const { title, description, startDate, endDate } = values;
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-2xl">
       <h1 className="text-lg font-semibold pt-2 mb-4">
         Step 1 of 3: Project info
       </h1>
+
       <form
         className="bg-white shadow-md rounded px-8 py-6 mb-4"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
-          <label className="form-label">Title</label>
+          <label className="form-label">Company Name</label>
           <input
             className="form-input"
             id="title"
             type="text"
-            placeholder="Title"
+            placeholder="Capazy..."
             onChange={handleChange}
             value={title}
             invalid={touched.title && errors.title ? 'true' : 'false'}
@@ -75,7 +77,7 @@ const ProjectForm = (props) => {
         </div>
         <div className="mb-4 ">
           <label className="form-label">Description</label>
-          <textarea
+          {/* <textarea
             id="description"
             rows="10"
             cols="10"
@@ -87,7 +89,9 @@ const ProjectForm = (props) => {
               touched.description && errors.description ? 'true' : 'false'
             }
           ></textarea>
-          <p className="form-error">{errors.description}</p>
+          <p className="form-error">{errors.description}</p> */}
+
+          <TextEditor setFieldValue={setFieldValue} description={description} />
         </div>
         <label className="form-label">Type</label>
         <div className="mb-4 inline-block relative w-full">
