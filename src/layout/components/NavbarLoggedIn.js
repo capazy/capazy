@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import Alert from '../../components/Alert';
 import useOutsideClick from '../../utils/useOutsideClik';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const NavbarLoggedIn = () => {
   const { logout, user } = useContext(UserContext);
-
+  const { resetProject } = useContext(ProjectContext);
   const [isOpen, setOpen] = useState(false);
   const [isOpenLogout, setOpenLogout] = useState(false);
   const ref = useRef();
@@ -24,59 +25,61 @@ const NavbarLoggedIn = () => {
     user.profilePictureUrl ||
     'https://res.cloudinary.com/dpnlmwgxh/image/upload/v1590759814/Main/avatar_qwrlq9.png';
 
-  // const links = () => (
-  //   <div
-  //     className="flex-grow max-w-screen-lg lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
-  //     id="nav-content"
-  //   >
-  //     <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
-  //       <li className="mx-6 my-2 md:my-0">
-  //         <Link
-  //           to="/search"
-  //           className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
-  //         >
-  //           <i className="fa fa-envelope fa-fw"></i>
-  //           <span className="md:pb-0 text-sm">Search</span>
-  //         </Link>
-  //       </li>
-  //       <li className="mx-6 my-2 md:my-0">
-  //         <Link
-  //           to="/joined-projects"
-  //           className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
-  //         >
-  //           <i className="fa fa-envelope fa-fw"></i>
-  //           <span className="md:pb-0 text-sm">My feed</span>
-  //         </Link>
-  //       </li>
-  //       <li className="mx-6 my-2 md:my-0">
-  //         <Link
-  //           to="/created-projects"
-  //           className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
-  //         >
-  //           <i className="fa fa-envelope fa-fw"></i>
-  //           <span className="md:pb-0 text-sm">Posted projects</span>
-  //         </Link>
-  //       </li>
+  const links = () => (
+    <div
+      className="flex-grow max-w-screen-lg lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20"
+      id="nav-content"
+    >
+      <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+        <li className="mx-6 my-2 md:my-0">
+          <Link
+            to="/feed"
+            className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
+          >
+            <i className="fa fa-envelope fa-fw"></i>
+            <span className="md:pb-0 text-sm">Feed</span>
+          </Link>
+        </li>
+        <li className="mx-6 my-2 md:my-0">
+          <Link
+            to="/joined-projects"
+            className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
+          >
+            <i className="fa fa-envelope fa-fw"></i>
+            <span className="md:pb-0 text-sm">My feed</span>
+          </Link>
+        </li>
+        {user.role !== 'user' && (
+          <li className="mx-6 my-2 md:my-0">
+            <Link
+              to="/created-projects"
+              className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
+            >
+              <i className="fa fa-envelope fa-fw"></i>
+              <span className="md:pb-0 text-sm">Posted Jobs</span>
+            </Link>
+          </li>
+        )}
 
-  //       <li className="md:hidden mx-6 my-2 md:my-0">
-  //         <Link
-  //           to="/project/create"
-  //           className=" block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
-  //         >
-  //           <button
-  //             className="btn-square bg-brand-blue text-white"
-  //             onClick={() => {
-  //               resetProject();
-  //               setOpen(false);
-  //             }}
-  //           >
-  //             Post a Project
-  //           </button>
-  //         </Link>
-  //       </li>
-  //     </ul>
-  //   </div>
-  // );
+        <li className="md:hidden mx-6 my-2 md:my-0">
+          <Link
+            to="/project/create"
+            className=" block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
+          >
+            <button
+              className="btn-square bg-brand-blue text-white"
+              onClick={() => {
+                resetProject();
+                setOpen(false);
+              }}
+            >
+              Post a Project
+            </button>
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
 
   return (
     <div
@@ -93,22 +96,24 @@ const NavbarLoggedIn = () => {
                 className="h-12 md:h-14 text-left -ml-2 -mb-2 md:mb-1 "
               />
             </Link>
-            {/* <div className="hidden lg:block my-auto">{links()}</div> */}
+            <div className="hidden lg:block my-auto">{links()}</div>
           </div>
 
           <div className="w-1/2 md:w-1/2 pr-0 my-auto">
             <div className="flex relative inline-block float-right">
-              {/* <Link
-                to="/project/create"
-                className="hidden lg:block mr-5 my-auto md:block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
-              >
-                <button
-                  className="btn-square bg-brand-blue text-white mx-2"
-                  onClick={() => resetProject()}
+              {user.role !== 'user' && (
+                <Link
+                  to="/project/create"
+                  className="hidden lg:block mr-5 my-auto md:block py-1 md:py-1 align-middle text-grey no-underline hover:text-black border-white hover:border-red"
                 >
-                  Post a Project
-                </button>
-              </Link> */}
+                  <button
+                    className="btn-square bg-brand-blue text-white mx-2"
+                    onClick={() => resetProject()}
+                  >
+                    Post a Job
+                  </button>
+                </Link>
+              )}
               <div className="relative text-sm my-auto">
                 <button
                   id="userButton"

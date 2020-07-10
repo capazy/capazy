@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import ProjectCard from '../ProjectCard';
 import { Link } from 'react-router-dom';
-
+import parse from 'html-react-parser';
 const JoinedCard = ({
   vacancy: {
     title: vacancyTitle,
@@ -60,12 +60,14 @@ const JoinedCard = ({
             </span>
           )}
         </div>
-        <p className="text-gray-700 text-base mt-2">{vacancyDescription}</p>
+        <p className="text-gray-700 text-base mt-2">
+          {parse(vacancyDescription)}
+        </p>
 
         <div className="border-t mt-4">
           <div className="mb-2">
             <p className="text-gray-700 text-base mt-2">
-              Project:{' '}
+              Company:{' '}
               <span>
                 {' '}
                 <button onClick={() => setOpenModal(true)}>
@@ -78,7 +80,7 @@ const JoinedCard = ({
           </div>
 
           <div className="mb-2">
-            <p className="text-gray-700 text-base">{description}</p>
+            {/* <p className="text-gray-700 text-base">{description}</p> */}
           </div>
 
           <div className="flex justify-left mb-2">
@@ -102,7 +104,7 @@ const JoinedCard = ({
 
           <div className="mb-2">
             <p className="text-gray-700 text-base">
-              Contact:{' '}
+              Recruiter:{' '}
               <span>
                 {' '}
                 <Link to={`/profile/${creatorId}`}>
