@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
+import React, { useContext, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import parse from 'html-react-parser';
+
+// context
+import { UserContext } from '../../context/UserContext';
 
 const ProjectCard = ({
   project: {
@@ -16,20 +19,26 @@ const ProjectCard = ({
   },
   handleJoin,
 }) => {
-  const {
-    user: { _id: userId },
-  } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const [redirect, setRedirect] = useState(false);
 
   const userAlreadyApplied = (vacancy) => {
-    let result = vacancy.postulatedUsers.find((user) => user._id === userId);
+    let result = vacancy.postulatedUsers.find(
+      (postulatedUser) => postulatedUser._id === user._id
+    );
     return result;
   };
 
+  const handleNoLogin = () => {
+    setRedirect(true);
+  };
+
+  if (redirect) {
+    return <Redirect push to="/signup" />;
+  }
+
   return (
-    <div
-      className="bg-white shadow-md rounded-lg overflow-hidden my-2"
-      // style={{ height: '50vh' }}
-    >
+    <div className="bg-white shadow-md rounded-lg overflow-hidden my-2">
       {projectPictureUrl && (
         <img
           className="w-full h-32 object-cover object-center"
@@ -98,7 +107,6 @@ const ProjectCard = ({
             <h1 className="text-md font-semibold text-gray-800">Jobs</h1>
             <table className="text-left border-collapse table-fixed w-full ">
               <tbody className="w-full">
-                {/* <div className="w-full"> */}
                 {vacancies.map((vacancy) => (
                   <tr key={vacancy._id} className=" ">
                     <td className="border-b border-grey-light w-1/2 px-1 py-2 ">
@@ -117,66 +125,57 @@ const ProjectCard = ({
                           </span>
                         ))}
                       </span>
-                      <div className="flex">
-                        <span className="w-1/2 py-1 px-0 border-b border-grey-light my-auto mx-auto">
-                          {!vacancy.selectedUser._id ? (
+                      {user ? (
+                        <div className="flex">
+                          <span className="w-1/2 py-1 px-0 border-b border-grey-light my-auto mx-auto">
+                            {!vacancy.selectedUser._id ? (
+                              <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                                open
+                              </span>
+                            ) : (
+                              <span className="inline-block bg-yellow-400 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
+                                closed
+                              </span>
+                            )}
+                          </span>
+                          <span className="w-1/2 py-1  border-b border-grey-light">
+                            {userAlreadyApplied(vacancy) ? (
+                              <div className="flex flex-shrink-0 text-xs items-center pr-2">
+                                <div className="bg-green-200 text-green-700 px-2 py-1 rounded-r">
+                                  Already applied
+                                </div>
+                              </div>
+                            ) : vacancy.selectedUser._id ? null : (
+                              <button
+                                onClick={() => handleJoin(vacancy._id)}
+                                className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
+                              >
+                                Apply
+                              </button>
+                            )}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex">
+                          <span className="w-1/2 py-1 px-0 border-b border-grey-light my-auto mx-auto">
                             <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
                               open
                             </span>
-                          ) : (
-                            <span className="inline-block bg-yellow-400 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
-                              closed
-                            </span>
-                          )}
-                        </span>
-                        <span className="w-1/2 py-1  border-b border-grey-light">
-                          {userAlreadyApplied(vacancy) ? (
-                            <div className="flex flex-shrink-0 text-xs items-center pr-2">
-                              <div className="bg-green-200 text-green-700 px-2 py-1 rounded-r">
-                                Already applied
-                              </div>
-                            </div>
-                          ) : vacancy.selectedUser._id ? null : (
+                          </span>
+                          <span className="w-1/2 py-1  border-b border-grey-light">
                             <button
-                              onClick={() => handleJoin(vacancy._id)}
+                              onClick={handleNoLogin}
                               className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
                             >
                               Apply
                             </button>
-                          )}
-                        </span>
-                      </div>
+                          </span>
+                        </div>
+                      )}
                       <p className="text-gray-800 text-sm">
                         {parse(vacancy.description)}
                       </p>
                     </td>
-                    {/* <td className="w-1/4 py-1 px-0 border-b border-grey-light my-auto mx-auto">
-                      {!vacancy.selectedUser._id ? (
-                        <span className="inline-block bg-green-200 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
-                          open
-                        </span>
-                      ) : (
-                        <span className="inline-block bg-yellow-400 px-2 p-0 mt-4 text-sm rounded-full text-gray-700 mr-1">
-                          closed
-                        </span>
-                      )}
-                    </td>
-                    <td className="w-1/4 py-1  border-b border-grey-light">
-                      {userAlreadyApplied(vacancy) ? (
-                        <div className="flex flex-shrink-0 text-xs items-center pr-2">
-                          <div className="bg-green-200 text-green-700 px-2 py-1 rounded-r">
-                            Already applied
-                          </div>
-                        </div>
-                      ) : vacancy.selectedUser._id ? null : (
-                        <button
-                          onClick={() => handleJoin(vacancy._id)}
-                          className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
-                        >
-                          Apply
-                        </button>
-                      )}
-                    </td> */}
                   </tr>
                 ))}
               </tbody>
