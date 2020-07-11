@@ -12,7 +12,7 @@ const Header = () => {
             Hiring remote employees is becoming mainstream. Geography is no
             longer a barrier
           </p>
-          <Link to="/signup">
+          <Link to="/jobs">
             <button className="btn-rounded bg-brand-blue text-white my-6 py-4 px-8 z-0 ">
               Get started
             </button>
