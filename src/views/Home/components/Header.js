@@ -5,16 +5,16 @@ const Header = () => {
     <div className="pt-5">
       <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-          <h1 className="my-4 text-5xl font-bold leading-tight">
-            Changing how companies source talent
+          <h1 className="my-4 text-5xl font-bold leading-tight text-gray-800">
+            Work Remotely for a Company in North America
           </h1>
-          <p className="leading-normal text-2xl mb-8">
-            Hiring remote employees is becoming mainstream. Geography is no
-            longer a barrier
+          <p className="leading-normal text-2xl mb-8 text-gray-800">
+            You only need 3 things: to know english, to have a computer and to
+            really want to work!
           </p>
           <Link to="/jobs">
             <button className="btn-rounded bg-brand-blue text-white my-6 py-4 px-8 z-0 ">
-              Get started
+              See all jobs
             </button>
           </Link>
         </div>
