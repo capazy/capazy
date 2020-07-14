@@ -16,7 +16,11 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
     description,
     skills,
     postulatedUsers,
-    project: { _id: projectId, views },
+    project: {
+      _id: projectId,
+      views,
+      creator: { _id: creatorId, firstName, lastName },
+    },
     project,
   } = vacancy;
 
@@ -107,6 +111,15 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
             {skills.map((skill) => `#${skill} `)}
           </span>
         </p>
+        <p className="font-semibold text-gray-700">
+          Retruiter:
+          <span className="text-brand-blue text-sm">
+            <Link to={`profile/${creatorId}`}>
+              {firstName} {lastName}{' '}
+            </Link>
+          </span>
+        </p>
+
         {/* <p className="font-semibold text-gray-700">
           Vacancies ({vacancies.length}):
           <span className="text-brand-blue text-sm">
