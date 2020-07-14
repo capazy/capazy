@@ -12,6 +12,7 @@ export { default as TeamTable } from './TeamTable';
 export { default as Modal } from './Modal';
 export { default as NoData } from './NoData';
 export { default as FeedCard } from './FeedCard';
+export { default as VacancyCard } from './VacancyCard';
 export { default as SearchCard } from './SearchCard';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ChatLayout } from './ChatLayout';

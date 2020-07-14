@@ -3,8 +3,8 @@ import React from 'react';
 const Why = () => {
   return (
     <div>
-      <section className="bg-white border-b py-8">
-        <div className="container mx-auto flex flex-wrap pt-4 pb-12">
+      <section className="bg-white border-b">
+        <div className="container mx-auto flex flex-wrap py-4">
           <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
             For the Organization
           </h1>
@@ -19,7 +19,8 @@ const Why = () => {
                   Perfect Candidate for the Position
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Access candidates for the position worldwide. Ensure finding the perfect skill set for the position 
+                  Access candidates for the position worldwide. Ensure finding
+                  the perfect skill set for the position
                 </p>
               </span>
             </div>
@@ -39,7 +40,8 @@ const Why = () => {
                   Access the Best Talent Worlwide
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Allow your organzation to become a global enterprise by recruting humman capital worldwide 
+                  Allow your organzation to become a global enterprise by
+                  recruting humman capital worldwide
                 </p>
               </span>
             </div>
@@ -62,7 +64,8 @@ const Why = () => {
                   Cost Reduction
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  Save all the extra costs associated with a local employee, including but not limited to office space and benefits 
+                  Save all the extra costs associated with a local employee,
+                  including but not limited to office space and benefits
                 </p>
               </a>
             </div>

@@ -77,3 +77,51 @@ export const SELECT_USER = gql`
     }
   }
 `;
+
+export const GET_VACANCIES = gql`
+  {
+    vacancies {
+      _id
+      title
+      description
+      experience
+      skills
+      postulatedUsers {
+        _id
+      }
+      project {
+        _id
+        views
+        title
+        description
+        type
+        startDate
+        endDate
+        projectPictureUrl
+        files {
+          _id
+          name
+          url
+        }
+        creator {
+          _id
+          firstName
+          lastName
+        }
+        vacancies {
+          _id
+          title
+          experience
+          description
+          skills
+          selectedUser {
+            _id
+          }
+          postulatedUsers {
+            _id
+          }
+        }
+      }
+    }
+  }
+`;
