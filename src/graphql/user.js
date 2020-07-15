@@ -46,9 +46,13 @@ export const UPDATE_USER = gql`
     $workExperience: [ExperienceInput]
     $education: [EducationInput]
     $role: String
+    $method: String
+    $files: [FileInput]
   ) {
     updateUser(
       userInput: {
+        method: $method
+        files: $files
         firstName: $firstName
         lastName: $lastName
         description: $description
@@ -94,6 +98,11 @@ export const UPDATE_USER = gql`
         description
         skills
       }
+      files {
+        _id
+        name
+        url
+      }
     }
   }
 `;
@@ -129,6 +138,11 @@ export const GET_USER = gql`
         yearsOfExperience
         description
         skills
+      }
+      files {
+        _id
+        name
+        url
       }
     }
   }
@@ -470,6 +484,47 @@ export const SEND_HELP_EMAIL = gql`
   mutation sendEmail($email: String!, $message: String!) {
     sendEmail(email: $email, message: $message) {
       status
+    }
+  }
+`;
+
+export const DELETE_USER_FILE = gql`
+  mutation deleteUserFile($fileId: ID!) {
+    deleteUserFile(fileId: $fileId) {
+      _id
+      firstName
+      lastName
+      description
+      skills
+      expertise
+      additionalSkills
+      profilePictureUrl
+      languages
+      companyName
+      companyDepartment
+      country
+      profilePictureUrl
+      role
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+      files {
+        _id
+        name
+        url
+      }
     }
   }
 `;
