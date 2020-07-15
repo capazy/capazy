@@ -11,6 +11,7 @@ import {
   CREATE_EDUCATION,
   DELETE_EDUCATION,
   SEND_HELP_EMAIL,
+  DELETE_USER_FILE,
 } from '../../graphql/user';
 import { userReducer } from '../../reducers/userReducer';
 
@@ -107,6 +108,13 @@ const UserProvider = (props) => {
   const [deleteEducation] = useMutation(DELETE_EDUCATION, {
     update(_, { data }) {
       dispatch({ type: 'UPDATE_USER', payload: data.deleteEducation });
+    },
+  });
+
+  // delete user file
+  const [deleteUserFile] = useMutation(DELETE_USER_FILE, {
+    update(_, { data: { deleteUserFile: user } }) {
+      dispatch({ type: 'UPDATE_USER', payload: user });
     },
   });
 
@@ -213,6 +221,15 @@ const UserProvider = (props) => {
     }
   };
 
+  // delete user file
+  const deleteFile = async (values) => {
+    try {
+      await deleteUserFile({ variables: values });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -232,6 +249,7 @@ const UserProvider = (props) => {
         createEdu,
         deleteEdu,
         sendHelpEmail,
+        deleteFile,
       }}
     >
       {props.children}

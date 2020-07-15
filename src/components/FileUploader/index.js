@@ -25,7 +25,11 @@ const FileUploader = ({ id, projectId, action, field }) => {
           [field.fileName]: file.name,
           [field.fileUrl]: await uploadTask.snapshot.ref.getDownloadURL(),
         };
-        action({ projectId, method: '$push', files: values });
+        if (projectId !== null) {
+          action({ projectId, method: '$push', files: values });
+        } else {
+          action({ method: '$push', files: values });
+        }
       }
     );
   };

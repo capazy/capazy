@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Redirect } from 'react-router-dom';
+import { firebaseApp } from '../../firebase';
 
 // components
-import { SelectMulti, PictureUploader } from '../../components';
+import { SelectMulti, PictureUploader, FileUploader } from '../../components';
 
 // context
 import { UserContext } from '../../context/UserContext';
@@ -23,7 +24,9 @@ import Exprience from './Exprience';
 import Education from './Education';
 
 const UserForm = ({ match }) => {
-  const { update, user: userData, userLoading } = useContext(UserContext);
+  const { update, user: userData, userLoading, deleteFile } = useContext(
+    UserContext
+  );
   const { sb, updateSbProfile, sbUser } = useContext(ChatContext);
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -53,6 +56,7 @@ const UserForm = ({ match }) => {
         values,
         'additionalSkills'
       );
+      values.method = '$set';
       await update(values);
       setUpdateSuccess(true);
       resetForm();
@@ -100,6 +104,14 @@ const UserForm = ({ match }) => {
   //   return <Redirect push to={`/profile/${userData._id}`} />;
   // }
 
+  const handleDelete = (fileId, fileName) => {
+    // const values = { projectId, fileId };
+    const storageRef = firebaseApp.storage().ref();
+    const fileRef = storageRef.child(fileName);
+    fileRef.delete();
+    deleteFile({ fileId });
+  };
+
   if (updateSuccess) {
     return <Redirect push to="/" />;
   }
@@ -110,34 +122,84 @@ const UserForm = ({ match }) => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
-        <div className="border-b-2 mb-2">
-          {/* PICTURE */}
-          <div className="mb-4">
-            <div className="text-center p-6  border-b">
-              <img
-                className="h-24 w-24 rounded-full mx-auto object-cover object-center"
-                src={image}
-                alt=""
+        {/* PICTURE */}
+        <div className="mb-4 border-b">
+          <div className="text-center p-6">
+            <img
+              className="h-24 w-24 rounded-full mx-auto object-cover object-center"
+              src={image}
+              alt=""
+            />
+            <div>
+              <button className="btn-small mt-3" type="button">
+                <label htmlFor="upload">Change profile picture</label>
+              </button>
+              <PictureUploader
+                id={'upload'}
+                action={update}
+                field={{
+                  fileName: 'profilePictureName',
+                  fileUrl: 'profilePictureUrl',
+                }}
               />
-              <div>
-                <button className="btn-small mt-3" type="button">
-                  <label htmlFor="upload">Change profile picture</label>
-                </button>
-                <PictureUploader
-                  id={'upload'}
-                  action={update}
-                  field={{
-                    fileName: 'profilePictureName',
-                    fileUrl: 'profilePictureUrl',
-                  }}
-                />
-              </div>
-              <p className="pt-2 text-lg font-semibold">
-                {userData && `${userData.firstName} ${userData.lastName}`}
-              </p>
             </div>
+            <p className="pt-2 text-lg font-semibold">
+              {userData && `${userData.firstName} ${userData.lastName}`}
+            </p>
           </div>
-          {/* COMPANY */}
+        </div>
+
+        {/* FILES */}
+        <div className="text-center mb-4 border-b">
+          <div className="mb-5">
+            <label
+              htmlFor="uploadFiles"
+              className="btn bg-blue-500 text-white my-3"
+            >
+              Upload your CV
+            </label>
+          </div>
+          <FileUploader
+            id={'uploadFiles'}
+            projectId={null}
+            action={update}
+            field={{
+              fileName: 'name',
+              fileUrl: 'url',
+            }}
+          />
+
+          <div className="mb-4">
+            {userData && userData.files && userData.files.length >= 1 ? (
+              <table>
+                <tbody>
+                  {userData.files.map((file) => (
+                    <tr key={file._id}>
+                      <th>
+                        <button
+                          className="btn-small bg-blue-500"
+                          type="button"
+                          onClick={() => handleDelete(file._id, file.name)}
+                        >
+                          X
+                        </button>
+                      </th>
+                      <th className="text-left">
+                        <a
+                          href={file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {file.name}
+                        </a>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : // <NoData text={"You don't have files yet"} />
+            null}
+          </div>
         </div>
 
         {/* PERSONAL */}
