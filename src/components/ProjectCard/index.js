@@ -150,6 +150,7 @@ const ProjectCard = ({
                                 onClick={() => handleJoin(vacancy._id)}
                                 className="inline-block tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 shadow-sm"
                               >
+                                {console.log(vacancy)}
                                 Apply
                               </button>
                             )}

@@ -21,3 +21,4 @@ export { default as ExperienceTable } from './ExperienceTable';
 export { default as EducationTable } from './EducationTable';
 export { default as RegisterHeader } from './RegisterHeader';
 export { default as TextEditor } from './TextEditor';
+export { default as ApplyButton } from './ApplyButton';

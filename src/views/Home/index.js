@@ -16,6 +16,7 @@ const Home = () => {
       <Why />
       {/* <CallToAction /> */}
       {/* <Categories /> */}
+
       <Vacancies />
     </Fragment>
   );

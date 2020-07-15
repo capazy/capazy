@@ -101,7 +101,7 @@ const UserForm = ({ match }) => {
   // }
 
   if (updateSuccess) {
-    return <Redirect push to="/search" />;
+    return <Redirect push to="/" />;
   }
 
   return (

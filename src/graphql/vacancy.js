@@ -86,6 +86,9 @@ export const GET_VACANCIES = gql`
       description
       experience
       skills
+      selectedUser {
+        _id
+      }
       postulatedUsers {
         _id
       }

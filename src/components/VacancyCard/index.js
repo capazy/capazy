@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { ProjectContext } from '../../context/ProjectContext';
 
 // components
 import { Modal, ProjectCard } from '../../components';
+import ApplyButton from '../ApplyButton';
 
 const VacancyCard = ({ vacancy, handleJoin }) => {
   const { update } = useContext(ProjectContext);
@@ -23,6 +24,9 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
     },
     project,
   } = vacancy;
+
+  //Apply button => logic in project card
+  //Style
 
   // const image =
   //   profilePictureUrl ||
@@ -51,8 +55,11 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
     });
   };
 
+  // if (!vacancy) {
+  //   return <p>Loading...</p>;
+  // }
   return (
-    <div className="inline-block mb-2 w-full box-border border border-gray-200">
+    <div className="inline-block mb-2 w-full border border-gray-200">
       {/* <div className="flex flex-shrink-0 p-4 pb-0 ">
         <Link to={`profile/${_id}`}>
           <div className="flex items-center">
@@ -75,22 +82,26 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
         </Link>
       </div> */}
 
-      <div className="pl-16">
-        <h1 className="font-semibold text-xl">{title}</h1>
+      <div className="p-4">
+        <h1 className="font-semibold text-xl mb-1">{title}</h1>
         {description.length > 200 && !readMore ? (
-          <span className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
-            {parse(description.substr(0, 200))}...{' '}
-            <span>
-              <button
-                className="text-brand-blue"
-                onClick={() => setReadMore(!readMore)}
-              >
-                read more
-              </button>
-            </span>
-          </span>
+          <Fragment>
+            <div className="">
+              <span className="text-base width-auto font-medium  text-gray-700">
+                {parse(description.substr(0, 200))}
+              </span>
+              <span>
+                <button
+                  className="text-brand-blue"
+                  onClick={() => setReadMore(!readMore)}
+                >
+                  ...read more
+                </button>
+              </span>
+            </div>
+          </Fragment>
         ) : (
-          <span className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700">
+          <span className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700 text-justify">
             {parse(description)}{' '}
             <span>
               {description.length > 200 && (
@@ -104,21 +115,24 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
             </span>
           </span>
         )}
-        <p className="font-semibold text-gray-700">
-          Skills:
-          <span className="text-brand-blue text-sm">
-            {' '}
-            {skills.map((skill) => `#${skill} `)}
-          </span>
-        </p>
-        <p className="font-semibold text-gray-700">
-          Retruiter:
-          <span className="text-brand-blue text-sm">
-            <Link to={`profile/${creatorId}`}>
-              {firstName} {lastName}{' '}
-            </Link>
-          </span>
-        </p>
+        <div className="border-t-2 my-2">
+          <p className="font-semibold text-gray-700 mt-2">
+            Skills:
+            <span className="text-brand-blue text-sm">
+              {' '}
+              {skills.map((skill) => `#${skill} `)}
+            </span>
+          </p>
+          <p className="font-semibold text-gray-700">
+            Retruiter:
+            <span className="text-brand-blue text-md">
+              <Link to={`profile/${creatorId}`}>
+                {' '}
+                {firstName} {lastName}{' '}
+              </Link>
+            </span>
+          </p>
+        </div>
 
         {/* <p className="font-semibold text-gray-700">
           Vacancies ({vacancies.length}):
@@ -140,7 +154,7 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
         <div className="flex">
           <div className="w-full">
             <div className="flex items-center">
-              <div className="flex-1 text-center py-2 my-4">
+              <div className="flex-1 text-center py-2 my-1">
                 <div className="flex justify-between items-center flex-row px-2 z-50 text-xs md:text-sm">
                   <div className="flex justify-left">
                     <p className="flex items-center text-gray-800 mr-4">
@@ -150,13 +164,22 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
                       {postulatedUsers.length} applicants
                     </p>
                   </div>
-                  <div>
+                  <div className="flex justify-right">
                     <button
-                      className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
+                      className=" bg-transparent text-blue-dark font-semibold  py px-2 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
                       onClick={handleViewMore}
                     >
                       View more
                     </button>
+                    <div>
+                      <ApplyButton vacancy={vacancy} />
+                      {/* <button
+                      className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
+                      onClick={handleViewMore}
+                      >
+                      View more
+                    </button> */}
+                    </div>
                   </div>
                 </div>
               </div>
