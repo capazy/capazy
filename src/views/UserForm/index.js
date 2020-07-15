@@ -16,7 +16,7 @@ import countriesData from '../../data/countriesData.json';
 import languagesData from '../../data/languagesData.json';
 import { transformArray } from '../../utils/transformArray';
 import { originalArray } from '../../utils/originalArray';
-// import { userFormSchema } from '../../utils/formikSchemas';
+import { userFormSchema } from '../../utils/formikSchemas';
 
 // components
 import Exprience from './Exprience';
@@ -46,7 +46,7 @@ const UserForm = ({ match }) => {
       country: '',
       additionalSkills: [],
     },
-    // validationSchema: userFormSchema,
+    validationSchema: userFormSchema,
     onSubmit: async (values, { resetForm }) => {
       values.languages = await transformArray(values, 'languages');
       values.additionalSkills = await transformArray(
@@ -227,9 +227,9 @@ const UserForm = ({ match }) => {
           <h1 className="text-gray-900 text-xl mb-1">Skills</h1>
           <div className="mb-4 ">
             <div className="w-full">
-              <label className="form-label" htmlFor="Email">
+              {/* <label className="form-label" htmlFor="Email">
                 Additional Expertise
-              </label>
+              </label> */}
               <div className="w-full ">
                 <SelectMulti
                   options={allSkillsData}

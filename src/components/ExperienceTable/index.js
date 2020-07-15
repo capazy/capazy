@@ -6,6 +6,7 @@ import { UserContext } from '../../context/UserContext';
 
 const ExperienceTable = ({ setAction, user: { workExperience } }) => {
   const { deleteExp } = useContext(UserContext);
+
   return (
     <Fragment>
       <div className="max-w-xl border-b-2">
@@ -15,8 +16,8 @@ const ExperienceTable = ({ setAction, user: { workExperience } }) => {
             <tbody>
               <tr className="border-b">
                 <th className="text-left p-1 px-2">Role</th>
+                <th className="text-left p-1 px-2">Description</th>
                 <th className="text-left p-1 px-2">Experience</th>
-                <th className="text-left p-1 px-2">Skills</th>
                 <th className="mx-auto p-1 px-2 text-gray-400">Action</th>
                 <th></th>
               </tr>
@@ -31,7 +32,10 @@ const ExperienceTable = ({ setAction, user: { workExperience } }) => {
                       <p className="bg-transparent">{exp.title}</p>
                     </td>
                     <td className="p-1 px-2">
-                      <p className="bg-transparent">{exp.experience}</p>
+                      <p className="bg-transparent">{exp.description}</p>
+                    </td>
+                    <td className="p-1 px-2">
+                      <p className="bg-transparent">{exp.yearsOfExperience}</p>
                     </td>
                     <td className="p-1 px-2">
                       {exp.skills.map((skill, i) => (
