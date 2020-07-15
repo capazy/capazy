@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 
 // utils
-import { transformArray } from '../../utils/transformArray';
+// import { transformArray } from '../../utils/transformArray';
 import toggleAlert from '../../utils/toggleAlert';
 // import allSkillsData from '../../data/allSkillsData.json';
 // import { experienceFormSchema } from '../../utils/formikSchemas';
@@ -21,7 +21,7 @@ const experienceOptions = [
   { value: '+5', label: '+5' },
 ];
 
-const Exprience = ({ workExperience, deleteExperience }) => {
+const Exprience = ({ deleteExperience }) => {
   const { createExp, user } = useContext(UserContext);
   const [action, setAction] = useState(false);
   const {
@@ -30,8 +30,8 @@ const Exprience = ({ workExperience, deleteExperience }) => {
     errors,
     touched,
     handleChange,
-    setFieldValue,
-    setFieldTouched,
+    // setFieldValue,
+    // setFieldTouched,
   } = useFormik({
     initialValues: {
       title: '',
@@ -50,7 +50,7 @@ const Exprience = ({ workExperience, deleteExperience }) => {
       resetForm();
     },
   });
-  const { title, description, companyName, skills } = values;
+  const { title, description, companyName } = values;
   return (
     <div>
       <ExperienceTable

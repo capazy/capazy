@@ -19,11 +19,11 @@ import { UserContext } from '../../context/UserContext';
 // context
 // import { UserContext } from '../../context/UserContext';
 
-const experienceOptions = [
-  { value: '1-3', label: '1-3' },
-  { value: '3-5', label: '3-5' },
-  { value: '+5', label: '+5' },
-];
+// const experienceOptions = [
+//   { value: '1-3', label: '1-3' },
+//   { value: '3-5', label: '3-5' },
+//   { value: '+5', label: '+5' },
+// ];
 
 const Education = () => {
   const { createEdu, user } = useContext(UserContext);
