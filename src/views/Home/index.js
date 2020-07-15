@@ -3,18 +3,21 @@ import React, { Fragment } from 'react';
 // components
 import Header from './components/Header';
 import Why from './components/Why';
-import CallToAction from './components/CallToAction';
-import Categories from './components/Categories';
-import How from './components/How';
+// import CallToAction from './components/CallToAction';
+// import Categories from './components/Categories';
+// import How from './components/How';
+import Vacancies from './components/Vacancies';
 
 const Home = () => {
   return (
     <Fragment>
       <Header />
-      <How />
+      {/* <How /> */}
       <Why />
-      <CallToAction />
-      <Categories />
+      {/* <CallToAction /> */}
+      {/* <Categories /> */}
+
+      <Vacancies />
     </Fragment>
   );
 };

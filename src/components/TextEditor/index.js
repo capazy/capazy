@@ -5,7 +5,7 @@ const TextEditor = ({ setFieldValue, description }) => {
   const editor = useRef(null);
   const config = {
     readonly: false,
-    height: 600,
+    // height: 600,
   };
   return (
     <div>
@@ -13,7 +13,7 @@ const TextEditor = ({ setFieldValue, description }) => {
         ref={editor}
         value={description}
         config={config}
-        tabIndex={2} // tabIndex of textarea
+        // tabIndex={2} // tabIndex of textarea
         onBlur={(newContent) => setFieldValue('description', newContent, false)}
         // onChange={(newContent) =>
         //   setFieldValue('description', newContent, false)

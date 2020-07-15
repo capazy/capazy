@@ -19,7 +19,7 @@ export const signupFormSchema = Yup.object({
   password: Yup.string()
     .max(20, 'Must be 20 characters or less')
     .required('Required'),
-  reCaptcha: Yup.string().required('Required'),
+  // reCaptcha: Yup.string().required('Required'),
 });
 
 export const userFormSchema = Yup.object({
@@ -79,12 +79,12 @@ export const experienceFormSchema = Yup.object({
   companyName: Yup.string().required(),
   description: Yup.string().required(),
 
-  skills: Yup.array()
-    .min(1, 'Pick at least 1 skill')
-    .of(
-      Yup.object().shape({
-        label: Yup.string().required(),
-        value: Yup.string().required(),
-      })
-    ),
+  // skills: Yup.array()
+  //   .min(1, 'Pick at least 1 skill')
+  //   .of(
+  //     Yup.object().shape({
+  //       label: Yup.string().required(),
+  //       value: Yup.string().required(),
+  //     })
+  //   ),
 });

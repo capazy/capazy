@@ -19,11 +19,11 @@ import { UserContext } from '../../context/UserContext';
 // context
 // import { UserContext } from '../../context/UserContext';
 
-const experienceOptions = [
-  { value: '1-3', label: '1-3' },
-  { value: '3-5', label: '3-5' },
-  { value: '+5', label: '+5' },
-];
+// const experienceOptions = [
+//   { value: '1-3', label: '1-3' },
+//   { value: '3-5', label: '3-5' },
+//   { value: '+5', label: '+5' },
+// ];
 
 const Education = () => {
   const { createEdu, user } = useContext(UserContext);
@@ -62,7 +62,7 @@ const Education = () => {
             Education
           </label>
           <div className="mb-4">
-            <label className="form-label">degree</label>
+            <label className="form-label">Degree</label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="degree"
@@ -76,7 +76,7 @@ const Education = () => {
           </div>
 
           <div className="mb-4">
-            <label className="form-label">Company Name</label>
+            <label className="form-label">School Name</label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="school"
@@ -90,22 +90,23 @@ const Education = () => {
           </div>
 
           <div className="mb-4 ">
-            <label className="form-label">Description</label>
-            <textarea
+            <label className="form-label">Field</label>
+            <input
               id="fieldOfStudy"
-              rows="3"
-              cols="2"
-              placeholder="Vacancy fieldOfStudy..."
+              type="text"
+              // rows="3"
+              // cols="2"
+              placeholder="Field"
               onChange={handleChange}
               value={fieldOfStudy}
               className="form-input"
               invalid={
                 touched.fieldOfStudy && errors.fieldOfStudy ? true : undefined
               }
-            ></textarea>
+            ></input>
             <p className="form-error">{errors.fieldOfStudy}</p>
           </div>
-
+          {/* 
           <div className="mb-4">
             <label className="form-label mt-0">Experience</label>
             <div className="inline-block relative w-full">
@@ -133,7 +134,7 @@ const Education = () => {
               </div>
             </div>
             <p className="text-red-500 text-xs italic">{errors.year}</p>
-          </div>
+          </div> */}
 
           <div className="flex items-center justify-end">
             <button

@@ -2,14 +2,15 @@ import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 
 // utils
-import { transformArray } from '../../utils/transformArray';
+// import { transformArray } from '../../utils/transformArray';
 import toggleAlert from '../../utils/toggleAlert';
-import allSkillsData from '../../data/allSkillsData.json';
+// import allSkillsData from '../../data/allSkillsData.json';
 // import { experienceFormSchema } from '../../utils/formikSchemas';
 
 // components
-import { ExperienceTable, Modal, SelectMulti } from '../../components';
+import { ExperienceTable, Modal } from '../../components';
 import { UserContext } from '../../context/UserContext';
+import { experienceFormSchema } from '../../utils/formikSchemas';
 
 // context
 // import { UserContext } from '../../context/UserContext';
@@ -20,7 +21,7 @@ const experienceOptions = [
   { value: '+5', label: '+5' },
 ];
 
-const Exprience = ({ workExperience, deleteExperience }) => {
+const Exprience = ({ deleteExperience }) => {
   const { createExp, user } = useContext(UserContext);
   const [action, setAction] = useState(false);
   const {
@@ -29,19 +30,19 @@ const Exprience = ({ workExperience, deleteExperience }) => {
     errors,
     touched,
     handleChange,
-    setFieldValue,
-    setFieldTouched,
+    // setFieldValue,
+    // setFieldTouched,
   } = useFormik({
     initialValues: {
       title: '',
       companyName: '',
       yearsOfExperience: '1-3 years',
       description: '',
-      skills: '',
+      // skills: '',
     },
-    // validationSchema: experienceFormSchema,
+    validationSchema: experienceFormSchema,
     onSubmit: async (values, { resetForm }) => {
-      values.skills = await transformArray(values, 'skills');
+      // values.skills = await transformArray(values, 'skills');
 
       await createExp(values);
       setAction(false);
@@ -49,7 +50,7 @@ const Exprience = ({ workExperience, deleteExperience }) => {
       resetForm();
     },
   });
-  const { title, description, companyName, skills } = values;
+  const { title, description, companyName } = values;
   return (
     <div>
       <ExperienceTable
@@ -64,7 +65,7 @@ const Exprience = ({ workExperience, deleteExperience }) => {
             Experience
           </label>
           <div className="mb-4">
-            <label className="form-label">Title</label>
+            <label className="form-label">Role</label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="title"
@@ -99,7 +100,7 @@ const Exprience = ({ workExperience, deleteExperience }) => {
               id="description"
               rows="3"
               cols="2"
-              placeholder="Vacancy description..."
+              placeholder="Description..."
               onChange={handleChange}
               value={description}
               className="form-input"
@@ -141,7 +142,7 @@ const Exprience = ({ workExperience, deleteExperience }) => {
             </p>
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Skills
             </label>
@@ -156,7 +157,7 @@ const Exprience = ({ workExperience, deleteExperience }) => {
               touched={touched.skills}
             />
             <p className="text-red-500 text-xs italic">{errors.skills}</p>
-          </div>
+          </div> */}
 
           <div className="flex items-center justify-end">
             <button
