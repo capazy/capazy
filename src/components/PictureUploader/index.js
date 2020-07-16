@@ -32,14 +32,15 @@ const PictureUploader = ({ id, projectId, action, field }) => {
         const values = {
           [field.fileName]: file.name,
           [field.fileUrl]: await uploadTask.snapshot.ref.getDownloadURL(),
+          method: '$set',
         };
         if (projectId) {
           values.projectId = projectId;
-          values.method = '$set';
+          action(values);
+        } else {
+          updateSbProfile(sb, null, values[field.fileUrl]);
           action(values);
         }
-        updateSbProfile(sb, null, values[field.fileUrl]);
-        action(values);
       }
     );
   };
