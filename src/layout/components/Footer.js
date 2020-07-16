@@ -10,12 +10,12 @@ const Footer = () => {
             Home
           </span>
         </Link>
-        <Link to="/terms">
+        {/* <Link to="/terms">
           <span className="inline-block text-gray-800 hover:text-gray-600 mr-4">
             Terms
           </span>
-        </Link>
-        <Link to="/support">
+        </Link> */}
+        <Link to="/help">
           <span className="inline-block text-gray-800 hover:text-gray-600 mr-4">
             Support
           </span>
