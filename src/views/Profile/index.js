@@ -151,7 +151,6 @@ const Profile = ({ match, history }) => {
                     </span>
                     <div className="flex-1 pl-1 mr-16">
                       <div className="font-medium">{file.name}</div>
-                      <div className="text-gray-600 text-sm">200ml</div>
                     </div>
                     <a
                       href={file.url}

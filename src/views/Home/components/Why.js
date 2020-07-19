@@ -37,7 +37,7 @@ const Why = () => {
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
               <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Apply for a job you fit
+                  Apply for your dream job!
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
                   All listed jobs are from Canada or US-based Companies and
@@ -63,6 +63,10 @@ const Why = () => {
                 <p className="text-gray-800 text-base px-6 mb-5">
                   We'll talk directly with the company, and if you're selected
                   we'll get back to you.
+                  <br />
+                  <span className="italic text-sm">
+                    (Company hires Capazy. Capazy hires you.)
+                  </span>
                 </p>
               </span>
             </div>

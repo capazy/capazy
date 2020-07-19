@@ -7,17 +7,23 @@ import {
   DELETE_PROJECT_FILE,
 } from '../../graphql/project';
 import { projectReducer } from '../../reducers/projectReducer';
-import { CREATE_VACANCY, CANCEL_VACANCY } from '../../graphql/vacancy';
+import {
+  CREATE_VACANCY,
+  CANCEL_VACANCY,
+  GET_VACANCIES,
+} from '../../graphql/vacancy';
 
 const ProjectContext = createContext({
   projectId: null,
+  vacancies: null,
 });
 
 const ProjectProvider = (props) => {
   const [state, dispatch] = useReducer(projectReducer, {
     project: null,
+    vacancies: null,
   });
-  const { project } = state;
+  const { project, vacancies } = state;
   const [projectId, setProjectId] = useState(null);
 
   // APOLLO FUNTIONS
@@ -64,6 +70,13 @@ const ProjectProvider = (props) => {
     },
   });
 
+  // get project
+  const [getVacanciesQuery] = useLazyQuery(GET_VACANCIES, {
+    onCompleted: (data) => {
+      dispatch({ type: 'GET_VACANCIES', payload: data.vacancies });
+    },
+  });
+
   // CONTEXT FUNTIONS
   // Create
   const create = async (values) => {
@@ -87,6 +100,15 @@ const ProjectProvider = (props) => {
   const deleteVacancy = async (values) => {
     try {
       await cancelVacancy({ variables: values });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // cancel vacancy
+  const getVacancies = async (values) => {
+    try {
+      await getVacanciesQuery({ variables: values });
     } catch (error) {
       console.log(error);
     }
@@ -124,6 +146,8 @@ const ProjectProvider = (props) => {
         createVacancy,
         deleteVacancy,
         deleteFile,
+        getVacancies,
+        vacancies,
       }}
     >
       {props.children}
