@@ -9,7 +9,7 @@ const ExperienceTable = ({ setAction, user: { workExperience } }) => {
 
   return (
     <Fragment>
-      <div className="max-w-xl border-b-2">
+      <div className="w-full border-b-2">
         <div className=" pb-3">
           <h1 className="text-gray-900 text-xl mb-4">Work Experience</h1>
           <table className="w-full text-md bg-white shadow-md rounded mb-4">
@@ -19,7 +19,6 @@ const ExperienceTable = ({ setAction, user: { workExperience } }) => {
                 <th className="text-left p-1 px-2">Description</th>
                 <th className="text-left p-1 px-2">Experience</th>
                 <th className="mx-auto p-1 px-2 text-gray-400">Action</th>
-                <th></th>
               </tr>
               {workExperience &&
                 workExperience !== [] &&
@@ -37,7 +36,7 @@ const ExperienceTable = ({ setAction, user: { workExperience } }) => {
                     <td className="p-1 px-2">
                       <p className="bg-transparent">{exp.yearsOfExperience}</p>
                     </td>
-                    <td className="p-1 px-2">
+                    {/* <td className="p-1 px-2">
                       {exp.skills.map((skill, i) => (
                         <span key={skill}>
                           <p
@@ -48,7 +47,7 @@ const ExperienceTable = ({ setAction, user: { workExperience } }) => {
                           </p>
                         </span>
                       ))}
-                    </td>
+                    </td> */}
                     <td className="p-2 px-5 flex justify-end">
                       <button
                         type="button"

@@ -28,13 +28,14 @@ const Profile = ({ match, history }) => {
   const {
     lastName,
     firstName,
-    skills,
+    additionalSkills,
     description,
-    companyName,
-    companyDepartment,
+    workExperience,
     languages,
+    education,
     country,
     profilePictureUrl,
+    files,
   } = data.userById;
 
   const isOwner = match.params.id === _id;
@@ -110,8 +111,13 @@ const Profile = ({ match, history }) => {
                 About me
               </p>
 
-              <p className="mb-2">{description}</p>
-              <p className="font-semibold">Languages:</p>
+              <p className="mb-6">{description}</p>
+              <div>
+                <i className="fas fa-exclamation-circle text-blue-500"></i>
+                <span className="font-bold text-gray-700 text-lg">
+                  Languages:
+                </span>
+              </div>
               <div className="px-0 py-4">
                 {languages.map((language) => (
                   <span
@@ -124,10 +130,45 @@ const Profile = ({ match, history }) => {
               </div>
             </div>
           </section>
+
+          {/* FILES */}
+
+          <div className="container  w-full ">
+            <div>
+              <i className="fas fa-exclamation-circle text-blue-500"></i>
+              <span className="font-bold text-gray-700 text-lg">Files:</span>
+            </div>
+            <ul className="flex flex-col p-4">
+              {files.map((file) => (
+                <li className="border-gray-400 flex flex-row mb-2 w-full">
+                  <div className="select-none cursor-pointer bg-gray-200 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+                    <span
+                      role="img"
+                      aria-labelledby="book"
+                      className="flex flex-col rounded-md w-10 h-10 bg-gray-300 justify-center items-center mr-4"
+                    >
+                      📖
+                    </span>
+                    <div className="flex-1 pl-1 mr-16">
+                      <div className="font-medium">{file.name}</div>
+                      <div className="text-gray-600 text-sm">200ml</div>
+                    </div>
+                    <a
+                      href={file.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="text-gray-600 text-xs">View</div>
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
           {/* SKILLS */}
           <section className="flex md:justify-around">
             <div className=" w-full rounded-lg shadow-lg bg-white my-3">
-              <div className="border-b border-gray-100 px-5 py-4">
+              <div className="border-b border-gray-100 py-4">
                 <div>
                   <i className="fas fa-exclamation-circle text-blue-500"></i>
                   <span className="font-bold text-gray-700 text-lg">
@@ -137,7 +178,7 @@ const Profile = ({ match, history }) => {
               </div>
 
               <div className="px-2 py-2 text-gray-600">
-                {skills.map((skill) => (
+                {additionalSkills.map((skill) => (
                   <div
                     key={skill}
                     className="text-xs inline-flex items-center font-bold leading-sm uppercase m-2 px-3 py-1 bg-green-200 text-green-700 rounded-full"
@@ -161,27 +202,65 @@ const Profile = ({ match, history }) => {
             </div>
           </section>
 
-          {/* COMPANY */}
+          {/* EXPERIENCE */}
           <section className="flex md:justify-around">
-            <div className=" w-full rounded-lg shadow-lg bg-white my-3">
-              <div className="border-b border-gray-100 px-5 py-4">
+            <div className=" ">
+              <div className="border-b border-gray-100 px-1 py-4">
                 <div>
                   <i className="fas fa-exclamation-circle text-blue-500"></i>
                   <span className="font-bold text-gray-700 text-lg">
-                    Company
+                    Experience
                   </span>
                 </div>
-                <div className="py-2">
-                  <p className="px-2 mt-2 text-gray-600">
-                    {/* <span className="font-semibold">Name: </span> */}
-                    {companyName}
-                  </p>
+                {workExperience.map((exp) => (
+                  <div className="py-2 w-full rounded-lg shadow-lg bg-white my-3 p-4">
+                    <p className="px-2 mt-2 text-gray-600">
+                      <span className="font-semibold">Company: </span>
+                      {exp.companyName}
+                    </p>
 
-                  <p className="px-2 mt-2 text-gray-600">
-                    <span className="font-semibold">Department: </span>
-                    {companyDepartment}
-                  </p>
+                    <p className="px-2 mt-2 text-gray-600">
+                      <span className="font-semibold">Position: </span>
+                      {exp.title}
+                    </p>
+                    <p className="px-2 mt-2 text-gray-600 italic">
+                      <span className="font-semibold">Time: </span>
+                      {exp.yearsOfExperience}
+                    </p>
+                    <p className="px-2 mt-2 text-gray-600">{exp.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+          {/* EDUCATION */}
+          <section className="flex md:justify-around">
+            <div className="w-full ">
+              <div className="border-b border-gray-100 px-1 py-4">
+                <div>
+                  <i className="fas fa-exclamation-circle text-blue-500"></i>
+                  <span className="font-bold text-gray-700 text-lg">
+                    Education
+                  </span>
                 </div>
+                {education.map((edu) => (
+                  <div className="py-2 w-full rounded-lg shadow-lg bg-white my-3 p-4">
+                    <p className="px-2 mt-2 text-gray-600">
+                      <span className="font-semibold">Degree: </span>
+                      {edu.degree}
+                    </p>
+
+                    <p className="px-2 mt-2 text-gray-600">
+                      <span className="font-semibold">Field: </span>
+                      {edu.fieldOfStudy}
+                    </p>
+                    <p className="px-2 mt-2 text-gray-600 italic">
+                      <span className="font-semibold">School: </span>
+                      {edu.school}
+                    </p>
+                    <p className="px-2 mt-2 text-gray-600">{edu.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
