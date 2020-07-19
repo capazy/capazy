@@ -196,12 +196,18 @@ export const GET_USER_BY_ID = gql`
       country
       profilePictureUrl
       role
+      additionalSkills
       education {
         _id
         degree
         school
         year
         fieldOfStudy
+      }
+      files {
+        _id
+        name
+        url
       }
       workExperience {
         _id
