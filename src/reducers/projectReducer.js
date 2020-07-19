@@ -21,6 +21,11 @@ export const projectReducer = (state, { type, payload }) => {
         ...state,
         project: null,
       };
+    case 'GET_VACANCIES':
+      return {
+        ...state,
+        vacancies: payload,
+      };
     default:
       return state;
   }
