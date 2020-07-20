@@ -78,13 +78,11 @@ export const experienceFormSchema = Yup.object({
   yearsOfExperience: Yup.string().required(),
   companyName: Yup.string().required(),
   description: Yup.string().required(),
+});
 
-  // skills: Yup.array()
-  //   .min(1, 'Pick at least 1 skill')
-  //   .of(
-  //     Yup.object().shape({
-  //       label: Yup.string().required(),
-  //       value: Yup.string().required(),
-  //     })
-  //   ),
+export const educationFormSchema = Yup.object({
+  school: Yup.string().required(),
+  degree: Yup.string().required(),
+  year: Yup.string().required(),
+  fieldOfStudy: Yup.string().required(),
 });

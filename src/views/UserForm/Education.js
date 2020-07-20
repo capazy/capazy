@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 
 // utils
-// import { experienceFormSchema } from '../../utils/formikSchemas';
+import { educationFormSchema } from '../../utils/formikSchemas';
 // import { transformArray } from '../../utils/transformArray';
 // import allSkillsData from '../../data/allSkillsData.json';
 import toggleAlert from '../../utils/toggleAlert';
@@ -43,7 +43,7 @@ const Education = () => {
       year: '1-3 years',
       fieldOfStudy: '',
     },
-    // validationSchema: experienceFormSchema,
+    validationSchema: educationFormSchema,
     onSubmit: async (values, { resetForm }) => {
       //   values.skills = await transformArray(values, 'skills');
       await createEdu(values);
