@@ -341,25 +341,25 @@ export const CREATE_EXPERIENCE = gql`
         skills: $skills
       }
     ) {
-      _id
-      firstName
-      lastName
-      description
-      skills
-      languages
-      expertise
-      companyName
-      companyDepartment
-      country
-      additionalSkills
-      profilePictureUrl
-      education {
-        _id
-        degree
-        school
-        year
-        fieldOfStudy
-      }
+      # _id
+      # firstName
+      # lastName
+      # description
+      # skills
+      # languages
+      # expertise
+      # companyName
+      # companyDepartment
+      # country
+      # additionalSkills
+      # profilePictureUrl
+      # education {
+      #   _id
+      #   degree
+      #   school
+      #   year
+      #   fieldOfStudy
+      # }
       workExperience {
         _id
         title
@@ -375,25 +375,25 @@ export const CREATE_EXPERIENCE = gql`
 export const DELETE_EXPERIENCE = gql`
   mutation deleteExperience($experienceId: ID!) {
     deleteExperience(experienceId: $experienceId) {
-      _id
-      firstName
-      lastName
-      description
-      skills
-      languages
-      expertise
-      companyName
-      companyDepartment
-      country
-      additionalSkills
-      profilePictureUrl
-      education {
-        _id
-        degree
-        school
-        year
-        fieldOfStudy
-      }
+      # _id
+      # firstName
+      # lastName
+      # description
+      # skills
+      # languages
+      # expertise
+      # companyName
+      # companyDepartment
+      # country
+      # additionalSkills
+      # profilePictureUrl
+      # education {
+      #   _id
+      #   degree
+      #   school
+      #   year
+      #   fieldOfStudy
+      # }
       workExperience {
         _id
         title

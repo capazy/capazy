@@ -28,6 +28,20 @@ export const userReducer = (state, { type, payload }) => {
         ...state,
         language: payload,
       };
+    case 'CREATE_EXPERIENCE':
+    case 'GET_ALL_EXPERIENCES':
+    case 'DELETE_EXPERIENCE':
+      return {
+        ...state,
+        workExperience: payload,
+      };
+    case 'CREATE_EDUCATION':
+    case 'GET_ALL_EDUCATIONS':
+    case 'DELETE_EDUCATION':
+      return {
+        ...state,
+        education: payload,
+      };
     default:
       return state;
   }

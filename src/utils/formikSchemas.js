@@ -41,12 +41,12 @@ export const userFormSchema = Yup.object({
     .min(1, 'Pick at least 1 language')
     .of(
       Yup.object().shape({
-        label: Yup.string().required(),
-        value: Yup.string().required(),
+        label: Yup.string().required().nullable(),
+        value: Yup.string().required().nullable(),
       })
     ),
-  description: Yup.string().required(),
-  country: Yup.string().required(),
+  description: Yup.string().required().nullable(),
+  country: Yup.string().required().nullable(),
 });
 
 export const projectFormSchema = Yup.object({

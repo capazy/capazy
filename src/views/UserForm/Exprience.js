@@ -22,7 +22,8 @@ const experienceOptions = [
 ];
 
 const Exprience = ({ deleteExperience }) => {
-  const { createExp, user } = useContext(UserContext);
+  const { createExp, workExperience } = useContext(UserContext);
+
   const [action, setAction] = useState(false);
   const {
     handleSubmit,
@@ -56,7 +57,7 @@ const Exprience = ({ deleteExperience }) => {
       <ExperienceTable
         action={action}
         setAction={setAction}
-        user={user}
+        workExperience={workExperience}
         deleteExperience={deleteExperience}
       />
       <Modal action={action}>
