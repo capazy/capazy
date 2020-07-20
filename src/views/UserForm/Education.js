@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 
 // utils
-// import { experienceFormSchema } from '../../utils/formikSchemas';
+import { educationFormSchema } from '../../utils/formikSchemas';
 // import { transformArray } from '../../utils/transformArray';
 // import allSkillsData from '../../data/allSkillsData.json';
 import toggleAlert from '../../utils/toggleAlert';
@@ -26,7 +26,7 @@ import { UserContext } from '../../context/UserContext';
 // ];
 
 const Education = () => {
-  const { createEdu, user } = useContext(UserContext);
+  const { createEdu, education } = useContext(UserContext);
   const [action, setAction] = useState(false);
   const {
     handleSubmit,
@@ -43,7 +43,7 @@ const Education = () => {
       year: '1-3 years',
       fieldOfStudy: '',
     },
-    // validationSchema: experienceFormSchema,
+    validationSchema: educationFormSchema,
     onSubmit: async (values, { resetForm }) => {
       //   values.skills = await transformArray(values, 'skills');
       await createEdu(values);
@@ -55,7 +55,11 @@ const Education = () => {
   const { degree, fieldOfStudy, school } = values;
   return (
     <div>
-      <EducationTable action={action} setAction={setAction} user={user} />
+      <EducationTable
+        action={action}
+        setAction={setAction}
+        education={education}
+      />
       <Modal action={action}>
         <form className="w-full pt-2  mb-4 m-12" onSubmit={handleSubmit}>
           <label className="block text-gray-900 text-xl font-bold mb-2 mx-auto text-center">

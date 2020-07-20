@@ -4,7 +4,7 @@ import React, { Fragment, useContext } from 'react';
 import { NoData } from '../index';
 import { UserContext } from '../../context/UserContext';
 
-const EducationTable = ({ setAction, user: { education } }) => {
+const EducationTable = ({ setAction, education }) => {
   const { deleteEdu } = useContext(UserContext);
   return (
     <Fragment>

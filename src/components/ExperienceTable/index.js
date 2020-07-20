@@ -4,7 +4,7 @@ import React, { Fragment, useContext } from 'react';
 import { NoData } from '../index';
 import { UserContext } from '../../context/UserContext';
 
-const ExperienceTable = ({ setAction, user: { workExperience } }) => {
+const ExperienceTable = ({ setAction, workExperience }) => {
   const { deleteExp } = useContext(UserContext);
 
   return (

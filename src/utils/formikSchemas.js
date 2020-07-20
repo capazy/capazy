@@ -41,12 +41,12 @@ export const userFormSchema = Yup.object({
     .min(1, 'Pick at least 1 language')
     .of(
       Yup.object().shape({
-        label: Yup.string().required(),
-        value: Yup.string().required(),
+        label: Yup.string().required().nullable(),
+        value: Yup.string().required().nullable(),
       })
     ),
-  description: Yup.string().required(),
-  country: Yup.string().required(),
+  description: Yup.string().required().nullable(),
+  country: Yup.string().required().nullable(),
 });
 
 export const projectFormSchema = Yup.object({
@@ -78,13 +78,11 @@ export const experienceFormSchema = Yup.object({
   yearsOfExperience: Yup.string().required(),
   companyName: Yup.string().required(),
   description: Yup.string().required(),
+});
 
-  // skills: Yup.array()
-  //   .min(1, 'Pick at least 1 skill')
-  //   .of(
-  //     Yup.object().shape({
-  //       label: Yup.string().required(),
-  //       value: Yup.string().required(),
-  //     })
-  //   ),
+export const educationFormSchema = Yup.object({
+  school: Yup.string().required(),
+  degree: Yup.string().required(),
+  year: Yup.string().required(),
+  fieldOfStudy: Yup.string().required(),
 });

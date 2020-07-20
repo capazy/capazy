@@ -113,7 +113,7 @@ const UserForm = ({ match }) => {
   };
 
   if (updateSuccess) {
-    return <Redirect push to="/" />;
+    return <Redirect push to={`/profile/${id}`} />;
   }
 
   return (

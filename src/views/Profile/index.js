@@ -203,7 +203,7 @@ const Profile = ({ match, history }) => {
 
           {/* EXPERIENCE */}
           <section className="flex md:justify-around">
-            <div className=" ">
+            <div className="w-full ">
               <div className="border-b border-gray-100 px-1 py-4">
                 <div>
                   <i className="fas fa-exclamation-circle text-blue-500"></i>

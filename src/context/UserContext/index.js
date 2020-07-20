@@ -21,6 +21,8 @@ import toggleAlert from '../../utils/toggleAlert';
 const UserContext = createContext({
   tokenExp: null,
   user: null,
+  workExperience: [],
+  education: [],
   loading: false,
   language: 'en',
   login: (data) => {},
@@ -33,6 +35,8 @@ const UserProvider = (props) => {
   const [state, dispatch] = useReducer(userReducer, {
     user: null,
     tokenExp: null,
+    workExperience: [],
+    education: [],
     language: 'en',
   });
 
@@ -72,6 +76,14 @@ const UserProvider = (props) => {
   const [getCurrentUser, { called, loading }] = useLazyQuery(GET_USER, {
     onCompleted: (data) => {
       dispatch({ type: 'LOAD_USER', payload: data.user });
+      dispatch({
+        type: 'GET_ALL_EXPERIENCES',
+        payload: data.user.workExperience,
+      });
+      dispatch({
+        type: 'GET_ALL_EDUCATIONS',
+        payload: data.user.education,
+      });
     },
   });
   const userLoading = called && loading;
@@ -86,28 +98,40 @@ const UserProvider = (props) => {
   // create experience
   const [createExperience] = useMutation(CREATE_EXPERIENCE, {
     update(_, { data }) {
-      dispatch({ type: 'UPDATE_USER', payload: data.createExperience });
+      dispatch({
+        type: 'CREATE_EXPERIENCE',
+        payload: data.createExperience.workExperience,
+      });
     },
   });
 
   // delete experience
   const [deleteExperience] = useMutation(DELETE_EXPERIENCE, {
     update(_, { data }) {
-      dispatch({ type: 'UPDATE_USER', payload: data.deleteExperience });
+      dispatch({
+        type: 'DELETE_EXPERIENCE',
+        payload: data.deleteExperience.workExperience,
+      });
     },
   });
 
   // create Education
   const [createEducation] = useMutation(CREATE_EDUCATION, {
     update(_, { data }) {
-      dispatch({ type: 'UPDATE_USER', payload: data.createEducation });
+      dispatch({
+        type: 'CREATE_EDUCATION',
+        payload: data.createEducation.education,
+      });
     },
   });
 
   // delete education
   const [deleteEducation] = useMutation(DELETE_EDUCATION, {
     update(_, { data }) {
-      dispatch({ type: 'UPDATE_USER', payload: data.deleteEducation });
+      dispatch({
+        type: 'DELETE_EDUCATION',
+        payload: data.deleteEducation.education,
+      });
     },
   });
 
@@ -234,6 +258,8 @@ const UserProvider = (props) => {
     <UserContext.Provider
       value={{
         user: state.user,
+        workExperience: state.workExperience,
+        education: state.education,
         loading: state.loading,
         userLoading,
         signup,

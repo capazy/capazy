@@ -18,11 +18,12 @@ import { experienceFormSchema } from '../../utils/formikSchemas';
 const experienceOptions = [
   { value: '1-3', label: '1-3' },
   { value: '3-5', label: '3-5' },
-  { value: '+5', label: '+5' },
+  { value: '5+', label: '5+' },
 ];
 
 const Exprience = ({ deleteExperience }) => {
-  const { createExp, user } = useContext(UserContext);
+  const { createExp, workExperience } = useContext(UserContext);
+
   const [action, setAction] = useState(false);
   const {
     handleSubmit,
@@ -56,7 +57,7 @@ const Exprience = ({ deleteExperience }) => {
       <ExperienceTable
         action={action}
         setAction={setAction}
-        user={user}
+        workExperience={workExperience}
         deleteExperience={deleteExperience}
       />
       <Modal action={action}>
