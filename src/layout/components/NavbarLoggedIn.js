@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 // context
@@ -50,15 +50,26 @@ const NavbarLoggedIn = () => {
           </Link>
         </li>
         {user.role !== 'user' && (
-          <li className="mx-6 my-2 md:my-0">
-            <Link
-              to="/created-projects"
-              className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
-            >
-              <i className="fa fa-envelope fa-fw"></i>
-              <span className="md:pb-0 text-sm">Posted Jobs</span>
-            </Link>
-          </li>
+          <Fragment>
+            <li className="mx-6 my-2 md:my-0">
+              <Link
+                to="/created-projects"
+                className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
+              >
+                <i className="fa fa-envelope fa-fw"></i>
+                <span className="md:pb-0 text-sm">Posted Jobs</span>
+              </Link>
+            </li>
+            <li className="mx-6 my-2 md:my-0">
+              <Link
+                to="/dashboard"
+                className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
+              >
+                <i className="fa fa-envelope fa-fw"></i>
+                <span className="md:pb-0 text-sm">Dashboard</span>
+              </Link>
+            </li>
+          </Fragment>
         )}
 
         <li className="md:hidden mx-6 my-2 md:my-0">

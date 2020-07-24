@@ -7,7 +7,7 @@ import { UserContext } from '../../context/UserContext';
 
 const Links = ({ languageSelected, setLanguage }) => (
   <div className="hidden flex md:block px-2 pt-2 pb-4 sm:block sm:flex sm:p-0">
-    <button
+    {/* <button
       onClick={() => setLanguage('es')}
       style={{ color: languageSelected === 'es' && 'red' }}
       className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
@@ -20,7 +20,7 @@ const Links = ({ languageSelected, setLanguage }) => (
       className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"
     >
       en
-    </button>
+    </button> */}
     <Link
       to="/signup"
       className="block sm:inline-block px-2 py-1 mx-3 text-gray-900 font-semibold hover:border-gray-800 rounded border-b-2 border-transparent hover:border-indigo-400"

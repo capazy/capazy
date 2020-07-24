@@ -23,17 +23,28 @@ import {
   Help,
   CreatedProjects,
   JoinedProjects,
+  Dashboard,
 } from './views';
 import Layout from './layout';
 import SimpleLayout from './layout/SimpleLayout';
 import NoLayout from './layout/NoLayout';
 import MobileChat from './views/MobileChat';
+import AdminRoute from './router/AdminRoute';
 
 const Routes = () => {
   const { language } = useContext(UserContext);
 
   return (
     <Switch>
+      {/* ADMIN */}
+      <AdminRoute
+        exact
+        path="/dashboard"
+        layout={Layout}
+        component={Dashboard}
+      />
+      {/* ADMIN */}
+
       <Route exact path="/jobs" layout={Layout} component={Feed} />
       <Route exact path="/search" layout={Layout} component={Search} />
       <Route exact path="/help" layout={Layout} component={Help} />
