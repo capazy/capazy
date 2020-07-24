@@ -181,6 +181,41 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_ALL_USERS = gql`
+  {
+    allUsers {
+      _id
+      firstName
+      lastName
+      description
+      email
+      skills
+      profilePictureUrl
+      expertise
+      languages
+      companyName
+      companyDepartment
+      country
+      role
+      education {
+        _id
+        degree
+        school
+        year
+        fieldOfStudy
+      }
+      workExperience {
+        _id
+        title
+        companyName
+        yearsOfExperience
+        description
+        skills
+      }
+    }
+  }
+`;
+
 export const GET_USER_BY_ID = gql`
   query userById($userId: ID!) {
     userById(userId: $userId) {

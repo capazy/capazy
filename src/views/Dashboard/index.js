@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_ALL_USERS } from '../../graphql/user';
+import { LoadingCard } from '../../components';
 
 const Dashboard = () => {
+  const { loading, data, refetch } = useQuery(GET_ALL_USERS);
+  if (loading) return <LoadingCard />;
+  if (!data) return <LoadingCard />;
+  const users = data.allUsers;
+
+  refetch();
   return (
     <div>
       <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
@@ -46,8 +55,10 @@ const Dashboard = () => {
                   </div>
 
                   <div class="mx-5">
-                    <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
-                    <div class="text-gray-500">New Users</div>
+                    <h4 class="text-2xl font-semibold text-gray-700">
+                      {users.length}
+                    </h4>
+                    <div class="text-gray-500">Users</div>
                   </div>
                 </div>
               </div>
@@ -78,7 +89,7 @@ const Dashboard = () => {
 
                   <div class="mx-5">
                     <h4 class="text-2xl font-semibold text-gray-700">
-                      200,521
+                      To define
                     </h4>
                     <div class="text-gray-500">Total Orders</div>
                   </div>
@@ -111,7 +122,7 @@ const Dashboard = () => {
 
                   <div class="mx-5">
                     <h4 class="text-2xl font-semibold text-gray-700">
-                      215,542
+                      To define
                     </h4>
                     <div class="text-gray-500">Available Products</div>
                   </div>
@@ -145,57 +156,62 @@ const Dashboard = () => {
                   </thead>
 
                   <tbody class="bg-white">
-                    <tr>
-                      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="flex items-center">
-                          <div class="flex-shrink-0 h-10 w-10">
-                            <img
-                              class="h-10 w-10 rounded-full"
-                              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                              alt=""
-                            />
-                          </div>
+                    {users.map((user) => (
+                      <Fragment>
+                        <tr>
+                          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <div class="flex items-center">
+                              <div class="flex-shrink-0 h-10 w-10">
+                                <img
+                                  class="h-10 w-10 rounded-full"
+                                  src={user.profilePictureUrl}
+                                  alt=""
+                                />
+                              </div>
 
-                          <div class="ml-4">
-                            <div class="text-sm leading-5 font-medium text-gray-900">
-                              John Doe
+                              <div class="ml-4">
+                                <div class="text-sm leading-5 font-medium text-gray-900">
+                                  {user.firstName} {user.lastName}
+                                </div>
+                                <div class="text-sm leading-5 text-gray-500">
+                                  {user.email}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <div class="text-sm leading-5 text-gray-900">
+                              To define
                             </div>
                             <div class="text-sm leading-5 text-gray-500">
-                              john@example.com
+                              To define
                             </div>
-                          </div>
-                        </div>
-                      </td>
+                          </td>
 
-                      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div class="text-sm leading-5 text-gray-900">
-                          Software Engineer
-                        </div>
-                        <div class="text-sm leading-5 text-gray-500">
-                          Web dev
-                        </div>
-                      </td>
+                          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                              Active
+                            </span>
+                          </td>
 
-                      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Active
-                        </span>
-                      </td>
+                          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                            {user.role}
+                          </td>
 
-                      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                        Owner
-                      </td>
-
-                      <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                        <a
-                          href="#"
-                          class="text-indigo-600 hover:text-indigo-900"
-                        >
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr></tr>
+                          <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+                            <a
+                              href={`/profile/${user._id}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="text-indigo-600 hover:text-indigo-900"
+                            >
+                              view
+                            </a>
+                          </td>
+                        </tr>
+                      </Fragment>
+                    ))}
                   </tbody>
                 </table>
               </div>
