@@ -13,3 +13,4 @@ export { default as Project } from './Project';
 export { default as Job } from './Job';
 export { default as Loading } from './Loading';
 export { default as Help } from './Help';
+export { default as Dashboard } from './Dashboard';
