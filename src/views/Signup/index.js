@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFormik } from 'formik';
-// import ReCAPTCHA from 'react-google-recaptcha';
-// import axios from 'axios';
-
 // components
 import { RegisterHeader } from '../../components';
 
@@ -14,22 +11,14 @@ import { UserContext } from '../../context/UserContext';
 import { signupFormSchema } from '../../utils/formikSchemas';
 
 const SignUp = () => {
-  const { signup, user } = useContext(UserContext);
+  const { signup, user, signupLoading } = useContext(UserContext);
 
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    errors,
-    touched,
-    // setFieldValue,
-  } = useFormik({
+  const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      // reCaptcha: '',
     },
     validationSchema: signupFormSchema,
     onSubmit: (values) => {
@@ -108,12 +97,12 @@ const SignUp = () => {
           />
           <p className="form-error">{errors.password}</p>
         </div>
-        {/* <ReCAPTCHA
-          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-          onChange={(value) => setFieldValue('reCaptcha', value, false)}
-        /> */}
         <div className="w-full mt-6">
-          <button className="btn bg-brand-blue text-white" type="submit">
+          <button
+            className="btn bg-brand-blue text-white"
+            type="submit"
+            disabled={signupLoading}
+          >
             Signup
           </button>
         </div>

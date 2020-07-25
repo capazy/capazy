@@ -41,7 +41,7 @@ const UserProvider = (props) => {
   });
 
   // apollo-signup
-  const [createUser] = useMutation(CREATE_USER, {
+  const [createUser, { loading: signupLoading }] = useMutation(CREATE_USER, {
     update(_, { data: { createUser: loginData } }) {
       dispatch({ type: 'CREATE_USER', payload: loginData });
     },
@@ -262,6 +262,7 @@ const UserProvider = (props) => {
         education: state.education,
         loading: state.loading,
         userLoading,
+        signupLoading,
         signup,
         login,
         update,
