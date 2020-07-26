@@ -206,7 +206,7 @@ const NavbarLoggedIn = () => {
             </div>
           </div>
         </div>
-        {/* <div>{isOpen && links()}</div> */}
+        <div>{isOpen && links()}</div>
       </nav>
       <Alert />
     </div>
