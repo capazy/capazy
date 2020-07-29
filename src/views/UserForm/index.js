@@ -104,12 +104,11 @@ const UserForm = ({ match }) => {
   //   return <Redirect push to={`/profile/${userData._id}`} />;
   // }
 
-  const handleDelete = (fileId, fileName) => {
-    // const values = { projectId, fileId };
+  const handleDelete = (id, dataType, fileName) => {
     const storageRef = firebaseApp.storage().ref();
     const fileRef = storageRef.child(fileName);
     fileRef.delete();
-    deleteFile({ fileId });
+    deleteFile({ id, dataType });
   };
 
   if (updateSuccess) {
@@ -161,8 +160,10 @@ const UserForm = ({ match }) => {
           </div>
           <FileUploader
             id={'uploadFiles'}
+            userId={userData._id}
             projectId={null}
             action={update}
+            dataType={'files'}
             field={{
               fileName: 'name',
               fileUrl: 'url',
@@ -179,7 +180,9 @@ const UserForm = ({ match }) => {
                         <button
                           className="btn-small bg-blue-500"
                           type="button"
-                          onClick={() => handleDelete(file._id, file.name)}
+                          onClick={() =>
+                            handleDelete(file._id, 'files', file.name)
+                          }
                         >
                           X
                         </button>
@@ -199,6 +202,68 @@ const UserForm = ({ match }) => {
               </table>
             ) : // <NoData text={"You don't have files yet"} />
             null}
+          </div>
+        </div>
+
+        {/* ENGLISH */}
+        <div className="text-center mb-4 border-b">
+          <div className="mb-5">
+            <label
+              htmlFor="uploadEnglishCertificate"
+              className="btn bg-blue-500 text-white my-3"
+            >
+              Upload your English Certificate
+            </label>
+          </div>
+          <FileUploader
+            id={'uploadEnglishCertificate'}
+            userId={userData._id}
+            projectId={null}
+            action={update}
+            dataType={'certificates'}
+            field={{
+              fileName: 'name',
+              fileUrl: 'url',
+            }}
+          />
+
+          <div className="mb-4">
+            {userData &&
+            userData.certificates &&
+            userData.certificates.length >= 1 ? (
+              <table>
+                <tbody>
+                  {userData.certificates.map((certificate) => (
+                    <tr key={certificate._id}>
+                      <th>
+                        <button
+                          className="btn-small bg-blue-500"
+                          type="button"
+                          onClick={() =>
+                            handleDelete(
+                              certificate._id,
+                              'certificates',
+                              certificate.name
+                            )
+                          }
+                        >
+                          X
+                        </button>
+                      </th>
+                      <th className="text-left">
+                        <a
+                          href={certificate.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {certificate.name}
+                        </a>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : null}
           </div>
         </div>
 

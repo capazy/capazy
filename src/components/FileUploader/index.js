@@ -4,13 +4,14 @@ import { firebaseApp } from '../../firebase';
 // components
 import { ProgressBar } from '../index';
 
-const FileUploader = ({ id, projectId, action, field }) => {
+const FileUploader = ({ id, userId, projectId, action, dataType, field }) => {
   const [progress, setProgress] = useState(0);
 
   const handleChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = firebaseApp.storage().ref();
-    const fileRef = storageRef.child(file.name);
+    const modifyFileName = userId + '_' + file.name;
+    const fileRef = storageRef.child(modifyFileName);
     const uploadTask = fileRef.put(file);
     await uploadTask.on(
       'state_changed',
@@ -22,13 +23,13 @@ const FileUploader = ({ id, projectId, action, field }) => {
       },
       async () => {
         const values = {
-          [field.fileName]: file.name,
+          [field.fileName]: modifyFileName,
           [field.fileUrl]: await uploadTask.snapshot.ref.getDownloadURL(),
         };
         if (projectId !== null) {
-          action({ projectId, method: '$push', files: values });
+          action({ projectId, method: '$push', [dataType]: values });
         } else {
-          action({ method: '$push', files: values });
+          action({ method: '$push', [dataType]: values });
         }
       }
     );

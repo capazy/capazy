@@ -48,11 +48,13 @@ export const UPDATE_USER = gql`
     $role: String
     $method: String
     $files: [FileInput]
+    $certificates: [FileInput]
   ) {
     updateUser(
       userInput: {
         method: $method
         files: $files
+        certificates: $certificates
         firstName: $firstName
         lastName: $lastName
         description: $description
@@ -103,6 +105,11 @@ export const UPDATE_USER = gql`
         name
         url
       }
+      certificates {
+        _id
+        name
+        url
+      }
     }
   }
 `;
@@ -140,6 +147,11 @@ export const GET_USER = gql`
         skills
       }
       files {
+        _id
+        name
+        url
+      }
+      certificates {
         _id
         name
         url
@@ -530,8 +542,8 @@ export const SEND_HELP_EMAIL = gql`
 `;
 
 export const DELETE_USER_FILE = gql`
-  mutation deleteUserFile($fileId: ID!) {
-    deleteUserFile(fileId: $fileId) {
+  mutation deleteUserFile($id: ID!, $dataType: String!) {
+    deleteUserFile(id: $id, dataType: $dataType) {
       _id
       firstName
       lastName
@@ -562,6 +574,11 @@ export const DELETE_USER_FILE = gql`
         skills
       }
       files {
+        _id
+        name
+        url
+      }
+      certificates {
         _id
         name
         url
