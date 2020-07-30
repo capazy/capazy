@@ -41,8 +41,8 @@ const Why = () => {
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
                   You are going to have an English conversation with a
-                  proffessional recruiter who help you to be confident to
-                  present an interview.
+                  professional recruiter who help you to be confident to present
+                  an interview.
                 </p>
               </span>
             </div>
