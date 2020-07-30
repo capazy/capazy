@@ -37,11 +37,12 @@ const Why = () => {
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
               <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Apply for your dream job!
+                  Get a call from a recruiter
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  All listed jobs are from Canada or US-based Companies and
-                  they're 100% remote. You'll work peacefully at home.
+                  You are going to have an English conversation with a
+                  proffessional recruiter who help you to be confident to
+                  present an interview.
                 </p>
               </span>
             </div>
@@ -58,7 +59,7 @@ const Why = () => {
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
               <span className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Get hired
+                  Get hired!!
                 </div>
                 <p className="text-gray-800 text-base px-6 mb-5">
                   We'll talk directly with the company, and if you're selected

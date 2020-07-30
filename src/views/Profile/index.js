@@ -35,6 +35,7 @@ const Profile = ({ match, history }) => {
     education,
     country,
     profilePictureUrl,
+    certificates,
     files,
   } = data.userById;
 
@@ -154,6 +155,41 @@ const Profile = ({ match, history }) => {
                     </div>
                     <a
                       href={file.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="text-gray-600 text-xs">View</div>
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CERTIFICATES */}
+          <div className="container  w-full ">
+            <div>
+              <i className="fas fa-exclamation-circle text-blue-500"></i>
+              <span className="font-bold text-gray-700 text-lg">
+                English Certificate:
+              </span>
+            </div>
+            <ul className="flex flex-col p-4">
+              {certificates.map((certificate) => (
+                <li className="border-gray-400 flex flex-row mb-2 w-full">
+                  <div className="select-none cursor-pointer bg-gray-200 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+                    <span
+                      role="img"
+                      aria-labelledby="book"
+                      className="flex flex-col rounded-md w-10 h-10 bg-gray-300 justify-center items-center mr-4"
+                    >
+                      📖
+                    </span>
+                    <div className="flex-1 pl-1 mr-16">
+                      <div className="font-medium">{certificate.name}</div>
+                    </div>
+                    <a
+                      href={certificate.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

@@ -264,6 +264,11 @@ export const GET_USER_BY_ID = gql`
         description
         skills
       }
+      certificates {
+        _id
+        name
+        url
+      }
     }
   }
 `;

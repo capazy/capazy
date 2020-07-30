@@ -31,7 +31,7 @@ const NavbarLoggedIn = () => {
       id="nav-content"
     >
       <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
-        <li className="mx-6 my-2 md:my-0">
+        {/* <li className="mx-6 my-2 md:my-0">
           <Link
             to="/jobs"
             className="block py-1 md:py-1 px-1 align-center no-underline hover:text-black rounded border-transparent text-gray-900 hover:border-brand-blue"
@@ -39,7 +39,7 @@ const NavbarLoggedIn = () => {
             <i className="fa fa-envelope fa-fw"></i>
             <span className="md:pb-0 text-sm">Jobs</span>
           </Link>
-        </li>
+        </li> */}
         <li className="mx-6 my-2 md:my-0">
           <Link
             to="/joined-projects"
