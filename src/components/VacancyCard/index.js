@@ -84,11 +84,11 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
 
       <div className="p-4">
         <h1 className="font-semibold text-xl mb-1">{title}</h1>
-        {description.length > 200 && !readMore ? (
+        {description.length > 345 && !readMore ? (
           <Fragment>
             <div className="">
               <span className="text-base width-auto font-medium  text-gray-700">
-                {parse(description.substr(0, 200))}
+                {parse(description.substr(0, 345))}
               </span>
               <span>
                 <button
@@ -104,7 +104,7 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
           <span className="text-base width-auto font-medium flex-shrink pr-4 text-gray-700 text-justify">
             {parse(description)}{' '}
             <span>
-              {description.length > 200 && (
+              {description.length > 345 && (
                 <button
                   className="text-brand-blue"
                   onClick={() => setReadMore(!readMore)}
