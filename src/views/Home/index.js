@@ -4,29 +4,26 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import Header from './components/Header';
 import Why from './components/Why';
 import How from './components/How';
-// import CallToAction from './components/CallToAction';
-// import Categories from './components/Categories';
-// import How from './components/How';
 import { ProjectContext } from '../../context/ProjectContext';
 import { LoadingCard } from '../../components';
 import CallToAction from './components/CallToAction';
+import Vacancies from "./components/Vacancies";
 
 const Home = () => {
   const { getVacancies, vacancies } = useContext(ProjectContext);
 
   useEffect(() => {
     getVacancies();
+    // eslint-disable-next-line
   }, []);
-  if (!vacancies) return <LoadingCard />;
+
   return (
     <Fragment>
       <Header />
       <How />
       <Why />
-      <CallToAction />
-      {/* <Categories /> */}
-
-      {/* <Vacancies vacancies={vacancies} /> */}
+        {!vacancies ? <LoadingCard/> : <Vacancies vacancies={vacancies} />}
+        <CallToAction />
     </Fragment>
   );
 };

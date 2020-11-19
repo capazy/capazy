@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 
 // apollo
 import { useMutation } from '@apollo/react-hooks';
@@ -27,14 +26,14 @@ const Feed = ({ vacancies }) => {
   };
 
   if (joinSuccess) {
-    return <Redirect push to="/joined-projects" />;
+    window.location.href = "/joined-projects";
   }
 
   return (
     <Fragment>
       <div className="container my-8 mx-auto px-3">
         <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          Our Jobs
+          Available Jobs
         </h1>
         {/* <div className="container max-w-3xl  my-8 mx-auto md:px-4 md:px-12"> */}
         <div className=" mx-auto mt-4 justify-between">

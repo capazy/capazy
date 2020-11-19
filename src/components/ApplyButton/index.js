@@ -1,26 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
-// apollo
-import { useMutation } from '@apollo/react-hooks';
-import { JOIN_VACANCY } from '../../graphql/vacancy';
 import { Redirect } from 'react-router-dom';
 
-const ApplyButton = ({ vacancy }) => {
-  const { user, getCurrentUser } = useContext(UserContext);
+const ApplyButton = ({ vacancy, handleJoin }) => {
+  const { user } = useContext(UserContext);
   const [redirect, setRedirect] = useState(false);
-  const [joinVacancy] = useMutation(JOIN_VACANCY, {
-    update(_, { data }) {
-      getCurrentUser();
-    },
-  });
 
-  const handleJoin = async (vacancyId) => {
-    try {
-      await joinVacancy({ variables: { vacancyId } });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const userAlreadyApplied = (vacancy) => {
     let result = vacancy.postulatedUsers.find(
       (postulatedUser) => postulatedUser._id === user._id

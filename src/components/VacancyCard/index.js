@@ -172,7 +172,7 @@ const VacancyCard = ({ vacancy, handleJoin }) => {
                       View more
                     </button>
                     <div>
-                      <ApplyButton vacancy={vacancy} />
+                      <ApplyButton vacancy={vacancy} handleJoin={handleJoin}/>
                       {/* <button
                       className="bg-transparent text-blue-dark font-semibold  py-1 px-4 border border-blue hover:border-gray-400 rounded mr-2 rounded-lg"
                       onClick={handleViewMore}
